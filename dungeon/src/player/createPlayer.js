@@ -33,10 +33,11 @@ class Create extends Component {
         axios
         .post("http://localhost:5500/players",player)
         .then(response=>{
-            this.props.setPlayer()
+            this.props.setPlayer("reload")
             console.log("sent char:",response)
             this.state.redirect =true
             this.setState({name:"",password:"",age:"",bio:"",class:"",gender:""})
+            
         })
         .catch(err=>{
             console.log(err)
