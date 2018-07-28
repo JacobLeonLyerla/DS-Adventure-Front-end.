@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from "react";
 import { Redirect } from "react-router-dom";
-import axios from 'axios'
+import axios from "axios";
 
 class Info extends Component {
+
   state = {
-    player:"",
+    player: {gear:[],items:[]},
     name: "",
     age: "",
     class: "",
@@ -12,44 +13,42 @@ class Info extends Component {
     password: "",
     gender: "",
     redirect: false,
-    visible:false
+    visible: false
   };
-  componentDidMount(){
-const {id} = this.props.match.params
-    this.setCurrentPlayer(id)
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    this.setCurrentPlayer(id);
   }
-  setCurrentPlayer =(id)=>{
+  setCurrentPlayer = id => {
     axios
-    .get(`http://localhost:5500/players/${id}`)
-    .then(response=>{
-        this.setState({player:response.data})
-    })
-    .catch(err=>{
-        console.log(err)
-    })
-}
+      .get(`http://localhost:5500/players/${id}`)
+      .then(response => {
+        this.setState({ player: response.data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
-  updatePlayer = (id) => {
-console.log("passed in id:",id)
+  updatePlayer = id => {
+    console.log("passed in id:", id);
     const player = {};
     if (this.state.name !== "") {
       player.name = this.state.name;
     }
-    if(this.state.bio !==""){
-         player.bio = this.state.bio; 
+    if (this.state.bio !== "") {
+      player.bio = this.state.bio;
     }
     axios
-    .put(`http://localhost:5500/players/${id}`, player)
-    .then(response => {
+      .put(`http://localhost:5500/players/${id}`, player)
+      .then(response => {
         this.setState({
           name: "",
-          bio: "",
-
+          bio: ""
         });
-        this.setCurrentPlayer(id)
+        this.setCurrentPlayer(id);
       })
       .catch(err => {
-          
         console.log("not sent in");
       });
   };
@@ -67,13 +66,13 @@ console.log("passed in id:",id)
     }
   };
   render() {
-      let element =null
-      if(this.state.visible){
-
-         element = (
-    <form>
+    let element = null;
+    if (this.state.visible) {
+      element = (
+        <form>
           <label>
             Name:
+            
             <input
               name="name"
               placeholder="Enter a character name"
@@ -88,18 +87,16 @@ console.log("passed in id:",id)
             value={this.state.bio}
             onChange={this.handleInput}
           />
-          <br/>
-           <button onClick={() => this.updatePlayer(this.state.player._id)}>
-          Update Character
-        </button>
+          <br />
+          <button onClick={() => this.updatePlayer(this.state.player._id)}>
+            Update Character
+          </button>
         </form>
-) 
-      }
-      console.log(this.state.player)
+      );
+    }
+    console.log(this.state.player);
     return (
       <Fragment>
-
-
         <div>
           Name: {this.state.player.name}
           <br />
@@ -107,19 +104,49 @@ console.log("passed in id:",id)
           Age: {this.state.player.age} <br />
           Gender: {this.state.player.gender}
           <br />
-          Health: {this.state.player.health}
           <br />
-          Endurance: {this.state.player.endurance}
+          Combat Stats<br />
+          Health: {` ${this.state.player.health}  `}
+          Endurance: {`${this.state.player.endurance} `}
+          <br/>
+          Agiltiy: {` ${this.state.player.agility} `}
+          intellect: {` ${this.state.player.intellect} `}
+          Strength: {` ${this.state.player.strength} `}
+          <br />
           <br />
           Bio: {this.state.player.bio}
           <br />
+          <br/>
+          <div>
+ 
+            Equipment:
+            <br/><br/>
+                {this.state.player.gear.map(item => (<Fragment>
+                
+                <div>{item}</div><br/>
+               
+
+            </Fragment>))} 
+          </div>
+          <br/>
+          <div>
+ 
+            Bags:
+            <br/><br/>
+                {this.state.player.items.map(bag => (<Fragment>
+                <div>{bag}</div><br/>
+               
+
+            </Fragment>))} 
+          </div>
         </div>
-        <button onClick={()=>this.setState({visible:!this.state.visible})}>Edit hero</button>
+        <button onClick={() => this.setState({ visible: !this.state.visible })}>
+          Edit hero
+        </button>
         <br />
         {element}
 
-        <br/>
-      
+        <br />
       </Fragment>
     );
   }

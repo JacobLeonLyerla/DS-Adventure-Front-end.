@@ -70,7 +70,7 @@ class App extends Component {
         />
         <Route
           path="/info/:id"
-          render={props => <Info  {...props} />}
+          render={props => <Info  {...props} player={this.state.player} />}
         />
       </div>
     );
