@@ -36,6 +36,15 @@ class Equip extends Component {
   };
   setEquipment(id) {
     console.log(this.state.player.gear);
+
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // SET A EQUIPED FLAG ON GEAR SO IT ONLY EQUIPS ONCE,
+    // SO WHEN YOU GET IT IT RUNS THIS COMPONENT
+    // IT GOES THROUGH THE GEAR LIST
+    // CHECKS FOR EVERYTHING WITH THE "EQUIPED" FLAG SET TO FALSE,
+    // THEN SETS STATS, CHANGES FLAG TO TRUE  AND THEN WERE GOOD,
+    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     let strength = 0;
     let intellect = 0;
     let agility = 0;
@@ -67,8 +76,9 @@ class Equip extends Component {
     gear.strength = strength+ this.state.player.strength
     console.log(gear)
     axios
-    .put(`http://localhost:5500/items/${id}`, gear)
+    .put(`http://localhost:5500/players/${id}`, gear)
     .then(response => {
+        console.log(response)
       this.setState({
         redirect: true
       });
@@ -82,6 +92,7 @@ class Equip extends Component {
     return (
       <Fragment>
         {this.setEquipment(this.state.player._id)}
+        {this.renderRedirect(this.state.player._id)}
         Equpiping
       </Fragment>
     );

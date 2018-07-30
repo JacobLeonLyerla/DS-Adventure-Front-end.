@@ -123,12 +123,12 @@ class Info extends Component {
             Equipment:
             <br/><br/>
             
-                {this.state.player.gear.map(item => (<Fragment>
+                {/* {this.state.player.gear.map(item => (<Fragment>
                 
                 <div>{item}</div><br/>
                
 
-            </Fragment>))} 
+            </Fragment>))}  */}
           </div>
           <br/>
           <div>
@@ -136,12 +136,12 @@ class Info extends Component {
             Bags:
             <br/><br/>
             
-                {this.state.player.items.map(bag => (<Fragment>
+                {/* {this.state.player.items.map(bag => (<Fragment>
                 {console.log(bag.name)}
                 <div>{bag.name}</div><br/>
                
 
-            </Fragment>))} 
+            </Fragment>))}  */}
           </div>
         </div>
         <Link to ={`/equip/${this.state.player._id}`}><button >
