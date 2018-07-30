@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect,Link} from "react-router-dom";
 import axios from "axios";
 
 class Info extends Component {
@@ -79,7 +79,7 @@ class Info extends Component {
               value={this.state.name}
               onChange={this.handleInput}
             />
-          </label>
+          </label><br/>
           Lore:
           <input
             name="bio"
@@ -97,6 +97,7 @@ class Info extends Component {
     console.log(this.state.player);
     return (
       <Fragment>
+          <div className="info-styles">
         <div>
           Name: {this.state.player.name}
           <br />
@@ -121,6 +122,7 @@ class Info extends Component {
  
             Equipment:
             <br/><br/>
+            
                 {this.state.player.gear.map(item => (<Fragment>
                 
                 <div>{item}</div><br/>
@@ -133,13 +135,18 @@ class Info extends Component {
  
             Bags:
             <br/><br/>
+            
                 {this.state.player.items.map(bag => (<Fragment>
-                <div>{bag}</div><br/>
+                {console.log(bag.name)}
+                <div>{bag.name}</div><br/>
                
 
             </Fragment>))} 
           </div>
         </div>
+        <Link to ={`/equip/${this.state.player._id}`}><button >
+          equip hero
+        </button></Link>
         <button onClick={() => this.setState({ visible: !this.state.visible })}>
           Edit hero
         </button>
@@ -147,6 +154,7 @@ class Info extends Component {
         {element}
 
         <br />
+        </div>
       </Fragment>
     );
   }

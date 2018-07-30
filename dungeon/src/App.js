@@ -6,6 +6,7 @@ import "./App.css";
 import Player from "./player/player";
 import Create from "./player/createPlayer";
 import Info from "./player/info";
+import Equip from "./player/equipment";
 class App extends Component {
      state = {
       players: undefined,
@@ -71,6 +72,10 @@ class App extends Component {
         <Route
           path="/info/:id"
           render={props => <Info  {...props} player={this.state.player} />}
+        />
+          <Route
+          path="/equip/:id"
+          render={props => <Equip  {...props} player={this.state.player} />}
         />
       </div>
     );
