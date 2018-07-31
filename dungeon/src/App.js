@@ -7,6 +7,9 @@ import Player from "./player/player";
 import Create from "./player/createPlayer";
 import Info from "./player/info";
 import Equip from "./player/equipment";
+import DungeonList from"./dungeons/dungeonList";
+import BlackHeart from"./dungeons/loadBHDungeon";
+
 class App extends Component {
      state = {
       players: undefined,
@@ -72,6 +75,14 @@ class App extends Component {
           <Route
           path="/equip/:id"
           render={props => <Equip  {...props} player={this.state.player} />}
+        />
+             <Route
+          path="/dungeons/:id"
+          render={props => <DungeonList  {...props} player={this.state.player} />}
+        />
+                  <Route
+          path="/blackheart/:id"
+          render={props => <BlackHeart  {...props} player={this.state.player} />}
         />
       </div>
     );

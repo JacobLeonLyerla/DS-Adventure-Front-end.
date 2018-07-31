@@ -22,8 +22,7 @@ class Equip extends Component {
       .then(response => {
         this.setState({ player: response.data });
       })
-      .catch(err => {
-      });
+      .catch(err => {});
   };
 
   renderRedirect = id => {
@@ -37,8 +36,7 @@ class Equip extends Component {
     axios
       .put(`http://localhost:5500/items/${id}`, item)
       .then(response => {})
-      .catch(err => {
-      });
+      .catch(err => {});
   }
   buildGear(piece) {
     let strength = 0;
@@ -50,7 +48,6 @@ class Equip extends Component {
     let gear = {};
     let itemSlot = eval(`this.state.player.${piece.slot}`);
     if (itemSlot === "none") {
-     
       if (piece.strength !== undefined) {
         strength = piece.strength;
       }
@@ -69,94 +66,70 @@ class Equip extends Component {
       if (
         piece.slot === "shield" &&
         this.state.player.offHand === "none" &&
-        this.state.player.charm === "none"&&
-        this.state.player.weaponTwoHand ==="none"
+        this.state.player.charm === "none" &&
+        this.state.player.weaponTwoHand === "none"
       ) {
         gear.shield = "Equipped";
-        console.log("shield:",gear.shield)
-
-      }
-     else if (piece.slot === "head") {
+        console.log("shield:", gear.shield);
+      } else if (piece.slot === "head") {
         gear.head = "Equipped";
-        console.log("head:",gear.head)
-      }
-
-     else if (piece.slot === "shoulders") {
+        console.log("head:", gear.head);
+      } else if (piece.slot === "shoulders") {
         gear.shoulders = "Equipped";
-        console.log("shoulders:",gear.shoulders)
-        
-      }
-     else if (piece.slot === "chest") {
+        console.log("shoulders:", gear.shoulders);
+      } else if (piece.slot === "chest") {
         gear.chest = "Equipped";
-        console.log("chest:",gear.chest)
-
-      }
-     else if (piece.slot === "hands") {
+        console.log("chest:", gear.chest);
+      } else if (piece.slot === "hands") {
         gear.hands = "Equipped";
-        console.log("hands:",gear.hands)
-
-      }
-     else if (piece.slot === "feet") {
+        console.log("hands:", gear.hands);
+      } else if (piece.slot === "feet") {
         gear.feet = "Equipped";
-        console.log("feet:",gear.feet)
-
-      }
-     else if (piece.slot === "leggings") {
+        console.log("feet:", gear.feet);
+      } else if (piece.slot === "leggings") {
         gear.leggings = "Equipped";
-        console.log("leggings:",gear.legginfs)
-
-
-      }
-     else if (piece.slot === "weaponOneHand") {
+        console.log("leggings:", gear.legginfs);
+      } else if (piece.slot === "weaponOneHand") {
         gear.weaponOneHand = "Equipped";
-        console.log("1h:",gear.weaponOneHand)
-
-      }
-     else if (
+        console.log("1h:", gear.weaponOneHand);
+      } else if (
         piece.slot === "weaponTwoHand" &&
         this.state.player.shield === "none" &&
         this.state.player.weaponOneHand === "none" &&
         this.state.player.charm === "none" &&
-          this.state.player.offHand ==="none"
+        this.state.player.offHand === "none"
       ) {
         gear.WeapondTwoHand = "Equipped";
-        console.log("2H:",gear.WeapondTwoHand)
-
-      }
-     else if (
+        console.log("2H:", gear.WeapondTwoHand);
+      } else if (
         piece.slot === "charm" &&
         this.state.player.shield === "none" &&
-        this.state.player.offHand === "none"&&
-        this.state.player.weapondTwoHand ==="none"
+        this.state.player.offHand === "none" &&
+        this.state.player.weapondTwoHand === "none"
       ) {
         gear.charm = "Equipped";
-        console.log("charm:",gear.charm)
-
-      }
-    else  if (
+        console.log("charm:", gear.charm);
+      } else if (
         piece.slot === "offHand" &&
         this.state.player.charm === "none" &&
-        this.state.player.shield === "none"&&
-        this.state.player.weapondTwoHand ==="none"
+        this.state.player.shield === "none" &&
+        this.state.player.weapondTwoHand === "none"
       ) {
         gear.offHand = "Equipped";
-        console.log("OH:",gear.offHand)
-
-
+        console.log("OH:", gear.offHand);
       }
     }
-    console.log("setting up stats")
-    gear.agility = agility 
-    gear.endurance = endurance 
-    gear.health = health 
-    gear.intellect = intellect 
-    gear.strength = strength 
-   
-    console.log("returning gear object",gear)
+    console.log("setting up stats");
+    gear.agility = agility;
+    gear.endurance = endurance;
+    gear.health = health;
+    gear.intellect = intellect;
+    gear.strength = strength;
+
+    console.log("returning gear object", gear);
     return gear;
   }
   setEquipment(id) {
-
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // SET A EQUIPED FLAG ON GEAR SO IT ONLY EQUIPS ONCE,
     // SO WHEN YOU GET IT IT RUNS THIS COMPONENT
@@ -166,71 +139,74 @@ class Equip extends Component {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     let gear = {
-      agility :  this.state.player.agility,
-      endurance :  this.state.player.endurance,
-      health :  this.state.player.health,
-      intellect :  this.state.player.intellect,
-      strength : this.state.player.strength,
-
+      agility: this.state.player.agility,
+      endurance: this.state.player.endurance,
+      health: this.state.player.health,
+      intellect: this.state.player.intellect,
+      strength: this.state.player.strength
     };
     for (let index = 0; index < this.state.player.gear.length; index++) {
       const piece = this.state.player.gear[index];
-    let  update = this.buildGear(piece);
-      console.log(update.health)
-    gear.agility +=  update.agility;
-    gear.endurance +=  update.endurance;
-    gear.health +=  update.health;
-    gear.intellect +=  update.intellect;
-    gear.strength += update.strength
-    if(update.head !=="none"&& update.head !== undefined){
-      gear.head = "Equipped"
+      let update = this.buildGear(piece);
+      console.log(update.health);
+      gear.agility += update.agility;
+      gear.endurance += update.endurance;
+      gear.health += update.health;
+      gear.intellect += update.intellect;
+      gear.strength += update.strength;
+      if (update.head !== "none" && update.head !== undefined) {
+        gear.head = "Equipped";
+      }
+      if (update.shoulders !== "none" && update.shoulders !== undefined) {
+        gear.shoulders = "Equipped";
+      }
+      if (update.chest !== "none" && update.chest !== undefined) {
+        gear.chest = "Equipped";
+      }
+      if (update.hands !== "none" && update.hands !== undefined) {
+        gear.hands = "Equipped";
+      }
+      if (update.leggings !== "none" && update.leggings !== undefined) {
+        gear.leggings = "Equipped";
+      }
+      if (update.feer !== "none" && update.feet !== undefined) {
+        gear.feet = "Equipped";
+      }
+      if (
+        update.WeapondTwoHand !== "none" &&
+        update.weapondTwoHand !== undefined
+      ) {
+        gear.weapondTwoHand = "Equipped";
+      }
+      if (
+        update.weaponOneHand !== "none" &&
+        update.weaponOneHand !== undefined
+      ) {
+        gear.weaponOneHand = "Equipped";
+      }
+      if (update.charm !== "none" && update.charm !== undefined) {
+        gear.charm = "Equipped";
+      }
+      if (update.shield !== "none" && update.shield !== undefined) {
+        gear.shield = "Equipped";
+      }
+      if (update.offHand !== "none" && update.offHand !== undefined) {
+        gear.offHand = "Equipped";
+      }
     }
-    if(update.shoulders !=="none" && update.shoulders !== undefined){
-      gear.shoulders = "Equipped"
-    }
-    if(update.chest !=="none" && update.chest !== undefined){
-      gear.chest = "Equipped"
-    }
-    if(update.hands !=="none" && update.hands !== undefined){
-      gear.hands = "Equipped"
-    }
-    if(update.leggings!=="none" && update.leggings !== undefined){
-      gear.leggings = "Equipped"
-    }
-    if(update.feer !=="none" && update.feet !== undefined){
-      gear.feet = "Equipped"
-    }
-    if(update.WeapondTwoHand !=="none" && update.weapondTwoHand !== undefined){
-      gear.weapondTwoHand = "Equipped"
-    }
-    if(update.weaponOneHand !=="none" && update.weaponOneHand !== undefined){
-      gear.weaponOneHand = "Equipped"
-    }
-    if(update.charm !=="none" && update.charm !== undefined){
-      gear.charm = "Equipped"
-    }
-    if(update.shield!=="none" && update.shield !== undefined){
-      gear.shield = "Equipped"
-    }
-      if(update.offHand !=="none" && update.offHand !== undefined){
-      gear.offHand = "Equipped"
-    }
-      
-    }
-    console.log(gear)
-      this.equipmentAdd(gear,id)
+    console.log(gear);
+    this.equipmentAdd(gear, id);
   }
-    equipmentAdd(gear,id){
+  equipmentAdd(gear, id) {
     axios
       .put(`http://localhost:5500/players/${id}`, gear)
       .then(response => {
-        console.log(this.state.player)
+        console.log(this.state.player);
         this.setState({
           redirect: true
         });
       })
-      .catch(err => {
-      });
+      .catch(err => {});
   }
   render() {
     return (

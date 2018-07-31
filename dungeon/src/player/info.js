@@ -93,6 +93,7 @@ class Info extends Component {
     }
     return (
       <Fragment>
+        <Link to={`/dungeons/${this.state.player._id}`}><button>Dungeons</button></Link>
           <div className="info-styles">
         <div>
           Name: {this.state.player.name}
@@ -119,12 +120,12 @@ class Info extends Component {
             Equipment:
             <br/><br/>
             
-                {/* {this.state.player.gear.map(item => (<Fragment>
+                {this.state.player.gear.map(item => (<Fragment>
                 
-                <div>{item}</div><br/>
+                <div>{item.name}</div><br/>
                
 
-            </Fragment>))}  */}
+            </Fragment>))} 
           </div>
           <br/>
           <div>
@@ -132,11 +133,11 @@ class Info extends Component {
             Bags:
             <br/><br/>
             
-                {/* {this.state.player.items.map(bag => (<Fragment>
+                {this.state.player.items.map(bag => (<Fragment>
                 <div>{bag.name}</div><br/>
                
 
-            </Fragment>))}  */}
+            </Fragment>))} 
           </div>
         </div>
         <Link to ={`/equip/${this.state.player._id}`}><button >
