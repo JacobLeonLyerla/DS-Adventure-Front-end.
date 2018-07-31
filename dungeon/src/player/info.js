@@ -26,12 +26,10 @@ class Info extends Component {
         this.setState({ player: response.data });
       })
       .catch(err => {
-        console.log(err);
       });
   };
 
   updatePlayer = id => {
-    console.log("passed in id:", id);
     const player = {};
     if (this.state.name !== "") {
       player.name = this.state.name;
@@ -49,7 +47,6 @@ class Info extends Component {
         this.setCurrentPlayer(id);
       })
       .catch(err => {
-        console.log("not sent in");
       });
   };
   handleInput = input => {
@@ -94,7 +91,6 @@ class Info extends Component {
         </form>
       );
     }
-    console.log(this.state.player);
     return (
       <Fragment>
           <div className="info-styles">
@@ -137,7 +133,6 @@ class Info extends Component {
             <br/><br/>
             
                 {/* {this.state.player.items.map(bag => (<Fragment>
-                {console.log(bag.name)}
                 <div>{bag.name}</div><br/>
                
 

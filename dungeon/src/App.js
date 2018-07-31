@@ -24,14 +24,12 @@ class App extends Component {
       axios
       .get("http://localhost:5500/players")
       .then(response=>{
-        console.log(response)
           this.setState({players:response.data})
           if(reload ==="reload"){
             window.location.reload()
           }
       })
       .catch(err=>{
-          console.log(err)
       })
   }
   handleInput = input =>{
@@ -49,7 +47,6 @@ class App extends Component {
             }
           }
           else{
-              return console.log("not found")
           }
       });
       
@@ -61,7 +58,6 @@ class App extends Component {
     }
   }
   render() {
- console.log(this.state.player)
     return (
       <div className="App">
 {this.renderRedirect(this.state.id)}

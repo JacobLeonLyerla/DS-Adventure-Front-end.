@@ -30,7 +30,6 @@ class Create extends Component {
     }
     if (this.state.class !== "") {
       let test = this.state.class;
-      console.log(this.state.class);
       switch (test) {
         case "Ranger":
           player.health = 160;
@@ -75,7 +74,6 @@ class Create extends Component {
           player.strength = 0;
           break;
         default:
-          console.log("default");
       }
       player.class = this.state.class;
     }
@@ -92,7 +90,6 @@ class Create extends Component {
       .post("http://localhost:5500/players", player)
       .then(response => {
         this.props.setPlayer("reload");
-        console.log("sent char:", response);
         this.state.redirect = true;
         this.setState({
           name: "",
@@ -104,7 +101,6 @@ class Create extends Component {
         });
       })
       .catch(err => {
-        console.log(err);
       });
   };
   handleInput = input => {
