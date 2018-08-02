@@ -27,7 +27,7 @@ class Equip extends Component {
 
   renderRedirect = id => {
     if (this.state.redirect) {
-      return <Redirect to={`/info/${id}`} />;
+      return <Redirect to={`/blackheart/${id}`} />;
     }
   };
   setEquippedBool(id) {

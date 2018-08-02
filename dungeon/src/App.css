@@ -95,3 +95,15 @@ margin:10px
 
   /* border-bottom: .5px solid black; */
 }
+.class-styles{
+  border-top:1px solid black;
+  width: 50%;
+  margin: 0 auto;
+  padding-top:20px;
+}
+.classIcon-styles{
+  width:40px;
+  
+  border-radius: 1000px;
+  border:1px solid cadetblue;
+}

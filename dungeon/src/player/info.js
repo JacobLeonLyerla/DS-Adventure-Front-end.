@@ -140,9 +140,6 @@ class Info extends Component {
             </Fragment>))} 
           </div>
         </div>
-        <Link to ={`/equip/${this.state.player._id}`}><button >
-          equip hero
-        </button></Link>
         <button onClick={() => this.setState({ visible: !this.state.visible })}>
           Edit hero
         </button>
