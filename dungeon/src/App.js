@@ -10,6 +10,7 @@ import Equip from "./player/equipment";
 import DungeonList from "./dungeons/dungeonList";
 import BlackHeart from "./dungeons/loadBHDungeon";
 import Items from "./dungeons/items";
+import Battle from"./dungeons/battle";
 
 class App extends Component {
   state = {
@@ -101,6 +102,10 @@ class App extends Component {
         <Route
           path="/blackheart/:id"
           render={props => <Items {...props} player={this.state.player} />}
+        />
+        <Route
+          path="/battle/:id"
+          render={props => <Battle {...props} player={this.state.player} />}
         />
       </div>
     );

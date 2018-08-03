@@ -57,11 +57,8 @@ class Info extends Component {
       this.setState({ class: input });
     }
   };
-  renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to="/" />;
-    }
-  };
+
+  
   render() {
     let element = null;
     if (this.state.visible) {

@@ -55,7 +55,6 @@ class Items extends Component {
   };
 
   deleteItem(type, loot) {
-    console.log(type);
     let items = {};
     switch (type) {
       case "Loot":
@@ -92,6 +91,7 @@ class Items extends Component {
       case "Drop Item":
       items.items = this.state.player.items.filter(item =>item._id !== loot._id)
         break;
+
       default:
         break;
       }

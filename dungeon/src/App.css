@@ -123,6 +123,7 @@ color:lightcoral;
 
 
 }
+/* /////////////////////////////////////////////// BATTLE COMPONENT */
 .class-styles{
   border-top:1px solid black;
   width: 50%;
@@ -134,4 +135,39 @@ color:lightcoral;
   
   border-radius: 1000px;
   border:1px solid cadetblue;
+}
+.common{
+  margin-top:30px;
+  border:10px ridge lightgrey;
+}
+.Paladin{
+  margin-top:30px;
+  width:200px;
+  height:auto;
+  border:10px ridge goldenrod;
+}
+.commonStats-styles{
+  border-radius: 7px;
+  width:30%;
+margin: 0 auto;
+background:lightslategrey;
+border:1px groove black;
+color:white;
+padding:20px;
+font-size:20px;
+}
+.battleheader-styles{
+  font-size:30px;
+}
+.commonRarity-styles{
+width:100px;
+border-bottom: 3px solid lightgray;
+color: lightgray;
+}
+.middleBattle-styles{
+  display:flex;
+
+}
+.attack-styles{
+  width:20%;
 }

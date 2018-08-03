@@ -3,9 +3,7 @@ import axios from "axios"
 import {Link} from "react-router-dom"
 
 class Player extends Component {
-    props={
 
-    }
   
     
 
