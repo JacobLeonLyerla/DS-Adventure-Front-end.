@@ -86,6 +86,7 @@ class Create extends Component {
     if (this.state.gender !== "") {
       player.gender = this.state.gender;
     }
+    player.currentLocation = undefined
     axios
       .post("http://localhost:5500/players", player)
       .then(response => {
@@ -100,7 +101,8 @@ class Create extends Component {
           gender: ""
         });
       })
-      .catch(err => {
+      .catch(error => {
+        console.log(error)
       });
   };
   handleInput = input => {

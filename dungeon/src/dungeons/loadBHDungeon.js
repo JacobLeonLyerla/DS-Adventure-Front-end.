@@ -19,7 +19,8 @@ class BlackHeart extends Component {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //************************************************** AXIOS
   setDungeon = (reload) => {
-        if(this.state.player.currentLocation._id === 0|| this.state.player.currentLocation._id === undefined){
+  
+        if(this.state.player.currentLocation ===undefined){
     axios
       .get("http://localhost:5500/blackheart")
       .then(response => {
@@ -60,6 +61,12 @@ else{
       })
       .catch(err => {});
   };
+
+
+
+
+
+
   currentPlayer = id => {
     axios
       .get(`http://localhost:5500/players/${id}`)

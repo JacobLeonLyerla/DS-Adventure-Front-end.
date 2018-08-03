@@ -9,7 +9,7 @@ import ranger from "./img/ranger.jpg";
 import necro from "./img/necro.jpg";
 class Items extends Component {
   state = {
-    player: { gear: [{name:""}], items: [{name:""}] },
+    player: { gear: [{ name: "" }], items: [{ name: "" }] },
     area: { items: [] }
   };
   componentDidMount() {
@@ -17,12 +17,32 @@ class Items extends Component {
     this.currentPlayer(id);
   }
   currentRoom = id => {
-    axios
-      .get(`http://localhost:5500/blackheart/${id}`)
-      .then(response => {
-        this.setState({ area: response.data });
-      })
-      .catch(err => {});
+    axios.get(`http://localhost:5500/blackheart/${id}`).then(response => {
+      this.setState({ area: response.data });
+      let roomLoot = {};
+      let roomFilter = this.state.area.items.filter(item => {
+        let failed = false;
+        let secondfailed = false;
+        this.state.player.items.forEach(playerItem => {
+          if (playerItem._id !== item._id) {
+            return;
+          } else {
+            return (failed = true);
+          }
+        });
+        this.state.player.gear.forEach(InventoryItem => {
+          if (InventoryItem._id !== item._id) {
+            return;
+          } else {
+            return (secondfailed = true);
+          }
+        });
+
+        return failed === false && secondfailed === false;
+      });
+      roomLoot.items = roomFilter;
+      this.setState({ area: { items: roomLoot.items } });
+    });
   };
   currentPlayer = id => {
     axios
@@ -35,157 +55,141 @@ class Items extends Component {
   };
 
   deleteItem(type, loot) {
+    console.log(type);
     let items = {};
-    if (type === "Loot") {
-
-      items.items = this.state.area.items.filter(item => item._id !== loot._id);
-     
-
-
-        
-      axios
-        .put(`http://localhost:5500/blackheart/${this.state.area._id}`, items)
-        .then(response => {
-          items.items = [];
-          this.state.player.items.push(loot._id);
-
-          items.items = this.state.player.items;
-          axios
-            .put(
-              `http://localhost:5500/players/${this.state.player._id}`,
-              items
-            )
-            .then(response => {
-              window.location.reload();
-            })
-            .catch(err => {});
-        })
-        .catch(err => {});
-    } else if (type === "Inventory" || type === "Equip") {
-      if (type === "Inventory") {
-        items.items = this.state.player.items.filter(
-          item => item._id !== loot._id
-        );
-
-        this.state.player.gear.push(loot._id);
-
-        items.gear = this.state.player.gear;
-      } else {
-        items.gear = this.state.player.gear.filter(
-          item => item._id !== loot._id
-        );
+    switch (type) {
+      case "Loot":
+        items.items = [];
         this.state.player.items.push(loot._id);
 
         items.items = this.state.player.items;
-      }
+        axios
+          .put(`http://localhost:5500/players/${this.state.player._id}`, items)
+          .then(response => {
+            window.location.reload();
+          })
+          .catch(err => {});
+        break;
+      case "Inventory":
+      case "Equip":
+        if (type === "Inventory") {
+          items.items = this.state.player.items.filter(
+            item => item._id !== loot._id
+          );
 
-      axios
-        .put(`http://localhost:5500/players/${this.state.player._id}`, items)
-        .then(response => {
-          if (type === "Equip") {
-            this.removeEquipment(loot);
-          }
-          window.location.reload();
-        })
-        .catch(err => {});
-    }
+          this.state.player.gear.push(loot._id);
+
+          items.gear = this.state.player.gear;
+        } else if (type === "Equip") {
+          items.gear = this.state.player.gear.filter(
+            item => item._id !== loot._id
+          );
+          this.state.player.items.push(loot._id);
+
+          items.items = this.state.player.items;
+        }
+        break;
+      case "Drop Item":
+      items.items = this.state.player.items.filter(item =>item._id !== loot._id)
+        break;
+      default:
+        break;
+      }
+        axios
+          .put(`http://localhost:5500/players/${this.state.player._id}`, items)
+          .then(response => {
+            if (type === "Equip") {
+              this.removeEquipment(loot);
+            }
+            window.location.reload();
+          })
+          .catch(err => {});
+    
   }
   removeEquipment(item) {
     let items = {};
     let itemSlot = eval(`this.state.player.${item.slot}`);
 
-    console.log(itemSlot)
+    if (itemSlot === "Equipped") {
+      let player = {};
+      let strength,
+        intellect,
+        health,
+        endurance,
+        agility = 0;
+      switch (item.slot) {
+        case "shield":
+          player.shield = "none";
 
-    if (itemSlot ==="Equipped") {
-      console.log("what now")
-    
-      
-          let player = {};
-          let strength,
-            intellect,
-            health,
-            endurance,
-            agility = 0;
-            console.log(item.slot)
-         switch (item.slot) {
-           case "Shield":
-             player.shield ="none"
-             
-             break;
-             case "shield":
-             player.shield ="none"
-             
-             break;
-             case "head":
-             player.head ="none"
-             
-             break;
-             case "shoulders":
-             player.shoulders ="none"
-             
-             break;
-             case "feet":
-             player.feet ="none"
-             
-             break;
-             case "hands":
-             player.hands ="none"
-             
-             break;
-             case "chest":
-             player.chest ="none"
-             
-             break;
-             case "leggings":
-             player.leggings ="none"
-             
-             break;
-             case "charm":
-             player.charm ="none"
-             
-             break;
-             case "offHand":
-             player.offHand ="none"
-             
-             break;
-             case "weaponTwoHand":
-             player.weaponTwoHand ="none"
-             
-             break;
-             case "weaponOneHand":
-             console.log("WeaponOneHand")
-             player.weaponOneHand ="none"
-             break;
-           default:
-             break;
-         }
-          if (item.strength > 0) {
-            strength = item.strength;
-            player.strength = this.state.player.strength - strength;
-          }
-          if (item.intellect > 0) {
-            intellect = item.intellect;
-            player.intellect = this.state.player.intellect - intellect;
-          }
-          if (item.health > 0) {
-            health = item.health;
-            player.health = this.state.player.health - health;
-          }
-          if (item.agility > 0) {
-            agility = item.agility;
-            player.agility = this.state.player.agility - agility;
-          }
-          if (item.endurance > 0) {
-            endurance = item.endurance;
-            player.endurance = this.state.player.endurance - endurance;
-          }
-          console.log(player)
-          axios
-            .put(`http://localhost:5500/players/${this.state.player._id}`, player)
-            .then(response => {
-              window.location.reload();
-            })
-            .catch(err => {});
+          break;
+        case "head":
+          player.head = "none";
+
+          break;
+        case "shoulders":
+          player.shoulders = "none";
+
+          break;
+        case "feet":
+          player.feet = "none";
+
+          break;
+        case "hands":
+          player.hands = "none";
+
+          break;
+        case "chest":
+          player.chest = "none";
+
+          break;
+        case "leggings":
+          player.leggings = "none";
+
+          break;
+        case "charm":
+          player.charm = "none";
+
+          break;
+        case "offHand":
+          player.offHand = "none";
+
+          break;
+        case "weaponTwoHand":
+          player.weaponTwoHand = "none";
+
+          break;
+        case "weaponOneHand":
+          player.weaponOneHand = "none";
+          break;
+        default:
+          break;
+      }
+      if (item.strength > 0) {
+        strength = item.strength;
+        player.strength = this.state.player.strength - strength;
+      }
+      if (item.intellect > 0) {
+        intellect = item.intellect;
+        player.intellect = this.state.player.intellect - intellect;
+      }
+      if (item.health > 0) {
+        health = item.health;
+        player.health = this.state.player.health - health;
+      }
+      if (item.agility > 0) {
+        agility = item.agility;
+        player.agility = this.state.player.agility - agility;
+      }
+      if (item.endurance > 0) {
+        endurance = item.endurance;
+        player.endurance = this.state.player.endurance - endurance;
+      }
+      axios
+        .put(`http://localhost:5500/players/${this.state.player._id}`, player)
+        .then(response => {
+          window.location.reload();
+        })
+        .catch(err => {});
     } else {
     }
   }
@@ -198,23 +202,91 @@ class Items extends Component {
     if (classname === "Warrior") return warrior;
     if (classname === "Rogue") return rogue;
   }
-  checkDuplicate(type, loot){
-    let dup = false
+  checkDuplicate(type, loot) {
+    let dup = false;
     if (type === "Inventory") {
-         this.state.player.gear.forEach(curItem=>{
-        if(curItem.slot === loot.slot) {
-       dup =true
-       }
-       })
+      this.state.player.gear.forEach(curItem => {
+        if (curItem.slot === loot.slot) {
+          dup = true;
+        }
+      });
+    }
+    if (dup === false) {
+      this.deleteItem(type, loot);
+    } else {
+      return alert(`You cannot add another ${loot.slot} to your equipment`);
+    }
   }
-  if(dup ===false){
-    this.deleteItem(type,loot)
-  }
-  else{
-    return alert(`You cannot add another ${loot.slot} to your equipment`) 
-  }
-}
+  renderEquipment() {
+    if (this.state.player.name !== undefined && this.state.player.name !== "") {
+      return this.state.player.gear.map(item => (
+        <Fragment>
+          <div
+            className="itemCard-styles"
+           
+          >
+               <div className="move-styles">
+              <div
+                className="add-styles
+      "
+                onClick={() => this.checkDuplicate("Equip", item)}
+              >
+                <i class="fas fa-level-down-alt"></i>
+              </div>
 
+   
+            </div>
+            <div className="itemsHeader-styles">{item.name}</div>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            <br />
+            {` Health: ${item.health} Endurance: ${item.endurance}`}
+            <br />
+            {` Intellect: ${item.intellect} Strength: ${item.strength}`}
+            <br />
+            {` Agility: ${item.agility}`}
+          </div>
+          <br />
+        </Fragment>
+      ));
+    }
+  }
+  renderItems() {
+    if (this.state.player.name !== undefined && this.state.player.name !== "") {
+      return this.state.player.items.map(item => (
+        <Fragment>
+          <div className="itemCard-styles">
+            <div className="move-styles">
+              <div
+                className="add-styles
+      "
+                onClick={() => this.checkDuplicate("Inventory", item)}
+              >
+               <i class="fas fa-level-up-alt"></i>
+              </div>
+
+              <div
+                className="drop-styles"
+                onClick={() => this.deleteItem("Drop Item", item)}
+              >
+                <i class="far fa-times-circle"></i>
+
+
+              </div>
+            </div>
+            <div className="itemsHeader-styles">{item.name}</div>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            <br />
+            {` Health: ${item.health} Endurance: ${item.endurance}`}
+            <br />
+            {` Intellect: ${item.intellect} Strength: ${item.strength}`}
+            <br />
+            {` Agility: ${item.agility}`}
+          </div>
+          <br />
+        </Fragment>
+      ));
+    }
+  }
   render() {
     return (
       <Fragment>
@@ -227,8 +299,11 @@ class Items extends Component {
             <Fragment>
               <div
                 className="itemCard-styles"
-                onClick={() => this.deleteItem("Loot", item)}
+                
               >
+              <div className="delete-styles" onClick={() => this.deleteItem("Loot", item)}><i class="far fa-hand-paper"></i>
+
+</div>
                 <div className="itemsHeader-styles">{item.name}</div>
                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 <br />
@@ -261,26 +336,7 @@ class Items extends Component {
 
         <div className={"bigItemHeader-styles"}>Items in equipped</div>
 
-        <div className="Items">
-          {this.state.player.gear.map(item => (
-            <Fragment>
-              <div
-                className="itemCard-styles"
-                onClick={() => this.checkDuplicate("Equip", item)}
-              >
-                <div className="itemsHeader-styles">{item.name}</div>
-                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                <br />
-                {` Health: ${item.health} Endurance: ${item.endurance}`}
-                <br />
-                {` Intellect: ${item.intellect} Strength: ${item.strength}`}
-                <br />
-                {` Agility: ${item.agility}`}
-              </div>
-              <br />
-            </Fragment>
-          ))}
-        </div>
+        <div className="Items">{this.renderEquipment()}</div>
         <Link to={`/equip/${this.state.player._id}`}>
           <button>equip hero</button>
         </Link>
@@ -290,24 +346,7 @@ class Items extends Component {
           <br />
           <br />
 
-          {this.state.player.items.map(item => (
-            <Fragment>
-              <div
-                className="itemCard-styles"
-                onClick={() => this.checkDuplicate("Inventory", item)}
-              >
-                <div className="itemsHeader-styles">{item.name}</div>
-                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                <br />
-                {` Health: ${item.health} Endurance: ${item.endurance}`}
-                <br />
-                {` Intellect: ${item.intellect} Strength: ${item.strength}`}
-                <br />
-                {` Agility: ${item.agility}`}
-              </div>
-              <br />
-            </Fragment>
-          ))}
+          {this.renderItems()}
         </div>
       </Fragment>
     );
