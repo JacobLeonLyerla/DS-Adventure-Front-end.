@@ -6,6 +6,8 @@ class BlackHeart extends Component {
     areas: undefined,
     area: {},
     player: { currentLocation: { _id: 0 } },
+    pPempId:"",
+    mTempid:"",
     id: 0,
     redirect: false,
     moved: false
@@ -22,8 +24,7 @@ class BlackHeart extends Component {
         .get("http://localhost:5500/blackheart")
         .then(response => {
           this.currentRoom(response.data[0]._id);
-
-          this.setState({ players: response.data });
+          this.setState({ players: response.data,  });
 
           if (reload === "reload") {
             window.location.reload();
@@ -31,16 +32,12 @@ class BlackHeart extends Component {
         })
         .catch(err => {});
     } else {
-      axios
-        .get("http://localhost:5500/players")
-        .then(response => {
-          this.setState({ players: response.data });
+     
+
           this.currentRoom(this.state.player.currentLocation._id);
           if (reload === "reload") {
             window.location.reload();
           }
-        })
-        .catch(err => {});
     }
   };
   currentRoom = id => {
@@ -116,7 +113,7 @@ class BlackHeart extends Component {
     axios
       .get(`http://localhost:5500/players/${id}`)
       .then(response => {
-        this.setState({ player: response.data });
+        this.setState({ player: response.data, mTempid: response.data });
         this.setDungeon();
       })
       .catch(err => {});
@@ -164,8 +161,11 @@ class BlackHeart extends Component {
         `there is no path to the ${direction} of you, please try another path.`
       );
     }
+ 
     let player = {};
     player.currentLocation = id;
+    player.tempMonster = "no temp"
+    player.tempPlayer = "no temp"
     axios
       .put(`http://localhost:5500/players/${this.state.player._id}`, player)
       .then(response => {
@@ -183,8 +183,10 @@ class BlackHeart extends Component {
     switch (direction) {
       case "North":
         if (this.state.area.north.length > 0) {
+        
           for (let index = 0; index < this.state.area.north.length; index++) {
             pathId = this.state.area.north[0]._id;
+     
           }
         } else {
           pathId = "No path";
@@ -228,23 +230,39 @@ class BlackHeart extends Component {
       return <Redirect to={`/battle/${id}`} />;
     }
   }
+  movmentRender(){
+if(this.state.area.south !== undefined){
+    return(<Fragment>
+      <div className="BlackHeart">
+      {`You are currently in  the ${this.state.area.name}`}
+      <br />
+      <br />
+      <button onClick={() => this.move("North")}>Go North</button>
+
+      <br />
+      <button onClick={() => this.move("West")}>Go West</button>
+      <button onClick={() => this.move("East")}>Go East</button>
+      <br />
+      <button onClick={() => this.move("South")}>Go South</button>
+    </div>
+   </Fragment>)
+}else{
+  return(
+
+   <div className="BlackHeart">
+   <h3>You enter the room, looking around to find the next path.</h3>
+   <img className="pathicon" src="https://orig00.deviantart.net/2205/f/2010/307/e/e/moria_throne_room_by_moondoodles-d322n02.jpg" />
+   </div>
+  )
+}
+
+  }
   render() {
     return (
     
       <Fragment>
           {this.renderRedirect(this.state.player._id)}
-        <div className="BlackHeart">
-          {`You are currently in  the ${this.state.area.name}`}
-          <br />
-          <br />
-          <button onClick={() => this.move("North")}>Go North</button>
-
-          <br />
-          <button onClick={() => this.move("West")}>Go West</button>
-          <button onClick={() => this.move("East")}>Go East</button>
-          <br />
-          <button onClick={() => this.move("South")}>Go South</button>
-        </div>
+          {this.movmentRender()}
       </Fragment>
     );
   }

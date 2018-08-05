@@ -10,6 +10,18 @@ class Player extends Component {
   render() {
     return (<Fragment>
        <br/><br/>
+       <br/><br/>
+       <br/><br/>
+       <br/><br/>
+       <br/><br/>
+       <br/><br/>
+       <br/><br/>
+       <br/><br/>
+       <br/><br/>
+       <br/><br/>
+       <br/><br/>
+       <br/><br/>
+       <br/><br/>
     Name:
    <input 
    name="name"

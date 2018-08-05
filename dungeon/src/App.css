@@ -141,7 +141,7 @@ color:lightcoral;
   border:10px ridge lightgrey;
 }
 .Paladin{
-  margin-top:30px;
+
   width:200px;
   height:auto;
   border:10px ridge goldenrod;
@@ -166,8 +166,21 @@ color: lightgray;
 }
 .middleBattle-styles{
   display:flex;
+  padding:20px;
 
 }
 .attack-styles{
   width:20%;
+}
+.opponentAttacks-styles{
+font-size: 25px;
+}
+.attackName-styles{
+ font-weight:bold;
+  font-size:40px;
+  padding-bottom:30px;
+  border-bottom: 1px solid white;
+}
+.pathicon{
+  width:400px;
 }
