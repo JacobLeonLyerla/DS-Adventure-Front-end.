@@ -140,47 +140,134 @@ color:lightcoral;
   margin-top:30px;
   border:10px ridge lightgrey;
 }
+.uncommon{
+  margin-top:30px;
+  border:10px ridge green;
+  width:10%;
+}
+.rare{
+  margin-top:30px;
+  border:10px ridge rgb(94, 94, 156);
+  width:20%;
+}
 .Paladin{
-
+margin-top:10px;
   width:200px;
   height:auto;
   border:10px ridge goldenrod;
 }
 .commonStats-styles{
   border-radius: 7px;
-  width:30%;
+  width:28%;
 margin: 0 auto;
 background:lightslategrey;
 border:1px groove black;
 color:white;
 padding:20px;
-font-size:20px;
+font-size:15px;
+}
+.uncommonStats-styles{
+  border-radius: 7px;
+  width:29%;
+margin: 0 auto;
+background:lightgreen;
+border:1px groove black;
+color:black;
+padding:20px;
+font-size:15px;
+}
+.rareStats-styles{
+  border-radius: 7px;
+  width:20%;
+margin: 0 auto;
+background:rgb(112, 122, 216);
+border:1px groove black;
+color:black;
+padding:20px;
+font-size:15px;
+
 }
 .battleheader-styles{
-  font-size:30px;
+  font-size:20px;
 }
 .commonRarity-styles{
 width:100px;
 border-bottom: 3px solid lightgray;
 color: lightgray;
 }
+.uncommonRarity-styles{
+  width:100px;
+  border-bottom: 3px solid rgb(48, 146, 48);
+  color:  rgb(48, 146, 48);
+  }
+  .rareRarity-styles{
+    width:100px;
+  border-bottom: 3px solid rgb(66, 66, 255)z;
+  color:  rgb(66, 66, 255);
+    }
+
 .middleBattle-styles{
   display:flex;
   padding:20px;
+  height:300px;
 
 }
 .attack-styles{
-  width:20%;
+  width:9%;
+  height: 9%;
 }
 .opponentAttacks-styles{
-font-size: 25px;
+font-size: 15px;
 }
 .attackName-styles{
  font-weight:bold;
-  font-size:40px;
-  padding-bottom:30px;
+  font-size:25px;
+  padding-bottom:10px;
   border-bottom: 1px solid white;
 }
 .pathicon{
   width:400px;
 }
+.centerSpell-styles{
+display:flex;
+justify-content: space-between;
+
+}
+.combatLog-styles{
+ font-size:25px;
+ display:flex;
+ flex-direction: column;
+
+
+}
+.winnings-styles{
+border: 1px solid black;
+background:lightgreen;
+width:30%;
+margin: 0 auto;
+margin-top: 10px;
+font-size:20px;
+padding:1%;
+}
+.losing-styles{
+  border: 1px solid black;
+  background:lightcoral;
+  width:30%;
+  color:whitesmoke;
+  margin: 0 auto;
+  margin-top: 10px;
+  font-size:18px;
+  padding:1%;
+  }
+  .leveled-styles{
+   
+      border: 1px solid black;
+      background:lightgoldenrodyellow;
+      width:30%;
+      color:black;
+      margin: 0 auto;
+      margin-top: 10px;
+      font-size:18px;
+      padding:1%;
+      
+  }

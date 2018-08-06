@@ -287,6 +287,7 @@ class Items extends Component {
       ));
     }
   }
+
   render() {
     return (
       <Fragment>
@@ -323,7 +324,9 @@ class Items extends Component {
             src={this.classIcon(this.state.player.class)}
           />
           <br />
-          {this.state.player.name}
+          {this.state.player.name}<br/>
+
+          Level: {this.state.player.level}
           <br />
           {` Health: ${this.state.player.health} Endurance: ${
             this.state.player.endurance

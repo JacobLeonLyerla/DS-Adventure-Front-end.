@@ -49,29 +49,29 @@ class BlackHeart extends Component {
           this.setState({ moved: false });
           let battle ={}
           if (this.state.area.monsters) {
-            let randomInt = this.getRandomInt(400);
-            if (randomInt <= 100 &&
+            let randomInt = this.getRandomInt(1000);
+            if (randomInt <= 200 &&
               this.state.area.monsters.length >= 1) {
 
               battle.currentBattle = this.state.area.monsters[0]
 
             } else if (
-              randomInt >= 101 &&
-              randomInt <= 200 &&
+              randomInt >= 201 &&
+              randomInt <= 350 &&
               this.state.area.monsters.length >= 2
             ) {
 
               battle.currentBattle = this.state.area.monsters[1]
             } else if (
-              randomInt >= 201 &&
-              randomInt <= 300 &&
+              randomInt >= 351 &&
+              randomInt <= 600 &&
               this.state.area.monsters.length >= 3
             ) {
               battle.currentBattle = this.state.area.monsters[2]
 
             } else if (
-              randomInt >= 301 &&
-              randomInt <= 400 &&
+              randomInt >= 600 &&
+              randomInt <= 900 &&
               this.state.area.monsters.length >= 4
             ) {
               battle.currentBattle = this.state.area.monsters[3]
@@ -162,10 +162,28 @@ class BlackHeart extends Component {
       );
     }
  
+    if(this.state.player.tempPlayer !== "no temp"){
+    let id = this.state.player.tempPlayer 
+      axios
+      .delete(`http://localhost:5500/temps/${id}`)
+      .then(response =>{
+        let id = this.state.player.tempMonster 
+        axios
+        .delete(`http://localhost:5500/temps/${id}`)
+        .then(response =>{
+          
+        })    
+      })
+    }
     let player = {};
     player.currentLocation = id;
+    
     player.tempMonster = "no temp"
     player.tempPlayer = "no temp"
+    player.defeatedName = "none";
+    player.experienceGained = 0;
+    player.itemWon = "none";
+    player.leveled = false
     axios
       .put(`http://localhost:5500/players/${this.state.player._id}`, player)
       .then(response => {
@@ -255,14 +273,46 @@ if(this.state.area.south !== undefined){
    </div>
   )
 }
-
+  }
+  winnings(){
+    if(this.state.player.itemWon !== "none" && this.state.player.itemWon !== undefined && this.state.player.itemWon !=="lost"){
+      return(<Fragment>
+       <div className="winnings-styles">
+       <div>{`${this.state.player.name} defeated the ${this.state.player.defeatedName}`}</div>
+        <div>{`earing ${this.state.player.experienceGained} experience`}</div>
+      <div>{`and looted ${this.state.player.itemWon}`}</div>
+      
+       </div> 
+     </Fragment> )
+    }else if (this.state.player.itemWon === "lost" && this.state.player.itemWon !== undefined) {
+      return(
+        <Fragment>
+       <div className="losing-styles">
+       <div>{`${this.state.player.name} was defeated by the ${this.state.player.defeatedName}`}</div>
+        <div>{`earing ${this.state.player.experienceGained} experience`}</div>
+      <div>{`You were returned to the ${this.state.area.name}`}</div>
+      
+       </div> 
+     </Fragment> 
+      )
+    }
+  }
+  ding(){
+    if(this.state.player.leveled ===true && this.state.player.leveled !== undefined){
+      return(
+        <div className="leveled-styles">{`Congradulations!!!! you are now level ${this.state.player.level}`}</div>
+      )
+    }
   }
   render() {
     return (
     
       <Fragment>
+        
           {this.renderRedirect(this.state.player._id)}
           {this.movmentRender()}
+          {this.ding()}
+          {this.winnings()}
       </Fragment>
     );
   }
