@@ -139,6 +139,8 @@ color:lightcoral;
 .common{
   margin-top:30px;
   border:10px ridge lightgrey;
+  width:15%;
+  max-height:300px;
 }
 .uncommon{
   margin-top:30px;

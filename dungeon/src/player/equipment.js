@@ -100,12 +100,12 @@ class Equip extends Component {
         this.state.player.offHand === "none"
       ) {
         gear.WeapondTwoHand = "Equipped";
-        console.log("2H:", gear.WeapondTwoHand);
+        console.log("2H:", gear.weaponTwoHand);
       } else if (
         piece.slot === "charm" &&
         this.state.player.shield === "none" &&
         this.state.player.offHand === "none" &&
-        this.state.player.weapondTwoHand === "none"
+        this.state.player.weaponTwoHand === "none"
       ) {
         gear.charm = "Equipped";
         console.log("charm:", gear.charm);
@@ -119,6 +119,7 @@ class Equip extends Component {
         console.log("OH:", gear.offHand);
       }
     }
+    console.log(piece.slot)
     console.log("setting up stats");
     gear.agility = agility;
     gear.endurance = endurance;

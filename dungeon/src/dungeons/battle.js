@@ -186,11 +186,11 @@ class Battle extends Component {
                   this.state.player.strength / 7
               );
           } else {
-            cast.endurance =
-              this.state.player.level * 60 +
+            cast.endurance = Math.round(
+              this.state.player.level * 10 + 30+
               this.state.player.intellect * 2 +
               this.state.player.agility * 1.5 +
-              this.state.player.strength;
+              this.state.player.strength);
           }
           axios
             .put(`http://localhost:5500/temps/${id}`, cast)
