@@ -57,7 +57,30 @@ class Info extends Component {
       this.setState({ class: input });
     }
   };
+itemsRender(){
+  if(this.state.player.items !==[]){
+  return (this.state.player.items.map(item => (<Fragment>
+                
+    <div>{item.name}</div><br/>
+   
 
+</Fragment>)) 
+  )
+}
+
+}
+gearRender(){
+  if(this.state.player.items !==[]){
+  return (this.state.player.gear.map(item => (<Fragment>
+                
+    <div>{item.name}</div><br/>
+   
+
+</Fragment>)) 
+  )
+}
+
+}
   
   render() {
     let element = null;
@@ -117,12 +140,7 @@ class Info extends Component {
             Equipment:
             <br/><br/>
             
-                {this.state.player.gear.map(item => (<Fragment>
-                
-                <div>{item.name}</div><br/>
-               
-
-            </Fragment>))} 
+              {this.itemsRender()}
           </div>
           <br/>
           <div>

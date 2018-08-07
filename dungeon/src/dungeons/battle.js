@@ -1,6 +1,12 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import paladin from "./img/paladin";
+import rogue from "./img/rogueportrait.jpg";
+import mage from "./img/mageportrait.jpg";
+import warrior from "./img/warriorportrait.jpg";
+import ranger from "./img/rangerportait.jpg";
+import necro from "./img/necromancerportrait.jpg";
 
 class Battle extends Component {
   state = {
@@ -343,11 +349,20 @@ class Battle extends Component {
         <div className="adventurer-styles">
           <img
             className={this.state.player.class}
-            src="https://static.giantbomb.com/uploads/scale_small/1/17172/1078894-paladin.jpg"
+            src={this.pickPortrait(this.state.player.class)}
           />
         </div>
       </Fragment>
     );
+  }
+  pickPortrait(classname){
+    if (classname === "Paladin") return paladin;
+    if (classname === "Ranger") return ranger;
+    if (classname === "Mage") return mage;
+    if (classname === "Necromancer") return necro;
+    if (classname === "Warrior") return warrior;
+    if (classname === "Rogue") return rogue;
+
   }
 
   renderStats() {

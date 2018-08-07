@@ -98,6 +98,7 @@ class Items extends Component {
         axios
           .put(`http://localhost:5500/players/${this.state.player._id}`, items)
           .then(response => {
+           this.setState({player:response.data})
             if (type === "Equip") {
               this.removeEquipment(loot);
             }
