@@ -49,7 +49,7 @@ class BlackHeart extends Component {
           this.setState({ moved: false });
           let battle ={}
           if (this.state.area.monsters) {
-            let randomInt = this.getRandomInt(1000);
+            let randomInt = this.getRandomInt(700);
             if (randomInt <= 250 &&
               this.state.area.monsters.length >= 1) {
 
@@ -88,7 +88,6 @@ class BlackHeart extends Component {
               this.setState({
                 redirect: false
               });
-               window.location.reload();
             }
             axios
             .put(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`, battle)
