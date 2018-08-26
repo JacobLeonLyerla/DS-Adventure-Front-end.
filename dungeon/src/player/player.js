@@ -13,33 +13,41 @@ class Player extends Component {
        <br/><br/>
        <br/><br/>
        <br/><br/>
+       <div className="title-styles">Dungeon Race</div>
        <br/><br/>
        <br/><br/>
        <br/><br/>
        <br/><br/>
        <br/><br/>
        <br/><br/>
+    
        <br/><br/>
-       <br/><br/>
-       <br/><br/>
+      
+       <form className="login-styles">
+<div className="a">
     Name:
    <input 
+   className="loginInput-styles"
    name="name"
-   placeholder ="Enter a character name"
+   placeholder ="Enter a name"
    value={this.props.name}
    onChange={this.props.handleInput}
    />   
-        password:
+        Password:
+
       <input 
+      className="loginInput-styles"
    name="password"
    type="password"
-   placeholder ="Enter a character password"
+   placeholder ="Enter a password"
    value={this.props.password}
    onChange={this.props.handleInput}
    /><br/>
-   <button onClick={()=>this.props.findPlayer(this.props.name,this.props.password)}>Find Player</button>
+   <button className="btn" onClick={()=>this.props.findPlayer(this.props.name,this.props.password)}>Log On</button>
 
-   <Link to ="/create"><button>create a character</button></Link>
+   <Link to ="/create"><button className="btn">Create</button></Link>
+   </div>
+      </form>
    </Fragment> );
    
   }

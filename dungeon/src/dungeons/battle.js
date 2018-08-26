@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
-import paladin from "./img/paladin";
+import paladin from "./img/paladinportrait.jpg";
 import rogue from "./img/rogueportrait.jpg";
 import mage from "./img/mageportrait.jpg";
 import warrior from "./img/warriorportrait.jpg";
-import ranger from "./img/rangerportait.jpg";
+import ranger from "./img/rangerportrait.jpg";
 import necro from "./img/necromancerportrait.jpg";
 
 class Battle extends Component {
@@ -115,7 +115,7 @@ class Battle extends Component {
       .catch(err => {});
   }
   startBattle(damage, cost, hitChance, name) {
-    if (this.state.tempMonster.health > 0 && this.state.tempPlayer.health > 0) {
+   
       hitChance = Math.round(
         hitChance +
           this.state.player.agility * 1 +
@@ -164,7 +164,7 @@ class Battle extends Component {
         .put(`http://localhost:5500/temps/${id}`, dmg)
         .then(response => {
           this.setState({ tempMonster: response.data });
-          if (response.data.health < 0) {
+          if (response.data.health <= 0) {
             this.death("Monster");
           }
           let id = this.state.player.tempPlayer;
@@ -202,12 +202,14 @@ class Battle extends Component {
             .put(`http://localhost:5500/temps/${id}`, cast)
             .then(response => {
               this.setState({ tempPlayer: response.data });
+              if(this.state.tempMonster.health >0){
               this.attacked();
+              }
             })
             .catch(err => {});
         })
         .catch(err => {});
-    }
+    
   }
   attacked() {
     if (this.state.tempMonster.attacked === true) {
@@ -248,9 +250,9 @@ class Battle extends Component {
               hit <=
               damage[0].hitChance * 2 +
                 this.state.monster.level -
-                this.state.player.level * 10
+                this.state.player.level 
             ) {
-              dmg.health = this.state.tempPlayer.health - damage[0].damage;
+              dmg.health = this.state.tempPlayer.health - Math.round(damage[0].damage * this.state.player.level /4) ;
               dmg.combat = "hit";
             } else {
               dmg.combat = "missed";
@@ -291,7 +293,7 @@ class Battle extends Component {
         });
     } else {
       let index = Math.floor(
-        Math.random() * Math.floor(this.state.monster.items.length - 1)
+        Math.random() * Math.floor(this.state.monster.items.length)
       );
       let item = this.state.monster.items[index];
       this.state.player.items.push(this.state.monster.items[index]);
@@ -303,6 +305,8 @@ class Battle extends Component {
       ) {
         victory.level = playerlevel + 1;
         victory.leveled = true;
+        victory.health = this.state.player.health +  playerlevel + 1 *100
+        victory.endurance = this.state.player.endurance + playerlevel +1 *100
       }
 
       let myItems = this.state.player.items;
@@ -547,7 +551,7 @@ class Battle extends Component {
             <br />
             Cost : {attack.cost}
             <br />
-            Damage: {attack.damage}
+            Damage: {Math.round(attack.damage * this.state.player.level /4) }
             <br />
             <br />
             <div>{attack.description}</div>
@@ -561,15 +565,18 @@ class Battle extends Component {
       return (
         <Fragment>
           <div className={this.state.monster.rarity + "Stats-styles"}>
+          <div className="portraitStats-styles">
             <div className={this.state.monster.rarity + "Rarity-styles"}>
               {this.state.monster.rarity}
             </div>
             <br />
             <div className="battleheader-styles">{this.state.monster.name}</div>
             <br />
+            
             <div>{`Health: ${this.state.tempMonster.health} Endurance: ${
               this.state.tempMonster.endurance
             } `}</div>
+            </div>
           </div>
         </Fragment>
       );

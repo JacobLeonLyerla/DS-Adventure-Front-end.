@@ -219,11 +219,13 @@ class Items extends Component {
     }
   }
   renderEquipment() {
+
+
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
       return this.state.player.gear.map(item => (
         <Fragment>
           <div
-            className="itemCard-styles"
+            className={`${item.rarity}itemCard-styles`}
            
           >
                <div className="move-styles">
@@ -239,12 +241,17 @@ class Items extends Component {
             </div>
             <div className="itemsHeader-styles">{item.name}</div>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            <br/>
+                {item.slot}
             <br />
             {` Health: ${item.health} Endurance: ${item.endurance}`}
             <br />
             {` Intellect: ${item.intellect} Strength: ${item.strength}`}
             <br />
             {` Agility: ${item.agility}`}
+            <br/>
+            <br/>
+           <div className={`${item.rarity}Footer-styles`}> {item.rarity}</div>
           </div>
           <br />
         </Fragment>
@@ -255,7 +262,10 @@ class Items extends Component {
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
       return this.state.player.items.map(item => (
         <Fragment>
-          <div className="itemCard-styles">
+         <div
+            className={`${item.rarity}itemCard-styles`}
+           
+          >
             <div className="move-styles">
               <div
                 className="add-styles
@@ -276,14 +286,18 @@ class Items extends Component {
             </div>
             <div className="itemsHeader-styles">{item.name}</div>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            <br/>
+                {item.slot}
             <br />
             {` Health: ${item.health} Endurance: ${item.endurance}`}
             <br />
             {` Intellect: ${item.intellect} Strength: ${item.strength}`}
             <br />
             {` Agility: ${item.agility}`}
+            <br/>
+            <br/>
+           <div className={`${item.rarity}Footer-styles`}> {item.rarity}</div>
           </div>
-          <br />
         </Fragment>
       ));
     }
@@ -300,22 +314,29 @@ class Items extends Component {
           {this.state.area.items.map(item => (
             <Fragment>
               <div
-                className="itemCard-styles"
-                
-              >
+            className={`${item.rarity}itemCard-styles`}
+           
+          >
               <div className="delete-styles" onClick={() => this.deleteItem("Loot", item)}><i class="far fa-hand-paper"></i>
 
 </div>
                 <div className="itemsHeader-styles">{item.name}</div>
+                
                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                <br/>
+                {item.slot}
                 <br />
                 {` Health: ${item.health} Endurance: ${item.endurance}`}
                 <br />
                 {` Intellect: ${item.intellect} Strength: ${item.strength}`}
                 <br />
                 {` Agility: ${item.agility}`}
+                <br/>
+            <br/>
+           <div className={`${item.rarity}Footer-styles`}> {item.rarity}</div>
               </div>
               <br />
+              
             </Fragment>
           ))}
         </div>

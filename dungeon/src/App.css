@@ -1,6 +1,11 @@
 .App {
   text-align: center;
- 
+
+  background-image: url("https://i.imgur.com/GMjukQ3.png");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .App-logo {
@@ -59,7 +64,46 @@ a{
   margin-top: 50px;
   padding:10px
 
+
 }
+/*................................................................... Log in component */
+.title-styles{
+  font-size:50px;
+  color: lightblue;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -1px black;
+  outline: #222;
+letter-spacing: .4ch;
+padding-bottom:1px;
+border-bottom:1.5px solid wheat;
+width:50%;
+margin:0 auto;
+}
+.login-styles{
+opacity: .7;
+background: white;
+  width: 40%;
+  margin: 0 auto;
+border:1px solid lightblue;
+border-radius: 10px;
+}
+.btn{
+  background:lightblue;
+  border-radius: 5px;
+  border-style:none;
+}
+.btn:hover{
+  background:wheat;
+  border-radius: 5px;
+}
+/*.......................................................................... CREATE PLAYER */
+.create-styles{
+  opacity: .7;
+  background: white;
+    width: 45%;
+    margin: 0 auto;
+  border:1px solid lightblue;
+  border-radius: 10px;
+  }
 /* ..................................................................ITEMS CSS */
 .Items{
   width: 70%;
@@ -79,7 +123,7 @@ a{
   font-size:30px;
   margin-top:20px;
 }
-.itemCard-styles{
+.commonitemCard-styles{
   width:23%;
   min-width:300px;
   font-size: 13px;
@@ -89,6 +133,70 @@ a{
   color:white;
 margin:10px
 
+}
+.uncommonitemCard-styles{
+  width:23%;
+  min-width:300px;
+  font-size: 13px;
+  border:.5px solid black;
+  padding:7px;
+  background:darkgreen;
+  color: white;
+margin:10px
+
+}
+.rareitemCard-styles{
+  width:23%;
+  min-width:300px;
+  font-size: 13px;
+  border:.5px solid black;
+  padding:7px;
+  background:rgb(65, 146, 173);
+  color: black;
+margin:10px
+
+}
+.epicitemCard-styles{
+  width:23%;
+  min-width:300px;
+  font-size: 13px;
+  border:.5px solid black;
+  padding:7px;
+  background:purple;
+  color: white;
+margin:10px
+
+}
+.legendaryitemCard-styles{
+  width:23%;
+  min-width:300px;
+  font-size: 13px;
+  border:.5px solid black;
+  padding:7px;
+  background:#113A5E;
+  color: white;
+margin:10px
+
+}
+.commonFooter-styles{
+  font-size:25px;
+  color:lightgrey
+}
+.uncommonFooter-styles{
+  font-size:25px;
+  color:lightgreen
+}
+.rareFooter-styles{
+  font-size:25px;
+  color:blue
+}
+.epicFooter-styles{
+  font-size:25px;
+  color:palevioletred;
+}
+.legendaryFooter-styles{
+  font-size:25px;
+  color:goldenrod;
 }
 .itemsHeader-styles{
   font-size:16px;
@@ -145,19 +253,65 @@ color:lightcoral;
 .uncommon{
   margin-top:30px;
   border:10px ridge green;
-  width:10%;
+  width:20%;
+  max-height: 400px;
 }
 .rare{
   margin-top:30px;
   border:10px ridge rgb(94, 94, 156);
   width:20%;
+  max-height: 400px;
+}
+.epic{
+  margin-top:30px;
+  border:10px ridge purple;
+  width:20%;
+  max-height: 400px;
+  
+}
+.boss{
+  margin-top:10px;
+  border:10px ridge #113A5E;
+  width:20% ;
+  max-height: 400px;
 }
 .Paladin{
 margin-top:10px;
-  width:200px;
+  width:10%;
   height:auto;
   border:10px ridge goldenrod;
+ 
 }
+.Warrior{
+  margin-top:10px;
+    width:10%;
+    height:auto;
+    border:10px ridge silver;
+  }
+  .Mage{
+    margin-top:10px;
+      width:10%;
+      height:auto;
+      border:10px ridge darkred;
+    }
+    .Ranger{
+      margin-top:10px;
+        width:10%;
+        height:auto;
+        border:10px ridge darkgreen;
+      }
+      .Rogue{
+        margin-top:10px;
+          width:10%;
+          height:auto;
+          border:10px ridge lightskyblue;
+        }
+        .Necromancer{
+          margin-top:10px;
+            width:10%;
+            height:auto;
+            border:10px ridge darkmagenta;
+          }
 .commonStats-styles{
   border-radius: 7px;
   width:28%;
@@ -180,7 +334,7 @@ font-size:15px;
 }
 .rareStats-styles{
   border-radius: 7px;
-  width:20%;
+  width:30%;
 margin: 0 auto;
 background:rgb(112, 122, 216);
 border:1px groove black;
@@ -189,25 +343,66 @@ padding:20px;
 font-size:15px;
 
 }
+.epicStats-styles{
+  border-radius: 7px;
+  width:30%;
+margin: 0 auto;
+background:rgb(94, 21, 94);
+border:1px groove black;
+color:white;
+padding:20px;
+font-size:15px;
+
+}
+.bossStats-styles{
+  border-radius: 7px;
+  width:30%;
+margin: 0 auto;
+background:#113A5E;
+border:1px groove black;
+color:white;
+padding:20px;
+font-size:15px;
+
+}
 .battleheader-styles{
   font-size:20px;
 }
 .commonRarity-styles{
-width:100px;
+  width:90px;
+  display: inline-block;
 border-bottom: 3px solid lightgray;
 color: lightgray;
 }
 .uncommonRarity-styles{
-  width:100px;
+  width:90px;
+  display: inline-block;
   border-bottom: 3px solid rgb(48, 146, 48);
   color:  rgb(48, 146, 48);
   }
   .rareRarity-styles{
-    width:100px;
-  border-bottom: 3px solid rgb(66, 66, 255)z;
+    width:90px;
+    display: inline-block;
+  border-bottom: 3px solid rgb(66, 66, 255);
   color:  rgb(66, 66, 255);
     }
 
+    .epicRarity-styles{
+      font-size:30px;
+   
+    border-bottom: 3px solid plum;
+    color:  plum;
+    width:90px;
+    display: inline-block;
+      }
+.bossRarity-styles{
+  font-size:35px;
+  border-bottom: 1px solid goldenrod;
+  color:  goldenrod;
+  width:90px;
+  display: inline-block;
+
+    }
 .middleBattle-styles{
   display:flex;
   padding:20px;

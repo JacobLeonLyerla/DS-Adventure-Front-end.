@@ -50,20 +50,20 @@ class BlackHeart extends Component {
           let battle ={}
           if (this.state.area.monsters) {
             let randomInt = this.getRandomInt(1000);
-            if (randomInt <= 200 &&
+            if (randomInt <= 250 &&
               this.state.area.monsters.length >= 1) {
 
               battle.currentBattle = this.state.area.monsters[0]
 
             } else if (
-              randomInt >= 201 &&
-              randomInt <= 350 &&
+              randomInt >= 251 &&
+              randomInt <= 450 &&
               this.state.area.monsters.length >= 2
             ) {
 
               battle.currentBattle = this.state.area.monsters[1]
             } else if (
-              randomInt >= 351 &&
+              randomInt >= 451 &&
               randomInt <= 600 &&
               this.state.area.monsters.length >= 3
             ) {
@@ -71,10 +71,17 @@ class BlackHeart extends Component {
 
             } else if (
               randomInt >= 600 &&
-              randomInt <= 900 &&
+              randomInt <= 700 &&
               this.state.area.monsters.length >= 4
             ) {
               battle.currentBattle = this.state.area.monsters[3]
+
+            }else if (
+              randomInt >= 0 &&
+              randomInt <= 1000 &&
+              this.state.area.monsters.length >= 5
+            ) {
+              battle.currentBattle = this.state.area.monsters[4]
 
             } else {
               battle.currentBattle =[]
@@ -251,6 +258,7 @@ class BlackHeart extends Component {
   movmentRender(){
 if(this.state.area.south !== undefined){
     return(<Fragment>
+      <br/>
       <div className="BlackHeart">
       {`You are currently in  the ${this.state.area.name}`}
       <br />
@@ -300,7 +308,9 @@ if(this.state.area.south !== undefined){
   ding(){
     if(this.state.player.leveled ===true && this.state.player.leveled !== undefined){
       return(
-        <div className="leveled-styles">{`Congradulations!!!! you are now level ${this.state.player.level}`}</div>
+        
+      <div className="leveled-styles">{`Congradulations!!!! you are now level ${this.state.player.level}`}
+        </div>
       )
     }
   }

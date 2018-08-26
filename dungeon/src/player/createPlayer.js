@@ -37,6 +37,7 @@ class Create extends Component {
           player.agility = 20;
           player.strength = 5;
           player.intellect = 10;
+          player.attacks = ["5b68f678bc349a910c4b2402","5b68f616bc349a910c4b2401","5b66bd38667d32785c749ff8"]
           break;
         case "Warrior":
           player.endurance = 100;
@@ -44,6 +45,7 @@ class Create extends Component {
           player.intellect = 5;
           player.agility = 5;
           player.strength = 25;
+          player.attacks =["5b68eed2bc349a910c4b23f8","5b68ee71bc349a910c4b23f7","5b68edb6bc349a910c4b23f6"]
           break;
         case "Mage":
           player.endurance = 200;
@@ -51,6 +53,7 @@ class Create extends Component {
           player.intellect = 25;
           player.agility = 5;
           player.strength = 0;
+          player.attacks=["5b68ef26bc349a910c4b23f9","5b68efb3bc349a910c4b23fa","5b68f0aebc349a910c4b23fb"]
           break;
         case "Necromancer":
           player.endurance = 160;
@@ -58,6 +61,7 @@ class Create extends Component {
           player.intellect = 25;
           player.agility = 5;
           player.strength = 0;
+          player.attacks = ["5b68f41fbc349a910c4b23fe","5b68f2b2bc349a910c4b23fd","5b68f15cbc349a910c4b23fc"]
           break;
         case "Paladin":
           player.endurance = 120;
@@ -65,6 +69,7 @@ class Create extends Component {
           player.intellect = 10;
           player.agility = 5;
           player.strength = 15;
+          player.attacks = ["5b66baf0667d32785c749ff5","5b68f4e2bc349a910c4b23ff","5b68f57dbc349a910c4b2400"]
           break;
         case "Rogue":
           player.endurance = 160;
@@ -72,6 +77,7 @@ class Create extends Component {
           player.intellect = 5;
           player.agility = 25;
           player.strength = 0;
+          player.attacks = ["5b68ec1abc349a910c4b23f3","5b68ec6ebc349a910c4b23f4","5b68ed13bc349a910c4b23f5"]
           break;
         default:
       }
@@ -124,7 +130,16 @@ class Create extends Component {
         {this.renderRedirect()}
         <br />
         <br />
-        <form>
+        <br />
+        <br /><br />
+        <br /><br />
+        <br /><br />
+        <br /><br />
+        <br /><br />
+        <br /><br />
+        <br /><br />
+        <br />
+        <div className="create-styles">
           <label>
             Name:
             <input
@@ -165,22 +180,23 @@ class Create extends Component {
             value={this.state.gender}
             onChange={this.handleInput}
           />
-        </form>
+       
 
         <br />
-        <button onClick={() => this.handleClass("Paladin")}>Paladin</button>
-        <button onClick={() => this.handleClass("Warrior")}>Warrior</button>
-        <button onClick={() => this.handleClass("Necromancer")}>
+        <button className="btn"  onClick={() => this.handleClass("Paladin")}>Paladin</button>
+        <button className="btn"  onClick={() => this.handleClass("Warrior")}>Warrior</button>
+        <button className="btn"  onClick={() => this.handleClass("Necromancer")}>
           Necromancer
         </button>
         <br />
-        <button onClick={() => this.handleClass("Rogue")}>Rogue</button>
-        <button onClick={() => this.handleClass("Ranger")}>Ranger</button>
-        <button onClick={() => this.handleClass("Mage")}>Mage</button>
+        <button className="btn"  onClick={() => this.handleClass("Rogue")}>Rogue</button>
+        <button className="btn"  onClick={() => this.handleClass("Ranger")}>Ranger</button>
+        <button className="btn"  onClick={() => this.handleClass("Mage")}>Mage</button>
 
         <br />
         <br />
-        <button onClick={() => this.addPlayer()}>Create Character</button>
+        <button className="btn" onClick={() => this.addPlayer()}>Create Character</button>
+         </div>
       </Fragment>
     );
   }

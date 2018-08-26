@@ -38,7 +38,10 @@ class Equip extends Component {
       .then(response => {})
       .catch(err => {});
   }
+ 
+
   buildGear(piece) {
+     console.log(piece.slot)
     let strength = 0;
     let intellect = 0;
     let agility = 0;
@@ -70,28 +73,21 @@ class Equip extends Component {
         this.state.player.weaponTwoHand === "none"
       ) {
         gear.shield = "Equipped";
-        console.log("shield:", gear.shield);
       } else if (piece.slot === "head") {
         gear.head = "Equipped";
-        console.log("head:", gear.head);
       } else if (piece.slot === "shoulders") {
         gear.shoulders = "Equipped";
-        console.log("shoulders:", gear.shoulders);
       } else if (piece.slot === "chest") {
         gear.chest = "Equipped";
-        console.log("chest:", gear.chest);
       } else if (piece.slot === "hands") {
         gear.hands = "Equipped";
-        console.log("hands:", gear.hands);
       } else if (piece.slot === "feet") {
         gear.feet = "Equipped";
-        console.log("feet:", gear.feet);
       } else if (piece.slot === "leggings") {
         gear.leggings = "Equipped";
-        console.log("leggings:", gear.legginfs);
-      } else if (piece.slot === "weaponOneHand") {
+      } else if (piece.slot === "weaponOneHand" &&
+        this.state.player.weaponTwoHand === "none") {
         gear.weaponOneHand = "Equipped";
-        console.log("1h:", gear.weaponOneHand);
       } else if (
         piece.slot === "weaponTwoHand" &&
         this.state.player.shield === "none" &&
@@ -100,7 +96,6 @@ class Equip extends Component {
         this.state.player.offHand === "none"
       ) {
         gear.WeapondTwoHand = "Equipped";
-        console.log("2H:", gear.weaponTwoHand);
       } else if (
         piece.slot === "charm" &&
         this.state.player.shield === "none" &&
@@ -108,26 +103,22 @@ class Equip extends Component {
         this.state.player.weaponTwoHand === "none"
       ) {
         gear.charm = "Equipped";
-        console.log("charm:", gear.charm);
       } else if (
         piece.slot === "offHand" &&
         this.state.player.charm === "none" &&
         this.state.player.shield === "none" &&
-        this.state.player.weapondTwoHand === "none"
+        this.state.player.weaponTwoHand === "none"
       ) {
+        console.log("here?")
         gear.offHand = "Equipped";
-        console.log("OH:", gear.offHand);
       }
     }
-    console.log(piece.slot)
-    console.log("setting up stats");
     gear.agility = agility;
     gear.endurance = endurance;
     gear.health = health;
     gear.intellect = intellect;
     gear.strength = strength;
 
-    console.log("returning gear object", gear);
     return gear;
   }
   setEquipment(id) {
@@ -149,7 +140,6 @@ class Equip extends Component {
     for (let index = 0; index < this.state.player.gear.length; index++) {
       const piece = this.state.player.gear[index];
       let update = this.buildGear(piece);
-      console.log(update.health);
       gear.agility += update.agility;
       gear.endurance += update.endurance;
       gear.health += update.health;
@@ -195,14 +185,12 @@ class Equip extends Component {
         gear.offHand = "Equipped";
       }
     }
-    console.log(gear);
     this.equipmentAdd(gear, id);
   }
   equipmentAdd(gear, id) {
     axios
       .put(`http://localhost:5500/players/${id}`, gear)
       .then(response => {
-        console.log(this.state.player);
         this.setState({
           redirect: true
         });

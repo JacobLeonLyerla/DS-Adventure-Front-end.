@@ -135,15 +135,15 @@ gearRender(){
           Bio: {this.state.player.bio}
           <br />
           <br/>
-          <div>
+          {/* <div>
  
             Equipment:
             <br/><br/>
             
               {this.itemsRender()}
-          </div>
+          </div> */}
           <br/>
-          <div>
+          {/* <div>
  
             Bags:
             <br/><br/>
@@ -153,7 +153,7 @@ gearRender(){
                
 
             </Fragment>))} 
-          </div>
+          </div> */}
         </div>
         <button onClick={() => this.setState({ visible: !this.state.visible })}>
           Edit hero
