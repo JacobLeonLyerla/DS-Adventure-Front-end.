@@ -8,7 +8,7 @@ class Player extends Component {
     
 
   render() {
-    return (<Fragment>
+    return (<Fragment><div className="loginbackground-styles">
        <br/><br/>
        <br/><br/>
        <br/><br/>
@@ -48,7 +48,7 @@ class Player extends Component {
    <Link to ="/create"><button className="btn">Create</button></Link>
    </div>
       </form>
-   </Fragment> );
+  </div> </Fragment> );
    
   }
 }

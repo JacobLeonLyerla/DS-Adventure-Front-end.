@@ -65,7 +65,14 @@ class Items extends Component {
         axios
           .put(`http://localhost:5500/players/${this.state.player._id}`, items)
           .then(response => {
-            window.location.reload();
+            axios
+            .get(`http://localhost:5500/players/${this.state.player._id}`)
+            .then(response => {
+              this.setState({ player: response.data });
+              this.currentRoom(this.state.player.currentLocation._id);
+            })
+            .catch(err => {});
+          
           })
           .catch(err => {});
         break;
@@ -98,11 +105,17 @@ class Items extends Component {
         axios
           .put(`http://localhost:5500/players/${this.state.player._id}`, items)
           .then(response => {
-           this.setState({player:response.data})
+            axios
+            .get(`http://localhost:5500/players/${this.state.player._id}`)
+            .then(response => {
+              this.setState({ player: response.data });
+              this.currentRoom(this.state.player.currentLocation._id);
+            })
+            .catch(err => {});
             if (type === "Equip") {
               this.removeEquipment(loot);
             }
-            window.location.reload();
+            //window.location.reload();
           })
           .catch(err => {});
     
@@ -188,7 +201,14 @@ class Items extends Component {
       axios
         .put(`http://localhost:5500/players/${this.state.player._id}`, player)
         .then(response => {
-          window.location.reload();
+          axios
+          .get(`http://localhost:5500/players/${this.state.player._id}`)
+          .then(response => {
+            this.setState({ player: response.data });
+            this.currentRoom(this.state.player.currentLocation._id);
+          })
+          .catch(err => {});
+          //window.location.reload();
         })
         .catch(err => {});
     } else {
@@ -259,9 +279,11 @@ class Items extends Component {
     }
   }
   renderItems() {
+    console.log(this.state.player)
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
       return this.state.player.items.map(item => (
         <Fragment>
+          {console.log(item)}
          <div
             className={`${item.rarity}itemCard-styles`}
            
@@ -306,7 +328,7 @@ class Items extends Component {
   render() {
     return (
       <Fragment>
-        <div className={"bigItemHeader-styles"}>Items in room</div>
+        <div className="bigItemHeader-styles">Items in room</div>
         <div className="Items">
           <br />
           <br />

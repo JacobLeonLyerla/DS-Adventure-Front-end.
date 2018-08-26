@@ -6,8 +6,26 @@ class DungeonList extends Component {
 
 render(){
     return (<Fragment>
-      <div className="DungeonList">
-    <Link to ={`/blackHeart/${this.props.match.params.id}`}><button>Black Heart Keep</button></Link>
+      <div className="DungeonList loginbackground-styles">
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+    <Link to ={`/blackHeart/${this.props.match.params.id}`}><button className="btn btnPick-styles sample">Black Heart Keep</button></Link>
 
       </div>
    </Fragment> );

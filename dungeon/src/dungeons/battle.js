@@ -7,6 +7,7 @@ import mage from "./img/mageportrait.jpg";
 import warrior from "./img/warriorportrait.jpg";
 import ranger from "./img/rangerportrait.jpg";
 import necro from "./img/necromancerportrait.jpg";
+import {Progress} from'reactstrap'
 
 class Battle extends Component {
   state = {
@@ -19,6 +20,7 @@ class Battle extends Component {
     monsterAttacks: [],
     currentSpell: 0,
     currentLocation: "",
+    tempMonHP:0,
     redirect: false
   };
   componentDidMount() {
@@ -110,7 +112,8 @@ class Battle extends Component {
     axios
       .get(`http://localhost:5500/temps/${id}`)
       .then(response => {
-        this.setState({ tempMonster: response.data });
+        let raisedhp = Math.round(response.data.health +( response.data.health * this.state.player.level /25))
+        this.setState({ tempMonster: response.data, tempMonHP:raisedhp });
       })
       .catch(err => {});
   }
@@ -133,10 +136,10 @@ class Battle extends Component {
       if (
         this.state.tempPlayer.endurance -
           Math.round(
-            cost -
+            cost *this.state.player.level  - 
               this.state.player.intellect / 3 -
               this.state.player.agility / 5 -
-              this.state.player.strength / 7
+              this.state.player.strength / 7 * this.state.player.level
           ) >
         0
       ) {
@@ -150,7 +153,7 @@ class Battle extends Component {
           );
 
           dmg.combat = "hit";
-          dmg.health = this.state.tempMonster.health - damage;
+          dmg.health = this.state.tempMonHP - damage;
         }
         if (hit > hitChance) {
           dmg.combat = "missed";
@@ -163,7 +166,7 @@ class Battle extends Component {
       axios
         .put(`http://localhost:5500/temps/${id}`, dmg)
         .then(response => {
-          this.setState({ tempMonster: response.data });
+          this.setState({ tempMonster: response.data, tempMonHP:response.data.health });
           if (response.data.health <= 0) {
             this.death("Monster");
           }
@@ -176,7 +179,7 @@ class Battle extends Component {
           if (
             this.state.tempPlayer.endurance -
               Math.round(
-                cost -
+                cost *this.state.player.level  -
                   this.state.player.intellect / 3 -
                   this.state.player.agility / 5 -
                   this.state.player.strength / 7
@@ -186,23 +189,19 @@ class Battle extends Component {
             cast.endurance =
               this.state.tempPlayer.endurance -
               Math.round(
-                cost -
+                cost *this.state.player.level  -
                   this.state.player.intellect / 3 -
                   this.state.player.agility / 5 -
                   this.state.player.strength / 7
               );
           } else {
-            cast.endurance = Math.round(
-              this.state.player.level * 10 + 30+
-              this.state.player.intellect * 2 +
-              this.state.player.agility * 1.5 +
-              this.state.player.strength);
+            cast.endurance = this.state.player.endurance
           }
           axios
             .put(`http://localhost:5500/temps/${id}`, cast)
             .then(response => {
               this.setState({ tempPlayer: response.data });
-              if(this.state.tempMonster.health >0){
+              if(this.state.tempMonHP >0){
               this.attacked();
               }
             })
@@ -370,13 +369,18 @@ class Battle extends Component {
   }
 
   renderStats() {
+    let currentpercent = Math.round( this.state.tempMonHP/(this.state.monster.health + Math.round(this.state.monster.health * this.state.player.level /22)) *100)
+    let currentPlayerhp = Math.round( this.state.tempPlayer.health/this.state.player.health *100)
+    let monsterend = Math.round( this.state.tempMonster.endurance/this.state.monster.endurance *100)
+    let playerend = Math.round( this.state.tempPlayer.endurance/this.state.player.endurance *100)
     return (
       <Fragment>
+
         <div className={this.state.monster.rarity + "Stats-styles"}>
-          <div>
-            {`starting hp:${this.state.monster.health}`}
-            <br />
-            {`current hp: ${this.state.tempMonster.health}`}
+          <div >
+          <Progress color="success" value ={currentpercent}> {`${this.state.tempMonHP}`}</Progress>   
+          <br/>
+          <Progress color="info" value ={monsterend}> {`${this.state.tempMonster.endurance}`}</Progress>  
           </div>
           <br />
           <div className="combatLog-styles">
@@ -388,11 +392,11 @@ class Battle extends Component {
               this.state.tempMonster.combat
             } with ${this.state.tempMonster.spellUsed}`}</div>
           </div>
-          <br />
+    <Progress color="info" value ={playerend}> {`${this.state.tempPlayer.endurance}`}</Progress> 
+          <br/> 
+          <Progress color="success" value ={currentPlayerhp}> {`${this.state.tempPlayer.health}`}</Progress>  
           <div>
-            {`starting hp:${this.state.player.health}`}
-            <br />
-            {`current hp: ${this.state.tempPlayer.health}`}
+        
           </div>
         </div>
       </Fragment>
@@ -457,10 +461,11 @@ class Battle extends Component {
                 )}
                 <br />Cost:{" "}
                 {Math.round(
-                  attack.cost -
+                  attack.cost *this.state.player.level 
+                  -
                     this.state.player.intellect / 3 -
                     this.state.player.agility / 5 -
-                    this.state.player.strength / 7
+                    this.state.player.strength / 7 
                 )}
               </div>
               <br />
@@ -573,7 +578,7 @@ class Battle extends Component {
             <div className="battleheader-styles">{this.state.monster.name}</div>
             <br />
             
-            <div>{`Health: ${this.state.tempMonster.health} Endurance: ${
+            <div>{`Health: ${this.state.tempMonHP} Endurance: ${
               this.state.tempMonster.endurance
             } `}</div>
             </div>

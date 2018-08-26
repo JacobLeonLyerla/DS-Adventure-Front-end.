@@ -6,6 +6,6 @@
   "author": "Jacob Leon Lyerla <umasour@yahoo.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
   }
 }

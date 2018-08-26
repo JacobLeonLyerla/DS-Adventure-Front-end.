@@ -27,7 +27,7 @@ class BlackHeart extends Component {
           this.setState({ players: response.data,  });
 
           if (reload === "reload") {
-            window.location.reload();
+           // window.location.reload();
           }
         })
         .catch(err => {});
@@ -36,7 +36,7 @@ class BlackHeart extends Component {
 
           this.currentRoom(this.state.player.currentLocation._id);
           if (reload === "reload") {
-            window.location.reload();
+           // window.location.reload();
           }
     }
   };

@@ -94,7 +94,7 @@ class App extends Component {
             <DungeonList {...props} player={this.state.player} />
           )}
         />
-
+<div className="blackHeartBackground-styles">
         <Route
           path="/blackheart/:id"
           render={props => <BlackHeart {...props} player={this.state.player} />}
@@ -103,10 +103,13 @@ class App extends Component {
           path="/blackheart/:id"
           render={props => <Items {...props} player={this.state.player} />}
         />
+
         <Route
           path="/battle/:id"
           render={props => <Battle {...props} player={this.state.player} />}
+         
         />
+         </div>
       </div>
     );
   }

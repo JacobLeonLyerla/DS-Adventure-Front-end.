@@ -1,13 +1,23 @@
 .App {
   text-align: center;
-
+  font-family:""
+}
+.loginbackground-styles{
+  min-height:100vh;
   background-image: url("https://i.imgur.com/GMjukQ3.png");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
-
+.blackHeartBackground-styles{
+  min-height:100vh;
+  background-image: url("https://i.imgur.com/TeSg8AT.jpg");
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -104,6 +114,14 @@ border-radius: 10px;
   border:1px solid lightblue;
   border-radius: 10px;
   }
+  /*.............................................................. DUNGRON LIST */
+  .btnPick-styles{
+    font-size:40px;
+  }
+  .sample {
+    font-family: "TypoPRO Lora";
+
+}
 /* ..................................................................ITEMS CSS */
 .Items{
   width: 70%;
@@ -114,6 +132,7 @@ border-radius: 10px;
   justify-content: center;
   flex-wrap:wrap;
   
+  
 }
 .bigItemHeader-styles{
   border-bottom:1px solid black;
@@ -122,6 +141,9 @@ border-radius: 10px;
   margin: 0 auto;
   font-size:30px;
   margin-top:20px;
+  color:white;
+    text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -1px black;
+  outline: #222;
 }
 .commonitemCard-styles{
   width:23%;
@@ -131,7 +153,8 @@ border-radius: 10px;
   padding:7px;
   background:gray;
   color:white;
-margin:10px
+margin:10px;
+box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
 
 }
 .uncommonitemCard-styles{
@@ -142,7 +165,8 @@ margin:10px
   padding:7px;
   background:darkgreen;
   color: white;
-margin:10px
+margin:10px;
+box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
 
 }
 .rareitemCard-styles{
@@ -153,7 +177,8 @@ margin:10px
   padding:7px;
   background:rgb(65, 146, 173);
   color: black;
-margin:10px
+margin:10px;
+box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
 
 }
 .epicitemCard-styles{
@@ -164,7 +189,8 @@ margin:10px
   padding:7px;
   background:purple;
   color: white;
-margin:10px
+margin:10px;
+box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
 
 }
 .legendaryitemCard-styles{
@@ -175,7 +201,8 @@ margin:10px
   padding:7px;
   background:#113A5E;
   color: white;
-margin:10px
+margin:10px;
+box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
 
 }
 .commonFooter-styles{
@@ -233,10 +260,14 @@ color:lightcoral;
 }
 /* /////////////////////////////////////////////// BATTLE COMPONENT */
 .class-styles{
+  color:white;
+  font-size:25px;
   border-top:1px solid black;
   width: 50%;
   margin: 0 auto;
   padding-top:20px;
+  text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -1px black;
+  outline: #222;
 }
 .classIcon-styles{
   width:40px;
@@ -249,6 +280,7 @@ color:lightcoral;
   border:10px ridge lightgrey;
   width:15%;
   max-height:300px;
+  
 }
 .uncommon{
   margin-top:30px;
@@ -342,6 +374,7 @@ color:black;
 padding:20px;
 font-size:15px;
 
+
 }
 .epicStats-styles{
   border-radius: 7px;
@@ -406,7 +439,7 @@ color: lightgray;
 .middleBattle-styles{
   display:flex;
   padding:20px;
-  height:300px;
+
 
 }
 .attack-styles{

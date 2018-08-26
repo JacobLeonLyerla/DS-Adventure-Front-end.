@@ -23,10 +23,20 @@ class Create extends Component {
     const player = {};
     if (this.state.name !== "") {
       // if they are not empty then set the player objects key of email is set to the email on the state,
+      if(this.state.name.length >20){
+        alert(`${this.state.name} is too is ${this.state.name.length}, and the name must be less than 20 characters`)
+      this.setState({name:""})
+      }else{
       player.name = this.state.name;
+      }
     }
     if (this.state.password !== "") {
+      if(this.state.password.length >30){
+      alert(`${this.state.password} is too is ${this.state.password.length}, and the name must be less than 30 characters`)
+      this.setState({password:""})
+    }else{
       player.password = this.state.password;
+    }
     }
     if (this.state.class !== "") {
       let test = this.state.class;
@@ -127,6 +137,7 @@ class Create extends Component {
   render() {
     return (
       <Fragment>
+        <div className="loginbackground-styles">
         {this.renderRedirect()}
         <br />
         <br />
@@ -166,6 +177,7 @@ class Create extends Component {
               onChange={this.handleInput}
             />
           </label>
+          <br/>
           Lore:
           <input
             name="bio"
@@ -197,7 +209,7 @@ class Create extends Component {
         <br />
         <button className="btn" onClick={() => this.addPlayer()}>Create Character</button>
          </div>
-      </Fragment>
+      </div></Fragment>
     );
   }
 }

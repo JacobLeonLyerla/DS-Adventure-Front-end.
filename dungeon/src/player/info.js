@@ -112,7 +112,7 @@ gearRender(){
       );
     }
     return (
-      <Fragment>
+      <Fragment><div className="loginbackground-styles">
         <Link to={`/dungeons/${this.state.player._id}`}><button>Dungeons</button></Link>
           <div className="info-styles">
         <div>
@@ -162,6 +162,7 @@ gearRender(){
         {element}
 
         <br />
+        </div>
         </div>
       </Fragment>
     );
