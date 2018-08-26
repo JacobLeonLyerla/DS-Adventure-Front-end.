@@ -242,6 +242,12 @@ class Items extends Component {
         if(loot.slot ==="charm" && curItem.slot ==="offHand"||curItem.slot ==="weaponTwoHand"||curItem.slot ==="shield"){
           dup =true;
         }
+        if(loot.slot ==="weaponTwoHand" && curItem.slot ==="weaponOneHand"){
+          dup =true;
+        }
+        if( curItem.slot ==="weaponOneHand" && curItem.slot ==="weaponTwoHand"){
+          dup =true;
+        }
         
       });
     }
