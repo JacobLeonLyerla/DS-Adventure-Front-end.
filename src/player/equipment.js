@@ -109,7 +109,6 @@ class Equip extends Component {
         this.state.player.shield === "none" &&
         this.state.player.weaponTwoHand === "none"
       ) {
-        console.log("here?")
         gear.offHand = "Equipped";
       }
     }
