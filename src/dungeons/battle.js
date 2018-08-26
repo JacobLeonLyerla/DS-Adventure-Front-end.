@@ -251,7 +251,7 @@ class Battle extends Component {
                 this.state.monster.level -
                 this.state.player.level 
             ) {
-              dmg.health = this.state.tempPlayer.health - Math.round(damage[0].damage * this.state.player.level /4) *100 ;
+              dmg.health = this.state.tempPlayer.health - Math.round(damage[0].damage * this.state.player.level *100 ) ;
               dmg.combat = "hit";
             } else {
               dmg.combat = "missed";
