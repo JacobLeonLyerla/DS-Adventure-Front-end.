@@ -309,7 +309,7 @@ if(this.state.area.south !== undefined){
     if(this.state.player.leveled ===true && this.state.player.leveled !== undefined){
       return(
         
-      <div className="leveled-styles">{`Congradulations!!!! you are now level ${this.state.player.level}`}
+      <div className="leveled-styles">{`Congradulations! you are now level ${this.state.player.level}`}
         </div>
       )
     }

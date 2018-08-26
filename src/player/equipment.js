@@ -164,10 +164,10 @@ class Equip extends Component {
         gear.feet = "Equipped";
       }
       if (
-        update.WeapondTwoHand !== "none" &&
-        update.weapondTwoHand !== undefined
+        update.WeaponTwoHand !== "none" &&
+        update.weaponTwoHand !== undefined
       ) {
-        gear.weapondTwoHand = "Equipped";
+        gear.weaponTwoHand = "Equipped";
       }
       if (
         update.weaponOneHand !== "none" &&
