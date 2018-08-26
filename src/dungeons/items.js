@@ -230,11 +230,25 @@ class Items extends Component {
         if (curItem.slot === loot.slot) {
           dup = true;
         }
+        if(loot.slot ==="shield" && curItem.slot ==="offHand"||curItem.slot ==="weaponTwoHand"||curItem.slot ==="charm"){
+          dup =true;
+        }
+        if(loot.slot ==="offHand" && curItem.slot ==="shield"||curItem.slot ==="weaponTwoHand"||curItem.slot ==="charm"){
+          dup =true;
+        }
+        if(loot.slot ==="weaponTwoHand" && curItem.slot ==="offHand"||curItem.slot ==="shield"||curItem.slot ==="charm"){
+          dup =true;
+        }
+        if(loot.slot ==="charm" && curItem.slot ==="offHand"||curItem.slot ==="weaponTwoHand"||curItem.slot ==="shield"){
+          dup =true;
+        }
+        
       });
     }
     if (dup === false) {
       this.deleteItem(type, loot);
     } else {
+   
       return alert(`You cannot add another ${loot.slot} to your equipment`);
     }
   }
