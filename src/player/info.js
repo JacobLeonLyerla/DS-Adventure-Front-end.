@@ -21,7 +21,7 @@ class Info extends Component {
   }
   setCurrentPlayer = id => {
     axios
-      .get(`http://localhost:5500/players/${id}`)
+      .get(`https://dungeon-run.herokuapp.com/players/${id}`)
       .then(response => {
         this.setState({ player: response.data });
       })
@@ -38,7 +38,7 @@ class Info extends Component {
       player.bio = this.state.bio;
     }
     axios
-      .put(`http://localhost:5500/players/${id}`, player)
+      .put(`https://dungeon-run.herokuapp.com/players/${id}`, player)
       .then(response => {
         this.setState({
           name: "",

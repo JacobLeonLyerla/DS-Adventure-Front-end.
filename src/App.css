@@ -66,14 +66,15 @@ a{
   margin-right: 30px;
 } */
 .BlackHeart{
+  border-radius: 15px;
   border:.5px solid black;
   width:50%;
   font-size: 25px;
   background:wheat;
   margin: 0 auto;
   margin-top: 50px;
-  padding:10px
-
+  padding:10px;
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
 
 }
 /*................................................................... Log in component */
@@ -155,6 +156,7 @@ border-radius: 10px;
   color:white;
 margin:10px;
 box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
+border-radius:15px;
 
 }
 .uncommonitemCard-styles{
@@ -167,6 +169,7 @@ box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
   color: white;
 margin:10px;
 box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
+border-radius:15px;
 
 }
 .rareitemCard-styles{
@@ -176,9 +179,10 @@ box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
   border:.5px solid black;
   padding:7px;
   background:rgb(65, 146, 173);
-  color: black;
+  color: white;
 margin:10px;
 box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
+border-radius:15px;
 
 }
 .epicitemCard-styles{
@@ -191,6 +195,7 @@ box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
   color: white;
 margin:10px;
 box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
+border-radius:15px;
 
 }
 .legendaryitemCard-styles{
@@ -203,7 +208,11 @@ box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
   color: white;
 margin:10px;
 box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
+border-radius:15px;
 
+}
+.itemCard-styles:hover{
+  filter: brightness(150%)
 }
 .commonFooter-styles{
   font-size:25px;
@@ -232,6 +241,7 @@ box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
 
   /* border-bottom: .5px solid black; */
 }
+
 .delete-styles{
   color:lightgreen;
   font-size:20px;
@@ -247,6 +257,7 @@ box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
   justify-content: start;
   color:lightgreen;
   padding-left:4px;
+  font-size:20px;
 
 }
 .drop-styles{
@@ -445,7 +456,18 @@ color: lightgray;
 .attack-styles{
   width:9%;
   height: 9%;
+  margin:1.5%;
 }
+.attack-styles:hover{
+  margin:0;
+ width:12%;
+}
+.fa-long-arrow-alt-right:hover{
+color:lightgreen;
+}
+.fa-long-arrow-alt-left:hover{
+  color:lightgreen;
+  }
 .opponentAttacks-styles{
 font-size: 15px;
 }
@@ -478,6 +500,8 @@ margin: 0 auto;
 margin-top: 10px;
 font-size:20px;
 padding:1%;
+box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
+border-radius:15px;
 }
 .losing-styles{
   border: 1px solid black;
@@ -488,6 +512,8 @@ padding:1%;
   margin-top: 10px;
   font-size:18px;
   padding:1%;
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
+border-radius:15px;
   }
   .leveled-styles{
    
@@ -500,4 +526,24 @@ padding:1%;
       font-size:18px;
       padding:1%;
       
+  }
+.westEast-styles{
+
+width:300px;
+display:flex;
+justify-content: space-around;
+margin:0 auto;
+}
+  .movmenticons-styles{
+    color:lightblue;
+    font-size:60px;
+
+  }
+  .movmenticons-styles:hover{
+    color:lightgreen;
+    font-size:60px;
+
+  }
+  .itemCard-styles:hover{
+
   }

@@ -21,7 +21,7 @@ class BlackHeart extends Component {
   setDungeon = reload => {
     if (this.state.player.currentLocation === undefined) {
       axios
-        .get("http://localhost:5500/blackheart")
+        .get("https://dungeon-run.herokuapp.com/blackheart")
         .then(response => {
           this.currentRoom(response.data[0]._id);
           this.setState({ players: response.data,  });
@@ -42,7 +42,7 @@ class BlackHeart extends Component {
   };
   currentRoom = id => {
     axios
-      .get(`http://localhost:5500/blackheart/${id}`)
+      .get(`https://dungeon-run.herokuapp.com/blackheart/${id}`)
       .then(response => {
         this.setState({ area: response.data });
         if (this.state.moved === true) {
@@ -91,7 +91,7 @@ class BlackHeart extends Component {
                window.location.reload();
             }
             axios
-            .put(`http://localhost:5500/players/${this.state.player._id}`, battle)
+            .put(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`, battle)
             .then(response => {
               if(response.data.currentBattle.length >0){
               this.setState({
@@ -118,7 +118,7 @@ class BlackHeart extends Component {
 
   currentPlayer = id => {
     axios
-      .get(`http://localhost:5500/players/${id}`)
+      .get(`https://dungeon-run.herokuapp.com/players/${id}`)
       .then(response => {
         this.setState({ player: response.data, mTempid: response.data });
         this.setDungeon();
@@ -140,7 +140,7 @@ class BlackHeart extends Component {
     }
 
     axios
-      .put(`http://localhost:5500/players/${this.state.player._id}`, player)
+      .put(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`, player)
       .then(response => {})
       .catch(err => {});
   }
@@ -172,11 +172,11 @@ class BlackHeart extends Component {
     if(this.state.player.tempPlayer !== "no temp"){
     let id = this.state.player.tempPlayer 
       axios
-      .delete(`http://localhost:5500/temps/${id}`)
+      .delete(`https://dungeon-run.herokuapp.com/temps/${id}`)
       .then(response =>{
         let id = this.state.player.tempMonster 
         axios
-        .delete(`http://localhost:5500/temps/${id}`)
+        .delete(`https://dungeon-run.herokuapp.com/temps/${id}`)
         .then(response =>{
           
         })    
@@ -192,7 +192,7 @@ class BlackHeart extends Component {
     player.itemWon = "none";
     player.leveled = false
     axios
-      .put(`http://localhost:5500/players/${this.state.player._id}`, player)
+      .put(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`, player)
       .then(response => {
         this.setState({ moved: true });
         this.currentRoom(id);
@@ -263,13 +263,14 @@ if(this.state.area.south !== undefined){
       {`You are currently in  the ${this.state.area.name}`}
       <br />
       <br />
-      <button onClick={() => this.move("North")}>Go North</button>
-
+      
+      <i  onClick={() => this.move("North")} className="fas fa-chevron-circle-up movmenticons-styles"></i>
       <br />
-      <button onClick={() => this.move("West")}>Go West</button>
-      <button onClick={() => this.move("East")}>Go East</button>
-      <br />
-      <button onClick={() => this.move("South")}>Go South</button>
+      <div className="westEast-styles">
+      <i  onClick={() => this.move("West")} className="fas fa-chevron-circle-left movmenticons-styles"></i>
+      <i  onClick={() => this.move("East")} className="fas fa-chevron-circle-right movmenticons-styles"></i>
+      </div>
+      <i  onClick={() => this.move("South")} className="fas fa-chevron-circle-down movmenticons-styles"></i>
     </div>
    </Fragment>)
 }else{

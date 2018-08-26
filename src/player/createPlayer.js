@@ -104,7 +104,7 @@ class Create extends Component {
     }
     player.currentLocation = undefined
     axios
-      .post("http://localhost:5500/players", player)
+      .post("https://dungeon-run.herokuapp.com/players", player)
       .then(response => {
         this.props.setPlayer("reload");
         this.state.redirect = true;

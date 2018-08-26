@@ -26,7 +26,7 @@ class App extends Component {
   }
   setPlayer = reload => {
     axios
-      .get("http://localhost:5500/players")
+      .get("https://dungeon-run.herokuapp.com/players")
       .then(response => {
         this.setState({ players: response.data });
         if (reload === "reload") {

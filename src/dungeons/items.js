@@ -17,7 +17,7 @@ class Items extends Component {
     this.currentPlayer(id);
   }
   currentRoom = id => {
-    axios.get(`http://localhost:5500/blackheart/${id}`).then(response => {
+    axios.get(`https://dungeon-run.herokuapp.com/blackheart/${id}`).then(response => {
       this.setState({ area: response.data });
       let roomLoot = {};
       let roomFilter = this.state.area.items.filter(item => {
@@ -46,7 +46,7 @@ class Items extends Component {
   };
   currentPlayer = id => {
     axios
-      .get(`http://localhost:5500/players/${id}`)
+      .get(`https://dungeon-run.herokuapp.com/players/${id}`)
       .then(response => {
         this.setState({ player: response.data });
         this.currentRoom(this.state.player.currentLocation._id);
@@ -63,10 +63,10 @@ class Items extends Component {
 
         items.items = this.state.player.items;
         axios
-          .put(`http://localhost:5500/players/${this.state.player._id}`, items)
+          .put(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`, items)
           .then(response => {
             axios
-            .get(`http://localhost:5500/players/${this.state.player._id}`)
+            .get(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`)
             .then(response => {
               this.setState({ player: response.data });
               this.currentRoom(this.state.player.currentLocation._id);
@@ -103,10 +103,10 @@ class Items extends Component {
         break;
       }
         axios
-          .put(`http://localhost:5500/players/${this.state.player._id}`, items)
+          .put(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`, items)
           .then(response => {
             axios
-            .get(`http://localhost:5500/players/${this.state.player._id}`)
+            .get(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`)
             .then(response => {
               this.setState({ player: response.data });
               this.currentRoom(this.state.player.currentLocation._id);
@@ -199,10 +199,10 @@ class Items extends Component {
         player.endurance = this.state.player.endurance - endurance;
       }
       axios
-        .put(`http://localhost:5500/players/${this.state.player._id}`, player)
+        .put(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`, player)
         .then(response => {
           axios
-          .get(`http://localhost:5500/players/${this.state.player._id}`)
+          .get(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`)
           .then(response => {
             this.setState({ player: response.data });
             this.currentRoom(this.state.player.currentLocation._id);
@@ -245,7 +245,7 @@ class Items extends Component {
       return this.state.player.gear.map(item => (
         <Fragment>
           <div
-            className={`${item.rarity}itemCard-styles`}
+            className={`${item.rarity}itemCard-styles itemCard-styles`}
            
           >
                <div className="move-styles">
@@ -259,7 +259,7 @@ class Items extends Component {
 
    
             </div>
-            <div className="itemsHeader-styles">{item.name}</div>
+            <div >{item.name}</div>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             <br/>
                 {item.slot}
@@ -285,7 +285,7 @@ class Items extends Component {
         <Fragment>
           {console.log(item)}
          <div
-            className={`${item.rarity}itemCard-styles`}
+            className={`${item.rarity}itemCard-styles itemCard-styles`}
            
           >
             <div className="move-styles">
@@ -306,7 +306,7 @@ class Items extends Component {
 
               </div>
             </div>
-            <div className="itemsHeader-styles">{item.name}</div>
+            <div >{item.name}</div>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             <br/>
                 {item.slot}
@@ -336,13 +336,13 @@ class Items extends Component {
           {this.state.area.items.map(item => (
             <Fragment>
               <div
-            className={`${item.rarity}itemCard-styles`}
+            className={`${item.rarity}itemCard-styles itemCard-styles`}
            
           >
               <div className="delete-styles" onClick={() => this.deleteItem("Loot", item)}><i class="far fa-hand-paper"></i>
 
 </div>
-                <div className="itemsHeader-styles">{item.name}</div>
+                <div >{item.name}</div>
                 
                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 <br/>
@@ -385,7 +385,7 @@ class Items extends Component {
 
         <div className="Items">{this.renderEquipment()}</div>
         <Link to={`/equip/${this.state.player._id}`}>
-          <button>equip hero</button>
+          <button className="btn">equip hero</button>
         </Link>
 
         <div className={"bigItemHeader-styles"}>Items in inventory</div>

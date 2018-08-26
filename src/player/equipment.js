@@ -18,7 +18,7 @@ class Equip extends Component {
   }
   setCurrItems = id => {
     axios
-      .get(`http://localhost:5500/players/${id}`)
+      .get(`https://dungeon-run.herokuapp.com/players/${id}`)
       .then(response => {
         this.setState({ player: response.data });
       })
@@ -34,7 +34,7 @@ class Equip extends Component {
     let item = {};
     item.equipped = true;
     axios
-      .put(`http://localhost:5500/items/${id}`, item)
+      .put(`https://dungeon-run.herokuapp.com/items/${id}`, item)
       .then(response => {})
       .catch(err => {});
   }
@@ -189,7 +189,7 @@ class Equip extends Component {
   }
   equipmentAdd(gear, id) {
     axios
-      .put(`http://localhost:5500/players/${id}`, gear)
+      .put(`https://dungeon-run.herokuapp.com/players/${id}`, gear)
       .then(response => {
         this.setState({
           redirect: true

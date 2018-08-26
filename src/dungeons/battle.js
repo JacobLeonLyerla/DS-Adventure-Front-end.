@@ -29,7 +29,7 @@ class Battle extends Component {
   }
   currentPlayer = id => {
     axios
-      .get(`http://localhost:5500/players/${id}`)
+      .get(`https://dungeon-run.herokuapp.com/players/${id}`)
       .then(response => {
         this.setState({
           player: response.data,
@@ -38,7 +38,7 @@ class Battle extends Component {
         });
         id = this.state.player.currentBattle[0]._id;
 
-        axios.get(`http://localhost:5500/monsters/${id}`).then(response => {
+        axios.get(`https://dungeon-run.herokuapp.com/monsters/${id}`).then(response => {
           this.setState({
             monster: response.data,
             monsterAttacks: response.data.attacks
@@ -66,21 +66,21 @@ class Battle extends Component {
     // this should always be un defined
 
     axios
-      .post(`http://localhost:5500/temps`, temp)
+      .post(`https://dungeon-run.herokuapp.com/temps`, temp)
       .then(response => {
         temp = {};
         let id = response.data._id;
         temp.health = this.state.monster.health;
         temp.endurance = this.state.monster.endurance;
         axios
-          .post(`http://localhost:5500/temps`, temp)
+          .post(`https://dungeon-run.herokuapp.com/temps`, temp)
           .then(response => {
             temp = {};
             temp.tempPlayer = id;
             temp.tempMonster = response.data._id;
             axios
               .put(
-                `http://localhost:5500/players/${this.state.player._id}`,
+                `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`,
                 temp
               )
               .then(response => {
@@ -100,7 +100,7 @@ class Battle extends Component {
   fetchTemps() {
     let id = this.state.player.tempPlayer;
     axios
-      .get(`http://localhost:5500/temps/${id}`)
+      .get(`https://dungeon-run.herokuapp.com/temps/${id}`)
       .then(response => {
         this.setState({ tempPlayer: response.data });
       })
@@ -110,7 +110,7 @@ class Battle extends Component {
       id = this.state.player.tempMonster._id;
     }
     axios
-      .get(`http://localhost:5500/temps/${id}`)
+      .get(`https://dungeon-run.herokuapp.com/temps/${id}`)
       .then(response => {
         let raisedhp = Math.round(response.data.health +( response.data.health * this.state.player.level /25))
         this.setState({ tempMonster: response.data, tempMonHP:raisedhp });
@@ -164,7 +164,7 @@ class Battle extends Component {
       dmg.attacked = true;
       dmg.spellUsed = name;
       axios
-        .put(`http://localhost:5500/temps/${id}`, dmg)
+        .put(`https://dungeon-run.herokuapp.com/temps/${id}`, dmg)
         .then(response => {
           this.setState({ tempMonster: response.data, tempMonHP:response.data.health });
           if (response.data.health <= 0) {
@@ -198,7 +198,7 @@ class Battle extends Component {
             cast.endurance = this.state.player.endurance
           }
           axios
-            .put(`http://localhost:5500/temps/${id}`, cast)
+            .put(`https://dungeon-run.herokuapp.com/temps/${id}`, cast)
             .then(response => {
               this.setState({ tempPlayer: response.data });
               if(this.state.tempMonHP >0){
@@ -234,7 +234,7 @@ class Battle extends Component {
         attack.endurance = this.state.monster.level * 75;
       }
       axios
-        .put(`http://localhost:5500/temps/${id}`, attack)
+        .put(`https://dungeon-run.herokuapp.com/temps/${id}`, attack)
         .then(response => {
           this.setState({ tempMonster: response.data });
           let id = this.state.player.tempPlayer;
@@ -261,7 +261,7 @@ class Battle extends Component {
           }
           dmg.spellUsed = damage[0].name;
           axios
-            .put(`http://localhost:5500/temps/${id}`, dmg)
+            .put(`https://dungeon-run.herokuapp.com/temps/${id}`, dmg)
             .then(response => {
               this.setState({ tempPlayer: response.data });
               if (response.data.health <= 0) {
@@ -283,7 +283,7 @@ class Battle extends Component {
       fail.itemWon = "lost";
       fail.currentLocation = "5b60093b9a47813e2cdd30d1";
       axios
-        .put(`http://localhost:5500/players/${this.state.player._id}`, fail)
+        .put(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`, fail)
         .then(response => {
           this.setState({
             currentlocation: response.data.currentlocation,
@@ -318,7 +318,7 @@ class Battle extends Component {
         this.state.player.experience + this.state.monster.experience;
 
       axios
-        .put(`http://localhost:5500/players/${this.state.player._id}`, victory)
+        .put(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`, victory)
         .then(response => {
           this.setState({
             currentlocation: response.data.currentlocation,
@@ -369,7 +369,7 @@ class Battle extends Component {
   }
 
   renderStats() {
-    let currentpercent = Math.round( this.state.tempMonHP/(this.state.monster.health + Math.round(this.state.monster.health * this.state.player.level /22)) *100)
+    let currentpercent = Math.round( this.state.tempMonHP/(this.state.monster.health +Math.round(this.state.monster.health * this.state.player.level /22)) *100)
     let currentPlayerhp = Math.round( this.state.tempPlayer.health/this.state.player.health *100)
     let monsterend = Math.round( this.state.tempMonster.endurance/this.state.monster.endurance *100)
     let playerend = Math.round( this.state.tempPlayer.endurance/this.state.player.endurance *100)
@@ -540,7 +540,7 @@ class Battle extends Component {
       }
     }
     axios
-      .put(`http://localhost:5500/players/${this.state.player._id}`, spell)
+      .put(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`, spell)
       .then(response => {
         this.setState({ currentSpell: response.data.currentSpell });
       })
