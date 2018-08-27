@@ -296,7 +296,16 @@ class Battle extends Component {
         Math.random() * Math.floor(this.state.monster.items.length)
       );
       let item = this.state.monster.items[index];
+      let add = true;
+     this.state.player.items.forEach(inventory=>{
+       if(item === inventory){
+        add = false
+       }
+        
+     })
+     if(add ===true){
       this.state.player.items.push(this.state.monster.items[index]);
+     }
       let playerlevel = this.state.player.level;
       let victory = {};
       if (

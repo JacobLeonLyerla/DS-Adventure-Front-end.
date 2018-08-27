@@ -61,7 +61,13 @@ class App extends Component {
       return <Redirect to={`/info/${id}`} />;
     }
   };
+  bhbackground(){
+    if(window.location.href !== "https://dungeon-run.netlify.com/create" && window.location.href !=="https://dungeon-run.netlify.com/"){
+return"blackHeartBackground-styles"
+    }
+  }
   render() {
+ 
     return (
       <div className="App">
         {this.renderRedirect(this.state.id)}
@@ -91,7 +97,7 @@ class App extends Component {
             <DungeonList {...props} player={this.state.player} />
           )}
         />
-<div className="blackHeartBackground-styles">
+<div className={this.bhbackground()}>
         <Route
           path="/blackheart/:id"
           render={props => <BlackHeart {...props} player={this.state.player} />}

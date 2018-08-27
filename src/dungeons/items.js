@@ -344,7 +344,7 @@ class Items extends Component {
     }
   }
   renderItems() {
-    console.log(this.state.player);
+    
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
       return this.state.player.items.map(item => (
         <Fragment>
@@ -386,8 +386,10 @@ class Items extends Component {
   }
 
   render() {
+    console.log(this.props.match)
     return (
       <Fragment>
+        
         <div className="bigItemHeader-styles">Items in room</div>
         <div className="Items">
           <br />

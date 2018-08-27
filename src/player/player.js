@@ -5,9 +5,10 @@ import Map from "../dungeons/map.js"
 class Player extends Component {
 
   
-    
+  
 
   render() {
+   
     return (<Fragment><div className="loginbackground-styles">
        <br/><br/>
        <br/><br/>
