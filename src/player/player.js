@@ -49,7 +49,6 @@ class Player extends Component {
    </div>
       </form>
   </div>
-  <Map/>
    </Fragment> );
    
   }
