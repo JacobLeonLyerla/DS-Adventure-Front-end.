@@ -348,7 +348,6 @@ class Items extends Component {
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
       return this.state.player.items.map(item => (
         <Fragment>
-          {console.log(item)}
           <div className={`${item.rarity}itemCard-styles itemCard-styles`}>
             <div className="move-styles">
               <div
@@ -386,7 +385,6 @@ class Items extends Component {
   }
 
   render() {
-    console.log(this.props.match)
     return (
       <Fragment>
         

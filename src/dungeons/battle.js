@@ -298,11 +298,21 @@ class Battle extends Component {
       let item = this.state.monster.items[index];
       let add = true;
      this.state.player.items.forEach(inventory=>{
-       if(item === inventory){
+       console.log("monster item",item,"inventory", inventory)
+       console.log(item._id===inventory)
+       if(item._id === inventory){
         add = false
        }
-        
+      
      })
+       if(this.state.player.level > 5 && item.rarity ==="common"){
+         add = false;
+       }
+       if(this.state.player.level > 10 && item.rarity ==="uncommon"){
+        add = false;
+      }
+  
+     console.log("add:",add)
      if(add ===true){
       this.state.player.items.push(this.state.monster.items[index]);
      }
