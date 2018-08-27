@@ -305,9 +305,10 @@ class Items extends Component {
     } else {
       if(loot.slot ==="shield"|| loot.slot==="offHand" || loot.slot==="charm"){
         return alert("offHand, Shields and Charms all count as secondary weapons. you can only have one, and only if you don't have a Two Handed Weapon")
-      }else
+      }else{
       return alert(`You cannot add another ${loot.slot} to your equipment`);
     }
+  }
   }
   renderEquipment() {
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
