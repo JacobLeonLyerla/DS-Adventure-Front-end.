@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
+import {Modal} from 'reactstrap'
 import { Redirect } from "react-router-dom";
 import paladin from "./img/paladinportrait.jpg";
 import rogue from "./img/rogueportrait.jpg";
@@ -21,7 +22,7 @@ class Battle extends Component {
     currentSpell: 0,
     currentLocation: "",
     tempMonHP:0,
-    redirect: false
+    redirect: false,
   };
   componentDidMount() {
     let { id } = this.props.match.params;

@@ -1,7 +1,7 @@
 import React, { Component,Fragment } from 'react';
 import axios from "axios"
 import {Link} from "react-router-dom"
-
+import Map from "../dungeons/map.js"
 class Player extends Component {
 
   
@@ -48,7 +48,9 @@ class Player extends Component {
    <Link to ="/create"><button className="btn">Create</button></Link>
    </div>
       </form>
-  </div> </Fragment> );
+  </div>
+  <Map/>
+   </Fragment> );
    
   }
 }

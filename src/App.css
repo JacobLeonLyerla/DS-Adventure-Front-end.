@@ -547,3 +547,119 @@ margin:0 auto;
   .itemCard-styles:hover{
 
   }
+  /*..................................................................... MAP */
+  .mapBackground-styles{
+    min-height:100vh;
+    background-image: url("https://cdna.artstation.com/p/assets/images/images/001/206/348/large/david-edwards-kenden-001.jpg?1442195813");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  .mapwrap{
+   width:100%;
+   
+   height:500px;
+
+  }
+  .ga-styles{
+    width:25%;
+    background:gray;
+    min-height: 10%;
+margin:0 auto;
+  opacity:.5;
+  }
+  .wb-styles{
+    width:25%;
+    background:gray;
+    min-height: 2%;
+margin:0 auto;
+opacity:.5;
+  
+  }
+  .bb-styles{
+    width:5%;
+    background:gray;
+    min-height: 12%;
+margin:0 auto;
+opacity:.5;
+  
+  }
+  .ghTeir-styles{
+    display:flex;
+    flex-direction: row;
+    width: 55.1%;
+    height:20%;
+  }
+  .gh-styles{
+    width:7%;
+    background:gray;
+   height: 50%;
+margin:0 auto;
+margin-top:10%;
+/* opacity:.5; */
+  
+  }
+  .nw-styles{
+    
+    width:6%;
+    background:gray;
+    height: 30%;
+margin:0 auto;
+margin-top:20%;
+opacity:.5;
+  
+  }
+  .ts-styles{
+    width:10%;
+    background:gray;
+    height: 80%;
+margin:0 auto;
+margin-top:10%;
+opacity: .5;
+  
+  }
+  .stgr-styles{
+    width:20%;
+    background:gray;
+   height: 100%;
+margin:0 auto;
+
+opacity:.5;
+  
+  }
+  .startingrow{
+    display:flex;
+    flex-direction: row;
+    width: 20%;
+    margin-left:35.5%;
+  }
+  .sr-styles{
+    width:30%;
+    background:gray;
+   height: 200px;
+margin:0 auto;
+opacity:.5;
+  }
+  .sw-styles{
+    width:20%;
+    background:gray;
+   height: 100px;
+margin:0 auto;
+margin-right:20%;
+opacity:.5;
+  }
+  .pf-styles{
+    width:50%;
+    background:gray;
+   height: 6%;
+margin:0 auto;
+opacity:.5;
+  
+  }
+  .activeRoom-styles{
+    background:lightgreen;
+opacity:1;
+   
+  }
+  

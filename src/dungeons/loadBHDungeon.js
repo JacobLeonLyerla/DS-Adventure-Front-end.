@@ -1,8 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { Redirect} from "react-router-dom";
+import{Modal} from "reactstrap"
 import axios from "axios";
+import Map from "../dungeons/map.js"
 class BlackHeart extends Component {
-  state = {
+  constructor(){
+super();
+      this.state = {
     areas: undefined,
     area: {},
     player: { currentLocation: { _id: 0 } },
@@ -10,8 +14,17 @@ class BlackHeart extends Component {
     mTempid:"",
     id: 0,
     redirect: false,
-    moved: false
+    moved: false,
+    modal:false
   };
+  this.toggle = this.toggle.bind(this);
+
+  }
+  toggle() {
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
   componentDidMount() {
     let { id } = this.props.match.params;
     this.currentPlayer(id);
@@ -270,7 +283,15 @@ if(this.state.area.south !== undefined){
       <i  onClick={() => this.move("East")} className="fas fa-chevron-circle-right movmenticons-styles"></i>
       </div>
       <i  onClick={() => this.move("South")} className="fas fa-chevron-circle-down movmenticons-styles"></i>
+
+        <br/>
+    <br/>
+    <button className="btn" color="danger" onClick={this.toggle}>MAP</button>
+    <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+    <Map name={this.state.area.name}/>
+    </Modal>
     </div>
+  
    </Fragment>)
 }else{
   return(
@@ -323,6 +344,7 @@ if(this.state.area.south !== undefined){
           {this.movmentRender()}
           {this.ding()}
           {this.winnings()}
+       
       </Fragment>
     );
   }
