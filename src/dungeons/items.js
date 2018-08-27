@@ -17,32 +17,34 @@ class Items extends Component {
     this.currentPlayer(id);
   }
   currentRoom = id => {
-    axios.get(`https://dungeon-run.herokuapp.com/blackheart/${id}`).then(response => {
-      this.setState({ area: response.data });
-      let roomLoot = {};
-      let roomFilter = this.state.area.items.filter(item => {
-        let failed = false;
-        let secondfailed = false;
-        this.state.player.items.forEach(playerItem => {
-          if (playerItem._id !== item._id) {
-            return;
-          } else {
-            return (failed = true);
-          }
-        });
-        this.state.player.gear.forEach(InventoryItem => {
-          if (InventoryItem._id !== item._id) {
-            return;
-          } else {
-            return (secondfailed = true);
-          }
-        });
+    axios
+      .get(`https://dungeon-run.herokuapp.com/blackheart/${id}`)
+      .then(response => {
+        this.setState({ area: response.data });
+        let roomLoot = {};
+        let roomFilter = this.state.area.items.filter(item => {
+          let failed = false;
+          let secondfailed = false;
+          this.state.player.items.forEach(playerItem => {
+            if (playerItem._id !== item._id) {
+              return;
+            } else {
+              return (failed = true);
+            }
+          });
+          this.state.player.gear.forEach(InventoryItem => {
+            if (InventoryItem._id !== item._id) {
+              return;
+            } else {
+              return (secondfailed = true);
+            }
+          });
 
-        return failed === false && secondfailed === false;
+          return failed === false && secondfailed === false;
+        });
+        roomLoot.items = roomFilter;
+        this.setState({ area: { items: roomLoot.items } });
       });
-      roomLoot.items = roomFilter;
-      this.setState({ area: { items: roomLoot.items } });
-    });
   };
   currentPlayer = id => {
     axios
@@ -63,16 +65,24 @@ class Items extends Component {
 
         items.items = this.state.player.items;
         axios
-          .put(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`, items)
+          .put(
+            `https://dungeon-run.herokuapp.com/players/${
+              this.state.player._id
+            }`,
+            items
+          )
           .then(response => {
             axios
-            .get(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`)
-            .then(response => {
-              this.setState({ player: response.data });
-              this.currentRoom(this.state.player.currentLocation._id);
-            })
-            .catch(err => {});
-          
+              .get(
+                `https://dungeon-run.herokuapp.com/players/${
+                  this.state.player._id
+                }`
+              )
+              .then(response => {
+                this.setState({ player: response.data });
+                this.currentRoom(this.state.player.currentLocation._id);
+              })
+              .catch(err => {});
           })
           .catch(err => {});
         break;
@@ -96,29 +106,35 @@ class Items extends Component {
         }
         break;
       case "Drop Item":
-      items.items = this.state.player.items.filter(item =>item._id !== loot._id)
+        items.items = this.state.player.items.filter(
+          item => item._id !== loot._id
+        );
         break;
 
       default:
         break;
-      }
+    }
+    axios
+      .put(
+        `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`,
+        items
+      )
+      .then(response => {
         axios
-          .put(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`, items)
+          .get(
+            `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`
+          )
           .then(response => {
-            axios
-            .get(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`)
-            .then(response => {
-              this.setState({ player: response.data });
-              this.currentRoom(this.state.player.currentLocation._id);
-            })
-            .catch(err => {});
-            if (type === "Equip") {
-              this.removeEquipment(loot);
-            }
-            //window.location.reload();
+            this.setState({ player: response.data });
+            this.currentRoom(this.state.player.currentLocation._id);
           })
           .catch(err => {});
-    
+        if (type === "Equip") {
+          this.removeEquipment(loot);
+        }
+        //window.location.reload();
+      })
+      .catch(err => {});
   }
   removeEquipment(item) {
     let items = {};
@@ -199,15 +215,22 @@ class Items extends Component {
         player.endurance = this.state.player.endurance - endurance;
       }
       axios
-        .put(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`, player)
+        .put(
+          `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`,
+          player
+        )
         .then(response => {
           axios
-          .get(`https://dungeon-run.herokuapp.com/players/${this.state.player._id}`)
-          .then(response => {
-            this.setState({ player: response.data });
-            this.currentRoom(this.state.player.currentLocation._id);
-          })
-          .catch(err => {});
+            .get(
+              `https://dungeon-run.herokuapp.com/players/${
+                this.state.player._id
+              }`
+            )
+            .then(response => {
+              this.setState({ player: response.data });
+              this.currentRoom(this.state.player.currentLocation._id);
+            })
+            .catch(err => {});
           //window.location.reload();
         })
         .catch(err => {});
@@ -230,68 +253,86 @@ class Items extends Component {
         if (curItem.slot === loot.slot) {
           dup = true;
         }
-        if(loot.slot ==="shield" && curItem.slot ==="offHand"||curItem.slot ==="weaponTwoHand"||curItem.slot ==="charm"){
-          dup =true;
+        if (loot.slot === "shield") {
+          if (
+            curItem.slot === "offHand" ||
+            curItem.slot === "weaponTwoHand" ||
+            curItem.slot === "charm"
+          ) {
+            dup = true;
+          }
         }
-        if(loot.slot ==="offHand" && curItem.slot ==="shield"||curItem.slot ==="weaponTwoHand"||curItem.slot ==="charm"){
-          dup =true;
+        if (loot.slot === "offHand") {
+          if (
+            curItem.slot === "shield" ||
+            curItem.slot === "weaponTwoHand" ||
+            curItem.slot === "charm"
+          ) {
+            dup = true;
+          }
         }
-        if(loot.slot ==="weaponTwoHand" && curItem.slot ==="offHand"||curItem.slot ==="shield"||curItem.slot ==="charm"){
-          dup =true;
+        if (loot.slot === "weaponTwoHand") {
+          if (
+            curItem.slot === "offHand" ||
+            curItem.slot === "shield" ||
+            curItem.slot === "charm"
+          ) {
+            dup = true;
+          }
         }
-        if(loot.slot ==="charm" && curItem.slot ==="offHand"||curItem.slot ==="weaponTwoHand"||curItem.slot ==="shield"){
-          dup =true;
+        if (loot.slot === "charm") {
+          if (
+            curItem.slot === "offHand" ||
+            curItem.slot === "weaponTwoHand" ||
+            curItem.slot === "shield"
+          ) {
+            dup = true;
+          }
         }
-        if(loot.slot ==="weaponTwoHand" && curItem.slot ==="weaponOneHand"){
-          dup =true;
+        if (loot.slot === "weaponTwoHand" && curItem.slot === "weaponOneHand") {
+          dup = true;
         }
-        if( curItem.slot ==="weaponOneHand" && curItem.slot ==="weaponTwoHand"){
-          dup =true;
+        if (
+          curItem.slot === "weaponOneHand" &&
+          curItem.slot === "weaponTwoHand"
+        ) {
+          dup = true;
         }
-        
       });
     }
     if (dup === false) {
       this.deleteItem(type, loot);
     } else {
-   
       return alert(`You cannot add another ${loot.slot} to your equipment`);
     }
   }
   renderEquipment() {
-
-
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
       return this.state.player.gear.map(item => (
         <Fragment>
-          <div
-            className={`${item.rarity}itemCard-styles itemCard-styles`}
-           
-          >
-               <div className="move-styles">
+          <div className={`${item.rarity}itemCard-styles itemCard-styles`}>
+            <div className="move-styles">
               <div
                 className="add-styles
       "
                 onClick={() => this.checkDuplicate("Equip", item)}
               >
-                <i class="fas fa-level-down-alt"></i>
+                <i class="fas fa-level-down-alt" />
               </div>
-
-   
             </div>
-            <div >{item.name}</div>
+            <div>{item.name}</div>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            <br/>
-                {item.slot}
+            <br />
+            {item.slot}
             <br />
             {` Health: ${item.health} Endurance: ${item.endurance}`}
             <br />
             {` Intellect: ${item.intellect} Strength: ${item.strength}`}
             <br />
             {` Agility: ${item.agility}`}
-            <br/>
-            <br/>
-           <div className={`${item.rarity}Footer-styles`}> {item.rarity}</div>
+            <br />
+            <br />
+            <div className={`${item.rarity}Footer-styles`}> {item.rarity}</div>
           </div>
           <br />
         </Fragment>
@@ -299,46 +340,41 @@ class Items extends Component {
     }
   }
   renderItems() {
-    console.log(this.state.player)
+    console.log(this.state.player);
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
       return this.state.player.items.map(item => (
         <Fragment>
           {console.log(item)}
-         <div
-            className={`${item.rarity}itemCard-styles itemCard-styles`}
-           
-          >
+          <div className={`${item.rarity}itemCard-styles itemCard-styles`}>
             <div className="move-styles">
               <div
                 className="add-styles
       "
                 onClick={() => this.checkDuplicate("Inventory", item)}
               >
-               <i class="fas fa-level-up-alt"></i>
+                <i class="fas fa-level-up-alt" />
               </div>
 
               <div
                 className="drop-styles"
                 onClick={() => this.deleteItem("Drop Item", item)}
               >
-                <i class="far fa-times-circle"></i>
-
-
+                <i class="far fa-times-circle" />
               </div>
             </div>
-            <div >{item.name}</div>
+            <div>{item.name}</div>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            <br/>
-                {item.slot}
+            <br />
+            {item.slot}
             <br />
             {` Health: ${item.health} Endurance: ${item.endurance}`}
             <br />
             {` Intellect: ${item.intellect} Strength: ${item.strength}`}
             <br />
             {` Agility: ${item.agility}`}
-            <br/>
-            <br/>
-           <div className={`${item.rarity}Footer-styles`}> {item.rarity}</div>
+            <br />
+            <br />
+            <div className={`${item.rarity}Footer-styles`}> {item.rarity}</div>
           </div>
         </Fragment>
       ));
@@ -355,17 +391,16 @@ class Items extends Component {
 
           {this.state.area.items.map(item => (
             <Fragment>
-              <div
-            className={`${item.rarity}itemCard-styles itemCard-styles`}
-           
-          >
-              <div className="delete-styles" onClick={() => this.deleteItem("Loot", item)}><i class="far fa-hand-paper"></i>
-
-</div>
-                <div >{item.name}</div>
-                
+              <div className={`${item.rarity}itemCard-styles itemCard-styles`}>
+                <div
+                  className="delete-styles"
+                  onClick={() => this.deleteItem("Loot", item)}
+                >
+                  <i class="far fa-hand-paper" />
+                </div>
+                <div>{item.name}</div>
                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                <br/>
+                <br />
                 {item.slot}
                 <br />
                 {` Health: ${item.health} Endurance: ${item.endurance}`}
@@ -373,12 +408,14 @@ class Items extends Component {
                 {` Intellect: ${item.intellect} Strength: ${item.strength}`}
                 <br />
                 {` Agility: ${item.agility}`}
-                <br/>
-            <br/>
-           <div className={`${item.rarity}Footer-styles`}> {item.rarity}</div>
+                <br />
+                <br />
+                <div className={`${item.rarity}Footer-styles`}>
+                  {" "}
+                  {item.rarity}
+                </div>
               </div>
               <br />
-              
             </Fragment>
           ))}
         </div>
@@ -388,8 +425,8 @@ class Items extends Component {
             src={this.classIcon(this.state.player.class)}
           />
           <br />
-          {this.state.player.name}<br/>
-
+          {this.state.player.name}
+          <br />
           Level: {this.state.player.level}
           <br />
           {` Health: ${this.state.player.health} Endurance: ${
