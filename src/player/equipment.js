@@ -201,7 +201,7 @@ class Equip extends Component {
       <Fragment>
         {this.setEquipment(this.state.player._id)}
         {this.renderRedirect(this.state.player._id)}
-        Equpiping
+        Equipping Items
       </Fragment>
     );
   }
