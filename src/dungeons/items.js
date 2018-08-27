@@ -303,6 +303,9 @@ class Items extends Component {
     if (dup === false) {
       this.deleteItem(type, loot);
     } else {
+      if(loot.slot ==="shield"|| loot.slot==="offHand" || loot.slot==="charm"){
+        return alert("offHand, Shields and Charms all count as secondary weapons. you can only have one, and only if you don't have a Two Handed Weapon")
+      }else
       return alert(`You cannot add another ${loot.slot} to your equipment`);
     }
   }
