@@ -442,7 +442,7 @@ class Items extends Component {
 
         <div className="Items">{this.renderEquipment()}</div>
         <Link to={`/equip/${this.state.player._id}`}>
-          <button className="btn">equip hero</button>
+          <button className="btn equip-hero">equip hero</button>
         </Link>
 
         <div className={"bigItemHeader-styles"}>Items in inventory</div>
