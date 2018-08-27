@@ -113,8 +113,9 @@ gearRender(){
     }
     return (
       <Fragment><div className="loginbackground-styles">
-        <Link to={`/dungeons/${this.state.player._id}`}><button>Dungeons</button></Link>
+       <br/>
           <div className="info-styles">
+          
         <div>
           Name: {this.state.player.name}
           <br />
@@ -155,14 +156,17 @@ gearRender(){
             </Fragment>))} 
           </div> */}
         </div>
-        <button onClick={() => this.setState({ visible: !this.state.visible })}>
+        
+        {/* <button onClick={() => this.setState({ visible: !this.state.visible })}>
           Edit hero
-        </button>
+        </button> */}
         <br />
         {element}
 
         <br />
         </div>
+        <br/>
+        <Link to={`/dungeons/${this.state.player._id}`}><button className="btn dungeons-styles" >Dungeons</button></Link>
         </div>
       </Fragment>
     );
