@@ -201,7 +201,14 @@ class Equip extends Component {
       <Fragment>
         {this.setEquipment(this.state.player._id)}
         {this.renderRedirect(this.state.player._id)}
-        Equipping Items
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div className="equipping-styles">Equipping Items...</div>
       </Fragment>
     );
   }

@@ -665,3 +665,13 @@ opacity:1;
   .dungeons-styles{
     font-size:50px;
   }
+  .equipping-styles{
+    font-size:60px;
+    background:white;
+    opacity: .6;
+    width: 50%;
+    margin:0 auto;
+    letter-spacing: .2ch;
+    margin-top: 20%;
+    border-radius: 10px;
+  }

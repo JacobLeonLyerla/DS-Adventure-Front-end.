@@ -84,10 +84,7 @@ class App extends Component {
           path="/info/:id"
           render={props => <Info {...props} player={this.state.player} />}
         />
-        <Route
-          path="/equip/:id"
-          render={props => <Equip {...props} player={this.state.player} />}
-        />
+     
         <Route
           path="/dungeons/:id"
           render={props => (
@@ -108,6 +105,10 @@ class App extends Component {
           path="/battle/:id"
           render={props => <Battle {...props} player={this.state.player} />}
          
+        />
+           <Route
+          path="/equip/:id"
+          render={props => <Equip {...props} player={this.state.player} />}
         />
          </div>
       </div>
