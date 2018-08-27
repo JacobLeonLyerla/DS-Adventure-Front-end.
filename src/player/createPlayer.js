@@ -155,7 +155,7 @@ class Create extends Component {
             Name:
             <input
               name="name"
-              placeholder="Enter a character name"
+              placeholder="Create name"
               value={this.state.name}
               onChange={this.handleInput}
             />
@@ -164,7 +164,7 @@ class Create extends Component {
           <input
             name="password"
             type="password"
-            placeholder="Enter a character password"
+            placeholder="Create password"
             value={this.state.password}
             onChange={this.handleInput}
           />{" "}
@@ -172,7 +172,7 @@ class Create extends Component {
             Age:
             <input
               name="age"
-              placeholder="Set age of your adventurer "
+              placeholder="Set age"
               value={this.state.age}
               onChange={this.handleInput}
             />
@@ -181,14 +181,14 @@ class Create extends Component {
           Lore:
           <input
             name="bio"
-            placeholder="Give your adventurer a backstory"
+            placeholder="Give a backstory"
             value={this.state.bio}
             onChange={this.handleInput}
           />
           Gender:
           <input
             name="gender"
-            placeholder="Set a gender for your adventurer"
+            placeholder="Set a gender"
             value={this.state.gender}
             onChange={this.handleInput}
           />
