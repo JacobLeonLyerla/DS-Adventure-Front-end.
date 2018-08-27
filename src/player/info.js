@@ -105,9 +105,9 @@ gearRender(){
             onChange={this.handleInput}
           />
           <br />
-          <button onClick={() => this.updatePlayer(this.state.player._id)}>
+          {/* <button onClick={() => this.updatePlayer(this.state.player._id)}>
             Update Character
-          </button>
+          </button> */}
         </form>
       );
     }
