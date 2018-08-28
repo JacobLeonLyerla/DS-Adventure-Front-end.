@@ -252,7 +252,7 @@ class Battle extends Component {
           let dmg = {};
           if (remainingEnd > 0) {
             if (
-              hit <=
+              hit <=dodge
               
             ) {
               dmg.health = this.state.tempPlayer.health - Math.round(damage[0].damage + damage[0].damage* this.state.player.level /7  ) ;
