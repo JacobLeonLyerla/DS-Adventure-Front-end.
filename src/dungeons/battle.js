@@ -244,13 +244,16 @@ class Battle extends Component {
           }
           let hit = Math.floor(Math.random() * Math.floor(100));
 
+
+          let dodge = damage[0].hitChance * 2 +  this.state.monster.level -this.state.player.level  - this.state.player.intellect /15 - this.state.player.underance / 100 - this.state.player.agility /10
+          if (dodge >=70){
+          dodge = 60
+          }
           let dmg = {};
           if (remainingEnd > 0) {
             if (
               hit <=
-              damage[0].hitChance * 2 +
-                this.state.monster.level -
-                this.state.player.level 
+              
             ) {
               dmg.health = this.state.tempPlayer.health - Math.round(damage[0].damage + damage[0].damage* this.state.player.level /7  ) ;
               dmg.combat = "hit";
