@@ -113,7 +113,7 @@ class Battle extends Component {
     axios
       .get(`https://dungeon-run.herokuapp.com/temps/${id}`)
       .then(response => {
-        let raisedhp = Math.round(response.data.health +( response.data.health * this.state.player.level /40))
+        let raisedhp = Math.round(response.data.health +( response.data.health * this.state.player.level /30))
         this.setState({ tempMonster: response.data, tempMonHP:raisedhp });
       })
       .catch(err => {});
@@ -389,7 +389,7 @@ class Battle extends Component {
   }
 
   renderStats() {
-    let currentpercent = Math.round( this.state.tempMonHP/(this.state.monster.health +Math.round(this.state.monster.health * this.state.player.level /40)) *100)
+    let currentpercent = Math.round( this.state.tempMonHP/(this.state.monster.health +Math.round(this.state.monster.health * this.state.player.level /30)) *100)
     let currentPlayerhp = Math.round( this.state.tempPlayer.health/this.state.player.health *100)
     let monsterend = Math.round( this.state.tempMonster.endurance/this.state.monster.endurance *100)
     let playerend = Math.round( this.state.tempPlayer.endurance/this.state.player.endurance *100)
