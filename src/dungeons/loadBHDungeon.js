@@ -318,7 +318,7 @@ if(this.state.area.south !== undefined){
         <Fragment>
        <div className="losing-styles">
        <div>{`${this.state.player.name} was defeated by the ${this.state.player.defeatedName}`}</div>
-        <div>{`earing ${this.state.player.experienceGained} experience`}</div>
+        <div>{`earning ${this.state.player.experienceGained} experience`}</div>
       <div>{`You were returned to the ${this.state.area.name}`}</div>
       
        </div> 
