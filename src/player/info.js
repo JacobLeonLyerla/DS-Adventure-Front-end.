@@ -128,7 +128,7 @@ gearRender(){
           Health: {` ${this.state.player.health}  `}
           Endurance: {`${this.state.player.endurance} `}
           <br/>
-          Agiltiy: {` ${this.state.player.agility} `}
+          Agility: {` ${this.state.player.agility} `}
           intellect: {` ${this.state.player.intellect} `}
           Strength: {` ${this.state.player.strength} `}
           <br />
