@@ -249,8 +249,7 @@ class Battle extends Component {
             if (
               hit <=
               damage[0].hitChance * 2 +
-                this.state.monster.level -
-                this.state.player.level 
+                this.state.monster.level 
             ) {
               dmg.health = this.state.tempPlayer.health - Math.round(damage[0].damage + damage[0].damage* this.state.player.level /7  ) ;
               dmg.combat = "hit";
