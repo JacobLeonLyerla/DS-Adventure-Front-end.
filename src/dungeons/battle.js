@@ -6,7 +6,7 @@ import paladin from "./img/paladinportrait.png";
 import rogue from "./img/rogueportrait.jpg";
 import mage from "./img/mageportrait.png";
 import warrior from "./img/warriorportrait.jpg";
-import ranger from "./img/rangerportrait.jpg";
+import ranger from "./img/rangerportrait.png";
 import necro from "./img/necromancerportrait.jpg";
 import {Progress} from'reactstrap'
 
