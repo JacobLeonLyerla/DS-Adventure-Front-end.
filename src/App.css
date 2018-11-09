@@ -333,9 +333,10 @@ margin-top:10px;
   }
   .Mage{
     margin-top:10px;
+    padding:5px;
       width:10%;
       height:auto;
-      border:10px ridge darkred;
+      border:10px ridge purple;
       background:cadetblue;
     }
     .Ranger{

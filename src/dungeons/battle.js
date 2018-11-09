@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import axios from "axios";
 import {Modal} from 'reactstrap'
 import { Redirect } from "react-router-dom";
-import paladin from "./img/paladinportrait.jpg";
+import paladin from "./img/paladinportrait.png";
 import rogue from "./img/rogueportrait.jpg";
 import mage from "./img/mageportrait.png";
 import warrior from "./img/warriorportrait.jpg";
