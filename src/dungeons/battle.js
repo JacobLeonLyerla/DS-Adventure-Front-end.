@@ -4,7 +4,7 @@ import {Modal} from 'reactstrap'
 import { Redirect } from "react-router-dom";
 import paladin from "./img/paladinportrait.jpg";
 import rogue from "./img/rogueportrait.jpg";
-import mage from "./img/mageportrait.jpg";
+import mage from "./img/mageportrait.png";
 import warrior from "./img/warriorportrait.jpg";
 import ranger from "./img/rangerportrait.jpg";
 import necro from "./img/necromancerportrait.jpg";
