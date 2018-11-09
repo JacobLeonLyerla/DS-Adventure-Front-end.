@@ -4,7 +4,7 @@
 }
 .loginbackground-styles{
   min-height:100vh;
-  background-image: url("https://i.imgur.com/GMjukQ3.png");
+  background-image: url("../src/dungeons/img/game_background_1.gif");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -544,9 +544,7 @@ margin:0 auto;
     font-size:60px;
 
   }
-  .itemCard-styles:hover{
-
-  }
+ 
   /*..................................................................... MAP */
   .mapBackground-styles{
     min-height:100vh;
