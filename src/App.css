@@ -4,7 +4,7 @@
 }
 .loginbackground-styles{
   min-height:100vh;
-  background-image: url("../src/dungeons/img/game_background_1.gif");
+  background-image: url("../src/dungeons/img/login.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -12,7 +12,7 @@
 }
 .blackHeartBackground-styles{
   min-height:100vh;
-  background-image: url("https://i.imgur.com/TeSg8AT.jpg");
+  background-image: url("../src/dungeons/img/darkwood.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
