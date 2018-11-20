@@ -270,6 +270,10 @@ color:lightcoral;
 
 }
 /* /////////////////////////////////////////////// BATTLE COMPONENT */
+.fighters{
+  display:flex;
+  flex-direction: row;
+}
 .class-styles{
   color:white;
   font-size:25px;

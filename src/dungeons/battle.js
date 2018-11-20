@@ -628,18 +628,29 @@ class Battle extends Component {
   render() {
     return (
       <Fragment>
-        {this.renderRedirect()}
+       <div className="fighters">
+        <div>
+         {this.renderAdventurer()}
+         <br/>
+         {this.renderAdventurerStats()}
+         </div>
+         <div>
         {this.renderOpponent()}
+        <br/>
+         {this.renderOpponentStats()}
+        </div>
+</div>
+
         <br />
-        {this.renderOpponentStats()}
+ 
         <div className="middleBattle-styles">
           {this.adventurerAttacks()}
           {this.renderStats()}
           {this.opponentAttacks()}
         </div>
         <br />
-        {this.renderAdventurerStats()}
-        {this.renderAdventurer()}
+        
+       
       </Fragment>
     );
   }
