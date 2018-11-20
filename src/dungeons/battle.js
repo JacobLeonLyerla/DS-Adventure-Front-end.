@@ -2,10 +2,10 @@ import React, { Component, Fragment } from "react";
 import axios from "axios";
 import {Modal} from 'reactstrap'
 import { Redirect } from "react-router-dom";
-import paladin from "./img/paladinportrait.png";
+// import paladin from "./img/paladinportrait.png";
 import rogue from "./img/rogueportrait.jpg";
 import mage from "./img/mageportrait.png";
-import warrior from "./img/warriorportrait.jpg";
+import warrior from "./img/warriorportrait.png";
 import ranger from "./img/rangerportrait.png";
 import necro from "./img/necromancerportrait.jpg";
 import {Progress} from'reactstrap'
@@ -378,7 +378,7 @@ class Battle extends Component {
     );
   }
   pickPortrait(classname){
-    if (classname === "Paladin") return paladin;
+    // if (classname === "Paladin") return paladin;
     if (classname === "Ranger") return ranger;
     if (classname === "Mage") return mage;
     if (classname === "Necromancer") return necro;
