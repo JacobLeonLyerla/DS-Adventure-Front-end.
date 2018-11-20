@@ -108,8 +108,8 @@ border-radius: 10px;
 }
 /*.......................................................................... CREATE PLAYER */
 .create-styles{
-  opacity: .7;
-  background: white;
+padding:5%;
+  background:rgba(255, 255, 255, 0.603);
     width: 45%;
     margin: 0 auto;
   border:1px solid lightblue;
