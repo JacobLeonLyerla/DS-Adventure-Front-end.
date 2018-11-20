@@ -169,13 +169,6 @@ class Create extends Component {
             onChange={this.handleInput}
           />{" "}
           <label>
-            Age:
-            <input
-              name="age"
-              placeholder="Set age"
-              value={this.state.age}
-              onChange={this.handleInput}
-            />
           </label>
           <br/>
           Lore:

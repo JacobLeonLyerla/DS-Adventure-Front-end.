@@ -120,7 +120,6 @@ gearRender(){
           Name: {this.state.player.name}
           <br />
           Class: {this.state.player.class} <br />
-          Age: {this.state.player.age} <br />
           Gender: {this.state.player.gender}
           <br />
           <br />
