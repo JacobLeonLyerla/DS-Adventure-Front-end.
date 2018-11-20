@@ -65,30 +65,30 @@ class Create extends Component {
           player.strength = 0;
           player.attacks=["5b68ef26bc349a910c4b23f9","5b68efb3bc349a910c4b23fa","5b68f0aebc349a910c4b23fb"]
           break;
-        case "Necromancer":
-          player.endurance = 160;
-          player.health = 140;
-          player.intellect = 25;
-          player.agility = 5;
-          player.strength = 0;
-          player.attacks = ["5b68f41fbc349a910c4b23fe","5b68f2b2bc349a910c4b23fd","5b68f15cbc349a910c4b23fc"]
-          break;
-        case "Paladin":
-          player.endurance = 120;
-          player.health = 180;
-          player.intellect = 10;
-          player.agility = 5;
-          player.strength = 15;
-          player.attacks = ["5b66baf0667d32785c749ff5","5b68f4e2bc349a910c4b23ff","5b68f57dbc349a910c4b2400"]
-          break;
-        case "Rogue":
-          player.endurance = 160;
-          player.health = 140;
-          player.intellect = 5;
-          player.agility = 25;
-          player.strength = 0;
-          player.attacks = ["5b68ec1abc349a910c4b23f3","5b68ec6ebc349a910c4b23f4","5b68ed13bc349a910c4b23f5"]
-          break;
+        // case "Necromancer":
+        //   player.endurance = 160;
+        //   player.health = 140;
+        //   player.intellect = 25;
+        //   player.agility = 5;
+        //   player.strength = 0;
+        //   player.attacks = ["5b68f41fbc349a910c4b23fe","5b68f2b2bc349a910c4b23fd","5b68f15cbc349a910c4b23fc"]
+        //   break;
+        // case "Paladin":
+        //   player.endurance = 120;
+        //   player.health = 180;
+        //   player.intellect = 10;
+        //   player.agility = 5;
+        //   player.strength = 15;
+        //   player.attacks = ["5b66baf0667d32785c749ff5","5b68f4e2bc349a910c4b23ff","5b68f57dbc349a910c4b2400"]
+        //   break;
+        // case "Rogue":
+        //   player.endurance = 160;
+        //   player.health = 140;
+        //   player.intellect = 5;
+        //   player.agility = 25;
+        //   player.strength = 0;
+        //   player.attacks = ["5b68ec1abc349a910c4b23f3","5b68ec6ebc349a910c4b23f4","5b68ed13bc349a910c4b23f5"]
+        //   break;
         default:
       }
       player.class = this.state.class;
@@ -195,13 +195,13 @@ class Create extends Component {
        
 
         <br />
-        <button className="btn"  onClick={() => this.handleClass("Paladin")}>Paladin</button>
+        {/* <button className="btn"  onClick={() => this.handleClass("Paladin")}>Paladin</button> */}
         <button className="btn"  onClick={() => this.handleClass("Warrior")}>Warrior</button>
-        <button className="btn"  onClick={() => this.handleClass("Necromancer")}>
+        {/* <button className="btn"  onClick={() => this.handleClass("Necromancer")}>
           Necromancer
-        </button>
+        </button> */}
         <br />
-        <button className="btn"  onClick={() => this.handleClass("Rogue")}>Rogue</button>
+        {/* <button className="btn"  onClick={() => this.handleClass("Rogue")}>Rogue</button> */}
         <button className="btn"  onClick={() => this.handleClass("Ranger")}>Ranger</button>
         <button className="btn"  onClick={() => this.handleClass("Mage")}>Mage</button>
 
