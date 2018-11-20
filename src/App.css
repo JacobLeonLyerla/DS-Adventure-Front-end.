@@ -692,3 +692,11 @@ opacity:1;
     font-size:30px;
     width:30%;
   }
+  .testing{
+    font-weight: 900;
+    color:red;
+    width:50vw;
+    margin:0 auto;
+    font-size: 100px;
+    border-bottom: 10px dotted darkred
+  }
