@@ -270,10 +270,7 @@ color:lightcoral;
 
 }
 /* /////////////////////////////////////////////// BATTLE COMPONENT */
-.fighters{
-  display:flex;
-  flex-direction: row;
-}
+
 .class-styles{
   color:white;
   font-size:25px;
@@ -398,7 +395,7 @@ font-size:15px;
 }
 .epicStats-styles{
   border-radius: 7px;
-  width:30%;
+  width:50%;
 margin: 0 auto;
 background:rgb(94, 21, 94);
 border:1px groove black;
@@ -458,7 +455,7 @@ color: lightgray;
     }
 .middleBattle-styles{
   display:flex;
-  padding:20px;
+  padding:10%;
 
 
 }

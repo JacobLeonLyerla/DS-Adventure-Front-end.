@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
-import {Modal} from 'reactstrap'
+import {Row, Col} from 'reactstrap'
 import { Redirect } from "react-router-dom";
 // import paladin from "./img/paladinportrait.png";
 import rogue from "./img/rogueportrait.jpg";
@@ -628,18 +628,18 @@ class Battle extends Component {
   render() {
     return (
       <Fragment>
-       <div className="fighters">
-        <div>
+       <Row className="fighters">
+        <Col md="5">
          {this.renderAdventurer()}
          <br/>
          {this.renderAdventurerStats()}
-         </div>
-         <div>
+         </Col>
+         <Col md="5">
         {this.renderOpponent()}
         <br/>
          {this.renderOpponentStats()}
-        </div>
-</div>
+        </Col>
+</Row>
 
         <br />
  
