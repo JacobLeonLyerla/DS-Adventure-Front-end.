@@ -641,7 +641,7 @@ class Battle extends Component {
         </Col>
 </Row>
 
-        <br />
+
  
         <div className="middleBattle-styles">
           {this.adventurerAttacks()}
