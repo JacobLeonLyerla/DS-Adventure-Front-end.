@@ -428,6 +428,7 @@ border-bottom: 3px solid lightgray;
 color: lightgray;
 }
 .uncommonRarity-styles{
+  box-sizing:border-box;
   width:90px;
   display: inline-block;
   border-bottom: 3px solid rgb(48, 146, 48);
@@ -473,14 +474,13 @@ color: lightgray;
   margin:1.5%;
 }
 .attack-styles:hover{
-  margin:0;
- width:12%;
+cursor: pointer;
 }
 .fa-long-arrow-alt-right:hover{
-color:lightgreen;
+  cursor: pointer;
 }
 .fa-long-arrow-alt-left:hover{
-  color:lightgreen;
+  cursor: pointer;
   }
 .opponentAttacks-styles{
 
