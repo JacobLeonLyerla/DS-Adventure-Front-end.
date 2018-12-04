@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import map from "../dungeons/img/map1.jpg"
 
 class Map extends Component {
 
