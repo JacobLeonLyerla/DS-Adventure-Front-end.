@@ -319,7 +319,7 @@ class Battle extends Component {
        if(this.state.player.level > 10 && item.rarity ==="uncommon"){
         add = false;
       }
-  
+      // so if the add flag is still set to true after all of that  than add the item
      if(add ===true){
       this.state.player.items.push(this.state.monster.items[index]);
      }
@@ -636,6 +636,7 @@ class Battle extends Component {
   render() {
     return (
       <Fragment>
+        {this.renderRedirect()}
        <Row className="fighters">
         <Col md="5">
          {this.renderAdventurer()}
