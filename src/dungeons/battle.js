@@ -168,9 +168,12 @@ class Battle extends Component {
         .put(`https://dungeon-run.herokuapp.com/temps/${id}`, dmg)
         .then(response => {
           this.setState({ tempMonster: response.data, tempMonHP:response.data.health });
-          if (response.data.health <= 0) {
+          if (response.data.health <=0) {
             this.death("Monster");
+            
           }
+         
+                              
           let id = this.state.player.tempPlayer;
           if (this.state.player.tempPlayer._id !== undefined) {
             id = this.state.player.tempPlayer._id;
@@ -291,19 +294,25 @@ class Battle extends Component {
           });
         });
     } else {
+
+      //this selects a random index for an item in the monsters bag
       let index = Math.floor(
         Math.random() * Math.floor(this.state.monster.items.length)
       );
+      // this basically takes the item at the random index we got above and sets that into a variable
       let item = this.state.monster.items[index];
+      // sets a flag for adding the item into the index that i can use later
       let add = true;
      this.state.player.items.forEach(inventory=>{
-       console.log("monster item",item,"inventory", inventory)
-       console.log(item._id===inventory)
+       // this makes sure i don't alrady have the item, so if this is ever true than the add flag gets swapped and the item is not added,
+       // this stops bags from being full of duplicates a major issues in earlier builds
        if(item._id === inventory){
         add = false
        }
       
      })
+     // this is saying if the player is above this level no longer add items of that rarity to their bags,
+     // this helps from getting bags full of junk, i may remove this if i decide to add in a vendor into the game.
        if(this.state.player.level > 5 && item.rarity ==="common"){
          add = false;
        }
@@ -311,7 +320,6 @@ class Battle extends Component {
         add = false;
       }
   
-     console.log("add:",add)
      if(add ===true){
       this.state.player.items.push(this.state.monster.items[index]);
      }
