@@ -8,7 +8,6 @@ class Player extends Component {
   
 
   render() {
-   
     return (<Fragment><div className="loginbackground-styles">
        <br/><br/>
        <br/><br/>
@@ -26,7 +25,7 @@ class Player extends Component {
        <br/><br/>
       
        <form className="login-styles">
-<div className="a">
+
     Name:
    <input 
    className="loginInput-styles"
@@ -45,10 +44,9 @@ class Player extends Component {
    value={this.props.password}
    onChange={this.props.handleInput}
    /><br/>
-   <button className="btn" onClick={()=>this.props.findPlayer(this.props.name,this.props.password)}>Log On</button>
+   <Link to="/"><button className="btn" onClick={()=>this.props.loadPlayer(this.props.name,this.props.password)}>Log On</button></Link>
 
    <Link to ="/create"><button className="btn">Create</button></Link>
-   </div>
       </form>
   </div>
    </Fragment> );

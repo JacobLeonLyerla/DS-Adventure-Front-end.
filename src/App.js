@@ -56,6 +56,33 @@ class App extends Component {
       }
     });
   };
+  loadPlayer =(name,password)=>{
+    const user = {
+      username: name,
+      password: password
+    };  
+
+    axios
+      .post("http://localhost:5500/auth/login", user)
+      .then(response => {
+        localStorage.setItem("token", `Bearer ${response.data.token}`);
+        axios
+        .get(`http://localhost:5500/players/${response.data.user._id}`)
+        .then(response => {
+          this.setState({
+            player: response.data,
+            name: "",
+            password: "",
+            id: response.data._id,
+            redirect: true
+          });
+          })
+        .catch(err => {
+        });
+  
+      }).catch(err=>{
+      })
+  }
   renderRedirect = id => {
     if (this.state.redirect) {
       return <Redirect to={`/info/${id}`} />;
@@ -79,6 +106,7 @@ return"blackHeartBackground-styles"
               {...this.state}
               handleInput={this.handleInput}
               findPlayer={this.findPlayer}
+              loadPlayer={this.loadPlayer}
             />
           )}
         />
