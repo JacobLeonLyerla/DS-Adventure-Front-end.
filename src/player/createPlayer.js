@@ -5,10 +5,12 @@ import { Redirect } from "react-router-dom";
 class Create extends Component {
   state = {
     name: "",
+    email:"",
     age: "",
     class: "",
     bio: "",
     password: "",
+    password2:"",
     gender: "",
     redirect: false,
     endurance: 0,
@@ -23,19 +25,37 @@ class Create extends Component {
     const player = {};
     if (this.state.name !== "") {
       // if they are not empty then set the player objects key of email is set to the email on the state,
-      if(this.state.name.length >20){
-        alert(`${this.state.name} is too is ${this.state.name.length}, and the name must be less than 20 characters`)
+      if(this.state.name.length >30){
+        alert(`${this.state.name} is too is ${this.state.name.length}, and the name must be less than 30 characters`)
       this.setState({name:""})
       }else{
       player.name = this.state.name;
+      
+      }
+    }
+    if (this.state.email !== "") {
+      // if they are not empty then set the player objects key of email is set to the email on the state,
+      if(this.state.email.length >30){
+        alert(`${this.state.email} is too is ${this.state.email.length}, and the name must be less than 30 characters`)
+      this.setState({email:""})
+      }else{
+      player.email = this.state.email;
+      
       }
     }
     if (this.state.password !== "") {
       if(this.state.password.length >30){
       alert(`${this.state.password} is too is ${this.state.password.length}, and the name must be less than 30 characters`)
-      this.setState({password:""})
+      this.setState({password:"",password2:""})
     }else{
-      player.password = this.state.password;
+      if(this.state.password === this.state.password2){
+        player.password = this.state.password;
+        player.password2 = this.state.password2;
+      }else{
+        alert("passwords did not match")
+        this.setState({password:"",password2:""})
+      }
+      
     }
     }
     if (this.state.class !== "") {
@@ -103,18 +123,21 @@ class Create extends Component {
       player.gender = this.state.gender;
     }
     player.currentLocation = undefined
+    console.log(player)
     axios
-      .post("https://dungeon-run.herokuapp.com/players", player)
+      .post("https://dungeon-run.herokuapp.com/auth/register", player)
       .then(response => {
         this.props.setPlayer("reload");
         this.state.redirect = true;
         this.setState({
           name: "",
           password: "",
+          password2:"",
           age: "",
           bio: "",
           class: "",
-          gender: ""
+          gender: "",
+          email:""
         });
       })
       .catch(error => {
@@ -159,13 +182,30 @@ class Create extends Component {
               value={this.state.name}
               onChange={this.handleInput}
             />
+            Email:
+            <input
+              name="email"
+              placeholder="Create email"
+              value={this.state.email}
+              onChange={this.handleInput}
+            /><br/>
           </label>
+          <br/>
           Password:
           <input
             name="password"
             type="password"
             placeholder="Create password"
             value={this.state.password}
+            onChange={this.handleInput}
+            
+          /><br/>
+          Re-type Password:
+          <input
+            name="password2"
+            type="password2"
+            placeholder="Repeat password"
+            value={this.state.password2}
             onChange={this.handleInput}
           />{" "}
           <label>
