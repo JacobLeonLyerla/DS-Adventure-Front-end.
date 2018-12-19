@@ -65,6 +65,7 @@ class App extends Component {
     axios
       .post("https://dungeon-run.herokuapp.com/auth/login", user)
       .then(response => {
+        console.log(response.data)
         localStorage.setItem("token", `Bearer ${response.data.token}`);
         axios
         .get(`https://dungeon-run.herokuapp.com/${response.data.user._id}`)
@@ -78,6 +79,7 @@ class App extends Component {
           });
           })
         .catch(err => {
+          console.log(err)
         });
   
       }).catch(err=>{
