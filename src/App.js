@@ -63,11 +63,11 @@ class App extends Component {
     };  
 
     axios
-      .post("http://localhost:5500/auth/login", user)
+      .post("https://dungeon-run.herokuapp.com/auth/login", user)
       .then(response => {
         localStorage.setItem("token", `Bearer ${response.data.token}`);
         axios
-        .get(`http://localhost:5500/players/${response.data.user._id}`)
+        .get(`https://dungeon-run.herokuapp.com/${response.data.user._id}`)
         .then(response => {
           this.setState({
             player: response.data,
