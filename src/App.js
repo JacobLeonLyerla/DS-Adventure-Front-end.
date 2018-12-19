@@ -61,7 +61,7 @@ class App extends Component {
       username: name,
       password: password
     };  
-
+console.log(user)
     axios
       .post("https://dungeon-run.herokuapp.com/auth/login", user)
       .then(response => {
