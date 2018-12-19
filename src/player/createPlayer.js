@@ -123,7 +123,6 @@ class Create extends Component {
       player.gender = this.state.gender;
     }
     player.currentLocation = undefined
-    console.log(player)
     axios
       .post("https://dungeon-run.herokuapp.com/auth/register", player)
       .then(response => {
@@ -141,7 +140,6 @@ class Create extends Component {
         });
       })
       .catch(error => {
-        console.log(error)
       });
   };
   handleInput = input => {
