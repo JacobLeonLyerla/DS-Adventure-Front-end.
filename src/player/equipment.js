@@ -38,10 +38,9 @@ class Equip extends Component {
       .then(response => {})
       .catch(err => {});
   }
- 
 
   buildGear(piece) {
-     console.log(piece.slot)
+    console.log(piece.slot);
     let strength = 0;
     let intellect = 0;
     let agility = 0;
@@ -85,8 +84,10 @@ class Equip extends Component {
         gear.feet = "Equipped";
       } else if (piece.slot === "leggings") {
         gear.leggings = "Equipped";
-      } else if (piece.slot === "weaponOneHand" &&
-        this.state.player.weaponTwoHand === "none") {
+      } else if (
+        piece.slot === "weaponOneHand" &&
+        this.state.player.weaponTwoHand === "none"
+      ) {
         gear.weaponOneHand = "Equipped";
       } else if (
         piece.slot === "weaponTwoHand" &&
@@ -201,13 +202,13 @@ class Equip extends Component {
       <Fragment>
         {this.setEquipment(this.state.player._id)}
         {this.renderRedirect(this.state.player._id)}
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <div className="equipping-styles">Equipping Items...</div>
       </Fragment>
     );

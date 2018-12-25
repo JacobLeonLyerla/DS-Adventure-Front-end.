@@ -10,7 +10,7 @@ import Equip from "./player/equipment";
 import DungeonList from "./dungeons/dungeonList";
 import BlackHeart from "./dungeons/loadBHDungeon";
 import Items from "./dungeons/items";
-import Battle from"./dungeons/battle";
+import Battle from "./dungeons/battle";
 
 class App extends Component {
   state = {
@@ -56,44 +56,48 @@ class App extends Component {
       }
     });
   };
-  loadPlayer =(name,password)=>{
+  loadPlayer = (name, password) => {
     const user = {
       username: name,
       password: password
-    };  
+    };
     axios
       .post("https://dungeon-run.herokuapp.com/auth/login", user)
       .then(response => {
         localStorage.setItem("token", `Bearer ${response.data.token}`);
         axios
-        .get(`https://dungeon-run.herokuapp.com/players/${response.data.user._id}`)
-        .then(response => {
-          this.setState({
-            player: response.data,
-            name: "",
-            password: "",
-            id: response.data._id,
-            redirect: true
-          });
+          .get(
+            `https://dungeon-run.herokuapp.com/players/${
+              response.data.user._id
+            }`
+          )
+          .then(response => {
+            this.setState({
+              player: response.data,
+              name: "",
+              password: "",
+              id: response.data._id,
+              redirect: true
+            });
           })
-        .catch(err => {
-        });
-  
-      }).catch(err=>{
+          .catch(err => {});
       })
-  }
+      .catch(err => {});
+  };
   renderRedirect = id => {
     if (this.state.redirect) {
       return <Redirect to={`/info/${id}`} />;
     }
   };
-  bhbackground(){
-    if(window.location.href !== "https://dungeon-run.netlify.com/create" && window.location.href !=="https://dungeon-run.netlify.com/"){
-return"blackHeartBackground-styles"
+  bhbackground() {
+    if (
+      window.location.href !== "https://dungeon-run.netlify.com/create" &&
+      window.location.href !== "https://dungeon-run.netlify.com/"
+    ) {
+      return "blackHeartBackground-styles";
     }
   }
   render() {
- 
     return (
       <div className="App">
         {this.renderRedirect(this.state.id)}
@@ -117,33 +121,34 @@ return"blackHeartBackground-styles"
           path="/info/:id"
           render={props => <Info {...props} player={this.state.player} />}
         />
-     
+
         <Route
           path="/dungeons/:id"
           render={props => (
             <DungeonList {...props} player={this.state.player} />
           )}
         />
-<div className={this.bhbackground()}>
-        <Route
-          path="/blackheart/:id"
-          render={props => <BlackHeart {...props} player={this.state.player} />}
-        />
-        <Route
-          path="/blackheart/:id"
-          render={props => <Items {...props} player={this.state.player} />}
-        />
+        <div className={this.bhbackground()}>
+          <Route
+            path="/blackheart/:id"
+            render={props => (
+              <BlackHeart {...props} player={this.state.player} />
+            )}
+          />
+          <Route
+            path="/blackheart/:id"
+            render={props => <Items {...props} player={this.state.player} />}
+          />
 
-        <Route
-          path="/battle/:id"
-          render={props => <Battle {...props} player={this.state.player} />}
-         
-        />
-           <Route
-          path="/equip/:id"
-          render={props => <Equip {...props} player={this.state.player} />}
-        />
-         </div>
+          <Route
+            path="/battle/:id"
+            render={props => <Battle {...props} player={this.state.player} />}
+          />
+          <Route
+            path="/equip/:id"
+            render={props => <Equip {...props} player={this.state.player} />}
+          />
+        </div>
       </div>
     );
   }

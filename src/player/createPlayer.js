@@ -5,12 +5,12 @@ import { Redirect } from "react-router-dom";
 class Create extends Component {
   state = {
     name: "",
-    email:"",
+    email: "",
     age: "",
     class: "",
     bio: "",
     password: "",
-    password2:"",
+    password2: "",
     gender: "",
     redirect: false,
     endurance: 0,
@@ -25,38 +25,47 @@ class Create extends Component {
     const player = {};
     if (this.state.name !== "") {
       // if they are not empty then set the player objects key of email is set to the email on the state,
-      if(this.state.name.length >30){
-        alert(`${this.state.name} is too is ${this.state.name.length}, and the name must be less than 30 characters`)
-      this.setState({name:""})
-      }else{
-      player.name = this.state.name;
-      
+      if (this.state.name.length > 30) {
+        alert(
+          `${this.state.name} is too is ${
+            this.state.name.length
+          }, and the name must be less than 30 characters`
+        );
+        this.setState({ name: "" });
+      } else {
+        player.name = this.state.name;
       }
     }
     if (this.state.email !== "") {
       // if they are not empty then set the player objects key of email is set to the email on the state,
-      if(this.state.email.length >30){
-        alert(`${this.state.email} is too is ${this.state.email.length}, and the name must be less than 30 characters`)
-      this.setState({email:""})
-      }else{
-      player.email = this.state.email;
-      
+      if (this.state.email.length > 30) {
+        alert(
+          `${this.state.email} is too is ${
+            this.state.email.length
+          }, and the name must be less than 30 characters`
+        );
+        this.setState({ email: "" });
+      } else {
+        player.email = this.state.email;
       }
     }
     if (this.state.password !== "") {
-      if(this.state.password.length >30){
-      alert(`${this.state.password} is too is ${this.state.password.length}, and the name must be less than 30 characters`)
-      this.setState({password:"",password2:""})
-    }else{
-      if(this.state.password === this.state.password2){
-        player.password = this.state.password;
-        player.password2 = this.state.password2;
-      }else{
-        alert("passwords did not match")
-        this.setState({password:"",password2:""})
+      if (this.state.password.length > 30) {
+        alert(
+          `${this.state.password} is too is ${
+            this.state.password.length
+          }, and the name must be less than 30 characters`
+        );
+        this.setState({ password: "", password2: "" });
+      } else {
+        if (this.state.password === this.state.password2) {
+          player.password = this.state.password;
+          player.password2 = this.state.password2;
+        } else {
+          alert("passwords did not match");
+          this.setState({ password: "", password2: "" });
+        }
       }
-      
-    }
     }
     if (this.state.class !== "") {
       let test = this.state.class;
@@ -67,7 +76,11 @@ class Create extends Component {
           player.agility = 20;
           player.strength = 5;
           player.intellect = 10;
-          player.attacks = ["5b68f678bc349a910c4b2402","5b68f616bc349a910c4b2401","5b66bd38667d32785c749ff8"]
+          player.attacks = [
+            "5b68f678bc349a910c4b2402",
+            "5b68f616bc349a910c4b2401",
+            "5b66bd38667d32785c749ff8"
+          ];
           break;
         case "Warrior":
           player.endurance = 100;
@@ -75,7 +88,11 @@ class Create extends Component {
           player.intellect = 5;
           player.agility = 5;
           player.strength = 25;
-          player.attacks =["5b68eed2bc349a910c4b23f8","5b68ee71bc349a910c4b23f7","5b68edb6bc349a910c4b23f6"]
+          player.attacks = [
+            "5b68eed2bc349a910c4b23f8",
+            "5b68ee71bc349a910c4b23f7",
+            "5b68edb6bc349a910c4b23f6"
+          ];
           break;
         case "Mage":
           player.endurance = 200;
@@ -83,7 +100,11 @@ class Create extends Component {
           player.intellect = 25;
           player.agility = 5;
           player.strength = 0;
-          player.attacks=["5b68ef26bc349a910c4b23f9","5b68efb3bc349a910c4b23fa","5b68f0aebc349a910c4b23fb"]
+          player.attacks = [
+            "5b68ef26bc349a910c4b23f9",
+            "5b68efb3bc349a910c4b23fa",
+            "5b68f0aebc349a910c4b23fb"
+          ];
           break;
         // case "Necromancer":
         //   player.endurance = 160;
@@ -122,7 +143,7 @@ class Create extends Component {
     if (this.state.gender !== "") {
       player.gender = this.state.gender;
     }
-    player.currentLocation = undefined
+    player.currentLocation = undefined;
     axios
       .post("https://dungeon-run.herokuapp.com/auth/register", player)
       .then(response => {
@@ -131,16 +152,15 @@ class Create extends Component {
         this.setState({
           name: "",
           password: "",
-          password2:"",
+          password2: "",
           age: "",
           bio: "",
           class: "",
           gender: "",
-          email:""
+          email: ""
         });
       })
-      .catch(error => {
-      });
+      .catch(error => {});
   };
   handleInput = input => {
     this.setState({ [input.target.name]: input.target.value });
@@ -159,88 +179,101 @@ class Create extends Component {
     return (
       <Fragment>
         <div className="loginbackground-styles">
-        {this.renderRedirect()}
-        <br />
-        <br />
-        <br />
-        <br /><br />
-        <br /><br />
-        <br /><br />
-        <br /><br />
-        <br /><br />
-        <br /><br />
-        <br /><br />
-        <br />
-        <div className="create-styles">
-          <label>
-            Name:
+          {this.renderRedirect()}
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <div className="create-styles">
+            <label>
+              Name:
+              <input
+                name="name"
+                placeholder="Create name"
+                value={this.state.name}
+                onChange={this.handleInput}
+              />
+              Email:
+              <input
+                name="email"
+                placeholder="Create email"
+                value={this.state.email}
+                onChange={this.handleInput}
+              />
+              <br />
+            </label>
+            <br />
+            Password:
             <input
-              name="name"
-              placeholder="Create name"
-              value={this.state.name}
+              name="password"
+              type="password"
+              placeholder="Create password"
+              value={this.state.password}
               onChange={this.handleInput}
             />
-            Email:
+            <br />
+            Re-type Password:
             <input
-              name="email"
-              placeholder="Create email"
-              value={this.state.email}
+              name="password2"
+              type="password2"
+              placeholder="Repeat password"
+              value={this.state.password2}
               onChange={this.handleInput}
-            /><br/>
-          </label>
-          <br/>
-          Password:
-          <input
-            name="password"
-            type="password"
-            placeholder="Create password"
-            value={this.state.password}
-            onChange={this.handleInput}
-            
-          /><br/>
-          Re-type Password:
-          <input
-            name="password2"
-            type="password2"
-            placeholder="Repeat password"
-            value={this.state.password2}
-            onChange={this.handleInput}
-          />{" "}
-          <label>
-          </label>
-          <br/>
-          Lore:
-          <input
-            name="bio"
-            placeholder="Give a backstory"
-            value={this.state.bio}
-            onChange={this.handleInput}
-          />
-          Gender:
-          <input
-            name="gender"
-            placeholder="Set a gender"
-            value={this.state.gender}
-            onChange={this.handleInput}
-          />
-       
-
-        <br />
-        {/* <button className="btn"  onClick={() => this.handleClass("Paladin")}>Paladin</button> */}
-        <button className="btn"  onClick={() => this.handleClass("Warrior")}>Warrior</button>
-        {/* <button className="btn"  onClick={() => this.handleClass("Necromancer")}>
+            />{" "}
+            <label />
+            <br />
+            Lore:
+            <input
+              name="bio"
+              placeholder="Give a backstory"
+              value={this.state.bio}
+              onChange={this.handleInput}
+            />
+            Gender:
+            <input
+              name="gender"
+              placeholder="Set a gender"
+              value={this.state.gender}
+              onChange={this.handleInput}
+            />
+            <br />
+            {/* <button className="btn"  onClick={() => this.handleClass("Paladin")}>Paladin</button> */}
+            <button className="btn" onClick={() => this.handleClass("Warrior")}>
+              Warrior
+            </button>
+            {/* <button className="btn"  onClick={() => this.handleClass("Necromancer")}>
           Necromancer
         </button> */}
-        <br />
-        {/* <button className="btn"  onClick={() => this.handleClass("Rogue")}>Rogue</button> */}
-        <button className="btn"  onClick={() => this.handleClass("Ranger")}>Ranger</button>
-        <button className="btn"  onClick={() => this.handleClass("Mage")}>Mage</button>
-
-        <br />
-        <br />
-        <button className="btn" onClick={() => this.addPlayer()}>Create Character</button>
-         </div>
-      </div></Fragment>
+            <br />
+            {/* <button className="btn"  onClick={() => this.handleClass("Rogue")}>Rogue</button> */}
+            <button className="btn" onClick={() => this.handleClass("Ranger")}>
+              Ranger
+            </button>
+            <button className="btn" onClick={() => this.handleClass("Mage")}>
+              Mage
+            </button>
+            <br />
+            <br />
+            <button className="btn" onClick={() => this.addPlayer()}>
+              Create Character
+            </button>
+          </div>
+        </div>
+      </Fragment>
     );
   }
 }
