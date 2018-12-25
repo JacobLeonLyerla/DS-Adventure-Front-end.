@@ -303,12 +303,18 @@ class Items extends Component {
     if (dup === false) {
       this.deleteItem(type, loot);
     } else {
-      if(loot.slot ==="shield"|| loot.slot==="offHand" || loot.slot==="charm"){
-        return alert("offHand, Shields and Charms all count as secondary weapons. you can only have one, and only if you don't have a Two Handed Weapon")
-      }else{
-      return alert(`You cannot add another ${loot.slot} to your equipment`);
+      if (
+        loot.slot === "shield" ||
+        loot.slot === "offHand" ||
+        loot.slot === "charm"
+      ) {
+        return alert(
+          "offHand, Shields and Charms all count as secondary weapons. you can only have one, and only if you don't have a Two Handed Weapon"
+        );
+      } else {
+        return alert(`You cannot add another ${loot.slot} to your equipment`);
+      }
     }
-  }
   }
   renderEquipment() {
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
@@ -344,7 +350,6 @@ class Items extends Component {
     }
   }
   renderItems() {
-    
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
       return this.state.player.items.map(item => (
         <Fragment>
@@ -387,7 +392,6 @@ class Items extends Component {
   render() {
     return (
       <Fragment>
-        
         <div className="bigItemHeader-styles">Items in room</div>
         <div className="Items">
           <br />
