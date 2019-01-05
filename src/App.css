@@ -90,8 +90,8 @@ width:50%;
 margin:0 auto;
 }
 .login-styles{
-opacity: .7;
-background: white;
+
+background: rgba(255, 255, 255, 0.5);
   width: 40%;
   margin: 0 auto;
 border:1px solid lightblue;
