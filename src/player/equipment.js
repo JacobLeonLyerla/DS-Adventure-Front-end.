@@ -40,7 +40,6 @@ class Equip extends Component {
   }
 
   buildGear(piece) {
-    console.log(piece.slot);
     let strength = 0;
     let intellect = 0;
     let agility = 0;

@@ -10,22 +10,17 @@ class Player extends Component {
           <br />
           <br />
           <br />
+              <br />
+          <br />
+          <br />
           <br />
           <br />
           <br />
           <br />
           <br />
           <div className="title-styles">Dungeon Race</div>
-          <br />
-          <br />
-          <div className="testing">VERY BROKEN</div>
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
+   
+   
           <br />
           <br />
           <br />

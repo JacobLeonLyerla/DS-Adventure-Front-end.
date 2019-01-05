@@ -120,7 +120,7 @@ gearRender(){
           Name: {this.state.player.name}
           <br />
           Class: {this.state.player.class} <br />
-          Gender: {this.state.player.gender}
+      
           <br />
           <br />
           Combat Stats<br />
