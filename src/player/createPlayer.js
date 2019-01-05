@@ -166,7 +166,8 @@ class Create extends Component {
           bio: "",
           class: "",
           gender: "",
-          email: ""
+          email: "",
+          button:""
         });
       })
       .catch(error => {});
@@ -184,6 +185,13 @@ class Create extends Component {
       return <Redirect to="/" />;
     }
   };
+  setButtonStyle=(id)=>{
+    if(this.state.button !=="" && this.state.button !== undefined){
+    if(id !==this.state.button){
+      return "class-not-picked"
+    }
+  }
+  }
   render() {
     return (
       <Fragment>
@@ -196,7 +204,7 @@ class Create extends Component {
           {(this.state.class !=="")?(<Fragment> <Alert color="success">
         {`You have selected a ${this.state.class}, adventure lies ahead champion.`}
       </Alert></Fragment>):(<Fragment></Fragment>)}
-            <Row style={{ marginBottom: "1vh" }}>
+            <Row style={{ margin: "1%" }}>
               <Col md="6">
                 <Label for="name" style={{ width: "90%" }} className="text-left">
                   Name:
@@ -227,7 +235,7 @@ class Create extends Component {
               </Col>
             </Row>
 
-            <Row style={{ marginBottom: "1vh" }}>
+            <Row style={{ margin: "1%" }}>
               <Col md="6">
                 <Label style={{ width: "90%" }} className="text-left" for="password">
                   Password:
@@ -253,13 +261,14 @@ class Create extends Component {
                 <Input
                 id="pwassword2"
                       name="password2"
-                      type="password2"
+                      type="password"
                   
                       value={this.state.password2}
                       onChange={this.handleInput}
                 />
               </Col>
             </Row>
+            <div style={{margin:"1%"}}>
             <Label
                   style={{ width: "97%" }}
                   className="text-left"
@@ -278,20 +287,20 @@ class Create extends Component {
                        style={{height:"20vh"}}
                 />
            
-       
+       </div>
             {/* <button className="btn"  onClick={() => this.handleClass("Paladin")}>Paladin</button> */}
             <div>
-            <button className="btn" onClick={()=> this.setState({class:"Warrior"})}>
+            <button className={`btn ${this.setButtonStyle("Warrior")}`} onClick={()=> this.setState({class:"Warrior",button:"Warrior"})}>
               Warrior
             </button>
             {/* <button className="btn"  onClick={() => this.handleClass("Necromancer")}>
           Necromancer
         </button> */}
             {/* <button className="btn"  onClick={() => this.handleClass("Rogue")}>Rogue</button> */}
-            <button className="btn" onClick={()=> this.setState({class:"Ranger"})}>
+            <button className={`btn ${this.setButtonStyle("Ranger")}`} onClick={()=> this.setState({class:"Ranger",button:"Ranger"})}>
               Ranger
             </button>
-            <button className="btn" onClick={()=> this.setState({class:"Mage"})}>
+            <button className={`btn ${this.setButtonStyle("Mage")}`} onClick={()=> this.setState({class:"Mage",button:"Mage"})}>
               Mage
             </button>
             </div>
