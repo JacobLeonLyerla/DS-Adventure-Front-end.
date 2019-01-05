@@ -56,7 +56,8 @@ class App extends Component {
       }
     });
   };
-  loadPlayer = (name, password) => {
+  loadPlayer = (e,name, password) => {
+    e.preventDefault();
     const user = {
       username: name,
       password: password
