@@ -23,7 +23,9 @@ class Player extends Component {
    
    
 
-          <Form className="login-styles">
+          <Form className="login-styles"  onClick={(e) =>
+                  this.props.loadPlayer(e,this.props.name, this.props.password)
+                }>
 
           <Row style={{ margin: "1%" }}>
               <Col md="6">
