@@ -15,8 +15,9 @@ class Player extends Component {
   render() {
     return (
       <Fragment>
-        <div className="loginbackground-styles">
        
+        <div className="loginbackground-styles">
+        <br/>
      
  
           <div className="title-styles">Dungeon Race</div>
@@ -70,9 +71,10 @@ class Player extends Component {
               >
                 Log On
               </button>
+              <br/>
             </Link>
             <Link to="/create">
-              <button className="btn">Create</button>
+              <button className="btn btn-register">Create An Adventurer</button>
             </Link>
           </Form>
         </div>
