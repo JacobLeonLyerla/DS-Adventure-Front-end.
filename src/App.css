@@ -129,6 +129,9 @@ padding-bottom:5%;
   .alert{
     width: 100%;
   }
+  .create-styles .class-not-picked{
+    background:rgba(149, 207, 221, 0.5)
+  }
   /*.............................................................. DUNGRON LIST */
   .btnPick-styles{
     font-size:40px;
