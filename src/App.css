@@ -1,6 +1,7 @@
 .App {
   text-align: center;
-  font-family:""
+  font-family:"";
+  font-size:64.5%;
 }
 .loginbackground-styles{
   min-height:100vh;
@@ -48,16 +49,7 @@ input{
 button{
  margin:2px;;
 }
-.info-styles{
-  padding:10px;
-  width:30%;
-  font-size:20px;
-  margin: 0 auto;
-margin-top:60px;
-color:rgba(255, 255, 255, 0.945);
-background:rgba(197, 26, 26, 0.74);
-  border:1px solid black
-}
+
 /* .labels-styles{
   widows: 50%;
   margin:0 auto;
@@ -69,7 +61,7 @@ a{
   border-radius: 15px;
   border:.5px solid black;
   width:50%;
-  font-size: 25px;
+  font-size: 2.2vw;
   background:wheat;
   margin: 0 auto;
   margin-top: 50px;
@@ -79,7 +71,7 @@ a{
 }
 /*................................................................... Log in component */
 .title-styles{
-  font-size:50px;
+  font-size:4vw;
   color: lightblue;
   text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -1px black;
   outline: #222;
@@ -88,6 +80,7 @@ padding-bottom:1px;
 border-bottom:1.5px solid wheat;
 width:50%;
 margin:0 auto;
+margin-top:15vh;
 }
 .login-styles{
 
@@ -95,7 +88,8 @@ background: rgba(255, 255, 255, 0.5);
   width: 40%;
   margin: 0 auto;
 border:1px solid lightblue;
-border-radius: 10px;
+ border-radius: .7vw .7vw 0px 0px;
+margin-top:20vh;
 }
 .btn{
   background:lightblue;
@@ -106,6 +100,14 @@ border-radius: 10px;
   background:wheat;
   border-radius: 5px;
 }
+.login-styles .btn{
+  width:100%;
+  font-size:1.2vw;
+  
+}
+.btn-register{
+  background:lightgreen;
+}
 /*.......................................................................... CREATE PLAYER */
 .create-styles{
 padding-bottom:5%;
@@ -113,7 +115,7 @@ padding-bottom:5%;
     width: 45%;
     margin: 0 auto;
   border:1px solid lightblue;
-  border-radius: 10px;
+  border-radius: 15px 50px;
   margin-top:10vh;
   }
   .create-styles .btn{
@@ -123,7 +125,7 @@ padding-bottom:5%;
 
   .create-styles .btn-create{
     min-height: 5vh;
-    font-size:1.4rem;
+    font-size:1.4vw;
   width:50%;
   }
   .alert{
@@ -132,6 +134,28 @@ padding-bottom:5%;
   .create-styles .class-not-picked{
     background:rgba(149, 207, 221, 0.5)
   }
+  .text-left{
+    font-size:1.1vw
+  }
+
+/****************************************************************** INFO **********/
+.info-styles{
+  padding:10px;
+  width:30%;
+  font-size:1.5vw;
+  margin: 0 auto;
+margin-top:60px;
+color:rgba(255, 255, 255, 0.945);
+background:rgba(2, 120, 255, 0.801);
+border-radius: 1vw 15vh;
+  border:1px solid black
+}
+.lore{
+  
+width:80%;
+margin:0 auto;
+
+}
   /*.............................................................. DUNGRON LIST */
   .btnPick-styles{
     font-size:40px;
