@@ -132,9 +132,11 @@ gearRender(){
           Strength: {` ${this.state.player.strength} `}
           <br />
           <br />
-          Bio: {this.state.player.bio}
-          <br />
-          <br/>
+          Lore
+          <div className="lore" >
+          {this.state.player.bio}
+          </div>
+         
           {/* <div>
  
             Equipment:
