@@ -1,7 +1,15 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
+import {
+  Form,
+  Alert,
+  Label,
+  Input,
 
+  Col,
+  Row
+} from "reactstrap";
 class Create extends Component {
   state = {
     name: "",
@@ -20,7 +28,8 @@ class Create extends Component {
     strength: 0
   };
 
-  addPlayer = () => {
+  addPlayer = e => {
+    e.preventDefault();
     this.state.redirect = false;
     const player = {};
     if (this.state.name !== "") {
@@ -181,97 +190,116 @@ class Create extends Component {
         <div className="loginbackground-styles">
           {this.renderRedirect()}
           <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <div className="create-styles">
-            <label>
-              Name:
-              <input
-                name="name"
-                placeholder="Create name"
-                value={this.state.name}
-                onChange={this.handleInput}
-              />
-              Email:
-              <input
-                name="email"
-                placeholder="Create email"
-                value={this.state.email}
-                onChange={this.handleInput}
-              />
-              <br />
-            </label>
-            <br />
-            Password:
-            <input
-              name="password"
-              type="password"
-              placeholder="Create password"
-              value={this.state.password}
-              onChange={this.handleInput}
-            />
-            <br />
-            Re-type Password:
-            <input
-              name="password2"
-              type="password2"
-              placeholder="Repeat password"
-              value={this.state.password2}
-              onChange={this.handleInput}
-            />{" "}
-            <label />
-            <br />
-            Lore:
-            <input
-              name="bio"
-              placeholder="Give a backstory"
-              value={this.state.bio}
-              onChange={this.handleInput}
-            />
-            Gender:
-            <input
-              name="gender"
-              placeholder="Set a gender"
-              value={this.state.gender}
-              onChange={this.handleInput}
-            />
-            <br />
+
+          <Form className="create-styles" onSubmit={ this.addPlayer}>
+
+          {(this.state.class !=="")?(<Fragment> <Alert color="success">
+        {`You have selected a ${this.state.class}, adventure lies ahead champion.`}
+      </Alert></Fragment>):(<Fragment></Fragment>)}
+            <Row style={{ marginBottom: "1vh" }}>
+              <Col md="6">
+                <Label for="name" style={{ width: "90%" }} className="text-left">
+                  Name:
+                </Label>
+
+                <Input
+                  type="text"
+                  name="name"
+                  id="name"
+                  value={this.state.name}
+                  onChange={this.handleInput}
+                />
+              </Col>
+              <Col md="6">
+                <Label
+                  style={{ width: "90%" }}
+                  className="text-left"
+                  for="email"
+                >
+                  Email:
+                </Label>
+
+                <Input
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleInput}
+                />
+              </Col>
+            </Row>
+
+            <Row style={{ marginBottom: "1vh" }}>
+              <Col md="6">
+                <Label style={{ width: "90%" }} className="text-left" for="password">
+                  Password:
+                </Label>
+
+                <Input
+                id="password"
+                 name="password"
+                 type="password"
+                 value={this.state.password}
+                 onChange={this.handleInput}
+                />
+              </Col>
+              <Col md="6">
+                <Label
+                  style={{ width: "90%" }}
+                  className="text-left"
+                  for="password2"
+                >
+                  Re-type Password:
+                </Label>
+
+                <Input
+                id="pwassword2"
+                      name="password2"
+                      type="password2"
+                  
+                      value={this.state.password2}
+                      onChange={this.handleInput}
+                />
+              </Col>
+            </Row>
+            <Label
+                  style={{ width: "97%" }}
+                  className="text-left"
+                  for="lore"
+                >
+                  Lore:
+                </Label>
+
+                <Input
+                type="textarea"
+                id="lore"
+                       name="bio"
+                       placeholder="Give a backstory"
+                       value={this.state.bio}
+                       onChange={this.handleInput}
+                       style={{height:"20vh"}}
+                />
+           
+       
             {/* <button className="btn"  onClick={() => this.handleClass("Paladin")}>Paladin</button> */}
-            <button className="btn" onClick={() => this.handleClass("Warrior")}>
+            <div>
+            <button className="btn" onClick={()=> this.setState({class:"Warrior"})}>
               Warrior
             </button>
             {/* <button className="btn"  onClick={() => this.handleClass("Necromancer")}>
           Necromancer
         </button> */}
-            <br />
             {/* <button className="btn"  onClick={() => this.handleClass("Rogue")}>Rogue</button> */}
-            <button className="btn" onClick={() => this.handleClass("Ranger")}>
+            <button className="btn" onClick={()=> this.setState({class:"Ranger"})}>
               Ranger
             </button>
-            <button className="btn" onClick={() => this.handleClass("Mage")}>
+            <button className="btn" onClick={()=> this.setState({class:"Mage"})}>
               Mage
             </button>
-            <br />
-            <br />
-            <button className="btn" onClick={() => this.addPlayer()}>
+            </div>
+            <button className="btn btn-create"  type="submit">
               Create Character
             </button>
-          </div>
+            
+          </Form>
         </div>
       </Fragment>
     );
