@@ -60,7 +60,7 @@ a{
 .BlackHeart{
   border-radius: 15px;
   border:.5px solid black;
-  width:50%;
+  width:70%;
   font-size: 2.2vw;
   background:wheat;
   margin: 0 auto;
@@ -68,6 +68,21 @@ a{
   padding:10px;
   box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
 
+
+
+}
+.BlackHeart .fas{
+  font-size:3.3vw
+
+}
+.BlackHeart .btn{
+  width:50%;
+  font-size:1.3vw
+
+}
+.BlackHeart .btn:hover{
+ ;
+ background:lightgreen; 
 }
 /*................................................................... Log in component */
 .title-styles{
@@ -170,9 +185,10 @@ margin:0 auto;
   display:flex;
   padding: 10px;
   margin: 0 auto;
-  margin-top:10px;
+ 
   justify-content: center;
   flex-wrap:wrap;
+  background:rgba(0, 0, 0, 0.288)
   
   
 }
@@ -181,11 +197,13 @@ margin:0 auto;
   width:70%;
   justify-content: center;
   margin: 0 auto;
-  font-size:30px;
-  margin-top:20px;
+  font-size:1.5vw;
+  padding-top:20px;
+  border-top:1px solid black;
   color:white;
     text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -1px black;
   outline: #222;
+  background:rgba(0, 0, 0, 0.288)
 }
 .commonitemCard-styles{
   width:23%;
@@ -252,6 +270,11 @@ box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
 border-radius:15px;
 
 }
+.itemCard-styles{
+ font-size:.9vw;
+ min-width:9vw;
+}
+
 .itemCard-styles:hover{
   filter: brightness(150%)
 }
@@ -271,9 +294,16 @@ border-radius:15px;
   font-size:25px;
   color:palevioletred;
 }
+
 .legendaryFooter-styles{
   font-size:25px;
   color:goldenrod;
+}
+.footer{
+  font-size:2vw;
+}
+.header-card{
+  border-bottom:2px dotted white;
 }
 .itemsHeader-styles{
   font-size:16px;
@@ -316,13 +346,14 @@ color:lightcoral;
 }
 .class-styles{
   color:white;
-  font-size:25px;
+  font-size:1.2vw;
   border-top:1px solid black;
-  width: 50%;
+  width: 70%;
   margin: 0 auto;
   padding-top:20px;
   text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -1px black;
   outline: #222;
+  background:rgba(0, 0, 0, 0.288)
 }
 .classIcon-styles{
   width:40px;
@@ -597,7 +628,6 @@ margin:0 auto;
   }
   .movmenticons-styles:hover{
     color:lightgreen;
-    font-size:60px;
 
   }
  
@@ -731,8 +761,8 @@ opacity:1;
     border-radius: 10px;
   }
   .equip-hero{
-    font-size:30px;
-    width:30%;
+    font-size:1.5vw;
+    width:70%;
   }
   .testing{
     font-weight: 900;
