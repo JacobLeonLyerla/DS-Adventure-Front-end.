@@ -410,8 +410,8 @@ margin-top:10px;
   margin-top:5%;
     width:10%;
     height:auto;
-    background: silver;
-    border:10px ridge silver;
+    background: #c0392b;
+    border:10px ridge #c0392b;
   }
   .Mage{
     margin-top:5%;
@@ -503,6 +503,10 @@ margin: 0 auto;
 
 padding:20px;
 font-size:15px;
+border-radius: 100vw 10vw 10vw 10vw;
+margin-bottom:2vh;
+font-size:1.3vw;
+
 
 }
 .battleheader-styles{
@@ -543,10 +547,47 @@ color: lightgray;
   display: inline-block;
 
     }
+.progress-container{
+  padding-left:1%;
+  padding-right:1%;
+}
+.top-progress{
+  border:none;
+  display:flex;
+  flex-direction: column;
+  background:lightcoral;
+  height: 6vh;
+  border-radius: 20% 20% 0% 0%;
+}
+.top-progress p{
+  
+  height: 20%;
+ 
+}
+.bottom-progress{
+  border:none;
+  display:flex;
+  flex-direction: column;
+  background:lightblue;
+  height: 8vh;
+  border-radius: 0% 0% 20% 20%;
+}
+.bottom-progress p{
+  
+  height: 20%;
+ 
+}
+
+
     .progress{
       width:100%;
+      min-height: 2.2vh;
       margin: 0 auto
     }
+
+
+
+
 .middleBattle-styles{
 justify-content: center;
 width:100vw;
@@ -558,12 +599,26 @@ min-height:40vh;
 max-height: 40vh;
 font-size:1vw;
 }
+
+
 .spell{
   color: white;
   font-size:1.2vw;
-  background:rebeccapurple;
+ 
   border-radius: 20vw 1vw;
 }
+.Mage-spell{
+ background:rebeccapurple;
+
+}
+.Warrior-spell{
+  background:#c0392b;
+ 
+ }
+ .Ranger-spell{
+  background:darkgreen;
+ 
+ }
 .damage{
   color: white;
   font-size:1.2vw;
@@ -593,6 +648,7 @@ cursor: pointer;
   .oppenent-styles{
     margin:0 auto;
     width:20vw;
+   
   }
 
 
@@ -600,6 +656,9 @@ cursor: pointer;
 .opponentAttacks-styles{
 
 font-size: 15px;
+}
+.monster-img{
+  max-height: 30.8vh;
 }
 .attackName-styles{
  font-weight:bold;
@@ -616,11 +675,12 @@ justify-content: space-between;
 
 }
 .combatLog-styles{
- font-size:25px;
+ font-size:1.2vw;
  display:flex;
  flex-direction: column;
-
-
+min-height: 22.4vh;
+align-content: center;
+justify-content: center;
 }
 .winnings-styles{
 border: 1px solid black;
@@ -632,6 +692,7 @@ font-size:20px;
 padding:1%;
 box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
 border-radius:15px;
+
 }
 .losing-styles{
   border: 1px solid black;
