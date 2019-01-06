@@ -389,7 +389,7 @@ class Battle extends Component {
       <Fragment>
         <div className="adventurer-styles">
           <img
-            className={this.state.player.class}
+            className={`${this.state.player.class} class-img`}
             src={this.pickPortrait(this.state.player.class)}
           />
         </div>
