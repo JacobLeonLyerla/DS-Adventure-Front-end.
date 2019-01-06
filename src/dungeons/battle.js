@@ -506,9 +506,10 @@ class Battle extends Component {
         return (
           <Fragment>
             <div className={this.state.monster.rarity + "Stats-styles mid-battle"}>
-              <div >{attack.name}</div>
+              <div className="spell" >{attack.name}</div>
             
               <div >
+                <div className="damage">
                 Damage:{" "}
                 {Math.round(
                   attack.damage +
@@ -516,15 +517,15 @@ class Battle extends Component {
                     this.state.player.strength / 1.5 +
                     this.state.player.intellect / 2.5 +
                     this.state.player.agility / 2
-                )}
-                <br />
+                )}</div>
+               <div className="cost">
                 Cost:{" "}
                 {Math.round(
                   attack.cost * this.state.player.level -
                     this.state.player.intellect / 3 -
                     this.state.player.agility / 5 -
                     this.state.player.strength / 7
-                )}
+                )}</div>
               </div>
               <br />
               <br />
