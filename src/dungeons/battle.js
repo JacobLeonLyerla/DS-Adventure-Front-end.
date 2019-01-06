@@ -506,9 +506,9 @@ class Battle extends Component {
         return (
           <Fragment>
             <div className={this.state.monster.rarity + "Stats-styles mid-battle"}>
-              <div style={{background:"pink", height:"5vh", width:"100%"}}>{attack.name}</div>
+              <div >{attack.name}</div>
             
-              <div style={{background:"pink", maxHeight:"6vh",width:"100%"}}>
+              <div >
                 Damage:{" "}
                 {Math.round(
                   attack.damage +
@@ -553,7 +553,7 @@ class Battle extends Component {
               <div style={{ color: "lightcoral" }}>Attack</div>
               <br />
               <br />
-              <div style={{background:"pink",height:"10vh", width:"100%"}}>{attack.description}</div>
+              <div>{attack.description}</div>
             </div>
           </Fragment>
         );
