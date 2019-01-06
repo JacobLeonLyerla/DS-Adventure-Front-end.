@@ -556,6 +556,25 @@ margin-top:1vh;
 min-width: 100%;
 min-height:40vh;
 max-height: 40vh;
+font-size:1vw;
+}
+.spell{
+  color: white;
+  font-size:1.2vw;
+  background:rebeccapurple;
+  border-radius: 20vw 1vw;
+}
+.damage{
+  color: white;
+  font-size:1.2vw;
+  background:coral;
+  border-radius: 1vw 20vw;
+}
+.cost{
+  color: white;
+  font-size:1.2vw;
+  background:#17a2b8;
+  border-radius: 20vw 1vw;
 }
 .attack-styles{
   width:9%;
