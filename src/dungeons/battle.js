@@ -425,19 +425,19 @@ class Battle extends Component {
     );
     return (
       <Fragment>
-        <div className={this.state.monster.rarity + "Stats-styles"}>
+        <div className={this.state.monster.rarity + "Stats-styles mid-battle"}>
           <div>
             <Progress color="success" value={currentpercent}>
               {" "}
               {`${this.state.tempMonHP}`}
             </Progress>
-            <br />
+          
             <Progress color="info" value={monsterend}>
               {" "}
               {`${this.state.tempMonster.endurance}`}
             </Progress>
           </div>
-          <br />
+         
           <div className="combatLog-styles">
             <div>{`${this.state.monster.name} ${
               this.state.tempPlayer.combat
@@ -505,11 +505,10 @@ class Battle extends Component {
       if (attack !== undefined) {
         return (
           <Fragment>
-            <div className={this.state.monster.rarity + "Stats-styles"}>
-              {attack.name}
-              <br />
-              <br />
-              <div>
+            <div className={this.state.monster.rarity + "Stats-styles mid-battle"}>
+              <div style={{background:"pink", height:"5vh", width:"100%"}}>{attack.name}</div>
+            
+              <div style={{background:"pink", maxHeight:"6vh",width:"100%"}}>
                 Damage:{" "}
                 {Math.round(
                   attack.damage +
@@ -554,7 +553,7 @@ class Battle extends Component {
               <div style={{ color: "lightcoral" }}>Attack</div>
               <br />
               <br />
-              <div>{attack.description}</div>
+              <div style={{background:"pink",height:"10vh", width:"100%"}}>{attack.description}</div>
             </div>
           </Fragment>
         );
@@ -611,7 +610,7 @@ class Battle extends Component {
   opponentAttacks() {
     return this.state.monster.attacks.map(attack => (
       <Fragment>
-        <div className={this.state.monster.rarity + "Stats-styles"}>
+        <div className={this.state.monster.rarity + "Stats-styles mid-battle"}>
           <div className="opponentAttacks-styles">
             <div>{`${this.state.monster.name} cast `}</div>
             <div className="attackName-styles">{attack.name}</div>
@@ -690,11 +689,12 @@ class Battle extends Component {
           </Col>
         </Row>
 
-        <div className="middleBattle-styles">
-          {this.adventurerAttacks()}
-          {this.renderStats()}
-          {this.opponentAttacks()}
-        </div>
+        <Row className="middleBattle-styles">
+          <Col md="3" className="mid-col">{this.adventurerAttacks()}</Col>
+
+          <Col md="3"  className="mid-col">{this.renderStats()}</Col>
+          <Col md ="3"  className="mid-col">{this.opponentAttacks()}</Col>
+        </Row>
         <br />
       </Fragment>
     );
