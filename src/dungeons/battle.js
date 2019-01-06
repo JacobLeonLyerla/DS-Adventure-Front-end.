@@ -634,7 +634,7 @@ class Battle extends Component {
     if (this.state.monster.attacks !== []) {
       return (
         <Fragment>
-          <div className={this.state.monster.rarity + "Stats-styles"}>
+          <div className={this.state.monster.rarity + "Stats-styles stats"}>
             <div className="portraitStats-styles">
               <div className={this.state.monster.rarity + "Rarity-styles"}>
                 {this.state.monster.rarity}
@@ -658,7 +658,7 @@ class Battle extends Component {
     if (this.state.monster.attacks !== []) {
       return (
         <Fragment>
-          <div className={this.state.monster.rarity + "Stats-styles"}>
+          <div className={this.state.monster.rarity + "Stats-styles stats"}>
             <div>{`Strength: ${this.state.player.strength} Intellect: ${
               this.state.player.intellect
             } Agility: ${this.state.player.agility} `}</div>
