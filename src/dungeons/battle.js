@@ -375,8 +375,8 @@ class Battle extends Component {
     return (
       <Fragment>
         <div className="oppenent-styles">
-          <img
-            className={this.state.monster.rarity}
+          <img 
+            className={`${this.state.monster.rarity} monster-img`}
             src={this.state.monster.photo}
           />
         </div>
@@ -425,19 +425,20 @@ class Battle extends Component {
     );
     return (
       <Fragment>
-        <div className={this.state.monster.rarity + "Stats-styles mid-battle"}>
-          <div>
+        <div className={this.state.monster.rarity + "Stats-styles mid-battle progress-container"}>
+          <div className="top-progress">
+          <p>{this.state.monster.name}</p>
             <Progress color="success" value={currentpercent}>
               {" "}
               {`${this.state.tempMonHP}`}
             </Progress>
-          
+
             <Progress color="info" value={monsterend}>
               {" "}
               {`${this.state.tempMonster.endurance}`}
             </Progress>
           </div>
-         
+
           <div className="combatLog-styles">
             <div>{`${this.state.monster.name} ${
               this.state.tempPlayer.combat
@@ -447,16 +448,19 @@ class Battle extends Component {
               this.state.tempMonster.combat
             } with ${this.state.tempMonster.spellUsed}`}</div>
           </div>
-          <Progress color="info" value={playerend}>
-            {" "}
-            {`${this.state.tempPlayer.endurance}`}
-          </Progress>
-          <br />
-          <Progress color="success" value={currentPlayerhp}>
-            {" "}
-            {`${this.state.tempPlayer.health}`}
-          </Progress>
-          <div />
+
+          <div className="bottom-progress">
+            <Progress color="info" value={playerend}>
+              {" "}
+              {`${this.state.tempPlayer.endurance}`}
+            </Progress>
+      
+            <Progress color="success" value={currentPlayerhp}>
+              {" "}
+              {`${this.state.tempPlayer.health}`}
+            </Progress>
+            <p>{this.state.player.name}</p>
+          </div>
         </div>
       </Fragment>
     );
@@ -505,27 +509,33 @@ class Battle extends Component {
       if (attack !== undefined) {
         return (
           <Fragment>
-            <div className={this.state.monster.rarity + "Stats-styles mid-battle"}>
-              <div className="spell" >{attack.name}</div>
-            
-              <div >
+            <div
+              className={this.state.monster.rarity + "Stats-styles mid-battle"}
+            >
+              <div className={`spell ${this.state.player.class}-spell`}>
+                {attack.name}
+              </div>
+
+              <div>
                 <div className="damage">
-                Damage:{" "}
-                {Math.round(
-                  attack.damage +
-                    10 * this.state.player.level +
-                    this.state.player.strength / 1.5 +
-                    this.state.player.intellect / 2.5 +
-                    this.state.player.agility / 2
-                )}</div>
-               <div className="cost">
-                Cost:{" "}
-                {Math.round(
-                  attack.cost * this.state.player.level -
-                    this.state.player.intellect / 3 -
-                    this.state.player.agility / 5 -
-                    this.state.player.strength / 7
-                )}</div>
+                  Damage:{" "}
+                  {Math.round(
+                    attack.damage +
+                      10 * this.state.player.level +
+                      this.state.player.strength / 1.5 +
+                      this.state.player.intellect / 2.5 +
+                      this.state.player.agility / 2
+                  )}
+                </div>
+                <div className="cost">
+                  Cost:{" "}
+                  {Math.round(
+                    attack.cost * this.state.player.level -
+                      this.state.player.intellect / 3 -
+                      this.state.player.agility / 5 -
+                      this.state.player.strength / 7
+                  )}
+                </div>
               </div>
               <br />
               <br />
@@ -636,14 +646,16 @@ class Battle extends Component {
         <Fragment>
           <div className={this.state.monster.rarity + "Stats-styles stats"}>
             <div className="portraitStats-styles">
-              <div className={this.state.monster.rarity + "Rarity-styles"}>
+              <div
+                style={{ width: "80%" }}
+                className={this.state.monster.rarity + "Rarity-styles"}
+              >
                 {this.state.monster.rarity}
               </div>
               <br />
               <div className="battleheader-styles">
                 {this.state.monster.name}
               </div>
-              <br />
 
               <div>{`Health: ${this.state.tempMonHP} Endurance: ${
                 this.state.tempMonster.endurance
@@ -658,14 +670,17 @@ class Battle extends Component {
     if (this.state.monster.attacks !== []) {
       return (
         <Fragment>
-          <div className={this.state.monster.rarity + "Stats-styles stats"}>
+          <div
+            className={this.state.monster.rarity + "Stats-styles stats"}
+            style={{ borderRadius: "10vw 100vw 10vw 10vw" }}
+          >
             <div>{`Strength: ${this.state.player.strength} Intellect: ${
               this.state.player.intellect
             } Agility: ${this.state.player.agility} `}</div>
             <div>{`Health: ${this.state.tempPlayer.health} Endurance: ${
               this.state.tempPlayer.endurance
             } `}</div>
-            <br />
+
             <div className="battleheader-styles">{this.state.player.name}</div>
           </div>
         </Fragment>
@@ -691,10 +706,16 @@ class Battle extends Component {
         </Row>
 
         <Row className="middleBattle-styles">
-          <Col md="3" className="mid-col">{this.adventurerAttacks()}</Col>
+          <Col md="3" className="mid-col">
+            {this.adventurerAttacks()}
+          </Col>
 
-          <Col md="3"  className="mid-col">{this.renderStats()}</Col>
-          <Col md ="3"  className="mid-col">{this.opponentAttacks()}</Col>
+          <Col md="3" className="mid-col">
+            {this.renderStats()}
+          </Col>
+          <Col md="3" className="mid-col">
+            {this.opponentAttacks()}
+          </Col>
         </Row>
         <br />
       </Fragment>
