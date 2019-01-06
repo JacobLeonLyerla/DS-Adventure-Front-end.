@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Redirect } from "react-router-dom";
-import { Modal } from "reactstrap";
+import { Modal,Col,Row } from "reactstrap";
 import axios from "axios";
 import Map from "../dungeons/map.js";
 class BlackHeart extends Component {
@@ -266,30 +266,37 @@ class BlackHeart extends Component {
           <div className="BlackHeart">
             {`You are currently in  the ${this.state.area.name}`}
             <br />
-            <br />
-
+          
+              <Row>
+                <Col md="12">
             <i
               onClick={() => this.move("North")}
               className="fas fa-chevron-circle-up movmenticons-styles"
             />
-            <br />
-            <div className="westEast-styles">
+            </Col >
+            <Col md="12">
+            <Row style={{justifyContent:"center"}}>
+            <Col xs="3" sm="3" md="2">
               <i
                 onClick={() => this.move("West")}
                 className="fas fa-chevron-circle-left movmenticons-styles"
-              />
+              /> </Col>
+              <Col xs="3" sm="3" md="2">
               <i
                 onClick={() => this.move("East")}
                 className="fas fa-chevron-circle-right movmenticons-styles"
               />
-            </div>
+              
+             
+            </Col></Row></Col>
+            <Col md="12">
             <i
               onClick={() => this.move("South")}
               className="fas fa-chevron-circle-down movmenticons-styles"
             />
-
-            <br />
-            <br />
+</Col>
+            
+            </Row>
             <button className="btn" color="danger" onClick={this.toggle}>
               MAP
             </button>
