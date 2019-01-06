@@ -330,8 +330,8 @@ class Items extends Component {
                 <i class="fas fa-level-down-alt" />
               </div>
             </div>
-            <div>{item.name}</div>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            <div className="header-card">{item.name}</div>
+           
             <br />
             {item.slot}
             <br />
@@ -342,7 +342,7 @@ class Items extends Component {
             {` Agility: ${item.agility}`}
             <br />
             <br />
-            <div className={`${item.rarity}Footer-styles`}> {item.rarity}</div>
+            <div className={`${item.rarity}Footer-styles footer`}> {item.rarity}</div>
           </div>
           <br />
         </Fragment>
