@@ -342,7 +342,8 @@ color:lightcoral;
 }
 /* /////////////////////////////////////////////// BATTLE COMPONENT */
 .fighters{
-  margin-left:10vw;
+  margin:0px;
+  justify-content: center;
 }
 .class-styles{
   color:white;
@@ -543,16 +544,18 @@ color: lightgray;
 
     }
     .progress{
-      width:25vw;
+      width:100%;
       margin: 0 auto
     }
 .middleBattle-styles{
-  display:flex;
-  padding-right:10%;
-  padding-left:10%;
-  padding-top:1%;
-
-
+justify-content: center;
+width:100vw;
+margin-top:1vh;
+}
+.mid-battle{
+min-width: 100%;
+min-height:40vh;
+max-height: 40vh;
 }
 .attack-styles{
   width:9%;
