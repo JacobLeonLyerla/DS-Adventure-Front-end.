@@ -494,6 +494,16 @@ padding:20px;
 font-size:15px;
 
 }
+.fighters .stats{
+  border-radius: 7px;
+  width:80%;
+  height: 30%;
+margin: 0 auto;
+
+padding:20px;
+font-size:15px;
+
+}
 .battleheader-styles{
   font-size:20px;
 }
@@ -643,7 +653,7 @@ margin:0 auto;
   }
   .adventurer-styles{
     margin:0 auto;
-    width:15vw;  
+    width:14.9vw;  
   }
   .class-img{
     width:100%;
