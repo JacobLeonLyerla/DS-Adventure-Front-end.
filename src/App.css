@@ -364,26 +364,30 @@ color:lightcoral;
 .common{
   margin-top:5%;
   border:10px ridge lightgrey;
-  width:15%;
+  width:100%;
+  height: 100%;
   max-height:300px;
   
 }
 .uncommon{
   margin-top:5%;
   border:10px ridge green;
-  width:20%;
+  width:100%;
+  height: 100%;
   max-height: 400px;
 }
 .rare{
   margin-top:5%;
     border:10px ridge rgb(94, 94, 156);
-  width:20%;
+    width:100%;
+    height: 100%;
   max-height: 400px;
 }
 .epic{
   margin-top:5%;
   border:10px ridge purple;
-  width:15vw;
+  width:100%;
+  height: 100%;
   max-height: 400px;
   
 }
@@ -554,6 +558,13 @@ cursor: pointer;
 .fa-long-arrow-alt-left:hover{
   cursor: pointer;
   }
+  .oppenent-styles{
+    margin:0 auto;
+    width:20vw;
+  }
+
+
+
 .opponentAttacks-styles{
 
 font-size: 15px;
@@ -629,6 +640,13 @@ margin:0 auto;
   .movmenticons-styles:hover{
     color:lightgreen;
 
+  }
+  .adventurer-styles{
+    margin:0 auto;
+    width:15vw;  
+  }
+  .class-img{
+    width:100%;
   }
  
   /*..................................................................... MAP */
