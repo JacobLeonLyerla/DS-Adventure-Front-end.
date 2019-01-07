@@ -65,8 +65,13 @@ class Player extends Component {
             <Link to="/create">
               <button className="btn btn-register">Create An Adventurer</button>
             </Link>
+               
+
+       
           </Form>
         </div>
+
+       
       </Fragment>
     );
   }

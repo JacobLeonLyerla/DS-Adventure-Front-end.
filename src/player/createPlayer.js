@@ -25,7 +25,9 @@ class Create extends Component {
     health: 0,
     agility: 0,
     intellect: 0,
-    strength: 0
+    strength: 0,
+   
+
   };
 
   addPlayer = e => {
