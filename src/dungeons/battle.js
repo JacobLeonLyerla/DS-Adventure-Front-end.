@@ -8,6 +8,10 @@ import mage from "./img/mageportrait.png";
 import warrior from "./img/warriorportrait.png";
 import ranger from "./img/rangerportrait.png";
 import necro from "./img/necromancerportrait.jpg";
+import wizard from "./img/wizardidlesml.gif"
+import goblin from "./img/goblinidle.gif"
+import attackgoblin from "./img/goblinattack.gif"
+import attackwizard from "./img/wizardattack.gif"
 import { Progress } from "reactstrap";
 
 class Battle extends Component {
@@ -22,7 +26,11 @@ class Battle extends Component {
     currentSpell: 0,
     currentLocation: "",
     tempMonHP: 0,
-    redirect: false
+    redirect: false,
+    advimg:wizard,
+    opimg:goblin,
+    attimg:attackwizard,
+    battle:false
   };
   componentDidMount() {
     let { id } = this.props.match.params;
@@ -125,7 +133,19 @@ class Battle extends Component {
       })
       .catch(err => {});
   }
+
   startBattle(damage, cost, hitChance, name) {
+
+  let change=()=>{
+    this.setState({battle:false})
+  }
+
+  setTimeout(function(){ change()},2270)
+    this.setState({battle:true})
+
+ 
+
+    
     hitChance = Math.round(
       hitChance +
         this.state.player.agility * 1 +
@@ -283,6 +303,7 @@ class Battle extends Component {
         })
         .catch(err => {});
     }
+   
   }
 
   death(died) {
@@ -377,20 +398,27 @@ class Battle extends Component {
         <div className="oppenent-styles">
           <img 
             className={`${this.state.monster.rarity} monster-img`}
-            src={this.state.monster.photo}
+            src={(this.state.battle === false)?goblin:attackgoblin}
           />
         </div>
       </Fragment>
     );
   }
+  rendergif =()=>{
+    if(this.state.battle === false){
+      return this.state.advimg
+    }else{
+      return this.state.attimg
+    }
 
+  }
   renderAdventurer() {
     return (
       <Fragment>
         <div className="adventurer-styles">
           <img
             className={`${this.state.player.class} class-img`}
-            src={this.pickPortrait(this.state.player.class)}
+            src={this.rendergif()}
           />
         </div>
       </Fragment>
@@ -503,6 +531,7 @@ class Battle extends Component {
   //   ));
   // }
   adventurerAttacks() {
+    
     let attack = { name: "" };
     if (this.state.attacks !== []) {
       attack = this.state.attacks[this.state.currentSpell];
