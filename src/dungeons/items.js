@@ -407,8 +407,8 @@ class Items extends Component {
                 >
                   <i class="far fa-hand-paper" />
                 </div>
-                <div>{item.name}</div>
-                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                <div className="header-card">{item.name}</div>
+               
                 <br />
                 {item.slot}
                 <br />
