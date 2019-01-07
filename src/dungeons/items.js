@@ -370,8 +370,8 @@ class Items extends Component {
                 <i class="far fa-times-circle" />
               </div>
             </div>
-            <div>{item.name}</div>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            <div  className="header-card">{item.name}</div>
+           
             <br />
             {item.slot}
             <br />

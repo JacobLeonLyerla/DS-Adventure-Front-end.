@@ -1,3 +1,7 @@
+
+
+
+
 .App {
   text-align: center;
   font-family: 'Gloria Hallelujah', cursive;
@@ -177,7 +181,7 @@ margin:0 auto;
     font-size:40px;
   }
   .sample {
-    font-family: "TypoPRO Lora";
+
 
 }
 /* ..................................................................ITEMS CSS */
@@ -658,7 +662,7 @@ cursor: pointer;
   .oppenent-styles{
     margin:0 auto;
     width:20vw;
-   
+ 
   }
 
 
@@ -668,7 +672,9 @@ cursor: pointer;
 font-size: 15px;
 }
 .monster-img{
+  min-height: 30.8vh;
   max-height: 30.8vh;
+  background:rgb(203, 230, 198)
 }
 .attackName-styles{
  font-weight:bold;
@@ -747,10 +753,14 @@ margin:0 auto;
   }
   .adventurer-styles{
     margin:0 auto;
-    width:14.9vw;  
+    width:20vw;
+  
   }
   .class-img{
     width:100%;
+    min-height: 30.8vh;
+    max-height: 30.8vh;
+    background:rgb(170, 230, 253)
   }
  
   /*..................................................................... MAP */
@@ -894,3 +904,6 @@ opacity:1;
     font-size: 100px;
     border-bottom: 10px dotted darkred
   }
+
+
+ 
