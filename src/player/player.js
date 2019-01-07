@@ -3,21 +3,14 @@ import axios from "axios";
 import { Form, Alert, Label, Input, Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 import Map from "../dungeons/map.js";
-import ReactAudioPlayer from 'react-audio-player';
-import audio from "../dungeons/assets/thisone.ogg"
+
 
 class Player extends Component {
   render() {
     return (
       <Fragment>
 
-<ReactAudioPlayer
-  src={audio}
-  autoPlay
-  loop
-  volume={.1}
-  controls
-/>
+
         <div className="loginbackground-styles">
           <br />
 

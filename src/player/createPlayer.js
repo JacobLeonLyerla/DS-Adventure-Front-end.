@@ -97,7 +97,7 @@ class Create extends Component {
           break;
         case "Warrior":
         player.idle ="warrioridle"
-        player.battle="warrriorbattle"
+        player.battle="warriorbattle"
           player.endurance = 100;
           player.health = 200;
           player.intellect = 5;
