@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import paladin from "./assets/paladin.jpg";
 import rogue from "./assets/rogue.jpg";
-import mage from "./assets/mage.jpg";
-import warrior from "./assets/warrior.jpg";
-import ranger from "./assets/ranger.jpg";
+import mage from "./assets/mage.png";
+import warrior from "./assets/warrior.png";
+import ranger from "./assets/ranger.png";
 import necro from "./assets/necro.jpg";
 
 class Items extends Component {
