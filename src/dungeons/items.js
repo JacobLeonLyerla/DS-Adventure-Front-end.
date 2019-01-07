@@ -7,6 +7,7 @@ import mage from "./img/mage.jpg";
 import warrior from "./img/warrior.jpg";
 import ranger from "./img/ranger.jpg";
 import necro from "./img/necro.jpg";
+
 class Items extends Component {
   state = {
     player: { gear: [{ name: "" }], items: [{ name: "" }] },

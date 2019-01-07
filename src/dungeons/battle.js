@@ -8,10 +8,8 @@ import mage from "./assets/mageportrait.png";
 import warrior from "./assets/warriorportrait.png";
 import ranger from "./assets/rangerportrait.png";
 import necro from "./assets/necromancerportrait.jpg";
-import wizard from "./assets/wizardidlesml.gif"
-import goblin from "./assets/goblinidle.gif"
-import attackgoblin from "./assets/goblinattack.gif"
-import attackwizard from "./assets/wizardattack.gif"
+
+
 import imgs from "./assets/exportImgs.js"
 import { Progress } from "reactstrap";
 
@@ -28,9 +26,7 @@ class Battle extends Component {
     currentLocation: "",
     tempMonHP: 0,
     redirect: false,
-    advimg:wizard,
-    opimg:goblin,
-    attimg:attackwizard,
+
     battle:false
   };
   componentDidMount() {
@@ -394,7 +390,9 @@ class Battle extends Component {
   };
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ RENDERS
   renderOpponent() {
+    if(this.state.monster.idle !== undefined){
     return (
+
       <Fragment>
         <div className="oppenent-styles"    style={{
               backgroundImage: `url(${
@@ -402,31 +400,27 @@ class Battle extends Component {
               })`}}>
           <img 
             className={`${this.state.monster.rarity} monster-img`}
-            src={(this.state.battle === false)?goblin:attackgoblin}
+            src={(this.state.battle === false)?require(`./assets/${this.state.monster.idle}.gif`):require(`./assets/${this.state.monster.battle}.gif`)}
           />
         </div>
       </Fragment>
     );
   }
-  rendergif =()=>{
-    if(this.state.battle === false){
-      return imgs["x"]
-    }else{
-      return this.state.attimg
-    }
 
-  }
+  } 
+
   renderAdventurer() {
+    if(this.state.player.idle !== undefined){
     return (
       <Fragment>
         <div className="adventurer-styles">
-          <img
-            className={`${this.state.player.class} class-img`}
-            src={this.rendergif()}
+          <img  className={`${this.state.player.class} class-img`}
+    src={(this.state.battle === false)?require(`./assets/${this.state.player.idle}.gif`):require(`./assets/${this.state.player.battle}.gif`)}
           />
         </div>
       </Fragment>
     );
+    }
   }
   pickPortrait(classname) {
     // if (classname === "Paladin") return paladin;
@@ -722,6 +716,7 @@ class Battle extends Component {
   }
 
   render() {
+    console.log(this.state)
     return (
       <Fragment>
         {this.renderRedirect()}
