@@ -82,6 +82,8 @@ class Create extends Component {
       let test = this.state.class;
       switch (test) {
         case "Ranger":
+        player.idle ="rangeridle"
+        player.battle="rangerbattle"
           player.health = 160;
           player.endurance = 140;
           player.agility = 20;
@@ -94,6 +96,8 @@ class Create extends Component {
           ];
           break;
         case "Warrior":
+        player.idle ="warrioridle"
+        player.battle="warrriorbattle"
           player.endurance = 100;
           player.health = 200;
           player.intellect = 5;
@@ -106,6 +110,8 @@ class Create extends Component {
           ];
           break;
         case "Mage":
+        player.idle ="mageidle"
+        player.battle="magebattle"
           player.endurance = 200;
           player.health = 100;
           player.intellect = 25;
