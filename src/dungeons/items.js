@@ -7,7 +7,7 @@ import mage from "./assets/mage.png";
 import warrior from "./assets/warrior.png";
 import ranger from "./assets/ranger.png";
 import necro from "./assets/necro.jpg";
-
+import {Progress} from "reactstrap"
 class Items extends Component {
   state = {
     player: { gear: [{ name: "" }], items: [{ name: "" }] },
@@ -319,9 +319,16 @@ class Items extends Component {
   }
   renderEquipment() {
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
-      return this.state.player.gear.map(item => (
+      return this.state.player.gear.map(item => {
+      
+
+let total = item.health + item.endurance + item.intellect +item.strength +item.agility
+ 
+
+
+        return(
         <Fragment>
-          <div className={`${item.rarity}itemCard-styles itemCard-styles`}>
+          <div className={`${item.rarity}itemCard-styles itemCard-styles`} >
             <div className="move-styles">
               <div
                 className="add-styles
@@ -332,22 +339,36 @@ class Items extends Component {
               </div>
             </div>
             <div className="header-card">{item.name}</div>
-           
-            <br />
+           {/* style={{fontFamily:" Arial, Helvetica, sans-serif"}} */}
+            <div className={"progress-container"} >
             {item.slot}
             <br />
-            {` Health: ${item.health} Endurance: ${item.endurance}`}
-            <br />
-            {` Intellect: ${item.intellect} Strength: ${item.strength}`}
-            <br />
-            {` Agility: ${item.agility}`}
-            <br />
+            
+      
+            {(item.health *2 /5 >0)?(<Fragment><div className="text-left">Health</div>
+            <Progress style={{fontFamily:" Arial, Helvetica, sans-serif"}}   value={Math.round(item.health / total *100) }max={100} >{item.health }</Progress></Fragment>):(<Fragment></Fragment>)}
+         
+            {(item.endurance *2 /5 >0)?(<Fragment><div className="text-left">Endurance</div>
+            <Progress style={{fontFamily:" Arial, Helvetica, sans-serif"}}   value={Math.round(item.endurance / total *100) }>{item.endurance }</Progress></Fragment>):(<Fragment></Fragment>)}
+         
+            {(item.intellect *2 /5 >0)?(<Fragment><div className="text-left">Intellect</div>
+            <Progress  style={{fontFamily:" Arial, Helvetica, sans-serif"}}   value={Math.round(item.intellect / total *100)} max={100}>{item.intellect }</Progress></Fragment>):(<Fragment></Fragment>)}
+         
+            {(item.strength *2 /5 >0)?(<Fragment><div className="text-left">Strength</div>
+            <Progress style={{fontFamily:" Arial, Helvetica, sans-serif"}}   value={Math.round(item.strength / total *100) }>{item.strength }</Progress></Fragment>):(<Fragment></Fragment>)}
+         
+            {(item.agility *2 /5 >0)?(<Fragment><div className="text-left">Agility</div>
+            <Progress style={{fontFamily:" Arial, Helvetica, sans-serif"}}    value={Math.round(item.agility / total *100) }>{item.agility }</Progress></Fragment>):(<Fragment></Fragment>)}
+         
+            
+            
+            </div>
             <br />
             <div className={`${item.rarity}Footer-styles footer`}> {item.rarity}</div>
           </div>
           <br />
         </Fragment>
-      ));
+      )});
     }
   }
   renderItems() {
