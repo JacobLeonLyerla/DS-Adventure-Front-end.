@@ -3,15 +3,16 @@ import axios from "axios";
 import { Row, Col } from "reactstrap";
 import { Redirect } from "react-router-dom";
 // import paladin from "./img/paladinportrait.png";
-import rogue from "./img/rogueportrait.jpg";
-import mage from "./img/mageportrait.png";
-import warrior from "./img/warriorportrait.png";
-import ranger from "./img/rangerportrait.png";
-import necro from "./img/necromancerportrait.jpg";
-import wizard from "./img/wizardidlesml.gif"
-import goblin from "./img/goblinidle.gif"
-import attackgoblin from "./img/goblinattack.gif"
-import attackwizard from "./img/wizardattack.gif"
+import rogue from "./assets/rogueportrait.jpg";
+import mage from "./assets/mageportrait.png";
+import warrior from "./assets/warriorportrait.png";
+import ranger from "./assets/rangerportrait.png";
+import necro from "./assets/necromancerportrait.jpg";
+import wizard from "./assets/wizardidlesml.gif"
+import goblin from "./assets/goblinidle.gif"
+import attackgoblin from "./assets/goblinattack.gif"
+import attackwizard from "./assets/wizardattack.gif"
+import imgs from "./assets/exportImgs.js"
 import { Progress } from "reactstrap";
 
 class Battle extends Component {
@@ -395,7 +396,10 @@ class Battle extends Component {
   renderOpponent() {
     return (
       <Fragment>
-        <div className="oppenent-styles">
+        <div className="oppenent-styles"    style={{
+              backgroundImage: `url(${
+                imgs["wizardidlesml"]
+              })`}}>
           <img 
             className={`${this.state.monster.rarity} monster-img`}
             src={(this.state.battle === false)?goblin:attackgoblin}
@@ -406,7 +410,7 @@ class Battle extends Component {
   }
   rendergif =()=>{
     if(this.state.battle === false){
-      return this.state.advimg
+      return imgs["x"]
     }else{
       return this.state.attimg
     }
