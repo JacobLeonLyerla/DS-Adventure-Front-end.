@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import paladin from "./img/paladin.jpg";
-import rogue from "./img/rogue.jpg";
-import mage from "./img/mage.jpg";
-import warrior from "./img/warrior.jpg";
-import ranger from "./img/ranger.jpg";
-import necro from "./img/necro.jpg";
+import paladin from "./assets/paladin.jpg";
+import rogue from "./assets/rogue.jpg";
+import mage from "./assets/mage.jpg";
+import warrior from "./assets/warrior.jpg";
+import ranger from "./assets/ranger.jpg";
+import necro from "./assets/necro.jpg";
 
 class Items extends Component {
   state = {
