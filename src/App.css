@@ -267,6 +267,7 @@ color:lightcoral;
 }
 .progress-low .progress-bar{
   background:  #fea3aa  ; 
+  color:black;
   font-size:1vw;
 }
 .progress-mid .progress-bar{

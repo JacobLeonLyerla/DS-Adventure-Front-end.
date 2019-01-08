@@ -18,7 +18,10 @@
   .btnPick-styles{
     font-size:40px;
   }
-  .sample {
+ .progress-info {
+ height: 3vh;
 
-
-}
+ }
+ .progress-info .progress-bar {
+  
+  }
