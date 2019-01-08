@@ -211,6 +211,7 @@ margin:0 auto;
   background:rgba(0, 0, 0, 0.288)
 }
 .commonitemCard-styles{
+ 
   width:23%;
   min-width:300px;
   font-size: 13px;
@@ -275,7 +276,8 @@ box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
 border-radius:15px;
 
 }
-.itemCard-styles{
+.itemCard-styles{ 
+  min-height: 36vh;
  font-size:.9vw;
  min-width:9vw;
 }
@@ -306,6 +308,7 @@ border-radius:15px;
 }
 .footer{
   font-size:2vw;
+  padding-bottom:1vh;
 }
 .header-card{
   border-bottom:2px dotted white;
@@ -345,6 +348,27 @@ color:lightcoral;
 
 
 }
+.progress-container{
+  min-height: 57.3%;
+}
+.progress-low .progress-bar{
+  background:  #fea3aa  ; 
+  font-size:1vw;
+}
+.progress-mid .progress-bar{
+  background:  #f8b88b  ; 
+  font-size:1vw;
+}
+.progress-good .progress-bar{
+  background:  #b2cefe  ; 
+  font-size:1vw;
+}
+.progress-high .progress-bar{
+  background:  #baed91   ; 
+  font-size:1vw;
+
+}
+
 /* /////////////////////////////////////////////// BATTLE COMPONENT */
 .fighters{
   margin:0px;
@@ -402,7 +426,7 @@ color:lightcoral;
   
 }
 .boss{
-  margin-top:10px;
+  margin-top:5%;
   border:2px solid #113A5E;
   border-radius: 1%;
   width:100%;
@@ -668,22 +692,58 @@ cursor: pointer;
  
   }
 
+  .player-miss{
+    background:rgb(235, 84, 84);
+    min-height:7vh;
+  }
+  .player-hit{
+    background:lightgreen;
+    color:black;
+    min-height:7vh;
+  }
 
+  .opponent-hit{
+    background:rgb(235, 84, 84);
+    border-bottom:1px solid white;
+    min-height:7vh;
+  }
+  .opponent-miss{
+    background:lightgreen;
+    color:black;
+    border-bottom:1px solid white;
+   min-height:7vh;
+  }
 
 .opponentAttacks-styles{
-
+width:100%;
 font-size: 15px;
+margin-bottom:2vh;
+
 }
+.opponent-damage{
+  color: white;
+  font-size:1vw;
+  background:coral;
+  border-radius: 20vw 1vw;
+}
+.opponent-cost{
+  color: white;
+  font-size:1vw;
+  background:#17a2b8;
+  border-radius: 1vw 20vw;
+}
+
+
 .monster-img{
   min-height: 30.8vh;
   max-height: 30.8vh;
   background:rgb(203, 230, 198)
 }
 .attackName-styles{
- font-weight:bold;
-  font-size:25px;
-  padding-bottom:10px;
-  border-bottom: 1px solid white;
+
+  font-size:1.2vw;
+  padding-bottom:2%;
+
 }
 .pathicon{
   width:400px;
