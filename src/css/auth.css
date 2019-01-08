@@ -1,0 +1,38 @@
+.title-styles{
+    font-size:4vw;
+    color: lightblue;
+    text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -1px black;
+    outline: #222;
+  letter-spacing: .4ch;
+  padding-bottom:1px;
+  border-bottom:1.5px solid wheat;
+  width:50%;
+  margin:0 auto;
+  margin-top:15vh;
+  }
+  .login-styles{
+  
+  background: rgba(255, 255, 255, 0.5);
+    width: 40%;
+    margin: 0 auto;
+  border:1px solid lightblue;
+   border-radius: .7vw .7vw 0px 0px;
+  margin-top:20vh;
+  }
+  .btn{
+    background:lightblue;
+    border-radius: 5px;
+    border-style:none;
+  }
+  .btn:hover{
+    background:wheat;
+    border-radius: 5px;
+  }
+  .login-styles .btn{
+    width:100%;
+    font-size:1.2vw;
+    
+  }
+  .btn-register{
+    background:lightgreen;
+  }
