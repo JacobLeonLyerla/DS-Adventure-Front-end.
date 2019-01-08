@@ -5,8 +5,8 @@
     margin: 0 auto;
   margin-top:60px;
   color:rgba(255, 255, 255, 0.945);
-  background:rgba(2, 120, 255, 0.801);
-  border-radius: 1vw 15vh;
+  background:rgba(67, 136, 214, 0.753);
+  border-radius: 1vw;
     border:1px solid black
   }
   .lore{
@@ -24,4 +24,26 @@
  }
  .progress-info .progress-bar {
   
+  }
+  .name-info{
+    height: 6vh;
+  background:rgb(137, 229, 137);
+  border-radius: 3vh 3vh 0vh 0vh;
+ 
+  }
+  .Rangerclass-info{
+    border-radius: 0vh 0vh 3vh 3vh;
+    height: 6vh;
+ background:darkgreen;
+  }
+  .Warriorclass-info{
+    border-radius: 0vh 0vh 3vh 3vh;
+    height: 6vh;
+    background:#c0392b;
+  }
+
+  .Mageclass-info{
+    border-radius: 0vh 0vh 3vh 3vh;
+    height: 6vh;
+    background:purple;
   }
