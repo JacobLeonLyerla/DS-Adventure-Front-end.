@@ -126,7 +126,7 @@ prgoressColor(value) {
     }  
     let health = this.state.player.health
     let endurance = this.state.player.endurance
-    let intellect = this.state.player.intelect
+    let intellect = this.state.player.intellect
     let strength = this.state.player.strength
     let agility = this.state.player.agility
     let total = this.state.player.health + this.state.player.endurance + this.state.player.intellect + this.state.player.strength + this.state.player.agility
@@ -137,10 +137,10 @@ prgoressColor(value) {
           <div className="info-styles">
         <div>
          
-         <div> Name: {this.state.player.name}
+         <div className="name-info">{this.state.player.name}
          </div>
-          <div>
-            Class: {this.state.player.class} <br />
+          <div className={`${this.state.player.class}class-info`}>
+           {this.state.player.class} <br />
     </div>
        
 
