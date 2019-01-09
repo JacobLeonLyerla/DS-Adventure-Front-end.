@@ -351,6 +351,7 @@ class Items extends Component {
                   <i class="fas fa-level-down-alt" />
                 </div>
               </div>
+              <div className="equip-Message">{(this.state.player[item.slot] === "none")?<div>Not Equipped</div>:""}</div>
               <div className="header-card">{item.name}</div>
               {/* style={{fontFamily:" Arial, Helvetica, sans-serif"}} */}
 
@@ -364,7 +365,7 @@ class Items extends Component {
 
               <div className={"progress-container"}>
                 <br />
-
+                
                 {(item.health * 2) / 5 > 0 ? (
                   <Fragment>
                     <div className="text-left">Health</div>
