@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import map from "../dungeons/assets/map1.jpg";
+import map from "../assets/map1.jpg";
 
 class Map extends Component {
   setRoom(room) {

@@ -3,14 +3,14 @@ import axios from "axios";
 import { Row, Col } from "reactstrap";
 import { Redirect } from "react-router-dom";
 // import paladin from "./img/paladinportrait.png";
-import rogue from "./assets/rogueportrait.jpg";
-import mage from "./assets/mageportrait.png";
-import warrior from "./assets/warriorportrait.png";
-import ranger from "./assets/rangerportrait.png";
-import necro from "./assets/necromancerportrait.jpg";
+import rogue from "../assets/rogueportrait.jpg";
+import mage from "../assets/mageportrait.png";
+import warrior from "../assets/warriorportrait.png";
+import ranger from "../assets/rangerportrait.png";
+import necro from "../assets/necromancerportrait.jpg";
 
 
-import imgs from "./assets/exportImgs.js"
+
 import { Progress } from "reactstrap";
 
 class Battle extends Component {
@@ -394,13 +394,10 @@ class Battle extends Component {
     return (
 
       <Fragment>
-        <div className="oppenent-styles"    style={{
-              backgroundImage: `url(${
-                imgs["wizardidlesml"]
-              })`}}>
+        <div className="oppenent-styles"  >
           <img 
             className={`${this.state.monster.rarity} monster-img`}
-            src={(this.state.battle === false)?require(`./assets/${this.state.monster.idle}.gif`):require(`./assets/${this.state.monster.battle}.gif`)}
+            src={(this.state.battle === false)?require(`../assets/${this.state.monster.idle}.gif`):require(`../assets/${this.state.monster.battle}.gif`)}
           />
         </div>
       </Fragment>
@@ -415,7 +412,7 @@ class Battle extends Component {
       <Fragment>
         <div className="adventurer-styles">
           <img  className={`${this.state.player.class} class-img`}
-    src={(this.state.battle === false)?require(`./assets/${this.state.player.idle}.gif`):require(`./assets/${this.state.player.battle}.gif`)}
+    src={(this.state.battle === false)?require(`../assets/${this.state.player.idle}.gif`):require(`../assets/${this.state.player.battle}.gif`)}
           />
         </div>
       </Fragment>

@@ -10,7 +10,7 @@
 }
 .loginbackground-styles{
   min-height:100vh;
-  background-image: url("../src/dungeons/assets/login.jpg");
+  background-image: url("../src/assets/login.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -18,7 +18,7 @@
 }
 .blackHeartBackground-styles{
   min-height:100vh;
-  background-image: url("../src/dungeons/assets/darkwood.jpg");
+  background-image: url("../src/assets/darkwood.jpg");
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -756,7 +756,7 @@ margin:0 auto;
   /*..................................................................... MAP */
   .mapBackground-styles{
     min-height:100vh;
-    background-image: url("../src/dungeons/assets/map1.jpg");
+    background-image: url("../src/assets/map1.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
