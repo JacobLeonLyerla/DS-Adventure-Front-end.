@@ -318,17 +318,15 @@ class Items extends Component {
     }
   }
   prgoressColor(value) {
-if (value > 70){
-  return "progress-high"
-}else if( value >50){
-  return "progress-good"
-} else if(value> 30){
-  return"progress-mid"
-
-}else{
-  return "progress-low"
-}
-
+    if (value > 70) {
+      return "progress-high";
+    } else if (value > 50) {
+      return "progress-good";
+    } else if (value > 30) {
+      return "progress-mid";
+    } else {
+      return "progress-low";
+    }
   }
   renderEquipment() {
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
@@ -340,9 +338,10 @@ if (value > 70){
           item.strength +
           item.agility;
 
+        console.log(this.state.player[item.slot]);
         return (
           <Fragment>
-            <div className={`${item.rarity}itemCard-styles itemCard-styles`}>
+            <div className={`${item.rarity}itemCard-styles itemCard-styles ${(this.state.player[item.slot] === "none")?"not-equipped":""}`}>
               <div className="move-styles">
                 <div
                   className="add-styles
@@ -355,20 +354,24 @@ if (value > 70){
               <div className="header-card">{item.name}</div>
               {/* style={{fontFamily:" Arial, Helvetica, sans-serif"}} */}
 
-                    <div   style={{
-                        fontFamily: " Arial, Helvetica, sans-serif",
-                       
-                      }}>{item.slot}</div>
+              <div
+                style={{
+                  fontFamily: " Arial, Helvetica, sans-serif"
+                }}
+              >
+                {item.slot}
+              </div>
 
               <div className={"progress-container"}>
-                
                 <br />
 
                 {(item.health * 2) / 5 > 0 ? (
                   <Fragment>
                     <div className="text-left">Health</div>
                     <Progress
-                    className={this.prgoressColor(Math.round((item.health / total) * 100))}
+                      className={this.prgoressColor(
+                        Math.round((item.health / total) * 100)
+                      )}
                       style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
                       value={Math.round((item.health / total) * 100)}
                     >
@@ -383,10 +386,11 @@ if (value > 70){
                   <Fragment>
                     <div className="text-left">Endurance</div>
                     <Progress
-                    className={this.prgoressColor(Math.round((item.endurance / total) * 100))}
+                      className={this.prgoressColor(
+                        Math.round((item.endurance / total) * 100)
+                      )}
                       style={{
-                        fontFamily: " Arial, Helvetica, sans-serif",
-                      
+                        fontFamily: " Arial, Helvetica, sans-serif"
                       }}
                       value={Math.round((item.endurance / total) * 100)}
                     >
@@ -401,7 +405,9 @@ if (value > 70){
                   <Fragment>
                     <div className="text-left">Intellect</div>
                     <Progress
-                    className={this.prgoressColor(Math.round((item.intellect / total) * 100))}
+                      className={this.prgoressColor(
+                        Math.round((item.intellect / total) * 100)
+                      )}
                       style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
                       value={Math.round((item.intellect / total) * 100)}
                     >
@@ -416,7 +422,9 @@ if (value > 70){
                   <Fragment>
                     <div className="text-left">Strength</div>
                     <Progress
-                    className={this.prgoressColor(Math.round((item.strength / total) * 100))}
+                      className={this.prgoressColor(
+                        Math.round((item.strength / total) * 100)
+                      )}
                       style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
                       value={Math.round((item.strength / total) * 100)}
                     >
@@ -431,7 +439,9 @@ if (value > 70){
                   <Fragment>
                     <div className="text-left">Agility</div>
                     <Progress
-                    className={this.prgoressColor(Math.round((item.agility / total) * 100))}
+                      className={this.prgoressColor(
+                        Math.round((item.agility / total) * 100)
+                      )}
                       style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
                       value={Math.round((item.agility / total) * 100)}
                     >
@@ -441,14 +451,10 @@ if (value > 70){
                 ) : (
                   <Fragment />
                 )}
-
-                
               </div>
-            <div className={`${item.rarity}Footer-styles footer`}>
-            
+              <div className={`${item.rarity}Footer-styles footer`}>
                 {item.rarity}
               </div>
-             
             </div>
             <br />
           </Fragment>
@@ -469,39 +475,43 @@ if (value > 70){
         return (
           <Fragment>
             <div className={`${item.rarity}itemCard-styles itemCard-styles`}>
-            <div className="move-styles">
-              <div
-                className="add-styles
+              <div className="move-styles">
+                <div
+                  className="add-styles
       "
-                onClick={() => this.checkDuplicate("Inventory", item)}
-              >
-                <i class="fas fa-level-up-alt" />
-              </div>
+                  onClick={() => this.checkDuplicate("Inventory", item)}
+                >
+                  <i class="fas fa-level-up-alt" />
+                </div>
 
-              <div
-                className="drop-styles"
-                onClick={() => this.deleteItem("Drop Item", item)}
-              >
-                <i class="far fa-times-circle" />
+                <div
+                  className="drop-styles"
+                  onClick={() => this.deleteItem("Drop Item", item)}
+                >
+                  <i class="far fa-times-circle" />
+                </div>
               </div>
-            </div>
               <div className="header-card">{item.name}</div>
               {/* style={{fontFamily:" Arial, Helvetica, sans-serif"}} */}
 
-                    <div   style={{
-                        fontFamily: " Arial, Helvetica, sans-serif",
-                       
-                      }}>{item.slot}</div>
+              <div
+                style={{
+                  fontFamily: " Arial, Helvetica, sans-serif"
+                }}
+              >
+                {item.slot}
+              </div>
 
               <div className={"progress-container"}>
-                
                 <br />
 
                 {(item.health * 2) / 5 > 0 ? (
                   <Fragment>
                     <div className="text-left">Health</div>
                     <Progress
-                    className={this.prgoressColor(Math.round((item.health / total) * 100))}
+                      className={this.prgoressColor(
+                        Math.round((item.health / total) * 100)
+                      )}
                       style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
                       value={Math.round((item.health / total) * 100)}
                     >
@@ -516,10 +526,11 @@ if (value > 70){
                   <Fragment>
                     <div className="text-left">Endurance</div>
                     <Progress
-                    className={this.prgoressColor(Math.round((item.endurance / total) * 100))}
+                      className={this.prgoressColor(
+                        Math.round((item.endurance / total) * 100)
+                      )}
                       style={{
-                        fontFamily: " Arial, Helvetica, sans-serif",
-                      
+                        fontFamily: " Arial, Helvetica, sans-serif"
                       }}
                       value={Math.round((item.endurance / total) * 100)}
                     >
@@ -534,7 +545,9 @@ if (value > 70){
                   <Fragment>
                     <div className="text-left">Intellect</div>
                     <Progress
-                    className={this.prgoressColor(Math.round((item.intellect / total) * 100))}
+                      className={this.prgoressColor(
+                        Math.round((item.intellect / total) * 100)
+                      )}
                       style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
                       value={Math.round((item.intellect / total) * 100)}
                     >
@@ -549,7 +562,9 @@ if (value > 70){
                   <Fragment>
                     <div className="text-left">Strength</div>
                     <Progress
-                    className={this.prgoressColor(Math.round((item.strength / total) * 100))}
+                      className={this.prgoressColor(
+                        Math.round((item.strength / total) * 100)
+                      )}
                       style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
                       value={Math.round((item.strength / total) * 100)}
                     >
@@ -564,7 +579,9 @@ if (value > 70){
                   <Fragment>
                     <div className="text-left">Agility</div>
                     <Progress
-                    className={this.prgoressColor(Math.round((item.agility / total) * 100))}
+                      className={this.prgoressColor(
+                        Math.round((item.agility / total) * 100)
+                      )}
                       style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
                       value={Math.round((item.agility / total) * 100)}
                     >
@@ -574,18 +591,15 @@ if (value > 70){
                 ) : (
                   <Fragment />
                 )}
-
-                
               </div>
-            <div className={`${item.rarity}Footer-styles footer`}>
-            
+              <div className={`${item.rarity}Footer-styles footer`}>
                 {item.rarity}
               </div>
-             
             </div>
             <br />
-            </Fragment>
-      )});
+          </Fragment>
+        );
+      });
     }
   }
 
@@ -598,126 +612,144 @@ if (value > 70){
           <br />
 
           {this.state.area.items.map(item => {
-        let total =
-          item.health +
-          item.endurance +
-          item.intellect +
-          item.strength +
-          item.agility;
+            let total =
+              item.health +
+              item.endurance +
+              item.intellect +
+              item.strength +
+              item.agility;
 
-        return (
-          <Fragment>
-            <div className={`${item.rarity}itemCard-styles itemCard-styles`}>
-              <div className="move-styles">
+            return (
+              <Fragment>
                 <div
-                  className="add-styles
-      "
-                  onClick={() => this.checkDuplicate("Equip", item)}
+                  className={`${item.rarity}itemCard-styles itemCard-styles`}
                 >
-                  <i class="fas fa-level-down-alt" />
+                  <div className="move-styles">
+                    <div
+                      className="add-styles
+      "
+                      onClick={() => this.checkDuplicate("Equip", item)}
+                    >
+                      <i class="fas fa-level-down-alt" />
+                    </div>
+                  </div>
+                  <div className="header-card">{item.name}</div>
+                  {/* style={{fontFamily:" Arial, Helvetica, sans-serif"}} */}
+
+                  <div
+                    style={{
+                      fontFamily: " Arial, Helvetica, sans-serif"
+                    }}
+                  >
+                    {item.slot}
+                  </div>
+
+                  <div className={"progress-container"}>
+                    <br />
+
+                    {(item.health * 2) / 5 > 0 ? (
+                      <Fragment>
+                        <div className="text-left">Health</div>
+                        <Progress
+                          className={this.prgoressColor(
+                            Math.round((item.health / total) * 100)
+                          )}
+                          style={{
+                            fontFamily: " Arial, Helvetica, sans-serif"
+                          }}
+                          value={Math.round((item.health / total) * 100)}
+                        >
+                          {item.health}
+                        </Progress>
+                      </Fragment>
+                    ) : (
+                      <Fragment />
+                    )}
+
+                    {(item.endurance * 2) / 5 > 0 ? (
+                      <Fragment>
+                        <div className="text-left">Endurance</div>
+                        <Progress
+                          className={this.prgoressColor(
+                            Math.round((item.endurance / total) * 100)
+                          )}
+                          style={{
+                            fontFamily: " Arial, Helvetica, sans-serif"
+                          }}
+                          value={Math.round((item.endurance / total) * 100)}
+                        >
+                          {item.endurance}
+                        </Progress>
+                      </Fragment>
+                    ) : (
+                      <Fragment />
+                    )}
+
+                    {(item.intellect * 2) / 5 > 0 ? (
+                      <Fragment>
+                        <div className="text-left">Intellect</div>
+                        <Progress
+                          className={this.prgoressColor(
+                            Math.round((item.intellect / total) * 100)
+                          )}
+                          style={{
+                            fontFamily: " Arial, Helvetica, sans-serif"
+                          }}
+                          value={Math.round((item.intellect / total) * 100)}
+                        >
+                          {item.intellect}
+                        </Progress>
+                      </Fragment>
+                    ) : (
+                      <Fragment />
+                    )}
+
+                    {(item.strength * 2) / 5 > 0 ? (
+                      <Fragment>
+                        <div className="text-left">Strength</div>
+                        <Progress
+                          className={this.prgoressColor(
+                            Math.round((item.strength / total) * 100)
+                          )}
+                          style={{
+                            fontFamily: " Arial, Helvetica, sans-serif"
+                          }}
+                          value={Math.round((item.strength / total) * 100)}
+                        >
+                          {item.strength}
+                        </Progress>
+                      </Fragment>
+                    ) : (
+                      <Fragment />
+                    )}
+
+                    {(item.agility * 2) / 5 > 0 ? (
+                      <Fragment>
+                        <div className="text-left">Agility</div>
+                        <Progress
+                          className={this.prgoressColor(
+                            Math.round((item.agility / total) * 100)
+                          )}
+                          style={{
+                            fontFamily: " Arial, Helvetica, sans-serif"
+                          }}
+                          value={Math.round((item.agility / total) * 100)}
+                        >
+                          {item.agility}
+                        </Progress>
+                      </Fragment>
+                    ) : (
+                      <Fragment />
+                    )}
+                  </div>
+                  <div className={`${item.rarity}Footer-styles footer`}>
+                    {item.rarity}
+                  </div>
                 </div>
-              </div>
-              <div className="header-card">{item.name}</div>
-              {/* style={{fontFamily:" Arial, Helvetica, sans-serif"}} */}
-
-                    <div   style={{
-                        fontFamily: " Arial, Helvetica, sans-serif",
-                       
-                      }}>{item.slot}</div>
-
-              <div className={"progress-container"}>
-                
                 <br />
-
-                {(item.health * 2) / 5 > 0 ? (
-                  <Fragment>
-                    <div className="text-left">Health</div>
-                    <Progress
-                    className={this.prgoressColor(Math.round((item.health / total) * 100))}
-                      style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
-                      value={Math.round((item.health / total) * 100)}
-                    >
-                      {item.health}
-                    </Progress>
-                  </Fragment>
-                ) : (
-                  <Fragment />
-                )}
-
-                {(item.endurance * 2) / 5 > 0 ? (
-                  <Fragment>
-                    <div className="text-left">Endurance</div>
-                    <Progress
-                    className={this.prgoressColor(Math.round((item.endurance / total) * 100))}
-                      style={{
-                        fontFamily: " Arial, Helvetica, sans-serif",
-                      
-                      }}
-                      value={Math.round((item.endurance / total) * 100)}
-                    >
-                      {item.endurance}
-                    </Progress>
-                  </Fragment>
-                ) : (
-                  <Fragment />
-                )}
-
-                {(item.intellect * 2) / 5 > 0 ? (
-                  <Fragment>
-                    <div className="text-left">Intellect</div>
-                    <Progress
-                    className={this.prgoressColor(Math.round((item.intellect / total) * 100))}
-                      style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
-                      value={Math.round((item.intellect / total) * 100)}
-                    >
-                      {item.intellect}
-                    </Progress>
-                  </Fragment>
-                ) : (
-                  <Fragment />
-                )}
-
-                {(item.strength * 2) / 5 > 0 ? (
-                  <Fragment>
-                    <div className="text-left">Strength</div>
-                    <Progress
-                    className={this.prgoressColor(Math.round((item.strength / total) * 100))}
-                      style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
-                      value={Math.round((item.strength / total) * 100)}
-                    >
-                      {item.strength}
-                    </Progress>
-                  </Fragment>
-                ) : (
-                  <Fragment />
-                )}
-
-                {(item.agility * 2) / 5 > 0 ? (
-                  <Fragment>
-                    <div className="text-left">Agility</div>
-                    <Progress
-                    className={this.prgoressColor(Math.round((item.agility / total) * 100))}
-                      style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
-                      value={Math.round((item.agility / total) * 100)}
-                    >
-                      {item.agility}
-                    </Progress>
-                  </Fragment>
-                ) : (
-                  <Fragment />
-                )}
-
-                
-              </div>
-            <div className={`${item.rarity}Footer-styles footer`}>
-            
-                {item.rarity}
-              </div>
-             
-            </div>
-            <br />
-            </Fragment>
-          )})}
+              </Fragment>
+            );
+          })}
         </div>
         <div className="class-styles">
           <img
