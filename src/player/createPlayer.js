@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
+
 import { Redirect } from "react-router-dom";
 import {
   Form,
@@ -26,7 +27,7 @@ class Create extends Component {
     agility: 0,
     intellect: 0,
     strength: 0,
-   
+    preview:"",
 
   };
 
@@ -175,7 +176,8 @@ class Create extends Component {
           class: "",
           gender: "",
           email: "",
-          button:""
+          button:"",
+          preview:"",
         });
       })
       .catch(error => {});
@@ -202,11 +204,23 @@ class Create extends Component {
   }
   render() {
     return (
-      <Fragment>
-        <div className="loginbackground-styles">
-          {this.renderRedirect()}
-          <br />
+      <Fragment> 
 
+       
+        <div className="loginbackground-styles">  
+           
+           {(this.state.preview !=="")?(
+           <div style={{height:"15vh"}}>
+ <img
+ style={{height:"100%"}}
+        src={(require(`../assets/${this.state.preview}.gif`))}/>
+
+     </div>):(<div style={{height:"15vh"}}></div>)}
+          {this.renderRedirect()}
+
+
+          <br />
+   
           <Form className="create-styles" onSubmit={ this.addPlayer}>
 
           {(this.state.class !=="")?(<Fragment> <Alert color="success">
@@ -298,25 +312,27 @@ class Create extends Component {
        </div>
             {/* <button className="btn"  onClick={() => this.handleClass("Paladin")}>Paladin</button> */}
             <div>
-            <button className={`btn ${this.setButtonStyle("Warrior")}`} onClick={()=> this.setState({class:"Warrior",button:"Warrior"})}>
+            <button type="button" className={`btn ${this.setButtonStyle("Warrior")}`} onClick={()=> this.setState({class:"Warrior",button:"Warrior",preview:"warrioridle"})}>
               Warrior
             </button>
             {/* <button className="btn"  onClick={() => this.handleClass("Necromancer")}>
           Necromancer
         </button> */}
             {/* <button className="btn"  onClick={() => this.handleClass("Rogue")}>Rogue</button> */}
-            <button className={`btn ${this.setButtonStyle("Ranger")}`} onClick={()=> this.setState({class:"Ranger",button:"Ranger"})}>
+            <button type="button" className={`btn ${this.setButtonStyle("Ranger")}`} onClick={()=> this.setState({class:"Ranger",button:"Ranger",preview:"rangeridle"})}>
               Ranger
             </button>
-            <button className={`btn ${this.setButtonStyle("Mage")}`} onClick={()=> this.setState({class:"Mage",button:"Mage"})}>
+            <button type="button" className={`btn ${this.setButtonStyle("Mage")}`} onClick={()=> this.setState({class:"Mage",button:"Mage",preview:"mageidle"})}>
               Mage
             </button>
+
             </div>
             <button className="btn btn-create"  type="submit">
               Create Character
             </button>
             
-          </Form>
+          </Form> 
+              
         </div>
       </Fragment>
     );
