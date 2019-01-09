@@ -193,13 +193,20 @@ border-radius:15px;
 
 }
 .itemCard-styles{ 
-  min-height: 36vh;
+  min-height: 46vh;
  font-size:.9vw;
  min-width:9vw;
+
 }
-.not-equipped{
-  opacity: 0.5;
-  content: "•"; /* Insert content that looks like bullets */
+
+  .not-equipped{
+    background:lightcoral;
+  }
+
+.equip-Message{
+ 
+  color:lightblue;
+  font-size:1.2vw;
 }
 .itemCard-styles:hover{
   filter: brightness(150%)
