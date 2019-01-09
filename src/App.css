@@ -197,7 +197,10 @@ border-radius:15px;
  font-size:.9vw;
  min-width:9vw;
 }
-
+.not-equipped{
+  opacity: 0.5;
+  content: "•"; /* Insert content that looks like bullets */
+}
 .itemCard-styles:hover{
   filter: brightness(150%)
 }
