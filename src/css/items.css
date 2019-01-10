@@ -1,0 +1,196 @@
+
+.Items{
+    width: 70%;
+    display:flex;
+    padding: 10px;
+    margin: 0 auto;
+   
+    justify-content: center;
+    flex-wrap:wrap;
+    background:rgba(0, 0, 0, 0.288)
+    
+    
+  }
+  .bigItemHeader-styles{
+    border-bottom:1px solid black;
+    width:70%;
+    justify-content: center;
+    margin: 0 auto;
+    font-size:1.5vw;
+    padding-top:20px;
+    border-top:1px solid black;
+    color:white;
+      text-shadow: -2px 0 black, 0 2px black, 1px 0 black, 0 -1px black;
+    outline: #222;
+    background:rgba(0, 0, 0, 0.288)
+  }
+  .commonitemCard-styles{
+   
+    width:23%;
+    min-width:300px;
+    font-size: 13px;
+    border:.5px solid black;
+    padding:7px;
+    background:gray;
+    color:white;
+  margin:10px;
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
+  border-radius:15px;
+  
+  }
+  .uncommonitemCard-styles{
+    width:23%;
+    min-width:300px;
+    font-size: 13px;
+    border:.5px solid black;
+    padding:7px;
+    background:darkgreen;
+    color: white;
+  margin:10px;
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
+  border-radius:15px;
+  
+  }
+  .rareitemCard-styles{
+    width:23%;
+    min-width:300px;
+    font-size: 13px;
+    border:.5px solid black;
+    padding:7px;
+    background:rgb(65, 146, 173);
+    color: white;
+  margin:10px;
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
+  border-radius:15px;
+  
+  }
+  .epicitemCard-styles{
+    width:23%;
+    min-width:300px;
+    font-size: 13px;
+    border:.5px solid black;
+    padding:7px;
+    background:purple;
+    color: white;
+  margin:10px;
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
+  border-radius:15px;
+  
+  }
+  .legendaryitemCard-styles{
+    width:23%;
+    min-width:300px;
+    font-size: 13px;
+    border:.5px solid black;
+    padding:7px;
+    background:#113A5E;
+    color: white;
+  margin:10px;
+  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
+  border-radius:15px;
+  
+  }
+  .itemCard-styles{ 
+    min-height: 46vh;
+   font-size:.9vw;
+   min-width:9vw;
+  
+  }
+  
+    .not-equipped{
+      background:lightcoral;
+    }
+  
+  .equip-Message{
+   
+    color:lightblue;
+    font-size:1.2vw;
+  }
+  .itemCard-styles:hover{
+    filter: brightness(150%)
+  }
+  .commonFooter-styles{
+    font-size:25px;
+    color:lightgrey
+  }
+  .uncommonFooter-styles{
+    font-size:25px;
+    color:lightgreen
+  }
+  .rareFooter-styles{
+    font-size:25px;
+    color:blue
+  }
+  .epicFooter-styles{
+    font-size:25px;
+    color:palevioletred;
+  }
+  
+  .legendaryFooter-styles{
+    font-size:25px;
+    color:goldenrod;
+  }
+  .footer{
+    font-size:2vw;
+    padding-bottom:1vh;
+  }
+  .header-card{
+    border-bottom:2px dotted white;
+  }
+  .itemsHeader-styles{
+    font-size:16px;
+    display:flex;
+    justify-content: center
+  
+    /* border-bottom: .5px solid black; */
+  }
+  
+  .delete-styles{
+    color:lightgreen;
+    font-size:20px;
+  }
+  .move-styles{
+    display:flex;
+    font-size:15px;
+    padding-right:10px;
+  }
+  .add-styles{
+    width:80%;
+    display:flex;
+    justify-content: start;
+    color:lightgreen;
+    padding-left:4px;
+    font-size:20px;
+  
+  }
+  .drop-styles{
+    display:flex;
+    justify-content: flex-end;
+  
+    width: 20%;
+  color:lightcoral;
+  
+  
+  }
+  .progress-container{
+    min-height: 57.3%;
+  }
+  .progress-low .progress-bar{
+    background:  #fea3aa  ; 
+    color:black;
+    font-size:1vw;
+  }
+  .progress-mid .progress-bar{
+    background:  #f8b88b  ; 
+    font-size:1vw;
+  }
+  .progress-good .progress-bar{
+    background:  #b2cefe  ; 
+    font-size:1vw;
+  }
+  .progress-high .progress-bar{
+    background:  #baed91   ; 
+    font-size:1vw;
+  
+  }
+  
