@@ -9,8 +9,6 @@ import warrior from "../assets/warriorportrait.png";
 import ranger from "../assets/rangerportrait.png";
 import necro from "../assets/necromancerportrait.jpg";
 
-
-
 import { Progress } from "reactstrap";
 
 class Battle extends Component {
@@ -27,7 +25,7 @@ class Battle extends Component {
     tempMonHP: 0,
     redirect: false,
 
-    battle:false
+    battle: false
   };
   componentDidMount() {
     let { id } = this.props.match.params;
@@ -132,17 +130,15 @@ class Battle extends Component {
   }
 
   startBattle(damage, cost, hitChance, name) {
+    let change = () => {
+      this.setState({ battle: false });
+    };
 
-  let change=()=>{
-    this.setState({battle:false})
-  }
+    setTimeout(function() {
+      change();
+    }, 2270);
+    this.setState({ battle: true });
 
-  setTimeout(function(){ change()},2270)
-    this.setState({battle:true})
-
- 
-
-    
     hitChance = Math.round(
       hitChance +
         this.state.player.agility * 1 +
@@ -300,7 +296,6 @@ class Battle extends Component {
         })
         .catch(err => {});
     }
-   
   }
 
   death(died) {
@@ -390,33 +385,40 @@ class Battle extends Component {
   };
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ RENDERS
   renderOpponent() {
-    if(this.state.monster.idle !== undefined){
-    return (
-
-      <Fragment>
-        <div className="oppenent-styles"  >
-          <img 
-            className={`${this.state.monster.rarity} monster-img`}
-            src={(this.state.battle === false)?require(`../assets/${this.state.monster.idle}.gif`):require(`../assets/${this.state.monster.battle}.gif`)}
-          />
-        </div>
-      </Fragment>
-    );
+    if (this.state.monster.idle !== undefined) {
+      return (
+        <Fragment>
+          <div className="oppenent-styles">
+            <img
+              className={`${this.state.monster.rarity} monster-img`}
+              src={
+                this.state.battle === false
+                  ? require(`../assets/${this.state.monster.idle}.gif`)
+                  : require(`../assets/${this.state.monster.battle}.gif`)
+              }
+            />
+          </div>
+        </Fragment>
+      );
+    }
   }
 
-  } 
-
   renderAdventurer() {
-    if(this.state.player.idle !== undefined){
-    return (
-      <Fragment>
-        <div className="adventurer-styles">
-          <img  className={`${this.state.player.class} class-img`}
-    src={(this.state.battle === false)?require(`../assets/${this.state.player.idle}.gif`):require(`../assets/${this.state.player.battle}.gif`)}
-          />
-        </div>
-      </Fragment>
-    );
+    if (this.state.player.idle !== undefined) {
+      return (
+        <Fragment>
+          <div className="adventurer-styles">
+            <img
+              className={`${this.state.player.class} class-img`}
+              src={
+                this.state.battle === false
+                  ? require(`../assets/${this.state.player.idle}.gif`)
+                  : require(`../assets/${this.state.player.battle}.gif`)
+              }
+            />
+          </div>
+        </Fragment>
+      );
     }
   }
   pickPortrait(classname) {
@@ -448,9 +450,14 @@ class Battle extends Component {
     );
     return (
       <Fragment>
-        <div className={this.state.monster.rarity + "Stats-styles mid-battle progress-container"}>
+        <div
+          className={
+            this.state.monster.rarity +
+            "Stats-styles mid-battle progress-container"
+          }
+        >
           <div className="top-progress">
-          <p>{this.state.monster.name}</p>
+            <p>{this.state.monster.name}</p>
             <Progress color="success" value={currentpercent}>
               {" "}
               {`${this.state.tempMonHP}`}
@@ -463,27 +470,32 @@ class Battle extends Component {
           </div>
 
           <div className="combatLog-styles">
-            {(this.state.tempPlayer.combat ==="hit")?(<div className="opponent-hit">{`${this.state.monster.name} ${
-              this.state.tempPlayer.combat
-            } with ${this.state.tempPlayer.spellUsed}`}</div>):(<div className="opponent-miss">{`${this.state.monster.name} ${
-              this.state.tempPlayer.combat
-            } with ${this.state.tempPlayer.spellUsed}`}</div>)}
-        
-           
-        {(this.state.tempMonster.combat ==="hit")?(<div className={"player-hit"}>{`${this.state.player.name} ${
-              this.state.tempMonster.combat
-            } with ${this.state.tempMonster.spellUsed}`}</div>  )
-          
-          :(<div className={"player-miss"}>{`${this.state.player.name} ${
-            this.state.tempMonster.combat
-          } with ${this.state.tempMonster.spellUsed}`}</div>)}
-</div>
+            {this.state.tempPlayer.combat === "hit" ? (
+              <div className="opponent-hit">{`${this.state.monster.name} ${
+                this.state.tempPlayer.combat
+              } with ${this.state.tempPlayer.spellUsed}`}</div>
+            ) : (
+              <div className="opponent-miss">{`${this.state.monster.name} ${
+                this.state.tempPlayer.combat
+              } with ${this.state.tempPlayer.spellUsed}`}</div>
+            )}
+
+            {this.state.tempMonster.combat === "hit" ? (
+              <div className={"player-hit"}>{`${this.state.player.name} ${
+                this.state.tempMonster.combat
+              } with ${this.state.tempMonster.spellUsed}`}</div>
+            ) : (
+              <div className={"player-miss"}>{`${this.state.player.name} ${
+                this.state.tempMonster.combat
+              } with ${this.state.tempMonster.spellUsed}`}</div>
+            )}
+          </div>
           <div className="bottom-progress">
             <Progress color="info" value={playerend}>
               {" "}
               {`${this.state.tempPlayer.endurance}`}
             </Progress>
-      
+
             <Progress color="success" value={currentPlayerhp}>
               {" "}
               {`${this.state.tempPlayer.health}`}
@@ -532,7 +544,6 @@ class Battle extends Component {
   //   ));
   // }
   adventurerAttacks() {
-    
     let attack = { name: "" };
     if (this.state.attacks !== []) {
       attack = this.state.attacks[this.state.currentSpell];
@@ -592,7 +603,7 @@ class Battle extends Component {
                 />
               </div>
               <div style={{ color: "lightcoral" }}>Attack</div>
-           
+
               <div>{attack.description}</div>
             </div>
           </Fragment>
@@ -648,25 +659,18 @@ class Battle extends Component {
       .catch(err => {});
   }
   opponentAttacks() {
-    
     return this.state.monster.attacks.map(attack => (
       <Fragment>
-      
-          <div className="opponentAttacks-styles">
-          
-            <div className="attackName-styles">{attack.name}</div>
-       
-         <div className="opponent-damage">
+        <div className="opponentAttacks-styles">
+          <div className="attackName-styles">{attack.name}</div>
+
+          <div className="opponent-damage">
             Damage:{" "}
-           
             {Math.round(
               attack.damage + (attack.damage * this.state.player.level) / 7
             )}
-         
-          </div> 
-           <div className="opponent-cost">
-            Cost : {attack.cost}
-         </div>
+          </div>
+          <div className="opponent-cost">Cost : {attack.cost}</div>
         </div>
       </Fragment>
     ));
@@ -720,7 +724,7 @@ class Battle extends Component {
   }
 
   render() {
-    console.log(this.state)
+    console.log(this.state);
     return (
       <Fragment>
         {this.renderRedirect()}
@@ -746,8 +750,11 @@ class Battle extends Component {
             {this.renderStats()}
           </Col>
           <Col md="3" className="mid-col">
-          <div className={this.state.monster.rarity + "Stats-styles mid-battle"}>
-            {this.opponentAttacks()}</div>
+            <div
+              className={this.state.monster.rarity + "Stats-styles mid-battle"}
+            >
+              {this.opponentAttacks()}
+            </div>
           </Col>
         </Row>
         <br />
