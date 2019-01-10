@@ -344,15 +344,7 @@ class Items extends Component {
       return "progress-low";
     }
   }
-  removeDups=(names)=>{
-    let unique = {};
-    names.forEach(function(i) {
-      if(!unique[i]) {
-        unique[i] = true;
-      }
-    });
-    return Object.keys(unique);
-  }
+  
   renderEquipment() {
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
       return this.state.player.gear.map(item => {
@@ -491,11 +483,27 @@ class Items extends Component {
   renderItems() {
     
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
+
+      let flag = false; 
       let items = this.state.player.items;
-      let x = (items) => items.filter((v,i) => items.indexOf(v) === i)
-      console.log(x(filter))
-      removeDups(names)
-      console.log(x,this.state.player.items)
+
+
+    //   let unique_array =  items.filter((obj, pos, arr) => {
+    //     flag = false
+    //      return  arr.map(mapObj => {
+         
+    //     if(obj === mapObj){
+    //       flag = true
+       
+    //     }
+    //    else{
+  
+    //     return obj
+    //     }
+    // })});
+    
+
+    //  console.log(unique_array)
       return this.state.player.items.map(item => {
         let total =
           item.health +
