@@ -58,6 +58,7 @@ class Items extends Component {
   };
 
   deleteItem(type, loot) {
+    console.log(loot,type)
     let items = {};
     switch (type) {
       case "Loot":
@@ -97,13 +98,23 @@ class Items extends Component {
           this.state.player.gear.push(loot._id);
 
           items.gear = this.state.player.gear;
+
+             items.items = this.state.player.items;
+          items[loot.slot] = "Equipped"
+          items.health = this.state.player.health += loot.health
+          items.endurance = this.state.player.endurance += loot.endurance
+          items.intellect = this.state.player.intellect += loot.intellect
+          items.strength = this.state.player.strength += loot.strength
+          items.agility = this.state.player.agility += loot.agility
         } else if (type === "Equip") {
           items.gear = this.state.player.gear.filter(
             item => item._id !== loot._id
           );
           this.state.player.items.push(loot._id);
-
-          items.items = this.state.player.items;
+          items.items = this.state.player.items
+       
+        
+        
         }
         break;
       case "Drop Item":
@@ -238,6 +249,9 @@ class Items extends Component {
     } else {
     }
   }
+  addEquippment=()=>{
+
+  }
 
   classIcon(classname) {
     if (classname === "Paladin") return paladin;
@@ -247,6 +261,8 @@ class Items extends Component {
     if (classname === "Warrior") return warrior;
     if (classname === "Rogue") return rogue;
   }
+
+
   checkDuplicate(type, loot) {
     let dup = false;
     if (type === "Inventory") {
@@ -327,6 +343,15 @@ class Items extends Component {
     } else {
       return "progress-low";
     }
+  }
+  removeDups=(names)=>{
+    let unique = {};
+    names.forEach(function(i) {
+      if(!unique[i]) {
+        unique[i] = true;
+      }
+    });
+    return Object.keys(unique);
   }
   renderEquipment() {
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
@@ -464,7 +489,13 @@ class Items extends Component {
     }
   }
   renderItems() {
+    
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
+      let items = this.state.player.items;
+      let x = (items) => items.filter((v,i) => items.indexOf(v) === i)
+      console.log(x(filter))
+      removeDups(names)
+      console.log(x,this.state.player.items)
       return this.state.player.items.map(item => {
         let total =
           item.health +
@@ -774,9 +805,7 @@ class Items extends Component {
         <div className={"bigItemHeader-styles"}>Items in equipped</div>
 
         <div className="Items">{this.renderEquipment()}</div>
-        <Link to={`/equip/${this.state.player._id}`}>
-          <button className="btn equip-hero">equip hero</button>
-        </Link>
+    
 
         <div className={"bigItemHeader-styles"}>Items in inventory</div>
         <div className="Items">
