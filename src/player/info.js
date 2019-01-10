@@ -14,7 +14,8 @@ class Info extends Component {
     password: "",
     gender: "",
     redirect: false,
-    visible: false
+    visible: false,
+    preview:""
   };
   componentDidMount() {
     const { id } = this.props.match.params;
@@ -24,7 +25,8 @@ class Info extends Component {
     axios
       .get(`https://dungeon-run.herokuapp.com/players/${id}`)
       .then(response => {
-        this.setState({ player: response.data });
+       
+        this.setState({ player: response.data,preview:response.data.idle });
       })
       .catch(err => {
       });
@@ -98,7 +100,8 @@ prgoressColor(value) {
   render() {
     let element = null;
     if (this.state.visible) {
-      element = (
+    element = (<Fragment>
+       <img src={(require(`../assets/${this.state.player.idle}.gif`))}/>
         <form>
           <label>
             Name:
@@ -122,7 +125,7 @@ prgoressColor(value) {
             Update Character
           </button> */}
         </form>
-      );
+      </Fragment>);
     }  
     let health = this.state.player.health
     let endurance = this.state.player.endurance
@@ -131,9 +134,18 @@ prgoressColor(value) {
     let agility = this.state.player.agility
     let total = this.state.player.health + this.state.player.endurance + this.state.player.intellect + this.state.player.strength + this.state.player.agility
   
+    console.log(this.state.preview)
     return (
       <Fragment><div className="loginbackground-styles">
-       <br/>
+  
+       {(this.state.preview !== "")?
+       <div style={{height:"13vh"}}><img
+       style={{height:"100%"}}
+
+        src={require(`../assets/${this.state.preview}.gif`)}/></div>:<div></div>}
+
+
+
           <div className="info-styles">
         <div>
          
