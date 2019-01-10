@@ -1,0 +1,89 @@
+.App {
+    text-align: center;
+    font-family: 'Gloria Hallelujah', cursive;
+    
+    font-size:64.5%;
+  }
+  .loginbackground-styles{
+    min-height:100vh;
+    background-image: url("../assets/login.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  .blackHeartBackground-styles{
+    min-height:100vh;
+    background-image: url("../assets/darkwood.jpg");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+  }
+  
+  .App-header {
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white;
+  }
+  
+  .App-title {
+    font-size: 1.5em;
+  }
+  
+  .App-intro {
+    font-size: large;
+  }
+  
+  @keyframes App-logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  input{
+    margin:5px;
+    font-family:" Arial, Helvetica, sans-serif"
+  }
+  button{
+   margin:2px;;
+  }
+  
+  
+  /* .labels-styles{
+    widows: 50%;
+    margin:0 auto;
+  }
+  a{
+    margin-right: 30px;
+  } */
+  .BlackHeart{
+    border-radius: 15px;
+    border:.5px solid black;
+    width:70%;
+    font-size: 2.2vw;
+    background:wheat;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding:10px;
+    box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.288);
+  
+  
+  
+  }
+  .BlackHeart .fas{
+    font-size:3.3vw
+  
+  }
+  .BlackHeart .btn{
+    width:50%;
+    font-size:1.3vw
+  
+  }
+  .BlackHeart .btn:hover{
+   
+   background:lightgreen; 
+  }
