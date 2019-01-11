@@ -219,7 +219,6 @@ class Create extends Component {
           {this.renderRedirect()}
 
 
-          <br />
    
           <Form className="create-styles" onSubmit={ this.addPlayer}>
 
