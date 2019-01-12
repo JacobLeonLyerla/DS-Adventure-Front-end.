@@ -15,7 +15,7 @@ class Player extends Component {
           <br />
 
           <div className="title-styles">Dungeon Race</div>
-
+        {/* Log in form for the player passes the data back to app.js */}
           <Form
             className="login-styles"
             onClick={e =>
