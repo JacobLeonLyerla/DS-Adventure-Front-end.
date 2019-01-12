@@ -24,6 +24,7 @@ class App extends Component {
   componentDidMount() {
     this.setPlayer();
   }
+  // pulls the player from the database ad sets it on the  state
   setPlayer = reload => {
     axios
       .get("https://dungeon-run.herokuapp.com/players")
@@ -35,9 +36,11 @@ class App extends Component {
       })
       .catch(err => {});
   };
+  // this takes the event in this case it's the onChange of the input field and setsi t on state
   handleInput = input => {
     this.setState({ [input.target.name]: input.target.value });
   };
+  // this uses the players name to find him in the data base
   findPlayer = (name, pass) => {
     this.state.players.forEach(player => {
       if (player.name.toLowerCase() === name.toLowerCase()) {
@@ -56,6 +59,7 @@ class App extends Component {
       }
     });
   };
+  // loads the player frm the data base this route
   loadPlayer = (e,name, password) => {
     e.preventDefault();
     const user = {
@@ -85,11 +89,14 @@ class App extends Component {
       })
       .catch(err => {});
   };
+  // this renders a redirect if redirect is ever true
   renderRedirect = id => {
     if (this.state.redirect) {
       return <Redirect to={`/info/${id}`} />;
     }
   };
+  // this background is only loaded if it's not on either of those sites so if it's on another one than it will load, 
+  // it also loads on local host, because i have not cared enough to add local host in
   bhbackground() {
     if (
       window.location.href !== "https://dungeon-run.netlify.com/create" &&
@@ -98,6 +105,7 @@ class App extends Component {
       return "blackHeartBackground-styles";
     }
   }
+  // the render has all the routes contained in side of it.
   render() {
     return (
       <div className="App">
