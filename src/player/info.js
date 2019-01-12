@@ -17,10 +17,13 @@ class Info extends Component {
     visible: false,
     preview:""
   };
+  // deconstruct id from params use it to call set player function
   componentDidMount() {
     const { id } = this.props.match.params;
     this.setCurrentPlayer(id);
   }
+  // take id from the  component did mount use it do grab the player from the database than 
+  // set that data on state
   setCurrentPlayer = id => {
     axios
       .get(`https://dungeon-run.herokuapp.com/players/${id}`)
@@ -31,7 +34,8 @@ class Info extends Component {
       .catch(err => {
       });
   };
-
+// this was going to allow people to edit player info, however it is not currently
+// in the game because emplementing it was a bit wonky i'll try something a bit later
   updatePlayer = id => {
     const player = {};
     if (this.state.name !== "") {
@@ -72,6 +76,9 @@ itemsRender(){
 }
 
 }
+// this is to render the gear inside of the user information,
+// this is also currently not being used, however i may make a gear
+// button that allows users to pull up  little screen with the gear
 gearRender(){
   if(this.state.player.items !==[]){
   return (this.state.player.gear.map(item => (<Fragment>
@@ -84,6 +91,7 @@ gearRender(){
 }
 
 }
+// this takes the value of the bar and gives it a style based on that 
 prgoressColor(value) {
   if (value > 70){
     return "progress-high"
@@ -99,9 +107,12 @@ prgoressColor(value) {
     }
   render() {
     let element = null;
+    // when this.state.visable comes back as defined than it will render a gif above the form
     if (this.state.visible) {
     element = (<Fragment>
        <img src={(require(`../assets/${this.state.player.idle}.gif`))}/>
+
+       {/* Header of the form with basic info and so name and class */}
         <form>
           <label>
             Name:
@@ -127,6 +138,8 @@ prgoressColor(value) {
         </form>
       </Fragment>);
     }  
+    // set up up variables we will be using inside of our progress bars
+    
     let health = this.state.player.health
     let endurance = this.state.player.endurance
     let intellect = this.state.player.intellect
@@ -134,7 +147,6 @@ prgoressColor(value) {
     let agility = this.state.player.agility
     let total = this.state.player.health + this.state.player.endurance + this.state.player.intellect + this.state.player.strength + this.state.player.agility
   
-    console.log(this.state.preview)
     return (
       <Fragment><div className="loginbackground-styles">
   
@@ -156,7 +168,10 @@ prgoressColor(value) {
     </div>
        
 
-
+{/* first we check to make sure the bar has a value, if not we do not render it
+than we check what percent this bars value is compared to the total of all the stats
+that allows us to get back a class name for the styling of these bars
+lastly we set the value based on the same logic */}
 {(health * 2) / 5 > 0 ? (
   <Fragment>
     <div className="text-left">Health</div>
@@ -241,34 +256,10 @@ className={`${this.prgoressColor(Math.round((agility / total) * 100))} progress-
           {this.state.player.bio}
           </div>
          
-          {/* <div>
- 
-            Equipment:
-            <br/><br/>
-            
-              {this.itemsRender()}
-          </div> */}
-          <br/>
-          {/* <div>
- 
-            Bags:
-            <br/><br/>
-            
-                {this.state.player.items.map(bag => (<Fragment>
-                <div>{bag.name}</div><br/>
-               
 
-            </Fragment>))} 
-          </div> */}
         </div>
-        
-        {/* <button onClick={() => this.setState({ visible: !this.state.visible })}>
-          Edit hero
-        </button> */}
-        <br />
         {element}
 
-        <br />
         </div>
         <br/>
         <Link to={`/dungeons/${this.state.player._id}`}><button className="btn dungeons-styles" >Dungeons</button></Link>
