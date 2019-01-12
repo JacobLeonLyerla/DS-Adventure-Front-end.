@@ -7,7 +7,6 @@ import {
   Alert,
   Label,
   Input,
-
   Col,
   Row
 } from "reactstrap";
@@ -30,7 +29,10 @@ class Create extends Component {
     preview:"",
 
   };
-
+  // this is a function to post a new adventurer  to the database,
+  // it pulls the data off the payload and sets it into a object
+  //with a few basic checks but i actually have set the checks to handle on the back end so the checks here are 
+  // really just second lines of defense
   addPlayer = e => {
     e.preventDefault();
     this.state.redirect = false;
@@ -79,6 +81,10 @@ class Create extends Component {
         }
       }
     }
+
+    // this is a switch that takes the class entered and than
+    // applies a set of base stats to the player
+    // along side of spells and the strings for animation
     if (this.state.class !== "") {
       let test = this.state.class;
       switch (test) {
@@ -182,19 +188,26 @@ class Create extends Component {
       })
       .catch(error => {});
   };
+  // this takes the event and sets it on state, the event here is the 
+  // onChange from my input fields
   handleInput = input => {
     this.setState({ [input.target.name]: input.target.value });
   };
+  // this  sets the class name on state i to render a banner telling the user what class is selected
   handleClass = input => {
     if (this.state.class === "") {
       this.setState({ class: input });
     }
   };
+  // this is a redirect render if the user ever sets redirect on state to true
   renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to="/" />;
     }
   };
+  //All of my buttons call this in the creat component,  they pass in the id in this case a class name,
+  // if the id does not match the currently selected this.state.button than they get the className
+  // "class-not-picked" that lowers the opacity in order to high light the one that is picked
   setButtonStyle=(id)=>{
     if(this.state.button !=="" && this.state.button !== undefined){
     if(id !==this.state.button){
@@ -206,22 +219,24 @@ class Create extends Component {
     return (
       <Fragment> 
 
-       
+       {/* this is a div that sits above the form, and when a class is selected
+        it sets preview to a string that is not empty that allows the terneray to pass
+        when it passes it imports the gif from the assets folder and displays it above the form */}
         <div className="loginbackground-styles">  
            
            {(this.state.preview !=="")?(
            <div style={{height:"15vh"}}>
+
+
  <img
  style={{height:"100%"}}
         src={(require(`../assets/${this.state.preview}.gif`))}/>
 
      </div>):(<div style={{height:"15vh"}}></div>)}
+     {/* this allows the renderRedirect to work, it's been called over and over
+     and if this.state.redirect is ever true it allows that function to exicute  */}
           {this.renderRedirect()}
-
-
-   
           <Form className="create-styles" onSubmit={ this.addPlayer}>
-
           {(this.state.class !=="")?(<Fragment> <Alert color="success">
         {`You have selected a ${this.state.class}, adventure lies ahead champion.`}
       </Alert></Fragment>):(<Fragment></Fragment>)}
@@ -309,15 +324,14 @@ class Create extends Component {
                 />
            
        </div>
-            {/* <button className="btn"  onClick={() => this.handleClass("Paladin")}>Paladin</button> */}
+              {/* these buttons  on click set the class state and the button state as well as the preview state,
+              
+              NOTE TO SELF: the button and class states are the same so we don't really need them both
+              i will fix tihs once i am back online i can't really code because all my data is hosted on mlab */}
             <div>
             <button type="button" className={`btn ${this.setButtonStyle("Warrior")}`} onClick={()=> this.setState({class:"Warrior",button:"Warrior",preview:"warrioridle"})}>
               Warrior
             </button>
-            {/* <button className="btn"  onClick={() => this.handleClass("Necromancer")}>
-          Necromancer
-        </button> */}
-            {/* <button className="btn"  onClick={() => this.handleClass("Rogue")}>Rogue</button> */}
             <button type="button" className={`btn ${this.setButtonStyle("Ranger")}`} onClick={()=> this.setState({class:"Ranger",button:"Ranger",preview:"rangeridle"})}>
               Ranger
             </button>
