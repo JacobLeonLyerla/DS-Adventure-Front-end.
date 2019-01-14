@@ -14,7 +14,7 @@ class Player extends Component {
         <div className="loginbackground-styles">
           <br />
 
-          <div className="title-styles">Dungeon Race</div>
+          <div className="title-styles">Dungeon Run</div>
         {/* Log in form for the player passes the data back to app.js */}
           <Form
             className="login-styles"
