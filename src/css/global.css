@@ -1,10 +1,11 @@
 .App {
     text-align: center;
     font-family: 'Gloria Hallelujah', cursive;
-    
+    background:black;
     font-size:64.5%;
   }
   .loginbackground-styles{
+   
     min-height:100vh;
     background-image: url("../assets/login.jpg");
     -webkit-background-size: cover;
