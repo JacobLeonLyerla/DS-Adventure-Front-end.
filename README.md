@@ -7,7 +7,7 @@
   
  
     
-![Dreamtrekking gif](https://media.giphy.com/media/69yuNNx5w77k43oKpY/giphy.gif)
+![Dungeon Run gif](https://media.giphy.com/media/69yuNNx5w77k43oKpY/giphy.gif)
 
 # Deployment
 * Website: https://dungeon-run.netlify.com/
