@@ -30,8 +30,10 @@ class Map extends Component {
       return "none";
     }
   }
+
   render() {
     return (
+
       <div className="mapwrap mapBackground-styles">
         <br />
         <div className={`ga-styles ${this.setRoom("ga")}`} />
@@ -62,11 +64,14 @@ class Map extends Component {
           <div className={`sw-styles ${this.setRoom("sw")}`} />
           <div className={`sr-styles ${this.setRoom("sr")}`} />
         </div>
+
         <br />
+        
         <br />
         <div className={`pf-styles ${this.setRoom("pf")}`} />
         <br />
       </div>
+
     );
   }
 }
