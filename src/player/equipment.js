@@ -5,17 +5,25 @@ import { Redirect } from "react-router-dom";
 class Equip extends Component {
   state = {
     player: { items: "", gear: "" },
+
     redirect: false,
+
     endurance: 0,
+
     health: 0,
+
     agility: 0,
+
     intellect: 0,
+
     strength: 0
   };
+
   componentDidMount() {
     const { id } = this.props.match.params;
     this.setCurrItems(id);
   }
+
   setCurrItems = id => {
     axios
       .get(`https://dungeon-run.herokuapp.com/players/${id}`)
@@ -30,6 +38,7 @@ class Equip extends Component {
       return <Redirect to={`/blackheart/${id}`} />;
     }
   };
+
   setEquippedBool(id) {
     let item = {};
     item.equipped = true;
@@ -41,29 +50,40 @@ class Equip extends Component {
 
   buildGear(piece) {
     let strength = 0;
+
     let intellect = 0;
+
     let agility = 0;
+
     let health = 0;
+
     let endurance = 0;
-    let equipped;
+
     let gear = {};
+
     let itemSlot = eval(`this.state.player.${piece.slot}`);
+
     if (itemSlot === "none") {
       if (piece.strength !== undefined) {
         strength = piece.strength;
       }
+
       if (piece.intellect !== undefined) {
         intellect = piece.intellect;
       }
+
       if (piece.agility !== undefined) {
         agility = piece.agility;
       }
+
       if (piece.health !== undefined) {
         health = piece.health;
       }
+
       if (piece.endurance !== undefined) {
         endurance = piece.endurance;
       }
+
       if (
         piece.slot === "shield" &&
         this.state.player.offHand === "none" &&
@@ -112,10 +132,15 @@ class Equip extends Component {
         gear.offHand = "Equipped";
       }
     }
+
     gear.agility = agility;
+
     gear.endurance = endurance;
+
     gear.health = health;
+
     gear.intellect = intellect;
+
     gear.strength = strength;
 
     return gear;
@@ -131,19 +156,30 @@ class Equip extends Component {
 
     let gear = {
       agility: this.state.player.agility,
+
       endurance: this.state.player.endurance,
+
       health: this.state.player.health,
+
       intellect: this.state.player.intellect,
+
       strength: this.state.player.strength
     };
     for (let index = 0; index < this.state.player.gear.length; index++) {
       const piece = this.state.player.gear[index];
+
       let update = this.buildGear(piece);
+
       gear.agility += update.agility;
+
       gear.endurance += update.endurance;
+
       gear.health += update.health;
+
       gear.intellect += update.intellect;
+
       gear.strength += update.strength;
+
       if (update.head !== "none" && update.head !== undefined) {
         gear.head = "Equipped";
       }
@@ -184,8 +220,10 @@ class Equip extends Component {
         gear.offHand = "Equipped";
       }
     }
+
     this.equipmentAdd(gear, id);
   }
+
   equipmentAdd(gear, id) {
     axios
       .put(`https://dungeon-run.herokuapp.com/players/${id}`, gear)
@@ -193,9 +231,9 @@ class Equip extends Component {
         this.setState({
           redirect: true
         });
-      })
-      .catch(err => {});
+      });
   }
+
   render() {
     return (
       <Fragment>
