@@ -1,28 +1,39 @@
-.create-styles{
-    padding-bottom:5%;
-      background:rgba(255, 255, 255, 0.603);
-        width: 45%;
-        margin: 0 auto;
-      border:1px solid lightblue;
-      border-radius: 15px 50px;
-      
-      }
-      .create-styles .btn{
-        margin-top:2vh;
-        width:30%;
-      }
-    
-      .create-styles .btn-create{
-        min-height: 5vh;
-        font-size:1.4vw;
-      width:50%;
-      }
-      .alert{
-        width: 100%;
-      }
-      .create-styles .class-not-picked{
-        background:rgba(149, 207, 221, 0.5)
-      }
-      .text-left{
-        font-size:1.1vw
-      }
+.create-styles {
+  padding-bottom: 5%;
+
+  background: rgba(255, 255, 255, 0.603);
+
+  width: 45%;
+
+  margin: 0 auto;
+
+  border: 1px solid lightblue;
+
+  border-radius: 15px 50px;
+}
+
+.create-styles .btn {
+  margin-top: 2vh;
+
+  width: 30%;
+}
+
+.create-styles .btn-create {
+  min-height: 5vh;
+
+  font-size: 1.4vw;
+
+  width: 50%;
+}
+
+.alert {
+  width: 100%;
+}
+
+.create-styles .class-not-picked {
+  background: rgba(149, 207, 221, 0.5);
+}
+
+.text-left {
+  font-size: 1.1vw;
+}
