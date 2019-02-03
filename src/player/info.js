@@ -1,12 +1,11 @@
 import React, { Component, Fragment } from "react";
-import { Redirect,Link} from "react-router-dom";
-import{Progress} from "reactstrap";
+import { Redirect, Link } from "react-router-dom";
+import { Progress } from "reactstrap";
 import axios from "axios";
 
 class Info extends Component {
-
   state = {
-    player: {gear:[],items:[]},
+    player: { gear: [], items: [] },
     name: "",
     age: "",
     class: "",
@@ -15,27 +14,25 @@ class Info extends Component {
     gender: "",
     redirect: false,
     visible: false,
-    preview:""
+    preview: ""
   };
   // deconstruct id from params use it to call set player function
   componentDidMount() {
     const { id } = this.props.match.params;
     this.setCurrentPlayer(id);
   }
-  // take id from the  component did mount use it do grab the player from the database than 
+  // take id from the  component did mount use it do grab the player from the database than
   // set that data on state
   setCurrentPlayer = id => {
     axios
       .get(`https://dungeon-run.herokuapp.com/players/${id}`)
       .then(response => {
-       
-        this.setState({ player: response.data,preview:response.data.idle });
+        this.setState({ player: response.data, preview: response.data.idle });
       })
-      .catch(err => {
-      });
+      .catch(err => {});
   };
-// this was going to allow people to edit player info, however it is not currently
-// in the game because emplementing it was a bit wonky i'll try something a bit later
+  // this was going to allow people to edit player info, however it is not currently
+  // in the game because emplementing it was a bit wonky i'll try something a bit later
   updatePlayer = id => {
     const player = {};
     if (this.state.name !== "") {
@@ -53,8 +50,7 @@ class Info extends Component {
         });
         this.setCurrentPlayer(id);
       })
-      .catch(err => {
-      });
+      .catch(err => {});
   };
   handleInput = input => {
     this.setState({ [input.target.name]: input.target.value });
@@ -64,205 +60,206 @@ class Info extends Component {
       this.setState({ class: input });
     }
   };
-itemsRender(){
-  if(this.state.player.items !==[]){
-  return (this.state.player.items.map(item => (<Fragment>
-                
-    <div>{item.name}</div><br/>
-   
-
-</Fragment>)) 
-  )
-}
-
-}
-// this is to render the gear inside of the user information,
-// this is also currently not being used, however i may make a gear
-// button that allows users to pull up  little screen with the gear
-gearRender(){
-  if(this.state.player.items !==[]){
-  return (this.state.player.gear.map(item => (<Fragment>
-                
-    <div>{item.name}</div><br/>
-   
-
-</Fragment>)) 
-  )
-}
-
-}
-// this takes the value of the bar and gives it a style based on that 
-prgoressColor(value) {
-  if (value > 70){
-    return "progress-high"
-  }else if( value >50){
-    return "progress-good"
-  } else if(value> 30){
-    return"progress-mid"
-  
-  }else{
-    return "progress-low"
-  }
-  
+  itemsRender() {
+    if (this.state.player.items !== []) {
+      return this.state.player.items.map(item => (
+        <Fragment>
+          <div>{item.name}</div>
+          <br />
+        </Fragment>
+      ));
     }
+  }
+  // this is to render the gear inside of the user information,
+  // this is also currently not being used, however i may make a gear
+  // button that allows users to pull up  little screen with the gear
+  gearRender() {
+    if (this.state.player.items !== []) {
+      return this.state.player.gear.map(item => (
+        <Fragment>
+          <div>{item.name}</div>
+          <br />
+        </Fragment>
+      ));
+    }
+  }
+  // this takes the value of the bar and gives it a style based on that
+  prgoressColor(value) {
+    if (value > 70) {
+      return "progress-high";
+    } else if (value > 50) {
+      return "progress-good";
+    } else if (value > 30) {
+      return "progress-mid";
+    } else {
+      return "progress-low";
+    }
+  }
   render() {
     let element = null;
     // when this.state.visable comes back as defined than it will render a gif above the form
     if (this.state.visible) {
-    element = (<Fragment>
-       <img src={(require(`../assets/${this.state.player.idle}.gif`))}/>
+      element = (
+        <Fragment>
+          <img src={require(`../assets/${this.state.player.idle}.gif`)} />
 
-       {/* Header of the form with basic info and so name and class */}
-        <form>
-          <label>
-            Name:
-            
+          {/* Header of the form with basic info and so name and class */}
+          <form>
+            <label>
+              Name:
+              <input
+                name="name"
+                placeholder="Enter a character name"
+                value={this.state.name}
+                onChange={this.handleInput}
+              />
+            </label>
+            <br />
+            Lore:
             <input
-              name="name"
-              placeholder="Enter a character name"
-              value={this.state.name}
+              name="bio"
+              placeholder="Give your adventurer a backstory"
+              value={this.state.bio}
               onChange={this.handleInput}
             />
-          </label><br/>
-          Lore:
-          <input
-            name="bio"
-            placeholder="Give your adventurer a backstory"
-            value={this.state.bio}
-            onChange={this.handleInput}
-          />
-          <br />
-          {/* <button onClick={() => this.updatePlayer(this.state.player._id)}>
+            <br />
+            {/* <button onClick={() => this.updatePlayer(this.state.player._id)}>
             Update Character
           </button> */}
-        </form>
-      </Fragment>);
-    }  
+          </form>
+        </Fragment>
+      );
+    }
     // set up up variables we will be using inside of our progress bars
-    
-    let health = this.state.player.health
-    let endurance = this.state.player.endurance
-    let intellect = this.state.player.intellect
-    let strength = this.state.player.strength
-    let agility = this.state.player.agility
-    let total = this.state.player.health + this.state.player.endurance + this.state.player.intellect + this.state.player.strength + this.state.player.agility
-  
+
+    let health = this.state.player.health;
+    let endurance = this.state.player.endurance;
+    let intellect = this.state.player.intellect;
+    let strength = this.state.player.strength;
+    let agility = this.state.player.agility;
+    let total =
+      this.state.player.health +
+      this.state.player.endurance +
+      this.state.player.intellect +
+      this.state.player.strength +
+      this.state.player.agility;
+
     return (
-      <Fragment><div className="loginbackground-styles">
-  
-       {(this.state.preview !== "")?
-       <div style={{height:"13vh"}}><img
-       style={{height:"100%"}}
-
-        src={require(`../assets/${this.state.preview}.gif`)}/></div>:<div></div>}
-
-
+      <Fragment>
+        <div className="loginbackground-styles">
+          {this.state.preview !== "" ? (
+            <div style={{ height: "13vh" }}>
+              <img
+                style={{ height: "100%" }}
+                src={require(`../assets/${this.state.preview}.gif`)}
+              />
+            </div>
+          ) : (
+            <div />
+          )}
 
           <div className="info-styles">
-        <div>
-         
-         <div className="name-info">{this.state.player.name}
-         </div>
-          <div className={`${this.state.player.class}class-info`}>
-           {this.state.player.class} <br />
-    </div>
-       
-
-{/* first we check to make sure the bar has a value, if not we do not render it
+            <div>
+              <div className="name-info">{this.state.player.name}</div>
+              <div className={`${this.state.player.class}class-info`}>
+                {this.state.player.class} <br />
+              </div>
+              {/* first we check to make sure the bar has a value, if not we do not render it
 than we check what percent this bars value is compared to the total of all the stats
 that allows us to get back a class name for the styling of these bars
 lastly we set the value based on the same logic */}
-{(health * 2) / 5 > 0 ? (
-  <Fragment>
-    <div className="text-left">Health</div>
-    <Progress
-    className={`${this.prgoressColor(Math.round((health / total) * 100))} progress-info`}
-      style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
-      value={Math.round((health / total) * 100)}
-    >
-      {health}
-    </Progress>
-  </Fragment>
-) : (
-  <Fragment />
-)}
-
-{(endurance * 2) / 5 > 0 ? (
-  <Fragment>
-    <div className="text-left">Endurance</div>
-    <Progress
-    className={`${this.prgoressColor(Math.round((endurance / total) * 100))} progress-info`}
-      style={{
-        fontFamily: " Arial, Helvetica, sans-serif",
-      
-      }}
-      value={Math.round((endurance / total) * 100)}
-    >
-      {endurance}
-    </Progress>
-  </Fragment>
-) : (
-  <Fragment />
-)}
-
-{(intellect * 2) / 5 > 0 ? (
-  <Fragment>
-    <div className="text-left">Intellect</div>
-    <Progress
-  className={`${this.prgoressColor(Math.round((intellect / total) * 100))} progress-info`}
-      style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
-      value={Math.round((intellect / total) * 100)}
-    >
-      {intellect}
-    </Progress>
-  </Fragment>
-) : (
-  <Fragment />
-)}
-
-{(strength * 2) / 5 > 0 ? (
-  <Fragment>
-    <div className="text-left">Strength</div>
-    <Progress
- className={`${this.prgoressColor(Math.round((strength / total) * 100))} progress-info`}
-      style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
-      value={Math.round((strength / total) * 100)}
-    >
-      {strength}
-    </Progress>
-  </Fragment>
-) : (
-  <Fragment />
-)}
-
-{(agility * 2) / 5 > 0 ? (
-  <Fragment>
-    <div className="text-left">Agility</div>
-    <Progress
-className={`${this.prgoressColor(Math.round((agility / total) * 100))} progress-info`}
-      style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
-      value={Math.round((agility / total) * 100)}
-    >
-      {agility}
-    </Progress>
-  </Fragment>
-) : (
-  <Fragment />
-)}
-
-          <br />
-          Lore
-          <div className="lore" >
-          {this.state.player.bio}
+              {(health * 2) / 5 > 0 ? (
+                <Fragment>
+                  <div className="text-left">Health</div>
+                  <Progress
+                    className={`${this.prgoressColor(
+                      Math.round((health / total) * 100)
+                    )} progress-info`}
+                    style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
+                    value={Math.round((health / total) * 100)}
+                  >
+                    {health}
+                  </Progress>
+                </Fragment>
+              ) : (
+                <Fragment />
+              )}
+              {(endurance * 2) / 5 > 0 ? (
+                <Fragment>
+                  <div className="text-left">Endurance</div>
+                  <Progress
+                    className={`${this.prgoressColor(
+                      Math.round((endurance / total) * 100)
+                    )} progress-info`}
+                    style={{
+                      fontFamily: " Arial, Helvetica, sans-serif"
+                    }}
+                    value={Math.round((endurance / total) * 100)}
+                  >
+                    {endurance}
+                  </Progress>
+                </Fragment>
+              ) : (
+                <Fragment />
+              )}
+              {(intellect * 2) / 5 > 0 ? (
+                <Fragment>
+                  <div className="text-left">Intellect</div>
+                  <Progress
+                    className={`${this.prgoressColor(
+                      Math.round((intellect / total) * 100)
+                    )} progress-info`}
+                    style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
+                    value={Math.round((intellect / total) * 100)}
+                  >
+                    {intellect}
+                  </Progress>
+                </Fragment>
+              ) : (
+                <Fragment />
+              )}
+              {(strength * 2) / 5 > 0 ? (
+                <Fragment>
+                  <div className="text-left">Strength</div>
+                  <Progress
+                    className={`${this.prgoressColor(
+                      Math.round((strength / total) * 100)
+                    )} progress-info`}
+                    style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
+                    value={Math.round((strength / total) * 100)}
+                  >
+                    {strength}
+                  </Progress>
+                </Fragment>
+              ) : (
+                <Fragment />
+              )}
+              {(agility * 2) / 5 > 0 ? (
+                <Fragment>
+                  <div className="text-left">Agility</div>
+                  <Progress
+                    className={`${this.prgoressColor(
+                      Math.round((agility / total) * 100)
+                    )} progress-info`}
+                    style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
+                    value={Math.round((agility / total) * 100)}
+                  >
+                    {agility}
+                  </Progress>
+                </Fragment>
+              ) : (
+                <Fragment />
+              )}
+              <br />
+              Lore
+              <div className="lore">{this.state.player.bio}</div>
+            </div>
+            {element}
           </div>
-         
-
-        </div>
-        {element}
-
-        </div>
-        <br/>
-        <Link to={`/dungeons/${this.state.player._id}`}><button className="btn dungeons-styles" >Dungeons</button></Link>
+          <br />
+          <Link to={`/dungeons/${this.state.player._id}`}>
+            <button className="btn dungeons-styles">Dungeons</button>
+          </Link>
         </div>
       </Fragment>
     );
