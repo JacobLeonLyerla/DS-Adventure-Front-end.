@@ -4,18 +4,15 @@ import { Form, Alert, Label, Input, Col, Row } from "reactstrap";
 import { Link } from "react-router-dom";
 import Map from "../dungeons/map.js";
 
-
 class Player extends Component {
   render() {
     return (
       <Fragment>
-
-
         <div className="loginbackground-styles">
           <br />
 
           <div className="title-styles">Dungeon Run</div>
-        {/* Log in form for the player passes the data back to app.js */}
+          {/* Log in form for the player passes the data back to app.js */}
           <Form
             className="login-styles"
             onClick={e =>
@@ -69,13 +66,8 @@ class Player extends Component {
             <Link to="/create">
               <button className="btn btn-register">Create An Adventurer</button>
             </Link>
-               
-
-       
           </Form>
         </div>
-
-       
       </Fragment>
     );
   }
