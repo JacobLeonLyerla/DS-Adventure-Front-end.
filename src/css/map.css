@@ -1,143 +1,212 @@
-.mapBackground-styles{
-    min-height:100vh;
-    background-image: url("../assets/map1.jpg");
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-  }
-  .mapwrap{
-   width:100%;
-   
-   height:500px;
-   padding-bottom:10%;
+.mapBackground-styles {
+  min-height: 100vh;
 
-  }
-  .ga-styles{
-    width:25%;
-    background:gray;
-    min-height: 10%;
-margin:0 auto;
-  opacity:.5;
-  }
-  .wb-styles{
-    width:25%;
-    background:gray;
-    min-height: 2%;
-margin:0 auto;
-opacity:.5;
-  
-  }
-  .bb-styles{
-    width:5%;
-    background:gray;
-    min-height: 12%;
-margin:0 auto;
-opacity:.5;
-  
-  }
-  .ghTeir-styles{
-    display:flex;
-    flex-direction: row;
-    width: 55.1%;
-    height:20%;
-  }
-  .gh-styles{
-    width:7%;
-    background:gray;
-   height: 50%;
-margin:0 auto;
-margin-top:10%;
-/* opacity:.5; */
-  
-  }
-  .nw-styles{
-    
-    width:6%;
-    background:gray;
-    height: 30%;
-margin:0 auto;
-margin-top:20%;
-opacity:.5;
-  
-  }
-  .ts-styles{
-    width:10%;
-    background:gray;
-    height: 80%;
-margin:0 auto;
-margin-top:10%;
-opacity: .5;
-  
-  }
-  .stgr-styles{
-    width:20%;
-    background:gray;
-   height: 100%;
-margin:0 auto;
+  background-image: url("../assets/map1.jpg");
 
-opacity:.5;
-  
-  }
-  .startingrow{
-    display:flex;
-    flex-direction: row;
-    width: 20%;
-    margin-left:35.5%;
-  }
-  .sr-styles{
-    width:30%;
-    background:gray;
-   height: 200px;
-margin:0 auto;
-opacity:.5;
-  }
-  .sw-styles{
-    width:20%;
-    background:gray;
-   height: 100px;
-margin:0 auto;
-margin-right:20%;
-opacity:.5;
-  }
-  .pf-styles{
-    width:50%;
-    background:gray;
-   height: 6%;
-margin:0 auto;
-opacity:.5;
-  
-  }
-  .activeRoom-styles{
-    background:lightgreen;
-opacity:1;
-   
-  }
-  .dungeons-styles{
-    font-size:50px;
-  }
-  .equipping-styles{
-    font-size:60px;
-    background:white;
-    opacity: .6;
-    width: 50%;
-    margin:0 auto;
-    letter-spacing: .2ch;
-    margin-top: 20%;
-    border-radius: 10px;
-  }
-  .equip-hero{
-    font-size:1.5vw;
-    width:70%;
-  }
-  .testing{
-    font-weight: 900;
-    color:red;
-    width:50vw;
-    margin:0 auto;
-    font-size: 100px;
-    border-bottom: 10px dotted darkred
-  }
+  -webkit-background-size: cover;
 
+  -moz-background-size: cover;
 
- 
+  -o-background-size: cover;
+
+  background-size: cover;
+}
+
+.mapwrap {
+  width: 100%;
+
+  height: 500px;
+
+  padding-bottom: 10%;
+}
+.ga-styles {
+  width: 25%;
+
+  background: gray;
+
+  min-height: 10%;
+
+  margin: 0 auto;
+
+  opacity: 0.5;
+}
+
+.wb-styles {
+  width: 25%;
+
+  background: gray;
+
+  min-height: 2%;
+
+  margin: 0 auto;
+
+  opacity: 0.5;
+}
+.bb-styles {
+  width: 5%;
+
+  background: gray;
+
+  min-height: 12%;
+
+  margin: 0 auto;
+
+  opacity: 0.5;
+}
+
+.ghTeir-styles {
+  display: flex;
+
+  flex-direction: row;
+
+  width: 55.1%;
+
+  height: 20%;
+}
+
+.gh-styles {
+  width: 7%;
+
+  background: gray;
+
+  height: 50%;
+
+  margin: 0 auto;
+
+  margin-top: 10%;
+}
+
+.nw-styles {
+  width: 6%;
+
+  background: gray;
+
+  height: 30%;
+
+  margin: 0 auto;
+
+  margin-top: 20%;
+
+  opacity: 0.5;
+}
+.ts-styles {
+  width: 10%;
+
+  background: gray;
+
+  height: 80%;
+
+  margin: 0 auto;
+
+  margin-top: 10%;
+
+  opacity: 0.5;
+}
+
+.stgr-styles {
+  width: 20%;
+
+  background: gray;
+
+  height: 100%;
+
+  margin: 0 auto;
+
+  opacity: 0.5;
+}
+
+.startingrow {
+  display: flex;
+
+  flex-direction: row;
+
+  width: 20%;
+
+  margin-left: 35.5%;
+}
+
+.sr-styles {
+  width: 30%;
+
+  background: gray;
+
+  height: 200px;
+
+  margin: 0 auto;
+
+  opacity: 0.5;
+}
+
+.sw-styles {
+  width: 20%;
+
+  background: gray;
+
+  height: 100px;
+
+  margin: 0 auto;
+
+  margin-right: 20%;
+
+  opacity: 0.5;
+}
+
+.pf-styles {
+  width: 50%;
+
+  background: gray;
+
+  height: 6%;
+
+  margin: 0 auto;
+
+  opacity: 0.5;
+}
+
+.activeRoom-styles {
+  background: lightgreen;
+
+  opacity: 1;
+}
+
+.dungeons-styles {
+  font-size: 50px;
+}
+
+.equipping-styles {
+  font-size: 60px;
+
+  background: white;
+
+  opacity: 0.6;
+
+  width: 50%;
+
+  margin: 0 auto;
+
+  letter-spacing: 0.2ch;
+
+  margin-top: 20%;
+
+  border-radius: 10px;
+}
+
+.equip-hero {
+  font-size: 1.5vw;
+
+  width: 70%;
+}
+
+.testing {
+  font-weight: 900;
+
+  color: red;
+
+  width: 50vw;
+
+  margin: 0 auto;
+
+  font-size: 100px;
+
+  border-bottom: 10px dotted darkred;
+}
