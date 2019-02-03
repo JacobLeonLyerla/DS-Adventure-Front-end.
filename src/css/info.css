@@ -1,49 +1,63 @@
-.info-styles{
-    padding:10px;
-    width:30%;
-    font-size:1.5vw;
-    margin: 0 auto;
+.info-styles {
+  padding: 10px;
 
-  color:rgba(255, 255, 255, 0.945);
-  background:rgba(67, 136, 214, 0.753);
+  width: 30%;
+
+  font-size: 1.5vw;
+
+  margin: 0 auto;
+
+  color: rgba(255, 255, 255, 0.945);
+
+  background: rgba(67, 136, 214, 0.753);
+
   border-radius: 1vw;
-    border:1px solid black
-  }
-  .lore{
-    
-  width:80%;
-  margin:0 auto;
-  
-  }
-  .btnPick-styles{
-    font-size:40px;
-  }
- .progress-info {
- height: 3vh;
 
- }
- .progress-info .progress-bar {
+  border: 1px solid black;
+}
+
+.lore {
+  width: 80%;
+
+  margin: 0 auto;
+}
+
+.btnPick-styles {
+  font-size: 40px;
+}
+
+.progress-info {
+  height: 3vh;
+}
+
+.name-info {
+  height: 6vh;
   
-  }
-  .name-info{
-    height: 6vh;
-  background:rgb(137, 229, 137);
+  background: rgb(137, 229, 137);
+
   border-radius: 3vh 3vh 0vh 0vh;
- 
-  }
-  .Rangerclass-info{
-    border-radius: 0vh 0vh 3vh 3vh;
-    height: 6vh;
- background:darkgreen;
-  }
-  .Warriorclass-info{
-    border-radius: 0vh 0vh 3vh 3vh;
-    height: 6vh;
-    background:#c0392b;
-  }
+}
 
-  .Mageclass-info{
-    border-radius: 0vh 0vh 3vh 3vh;
-    height: 6vh;
-    background:purple;
-  }
+.Rangerclass-info {
+  border-radius: 0vh 0vh 3vh 3vh;
+
+  height: 6vh;
+
+  background: darkgreen;
+}
+
+.Warriorclass-info {
+  border-radius: 0vh 0vh 3vh 3vh;
+
+  height: 6vh;
+
+  background: #c0392b;
+}
+
+.Mageclass-info {
+  border-radius: 0vh 0vh 3vh 3vh;
+
+  height: 6vh;
+  
+  background: purple;
+}
