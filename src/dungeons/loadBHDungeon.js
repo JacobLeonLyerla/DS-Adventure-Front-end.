@@ -1,33 +1,56 @@
 import React, { Component, Fragment } from "react";
+
 import { Redirect } from "react-router-dom";
-import { Modal,Col,Row } from "reactstrap";
+
+import { Modal, Col, Row } from "reactstrap";
+
 import axios from "axios";
+
 import Map from "../dungeons/map.js";
+
 class BlackHeart extends Component {
   constructor() {
     super();
     this.state = {
       areas: undefined,
+
       area: {},
-      player: { currentLocation: { _id: 0 } },
+
+      player: { 
+        currentLocation: { _id: 0 }  
+      },
+
       pPempId: "",
+
       mTempid: "",
+
       id: 0,
+
       redirect: false,
+
       moved: false,
+
       modal: false
     };
+
+
     this.toggle = this.toggle.bind(this);
   }
+
+
   toggle() {
     this.setState({
       modal: !this.state.modal
     });
   }
+
+
   componentDidMount() {
     let { id } = this.props.match.params;
     this.currentPlayer(id);
   }
+
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //************************************************** AXIOS
   setDungeon = reload => {
@@ -42,14 +65,18 @@ class BlackHeart extends Component {
             // window.location.reload();
           }
         })
+
         .catch(err => {});
     } else {
       this.currentRoom(this.state.player.currentLocation._id);
       if (reload === "reload") {
         // window.location.reload();
       }
+
     }
   };
+
+
   currentRoom = id => {
     axios
       .get(`https://dungeon-run.herokuapp.com/blackheart/${id}`)
@@ -92,6 +119,7 @@ class BlackHeart extends Component {
                 redirect: false
               });
             }
+
             axios
               .put(
                 `https://dungeon-run.herokuapp.com/players/${
@@ -99,6 +127,7 @@ class BlackHeart extends Component {
                 }`,
                 battle
               )
+
               .then(response => {
                 if (response.data.currentBattle.length > 0) {
                   this.setState({
@@ -106,16 +135,16 @@ class BlackHeart extends Component {
                   });
                 }
               })
-              .catch(err => {});
           }
         }
-      })
-      .catch(err => {});
+      })    
   };
+
 
   getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
   }
+
 
   currentPlayer = id => {
     axios
@@ -126,6 +155,8 @@ class BlackHeart extends Component {
       })
       .catch(err => {});
   };
+
+
   setLocation(id) {
     let player = {};
 
@@ -148,6 +179,8 @@ class BlackHeart extends Component {
       .then(response => {})
       .catch(err => {});
   }
+
+
   move(direction) {
     let id = "";
     switch (direction) {
@@ -167,6 +200,7 @@ class BlackHeart extends Component {
       default:
         break;
     }
+
     if (id === "No path") {
       return alert(
         `there is no path to the ${direction} of you, please try another path.`
@@ -184,6 +218,7 @@ class BlackHeart extends Component {
             .then(response => {});
         });
     }
+
     let player = {};
     player.currentLocation = id;
 
@@ -205,6 +240,7 @@ class BlackHeart extends Component {
       .catch(err => {});
   }
 
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //************************************************** MOVMENT
   path(direction) {
@@ -219,6 +255,7 @@ class BlackHeart extends Component {
         } else {
           pathId = "No path";
         }
+
         break;
       case "South":
         if (this.state.area.south.length > 0) {
@@ -228,6 +265,7 @@ class BlackHeart extends Component {
         } else {
           pathId = "No path";
         }
+
         break;
       case "East":
         if (this.state.area.east.length > 0) {
@@ -244,72 +282,93 @@ class BlackHeart extends Component {
           for (let index = 0; index < this.state.area.west.length; index++) {
             pathId = this.state.area.west[0]._id;
           }
+
         } else {
           pathId = "No path";
         }
+
         break;
       default:
         break;
     }
+
     return pathId;
   }
+
   renderRedirect = id => {
     if (this.state.redirect) {
       return <Redirect to={`/battle/${id}`} />;
     }
+
   };
+
+
   movmentRender() {
     if (this.state.area.south !== undefined) {
       return (
+
         <Fragment>
           <br />
+
           <div className="BlackHeart">
+
             {`You are currently in  the ${this.state.area.name}`}
             <br />
-          
-              <Row>
-                <Col md="12">
-            <i
-              onClick={() => this.move("North")}
-              className="fas fa-chevron-circle-up movmenticons-styles"
-            />
-            </Col >
-            <Col md="12">
-            <Row style={{justifyContent:"center"}}>
-            <Col xs="3" sm="3" md="2">
-              <i
-                onClick={() => this.move("West")}
-                className="fas fa-chevron-circle-left movmenticons-styles"
-              /> </Col>
-              <Col xs="3" sm="3" md="2">
-              <i
-                onClick={() => this.move("East")}
-                className="fas fa-chevron-circle-right movmenticons-styles"
-              />
-              
-             
-            </Col></Row></Col>
-            <Col md="12">
-            <i
-              onClick={() => this.move("South")}
-              className="fas fa-chevron-circle-down movmenticons-styles"
-            />
-</Col>
-            
+
+            <Row>
+              <Col md="12">
+                <i
+                  onClick={() => this.move("North")}
+                  className="fas fa-chevron-circle-up movmenticons-styles"
+                />
+
+              </Col>
+              <Col md="12">
+                <Row style={{ justifyContent: "center" }}>
+                  <Col xs="3" sm="3" md="2">
+                    <i
+                      onClick={() => this.move("West")}
+                      className="fas fa-chevron-circle-left movmenticons-styles"
+                    />
+
+                  </Col>
+                  <Col xs="3" sm="3" md="2">
+                    <i
+                      onClick={() => this.move("East")}
+                      className="fas fa-chevron-circle-right movmenticons-styles"
+                    />
+
+                  </Col>
+                </Row>
+              </Col>
+              <Col md="12">
+                <i
+                  onClick={() => this.move("South")}
+                  className="fas fa-chevron-circle-down movmenticons-styles"
+                />
+
+              </Col>
             </Row>
+
             <button className="btn" color="danger" onClick={this.toggle}>
               MAP
             </button>
+
             <Modal
               isOpen={this.state.modal}
               toggle={this.toggle}
               className={this.props.className}
             >
+
               <Map name={this.state.area.name} />
             </Modal>
+
           </div>
         </Fragment>
+
       );
+
+
     } else {
       return (
         <div className="BlackHeart">
@@ -320,14 +379,18 @@ class BlackHeart extends Component {
           />
         </div>
       );
+
     }
   }
+
+
   winnings() {
     if (
       this.state.player.itemWon !== "none" &&
       this.state.player.itemWon !== undefined &&
       this.state.player.itemWon !== "lost"
     ) {
+
       return (
         <Fragment>
           <div className="winnings-styles">
@@ -341,6 +404,7 @@ class BlackHeart extends Component {
           </div>
         </Fragment>
       );
+
     } else if (
       this.state.player.itemWon === "lost" &&
       this.state.player.itemWon !== undefined
@@ -360,6 +424,8 @@ class BlackHeart extends Component {
       );
     }
   }
+
+
   ding() {
     if (
       this.state.player.leveled === true &&
@@ -372,14 +438,18 @@ class BlackHeart extends Component {
       );
     }
   }
+
+
   render() {
     return (
+
       <Fragment>
         {this.renderRedirect(this.state.player._id)}
         {this.movmentRender()}
         {this.ding()}
         {this.winnings()}
       </Fragment>
+      
     );
   }
 }
