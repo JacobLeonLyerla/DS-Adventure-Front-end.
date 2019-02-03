@@ -1,22 +1,37 @@
 import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
+
 import axios from "axios";
+
 import paladin from "../assets/paladin.jpg";
+
 import rogue from "../assets/rogue.jpg";
+
 import mage from "../assets/mage.png";
+
 import warrior from "../assets/warrior.png";
+
 import ranger from "../assets/ranger.png";
+
 import necro from "../assets/necro.jpg";
+
 import { Progress } from "reactstrap";
+
 class Items extends Component {
   state = {
-    player: { gear: [{ name: "" }], items: [{ name: "" }] },
+    player: {
+      gear: [{ name: "" }],
+
+      items: [{ name: "" }]
+    },
+
     area: { items: [] }
   };
+
   componentDidMount() {
     let { id } = this.props.match.params;
     this.currentPlayer(id);
   }
+
   currentRoom = id => {
     axios
       .get(`https://dungeon-run.herokuapp.com/blackheart/${id}`)
@@ -43,29 +58,32 @@ class Items extends Component {
 
           return failed === false && secondfailed === false;
         });
+
         roomLoot.items = roomFilter;
         this.setState({ area: { items: roomLoot.items } });
       });
   };
+
   currentPlayer = id => {
     axios
       .get(`https://dungeon-run.herokuapp.com/players/${id}`)
       .then(response => {
         this.setState({ player: response.data });
         this.currentRoom(this.state.player.currentLocation._id);
-      })
-      .catch(err => {});
+      });
   };
 
   deleteItem(type, loot) {
-    console.log(loot,type)
+    console.log(loot, type);
     let items = {};
     switch (type) {
       case "Loot":
         items.items = [];
+
         this.state.player.items.push(loot._id);
 
         items.items = this.state.player.items;
+
         axios
           .put(
             `https://dungeon-run.herokuapp.com/players/${
@@ -73,7 +91,7 @@ class Items extends Component {
             }`,
             items
           )
-          .then(response => {
+          .then(() => {
             axios
               .get(
                 `https://dungeon-run.herokuapp.com/players/${
@@ -83,10 +101,9 @@ class Items extends Component {
               .then(response => {
                 this.setState({ player: response.data });
                 this.currentRoom(this.state.player.currentLocation._id);
-              })
-              .catch(err => {});
-          })
-          .catch(err => {});
+              });
+          });
+
         break;
       case "Inventory":
       case "Equip":
@@ -99,22 +116,26 @@ class Items extends Component {
 
           items.gear = this.state.player.gear;
 
-             items.items = this.state.player.items;
-          items[loot.slot] = "Equipped"
-          items.health = this.state.player.health += loot.health
-          items.endurance = this.state.player.endurance += loot.endurance
-          items.intellect = this.state.player.intellect += loot.intellect
-          items.strength = this.state.player.strength += loot.strength
-          items.agility = this.state.player.agility += loot.agility
+          items.items = this.state.player.items;
+
+          items[loot.slot] = "Equipped";
+
+          items.health = this.state.player.health += loot.health;
+
+          items.endurance = this.state.player.endurance += loot.endurance;
+
+          items.intellect = this.state.player.intellect += loot.intellect;
+
+          items.strength = this.state.player.strength += loot.strength;
+
+          items.agility = this.state.player.agility += loot.agility;
         } else if (type === "Equip") {
           items.gear = this.state.player.gear.filter(
             item => item._id !== loot._id
           );
           this.state.player.items.push(loot._id);
-          items.items = this.state.player.items
-       
-        
-        
+
+          items.items = this.state.player.items;
         }
         break;
       case "Drop Item":
@@ -126,30 +147,34 @@ class Items extends Component {
       default:
         break;
     }
+
     axios
       .put(
         `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`,
         items
       )
+
       .then(response => {
         axios
           .get(
             `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`
           )
+
           .then(response => {
             this.setState({ player: response.data });
             this.currentRoom(this.state.player.currentLocation._id);
           })
+
           .catch(err => {});
         if (type === "Equip") {
           this.removeEquipment(loot);
         }
+
         //window.location.reload();
-      })
-      .catch(err => {});
+      });
   }
+
   removeEquipment(item) {
-    let items = {};
     let itemSlot = eval(`this.state.player.${item.slot}`);
 
     if (itemSlot === "Equipped") {
@@ -202,69 +227,79 @@ class Items extends Component {
           break;
         case "weaponOneHand":
           player.weaponOneHand = "none";
+
           break;
         default:
           break;
       }
+
       if (item.strength > 0) {
         strength = item.strength;
+
         player.strength = this.state.player.strength - strength;
       }
+
       if (item.intellect > 0) {
         intellect = item.intellect;
+
         player.intellect = this.state.player.intellect - intellect;
       }
+
       if (item.health > 0) {
         health = item.health;
+
         player.health = this.state.player.health - health;
       }
       if (item.agility > 0) {
         agility = item.agility;
+
         player.agility = this.state.player.agility - agility;
       }
       if (item.endurance > 0) {
         endurance = item.endurance;
+
         player.endurance = this.state.player.endurance - endurance;
       }
+
       axios
         .put(
           `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`,
+
           player
         )
-        .then(response => {
+        .then(() => {
           axios
             .get(
               `https://dungeon-run.herokuapp.com/players/${
                 this.state.player._id
               }`
             )
+
             .then(response => {
               this.setState({ player: response.data });
               this.currentRoom(this.state.player.currentLocation._id);
-            })
-            .catch(err => {});
-          //window.location.reload();
-        })
-        .catch(err => {});
+            });
+        });
     } else {
     }
   }
-  addEquippment=()=>{
-
-  }
-
   classIcon(classname) {
     if (classname === "Paladin") return paladin;
+
     if (classname === "Ranger") return ranger;
+
     if (classname === "Mage") return mage;
+
     if (classname === "Necromancer") return necro;
+
     if (classname === "Warrior") return warrior;
+
     if (classname === "Rogue") return rogue;
   }
 
-
   checkDuplicate(type, loot) {
     let dup = false;
+
     if (type === "Inventory") {
       this.state.player.gear.forEach(curItem => {
         if (curItem.slot === loot.slot) {
@@ -279,6 +314,7 @@ class Items extends Component {
             dup = true;
           }
         }
+
         if (loot.slot === "offHand") {
           if (
             curItem.slot === "shield" ||
@@ -288,6 +324,7 @@ class Items extends Component {
             dup = true;
           }
         }
+
         if (loot.slot === "weaponTwoHand") {
           if (
             curItem.slot === "offHand" ||
@@ -297,6 +334,7 @@ class Items extends Component {
             dup = true;
           }
         }
+
         if (loot.slot === "charm") {
           if (
             curItem.slot === "offHand" ||
@@ -306,9 +344,11 @@ class Items extends Component {
             dup = true;
           }
         }
+
         if (loot.slot === "weaponTwoHand" && curItem.slot === "weaponOneHand") {
           dup = true;
         }
+
         if (
           curItem.slot === "weaponOneHand" &&
           curItem.slot === "weaponTwoHand"
@@ -317,6 +357,7 @@ class Items extends Component {
         }
       });
     }
+
     if (dup === false) {
       this.deleteItem(type, loot);
     } else {
@@ -333,6 +374,7 @@ class Items extends Component {
       }
     }
   }
+
   prgoressColor(value) {
     if (value > 70) {
       return "progress-high";
@@ -344,7 +386,7 @@ class Items extends Component {
       return "progress-low";
     }
   }
-  
+
   renderEquipment() {
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
       return this.state.player.gear.map(item => {
@@ -355,10 +397,13 @@ class Items extends Component {
           item.strength +
           item.agility;
 
-        console.log(this.state.player[item.slot]);
         return (
           <Fragment>
-            <div className={`${item.rarity}itemCard-styles itemCard-styles ${(this.state.player[item.slot] === "none")?"not-equipped":""}`}>
+            <div
+              className={`${item.rarity}itemCard-styles itemCard-styles ${
+                this.state.player[item.slot] === "none" ? "not-equipped" : ""
+              }`}
+            >
               <div className="move-styles">
                 <div
                   className="add-styles
@@ -368,7 +413,14 @@ class Items extends Component {
                   <i class="fas fa-level-down-alt" />
                 </div>
               </div>
-              <div className="equip-Message">{(this.state.player[item.slot] === "none")?<div>Not Equipped</div>:""}</div>
+              <div className="equip-Message">
+                {this.state.player[item.slot] === "none" ? (
+                  <div>Not Equipped</div>
+                ) : (
+                  ""
+                )}
+              </div>
+
               <div className="header-card">{item.name}</div>
               {/* style={{fontFamily:" Arial, Helvetica, sans-serif"}} */}
 
@@ -382,7 +434,7 @@ class Items extends Component {
 
               <div className={"progress-container"}>
                 <br />
-                
+
                 {(item.health * 2) / 5 > 0 ? (
                   <Fragment>
                     <div className="text-left">Health</div>
@@ -396,9 +448,7 @@ class Items extends Component {
                       {item.health}
                     </Progress>
                   </Fragment>
-                ) : (
-                  <Fragment />
-                )}
+                ) : null}
 
                 {(item.endurance * 2) / 5 > 0 ? (
                   <Fragment>
@@ -415,9 +465,7 @@ class Items extends Component {
                       {item.endurance}
                     </Progress>
                   </Fragment>
-                ) : (
-                  <Fragment />
-                )}
+                ) : null}
 
                 {(item.intellect * 2) / 5 > 0 ? (
                   <Fragment>
@@ -481,29 +529,7 @@ class Items extends Component {
     }
   }
   renderItems() {
-    
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
-
-      let flag = false; 
-      let items = this.state.player.items;
-
-
-    //   let unique_array =  items.filter((obj, pos, arr) => {
-    //     flag = false
-    //      return  arr.map(mapObj => {
-         
-    //     if(obj === mapObj){
-    //       flag = true
-       
-    //     }
-    //    else{
-  
-    //     return obj
-    //     }
-    // })});
-    
-
-    //  console.log(unique_array)
       return this.state.player.items.map(item => {
         let total =
           item.health +
@@ -643,12 +669,15 @@ class Items extends Component {
     }
   }
 
+
   render() {
     return (
       <Fragment>
         <div className="bigItemHeader-styles">Items in room</div>
+
         <div className="Items">
           <br />
+
           <br />
 
           {this.state.area.items.map(item => {
@@ -672,8 +701,11 @@ class Items extends Component {
                     >
                       <i class="fas fa-level-down-alt" />
                     </div>
+
                   </div>
+
                   <div className="header-card">{item.name}</div>
+
                   {/* style={{fontFamily:" Arial, Helvetica, sans-serif"}} */}
 
                   <div
@@ -703,7 +735,7 @@ class Items extends Component {
                         </Progress>
                       </Fragment>
                     ) : (
-                      <Fragment />
+                     null
                     )}
 
                     {(item.endurance * 2) / 5 > 0 ? (
@@ -722,7 +754,7 @@ class Items extends Component {
                         </Progress>
                       </Fragment>
                     ) : (
-                      <Fragment />
+                     null
                     )}
 
                     {(item.intellect * 2) / 5 > 0 ? (
@@ -741,7 +773,7 @@ class Items extends Component {
                         </Progress>
                       </Fragment>
                     ) : (
-                      <Fragment />
+                     null
                     )}
 
                     {(item.strength * 2) / 5 > 0 ? (
@@ -760,7 +792,7 @@ class Items extends Component {
                         </Progress>
                       </Fragment>
                     ) : (
-                      <Fragment />
+                      null
                     )}
 
                     {(item.agility * 2) / 5 > 0 ? (
@@ -779,23 +811,29 @@ class Items extends Component {
                         </Progress>
                       </Fragment>
                     ) : (
-                      <Fragment />
+                     null
                     )}
+
                   </div>
                   <div className={`${item.rarity}Footer-styles footer`}>
                     {item.rarity}
                   </div>
+
                 </div>
+
                 <br />
+
               </Fragment>
             );
           })}
         </div>
+
         <div className="class-styles">
           <img
             className={"classIcon-styles"}
             src={this.classIcon(this.state.player.class)}
           />
+
           <br />
           {this.state.player.name}
           <br />
@@ -813,7 +851,6 @@ class Items extends Component {
         <div className={"bigItemHeader-styles"}>Items in equipped</div>
 
         <div className="Items">{this.renderEquipment()}</div>
-    
 
         <div className={"bigItemHeader-styles"}>Items in inventory</div>
         <div className="Items">
@@ -822,7 +859,9 @@ class Items extends Component {
 
           {this.renderItems()}
         </div>
+
       </Fragment>
+      
     );
   }
 }
