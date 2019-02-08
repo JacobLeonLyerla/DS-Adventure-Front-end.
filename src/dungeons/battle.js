@@ -105,12 +105,9 @@ class Battle extends Component {
                 });
 
                 this.fetchTemps();
-              })
-              .catch(err => {});
-          })
-          .catch(err => {});
-      })
-      .catch(err => {});
+              });
+          });
+      });
   }
 
   fetchTemps() {
@@ -125,6 +122,7 @@ class Battle extends Component {
     if (this.state.player.tempMonster._id !== undefined) {
       id = this.state.player.tempMonster._id;
     }
+
     axios
       .get(`https://dungeon-run.herokuapp.com/temps/${id}`)
       .then(response => {
