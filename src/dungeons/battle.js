@@ -1,12 +1,33 @@
+/*
+This will take at least a few days,
+Take your time and do it right
+break up everything,
+put what we need to into helpers if it's logic based
+if it's more jsx based make a component for it
+clean everything up make it look good
+comment everything out.
+
+Remember doing this we will learn we will grow and we will be improving 
+there is nothing wrong with that lets make this code look amazing
+*/
+
 import React, { Component, Fragment } from "react";
+
 import axios from "axios";
+
 import { Row, Col } from "reactstrap";
+
 import { Redirect } from "react-router-dom";
+
 // import paladin from "./img/paladinportrait.png";
 import rogue from "../assets/rogueportrait.jpg";
+
 import mage from "../assets/mageportrait.png";
+
 import warrior from "../assets/warriorportrait.png";
+
 import ranger from "../assets/rangerportrait.png";
+
 import necro from "../assets/necromancerportrait.jpg";
 
 import { Progress } from "reactstrap";
@@ -97,12 +118,9 @@ class Battle extends Component {
                 });
 
                 this.fetchTemps();
-              })
-              .catch(err => {});
-          })
-          .catch(err => {});
-      })
-      .catch(err => {});
+              });
+          });
+      });
   }
 
   fetchTemps() {
@@ -117,6 +135,7 @@ class Battle extends Component {
     if (this.state.player.tempMonster._id !== undefined) {
       id = this.state.player.tempMonster._id;
     }
+
     axios
       .get(`https://dungeon-run.herokuapp.com/temps/${id}`)
       .then(response => {

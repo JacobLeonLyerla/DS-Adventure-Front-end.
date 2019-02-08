@@ -1,3 +1,11 @@
+/*
+break out everything that does not need to be here into it's own function
+remove the assets we don't even use them anymore,
+
+try to find a better way to work out logic, a lot of this stuff is very static,
+and we should make it dynamic, 
+*/
+
 import React, { Component, Fragment } from "react";
 
 import axios from "axios";
