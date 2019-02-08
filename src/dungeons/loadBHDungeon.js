@@ -1,3 +1,14 @@
+/*
+Go through line by line break everything out, anything that does not need to be here needs it's own function
+we can just import it from a helper function or many helper functions
+
+once we are done comment out all of our code and keep it consistantly formatted,
+this code is not professional and you need to fix that, this will be great pactice
+and it will make bringing in other people to work on it less of a mess if it's easier to understand
+*/
+
+
+
 import React, { Component, Fragment } from "react";
 
 import { Redirect } from "react-router-dom";
