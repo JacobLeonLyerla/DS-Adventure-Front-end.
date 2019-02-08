@@ -1,9 +1,3 @@
-/*
-lets remove the breaks make this an element instead of a class,
-than we should render it inside of the info page,
-it does not need to be it's own page.
-*/
-
 import React, { Component, Fragment } from "react";
 
 import { Link } from "react-router-dom";
