@@ -1,3 +1,14 @@
+/*
+
+THIS COMPONENT IS NO LONGER IN USE!
+
+  possibly read this just for reference
+  and than delete it after we have loooked at the logic a bit more
+    
+
+*/
+
+
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 import { Redirect } from "react-router-dom";
