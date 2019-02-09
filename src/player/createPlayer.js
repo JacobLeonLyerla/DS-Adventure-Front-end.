@@ -1,8 +1,22 @@
+/*
+Break up this component as much as possible
+
+comment everything out
+
+add hooks if  they seem worth it,
+
+or even consider replacing this stuff with a context
+
+*/
+
 import React, { Component, Fragment } from "react";
 import axios from "axios";
 
 import { Redirect } from "react-router-dom";
 import { Form, Alert, Label, Input, Col, Row } from "reactstrap";
+
+import CreateForm from "../helpers/createForm";
+
 class Create extends Component {
   state = {
     name: "",
@@ -170,30 +184,6 @@ class Create extends Component {
             "5b68f0aebc349a910c4b23fb"
           ];
           break;
-        // case "Necromancer":
-        //   player.endurance = 160;
-        //   player.health = 140;
-        //   player.intellect = 25;
-        //   player.agility = 5;
-        //   player.strength = 0;
-        //   player.attacks = ["5b68f41fbc349a910c4b23fe","5b68f2b2bc349a910c4b23fd","5b68f15cbc349a910c4b23fc"]
-        //   break;
-        // case "Paladin":
-        //   player.endurance = 120;
-        //   player.health = 180;
-        //   player.intellect = 10;
-        //   player.agility = 5;
-        //   player.strength = 15;
-        //   player.attacks = ["5b66baf0667d32785c749ff5","5b68f4e2bc349a910c4b23ff","5b68f57dbc349a910c4b2400"]
-        //   break;
-        // case "Rogue":
-        //   player.endurance = 160;
-        //   player.health = 140;
-        //   player.intellect = 5;
-        //   player.agility = 25;
-        //   player.strength = 0;
-        //   player.attacks = ["5b68ec1abc349a910c4b23f3","5b68ec6ebc349a910c4b23f4","5b68ed13bc349a910c4b23f5"]
-        //   break;
         default:
       }
 
@@ -208,7 +198,7 @@ class Create extends Component {
     if (this.state.gender !== "") {
       player.gender = this.state.gender;
     }
-    player.currentLocation = undefined;
+    player.currentLocation = "5b60093b9a47813e2cdd30d1";
     axios
       .post("https://dungeon-run.herokuapp.com/auth/register", player)
       .then(response => {
@@ -235,8 +225,7 @@ class Create extends Component {
 
           preview: ""
         });
-      })
-      .catch(error => {});
+      });
   };
 
   // this takes the event and sets it on state, the event here is the
@@ -245,6 +234,9 @@ class Create extends Component {
     this.setState({ [input.target.name]: input.target.value });
   };
 
+  setClass = (selected, preview) => {
+    this.setState({ class: selected, preview });
+  };
   // this  sets the class name on state i to render a banner telling the user what class is selected
   handleClass = input => {
     if (this.state.class === "") {
@@ -263,8 +255,8 @@ class Create extends Component {
   // if the id does not match the currently selected this.state.button than they get the className
   // "class-not-picked" that lowers the opacity in order to high light the one that is picked
   setButtonStyle = id => {
-    if (this.state.button !== "" && this.state.button !== undefined) {
-      if (id !== this.state.button) {
+    if (this.state.class !== "" && this.state.class !== undefined) {
+      if (id !== this.state.class) {
         return "class-not-picked";
       }
     }
@@ -290,153 +282,14 @@ class Create extends Component {
           {/* this allows the renderRedirect to work, it's been called over and over
      and if this.state.redirect is ever true it allows that function to exicute  */}
           {this.renderRedirect()}
-
-          <Form className="create-styles" onSubmit={this.addPlayer}>
-            {this.state.class !== "" ? (
-              <Fragment>
-                <Alert color="success">
-                  {`You have selected a ${
-                    this.state.class
-                  }, adventure lies ahead champion.`}
-                </Alert>
-              </Fragment>
-            ) : null}
-
-            <Row style={{ margin: "1%" }}>
-              <Col md="6">
-                <Label
-                  for="name"
-                  style={{ width: "90%" }}
-                  className="text-left"
-                >
-                  Name:
-                </Label>
-
-                <Input
-                  type="text"
-                  name="name"
-                  id="name"
-                  value={this.state.name}
-                  onChange={this.handleInput}
-                />
-              </Col>
-              <Col md="6">
-                <Label
-                  style={{ width: "90%" }}
-                  className="text-left"
-                  for="email"
-                >
-                  Email:
-                </Label>
-
-                <Input
-                  name="email"
-                  value={this.state.email}
-                  onChange={this.handleInput}
-                />
-              </Col>
-            </Row>
-
-            <Row style={{ margin: "1%" }}>
-              <Col md="6">
-                <Label
-                  style={{ width: "90%" }}
-                  className="text-left"
-                  for="password"
-                >
-                  Password:
-                </Label>
-
-                <Input
-                  id="password"
-                  name="password"
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.handleInput}
-                />
-              </Col>
-              <Col md="6">
-                <Label
-                  style={{ width: "90%" }}
-                  className="text-left"
-                  for="password2"
-                >
-                  Re-type Password:
-                </Label>
-
-                <Input
-                  id="pwassword2"
-                  name="password2"
-                  type="password"
-                  value={this.state.password2}
-                  onChange={this.handleInput}
-                />
-              </Col>
-            </Row>
-            <div style={{ margin: "1%" }}>
-              <Label style={{ width: "97%" }} className="text-left" for="lore">
-                Lore:
-              </Label>
-
-              <Input
-                type="textarea"
-                id="lore"
-                name="bio"
-                placeholder="Give a backstory"
-                value={this.state.bio}
-                onChange={this.handleInput}
-                style={{ height: "20vh" }}
-              />
-            </div>
-            {/* these buttons  on click set the class state and the button state as well as the preview state,
-              
-              NOTE TO SELF: the button and class states are the same so we don't really need them both
-              i will fix tihs once i am back online i can't really code because all my data is hosted on mlab */}
-            <div>
-              <button
-                type="button"
-                className={`btn ${this.setButtonStyle("Warrior")}`}
-                onClick={() =>
-                  this.setState({
-                    class: "Warrior",
-                    button: "Warrior",
-                    preview: "warrioridle"
-                  })
-                }
-              >
-                Warrior
-              </button>
-              <button
-                type="button"
-                className={`btn ${this.setButtonStyle("Ranger")}`}
-                onClick={() =>
-                  this.setState({
-                    class: "Ranger",
-                    button: "Ranger",
-                    preview: "rangeridle"
-                  })
-                }
-              >
-                Ranger
-              </button>
-              <button
-                type="button"
-                className={`btn ${this.setButtonStyle("Mage")}`}
-                onClick={() =>
-                  this.setState({
-                    class: "Mage",
-                    button: "Mage",
-                    preview: "mageidle"
-                  })
-                }
-              >
-                Mage
-              </button>
-            </div>
-            <button className="btn btn-create" type="submit">
-              Create Character
-            </button>
-          </Form>
+          <CreateForm
+            {...this.state}
+            addPlayer={this.addPlayer}
+            handleInput={this.handleInput}
+            setButtonStyle={this.setButtonStyle}
+            setClass={this.setClass}
+            setButtonStyle={this.setButtonStyle}
+          />
         </div>
       </Fragment>
     );
