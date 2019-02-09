@@ -1,3 +1,14 @@
+/*
+lets break this logic up keep as much of it in helpers as we can
+
+maybe replace our state with hooks, but thats not important
+
+clean up the code in general and comment everything out
+
+*/
+
+
+
 import React, { Component, Fragment } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { Progress } from "reactstrap";
