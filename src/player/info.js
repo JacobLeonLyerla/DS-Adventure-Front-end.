@@ -54,14 +54,13 @@ class Info extends Component {
     }
     axios
       .put(`https://dungeon-run.herokuapp.com/players/${id}`, player)
-      .then(response => {
+      .then(() => {
         this.setState({
           name: "",
           bio: ""
         });
         this.setCurrentPlayer(id);
       })
-      .catch(err => {});
   };
   handleInput = input => {
     this.setState({ [input.target.name]: input.target.value });
