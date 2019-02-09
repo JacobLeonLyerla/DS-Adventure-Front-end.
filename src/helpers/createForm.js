@@ -2,8 +2,10 @@ import React, {Fragment} from "react";
 
 import { Form, Alert, Label, Input, Col, Row } from "reactstrap";
 const CreateForm = props =>{
-
+   const  inputs =["name","email","password","password2" ]
     return(
+
+
         <Form className="create-styles" onSubmit={props.addPlayer}>
             {props.class !== "" ? (
               <Fragment>
@@ -16,75 +18,25 @@ const CreateForm = props =>{
             ) : null}
 
             <Row style={{ margin: "1%" }}>
+            {inputs.map(title =>(
               <Col md="6">
                 <Label
-                  for="name"
+                  for={title}
                   style={{ width: "90%" }}
                   className="text-left"
                 >
-                  Name:
+                  {(title !== "password2") ? <div>{(title.charAt(0).toUpperCase() + title.slice(1))}:</div> : <div>Re-type Password:</div>}
                 </Label>
 
                 <Input
-                  type="text"
+                  type={(title !== "password" && title !== "password2") ? "title":"password"}
                   name="name"
                   id="name"
-                  value={props.name}
+                  value={props.title}
                   onChange={props.handleInput}
                 />
               </Col>
-              <Col md="6">
-                <Label
-                  style={{ width: "90%" }}
-                  className="text-left"
-                  for="email"
-                >
-                  Email:
-                </Label>
-
-                <Input
-                  name="email"
-                  value={props.email}
-                  onChange={props.handleInput}
-                />
-              </Col>
-            </Row>
-
-            <Row style={{ margin: "1%" }}>
-              <Col md="6">
-                <Label
-                  style={{ width: "90%" }}
-                  className="text-left"
-                  for="password"
-                >
-                  Password:
-                </Label>
-
-                <Input
-                  id="password"
-                  name="password"
-                  type="password"
-                  value={props.password}
-                  onChange={props.handleInput}
-                />
-              </Col>
-              <Col md="6">
-                <Label
-                  style={{ width: "90%" }}
-                  className="text-left"
-                  for="password2"
-                >
-                  Re-type Password:
-                </Label>
-
-                <Input
-                  id="pwassword2"
-                  name="password2"
-                  type="password"
-                  value={props.password2}
-                  onChange={props.handleInput}
-                />
-              </Col>
+              ))}
             </Row>
             <div style={{ margin: "1%" }}>
               <Label style={{ width: "97%" }} className="text-left" for="lore">

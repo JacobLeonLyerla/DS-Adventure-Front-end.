@@ -1,23 +1,6 @@
-/*
-Change the if else if into a switch
-make it more dynamic if that, Maybe instead of the way we are doing it, lets iterate out soem divs
-set them up so the if there are 3 divs in one row it will format it
-maybe using col and row or something,  if we keep doing it this way it will really ad a lot of work
-every wing we do it will be another custom map and that seems a bit bad.
-
-we could do something like adding a row to the data base and put them on each room and level
-so our starting zone will be starting room to arcanum, and we can go from there
-we could also add a sizing element and scale the div bases on that
-maybe use inline functions for that remove all the break tags
-they look really bad, when I created these it I used the breaks for speed
-
-second option we keep making the map custom so we can use sizing a bit to our advantage
-
-
-*/
-
-
 import React, { Component } from "react";
+import map from "../assets/map1.jpg";
+
 class Map extends Component {
   setRoom(room) {
     if (this.props.name === "starting room" && room === "sr") {
