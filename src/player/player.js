@@ -1,12 +1,3 @@
-/*
-try to break this code into helpers as much as possible
-
-the form could be in a login form helper
-
-remove the brake and convert that into margin in the css
-
-*/
-
 import React from "react";
 
 import LoginForm from "../helpers/loginForm";
