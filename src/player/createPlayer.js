@@ -5,12 +5,12 @@ comment everything out
 
 add hooks if  they seem worth it,
 
-or even consider replacing this stuff with a context 
+or even consider replacing this stuff with a context
 
 */
 
 
-mport React, { Component, Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import axios from "axios";
 
 import { Redirect } from "react-router-dom";
@@ -182,30 +182,6 @@ class Create extends Component {
             "5b68f0aebc349a910c4b23fb"
           ];
           break;
-        // case "Necromancer":
-        //   player.endurance = 160;
-        //   player.health = 140;
-        //   player.intellect = 25;
-        //   player.agility = 5;
-        //   player.strength = 0;
-        //   player.attacks = ["5b68f41fbc349a910c4b23fe","5b68f2b2bc349a910c4b23fd","5b68f15cbc349a910c4b23fc"]
-        //   break;
-        // case "Paladin":
-        //   player.endurance = 120;
-        //   player.health = 180;
-        //   player.intellect = 10;
-        //   player.agility = 5;
-        //   player.strength = 15;
-        //   player.attacks = ["5b66baf0667d32785c749ff5","5b68f4e2bc349a910c4b23ff","5b68f57dbc349a910c4b2400"]
-        //   break;
-        // case "Rogue":
-        //   player.endurance = 160;
-        //   player.health = 140;
-        //   player.intellect = 5;
-        //   player.agility = 25;
-        //   player.strength = 0;
-        //   player.attacks = ["5b68ec1abc349a910c4b23f3","5b68ec6ebc349a910c4b23f4","5b68ed13bc349a910c4b23f5"]
-        //   break;
         default:
       }
 
@@ -248,7 +224,6 @@ class Create extends Component {
           preview: ""
         });
       })
-      .catch(error => {});
   };
 
   // this takes the event and sets it on state, the event here is the
