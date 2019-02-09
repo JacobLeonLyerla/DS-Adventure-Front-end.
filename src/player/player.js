@@ -7,28 +7,25 @@ remove the brake and convert that into margin in the css
 
 */
 
-import React, { Component,  } from "react";
+import React from "react";
 
-import LoginForm from "../helpers/loginForm"
+import LoginForm from "../helpers/loginForm";
 
+const Player = props => {
+  return (
+    <div className="loginbackground-styles">
+      <br />
 
-class Player extends Component {
-  render() {
-    return (
-    
-        <div className="loginbackground-styles">
-         <br/>
-
-          <div className="title-styles">Dungeon Run</div>
-          {/* Log in form for the player passes the data back to app.js */}
-           <LoginForm    {...this.props}
-              handleInput={this.props.handleInput}
-              findPlayer={this.props.findPlayer}
-              loadPlayer={this.props.loadPlayer}/>
-        </div>
-   
-    );
-  }
-}
+      <div className="title-styles">Dungeon Run</div>
+      {/* Log in form for the player passes the data back to app.js */}
+      <LoginForm
+        {...props}
+        handleInput={props.handleInput}
+        findPlayer={props.findPlayer}
+        loadPlayer={props.loadPlayer}
+      />
+    </div>
+  );
+};
 
 export default Player;
