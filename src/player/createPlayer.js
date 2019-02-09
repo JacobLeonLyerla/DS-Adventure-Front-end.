@@ -1,4 +1,16 @@
-import React, { Component, Fragment } from "react";
+/*
+Break up this component as much as possible
+
+comment everything out
+
+add hooks if  they seem worth it,
+
+or even consider replacing this stuff with a context 
+
+*/
+
+
+mport React, { Component, Fragment } from "react";
 import axios from "axios";
 
 import { Redirect } from "react-router-dom";
