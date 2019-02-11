@@ -12,12 +12,10 @@
   padding-bottom: 1px;
 
   border-bottom: 1.5px solid wheat;
-
+  display: table;
   width: 50%;
 
   margin: 0 auto;
-
-  margin-top: 15vh;
 }
 
 .login-styles {
@@ -29,8 +27,7 @@
 
   border: 1px solid lightblue;
 
-  border-radius: 0.7vw 0.7vw 0px 0px
-  ;
+  border-radius: 0.7vw 0.7vw 0px 0px;
   margin-top: 20vh;
 }
 
@@ -40,7 +37,6 @@
   border-radius: 5px;
 
   border-style: none;
-
 }
 
 .btn:hover {
@@ -57,4 +53,17 @@
 
 .btn-register {
   background: lightgreen;
+
+  animation: pulse 6s;
+
+  animation-delay: 1s;
+}
+@keyframes pulse {
+  0% {
+    letter-spacing: .2ch;
+  }
+
+  100% {
+    letter-spacing: 0ch;
+  }
 }
