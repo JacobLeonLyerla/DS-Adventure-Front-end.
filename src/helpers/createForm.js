@@ -60,7 +60,7 @@ const CreateForm = props =>{
             <div>
               <button
                 type="button"
-                className={`btn ${props.setButtonStyle("Warrior")}`}
+                className={`btn ${props.setButtonStyle("Warrior",props.class)}`}
                 onClick={() =>
                     props.setClass("Warrior","warrioridle")
                 }
@@ -69,7 +69,7 @@ const CreateForm = props =>{
               </button>
               <button
                 type="button"
-                className={`btn ${props.setButtonStyle("Ranger")}`}
+                className={`btn ${props.setButtonStyle("Ranger",props.class)}`}
                 onClick={() =>
                   props.setClass("Ranger","rangeridle")
                 }
@@ -78,7 +78,7 @@ const CreateForm = props =>{
               </button>
               <button
                 type="button"
-                className={`btn ${props.setButtonStyle("Mage")}`}
+                className={`btn ${props.setButtonStyle("Mage",props.class)}`}
                 onClick={() =>
                     props.setClass("Mage","mageidle")
                 }
