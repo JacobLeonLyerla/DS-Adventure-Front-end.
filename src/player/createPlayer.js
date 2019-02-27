@@ -13,8 +13,7 @@ import React, { Component, Fragment } from "react";
 import axios from "axios";
 
 import { Redirect } from "react-router-dom";
-import { Form, Alert, Label, Input, Col, Row } from "reactstrap";
-
+import {setButtonStyle} from "../helpers/createHelpers"
 import CreateForm from "../helpers/createForm";
 
 class Create extends Component {
@@ -254,13 +253,7 @@ class Create extends Component {
   //All of my buttons call this in the creat component,  they pass in the id in this case a class name,
   // if the id does not match the currently selected this.state.button than they get the className
   // "class-not-picked" that lowers the opacity in order to high light the one that is picked
-  setButtonStyle = id => {
-    if (this.state.class !== "" && this.state.class !== undefined) {
-      if (id !== this.state.class) {
-        return "class-not-picked";
-      }
-    }
-  };
+ 
 
   render() {
     return (
@@ -286,9 +279,9 @@ class Create extends Component {
             {...this.state}
             addPlayer={this.addPlayer}
             handleInput={this.handleInput}
-            setButtonStyle={this.setButtonStyle}
+            setButtonStyle={setButtonStyle}
             setClass={this.setClass}
-            setButtonStyle={this.setButtonStyle}
+            class ={this.state.class}
           />
         </div>
       </Fragment>
