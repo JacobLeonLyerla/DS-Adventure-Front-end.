@@ -30,8 +30,8 @@ const CreateForm = props =>{
 
                 <Input
                   type={(title !== "password" && title !== "password2") ? "title":"password"}
-                  name="name"
-                  id="name"
+                  name={title}
+                  id={title}
                   value={props.title}
                   onChange={props.handleInput}
                 />
