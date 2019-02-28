@@ -13,7 +13,8 @@ import React, { Component, Fragment } from "react";
 import axios from "axios";
 
 import { Redirect } from "react-router-dom";
-import {setButtonStyle,handleInput} from "../helpers/createHelpers"
+import {setButtonStyle} from "../helpers/createHelpers"
+import {handleInput} from "../helpers/commonHelpers"
 import CreateForm from "../helpers/createForm";
 
 class Create extends Component {
