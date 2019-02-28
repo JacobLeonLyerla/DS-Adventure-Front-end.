@@ -13,7 +13,7 @@ import React, { Component, Fragment } from "react";
 import axios from "axios";
 
 import { Redirect } from "react-router-dom";
-import {setButtonStyle} from "../helpers/createHelpers"
+import {setButtonStyle,setClass} from "../helpers/createHelpers"
 import {handleInput} from "../helpers/commonHelpers"
 import CreateForm from "../helpers/createForm";
 
@@ -232,9 +232,7 @@ class Create extends Component {
   // onChange from my input fields
  
 
-  setClass = (selected, preview) => {
-    this.setState({ class: selected, preview });
-  };
+
   // this  sets the class name on state i to render a banner telling the user what class is selected
   handleClass = input => {
     if (this.state.class === "") {
@@ -279,7 +277,7 @@ class Create extends Component {
             addPlayer={this.addPlayer}
             handleInput={handleInput.bind(this)}
             setButtonStyle={setButtonStyle}
-            setClass={this.setClass}
+            setClass={setClass.bind(this)}
             class ={this.state.class}
           />
         </div>
