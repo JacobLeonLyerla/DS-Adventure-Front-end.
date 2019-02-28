@@ -13,7 +13,7 @@ import React, { Component, Fragment } from "react";
 import axios from "axios";
 
 import { Redirect } from "react-router-dom";
-import {setButtonStyle} from "../helpers/createHelpers"
+import {setButtonStyle,handleInput} from "../helpers/createHelpers"
 import CreateForm from "../helpers/createForm";
 
 class Create extends Component {
@@ -54,6 +54,7 @@ class Create extends Component {
   // really just second lines of defense
   addPlayer = e => {
     e.preventDefault();
+    console.log(this.state)
 
     this.state.redirect = false;
 
@@ -229,9 +230,6 @@ class Create extends Component {
 
   // this takes the event and sets it on state, the event here is the
   // onChange from my input fields
-  handleInput = input => {
-    this.setState({ [input.target.name]: input.target.value });
-  };
 
   setClass = (selected, preview) => {
     this.setState({ class: selected, preview });
@@ -278,7 +276,7 @@ class Create extends Component {
           <CreateForm
             {...this.state}
             addPlayer={this.addPlayer}
-            handleInput={this.handleInput}
+            handleInput={handleInput.bind(this)}
             setButtonStyle={setButtonStyle}
             setClass={this.setClass}
             class ={this.state.class}
