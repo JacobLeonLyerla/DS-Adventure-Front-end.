@@ -6,3 +6,6 @@ export function setButtonStyle(id, curClass) {
   }
 }
 
+export function setClass(selected, preview) {
+  this.setState({ class: selected, preview });
+}
