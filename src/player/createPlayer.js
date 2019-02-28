@@ -228,17 +228,11 @@ class Create extends Component {
       });
   };
 
-  // this takes the event and sets it on state, the event here is the
-  // onChange from my input fields
+
  
 
 
-  // this  sets the class name on state i to render a banner telling the user what class is selected
-  handleClass = input => {
-    if (this.state.class === "") {
-      this.setState({ class: input });
-    }
-  };
+
 
   // this is a redirect render if the user ever sets redirect on state to true
   renderRedirect = () => {
@@ -247,9 +241,7 @@ class Create extends Component {
     }
   };
 
-  //All of my buttons call this in the creat component,  they pass in the id in this case a class name,
-  // if the id does not match the currently selected this.state.button than they get the className
-  // "class-not-picked" that lowers the opacity in order to high light the one that is picked
+ 
  
 
   render() {
