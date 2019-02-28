@@ -54,7 +54,6 @@ class Create extends Component {
   // really just second lines of defense
   addPlayer = e => {
     e.preventDefault();
-    console.log(this.state)
 
     this.state.redirect = false;
 
@@ -230,6 +229,7 @@ class Create extends Component {
 
   // this takes the event and sets it on state, the event here is the
   // onChange from my input fields
+ 
 
   setClass = (selected, preview) => {
     this.setState({ class: selected, preview });
