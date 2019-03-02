@@ -35,19 +35,6 @@ class Info extends Component {
 
 
 
-  // this is to render the gear inside of the user information,
-  // this is also currently not being used, however i may make a gear
-  // button that allows users to pull up  little screen with the gear
-  gearRender() {
-    if (this.state.player.items !== []) {
-      return this.state.player.gear.map(item => (
-        <Fragment>
-          <div>{item.name}</div>
-          <br />
-        </Fragment>
-      ));
-    }
-  }
   // this takes the value of the bar and gives it a style based on that
   prgoressColor(value) {
     if (value > 70) {
