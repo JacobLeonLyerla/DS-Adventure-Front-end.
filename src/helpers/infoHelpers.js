@@ -36,3 +36,14 @@ export function handleClass(input) {
     this.setState({ class: input });
   }
 }
+export function progressColor(value) {
+  if (value > 70) {
+    return "progress-high";
+  } else if (value > 50) {
+    return "progress-good";
+  } else if (value > 30) {
+    return "progress-mid";
+  } else {
+    return "progress-low";
+  }
+}
