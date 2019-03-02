@@ -34,17 +34,7 @@ class Info extends Component {
   }
 
 
-  
-  itemsRender() {
-    if (this.state.player.items !== []) {
-      return this.state.player.items.map(item => (
-        <Fragment>
-          <div>{item.name}</div>
-          <br />
-        </Fragment>
-      ));
-    }
-  }
+
   // this is to render the gear inside of the user information,
   // this is also currently not being used, however i may make a gear
   // button that allows users to pull up  little screen with the gear

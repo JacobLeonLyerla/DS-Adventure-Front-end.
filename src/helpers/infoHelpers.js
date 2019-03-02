@@ -1,4 +1,6 @@
 import axios from "axios";
+import React, { Fragment } from "react";
+
 // take id from the  component did mount use it do grab the player from the database than
 // set that data on state
 export function setCurrentPlayer(id) {
@@ -30,7 +32,7 @@ export function updatePlayer(id) {
     });
 }
 export function handleClass(input) {
-    if (this.state.class === "") {
-      this.setState({ class: input });
-    }
-  };
+  if (this.state.class === "") {
+    this.setState({ class: input });
+  }
+}
