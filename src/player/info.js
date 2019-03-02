@@ -10,7 +10,7 @@ clean up the code in general and comment everything out
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Progress } from "reactstrap";
-import { setCurrentPlayer,updatePlayer } from "../helpers/infoHelpers";
+import { setCurrentPlayer,updatePlayer,handleClass } from "../helpers/infoHelpers";
 import { handleInput } from "../helpers/commonHelpers";
 import axios from "axios";
 
@@ -34,11 +34,7 @@ class Info extends Component {
   }
 
 
-  handleClass = input => {
-    if (this.state.class === "") {
-      this.setState({ class: input });
-    }
-  };
+  
   itemsRender() {
     if (this.state.player.items !== []) {
       return this.state.player.items.map(item => (
@@ -78,6 +74,8 @@ class Info extends Component {
     this.setCurrentPlayer = setCurrentPlayer.bind(this);
     this.handleInput = handleInput.bind(this)
     this.updatePlayer = updatePlayer.bind(this)
+    this.handleClass = handleClass.bind(this)
+
     let element = null;
     // when this.state.visable comes back as defined than it will render a gif above the form
     if (this.state.visible) {
