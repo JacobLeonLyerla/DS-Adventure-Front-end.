@@ -7,11 +7,16 @@ clean up the code in general and comment everything out
 
 */
 
-
-
 import React, { Component, Fragment } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Progress } from "reactstrap";
+import {
+  setCurrentPlayer,
+  updatePlayer,
+  handleClass,
+  progressColor
+} from "../helpers/infoHelpers";
+import { handleInput } from "../helpers/commonHelpers";
 import axios from "axios";
 
 class Info extends Component {
@@ -32,80 +37,15 @@ class Info extends Component {
     const { id } = this.props.match.params;
     this.setCurrentPlayer(id);
   }
-  // take id from the  component did mount use it do grab the player from the database than
-  // set that data on state
-  setCurrentPlayer = id => {
-    axios
-      .get(`https://dungeon-run.herokuapp.com/players/${id}`)
-      .then(response => {
-        this.setState({ player: response.data, preview: response.data.idle });
-      })
-      .catch(err => {});
-  };
-  // this was going to allow people to edit player info, however it is not currently
-  // in the game because emplementing it was a bit wonky i'll try something a bit later
-  updatePlayer = id => {
-    const player = {};
-    if (this.state.name !== "") {
-      player.name = this.state.name;
-    }
-    if (this.state.bio !== "") {
-      player.bio = this.state.bio;
-    }
-    axios
-      .put(`https://dungeon-run.herokuapp.com/players/${id}`, player)
-      .then(() => {
-        this.setState({
-          name: "",
-          bio: ""
-        });
-        this.setCurrentPlayer(id);
-      })
-  };
-  handleInput = input => {
-    this.setState({ [input.target.name]: input.target.value });
-  };
-  handleClass = input => {
-    if (this.state.class === "") {
-      this.setState({ class: input });
-    }
-  };
-  itemsRender() {
-    if (this.state.player.items !== []) {
-      return this.state.player.items.map(item => (
-        <Fragment>
-          <div>{item.name}</div>
-          <br />
-        </Fragment>
-      ));
-    }
-  }
-  // this is to render the gear inside of the user information,
-  // this is also currently not being used, however i may make a gear
-  // button that allows users to pull up  little screen with the gear
-  gearRender() {
-    if (this.state.player.items !== []) {
-      return this.state.player.gear.map(item => (
-        <Fragment>
-          <div>{item.name}</div>
-          <br />
-        </Fragment>
-      ));
-    }
-  }
+
   // this takes the value of the bar and gives it a style based on that
-  prgoressColor(value) {
-    if (value > 70) {
-      return "progress-high";
-    } else if (value > 50) {
-      return "progress-good";
-    } else if (value > 30) {
-      return "progress-mid";
-    } else {
-      return "progress-low";
-    }
-  }
+
   render() {
+    this.setCurrentPlayer = setCurrentPlayer.bind(this);
+    this.handleInput = handleInput.bind(this);
+    this.updatePlayer = updatePlayer.bind(this);
+    this.handleClass = handleClass.bind(this);
+
     let element = null;
     // when this.state.visable comes back as defined than it will render a gif above the form
     if (this.state.visible) {
@@ -182,7 +122,7 @@ lastly we set the value based on the same logic */}
                 <Fragment>
                   <div className="text-left">Health</div>
                   <Progress
-                    className={`${this.prgoressColor(
+                    className={`${progressColor(
                       Math.round((health / total) * 100)
                     )} progress-info`}
                     style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
@@ -198,7 +138,7 @@ lastly we set the value based on the same logic */}
                 <Fragment>
                   <div className="text-left">Endurance</div>
                   <Progress
-                    className={`${this.prgoressColor(
+                    className={`${progressColor(
                       Math.round((endurance / total) * 100)
                     )} progress-info`}
                     style={{
@@ -216,7 +156,7 @@ lastly we set the value based on the same logic */}
                 <Fragment>
                   <div className="text-left">Intellect</div>
                   <Progress
-                    className={`${this.prgoressColor(
+                    className={`${progressColor(
                       Math.round((intellect / total) * 100)
                     )} progress-info`}
                     style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
@@ -232,7 +172,7 @@ lastly we set the value based on the same logic */}
                 <Fragment>
                   <div className="text-left">Strength</div>
                   <Progress
-                    className={`${this.prgoressColor(
+                    className={`${progressColor(
                       Math.round((strength / total) * 100)
                     )} progress-info`}
                     style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
@@ -248,7 +188,7 @@ lastly we set the value based on the same logic */}
                 <Fragment>
                   <div className="text-left">Agility</div>
                   <Progress
-                    className={`${this.prgoressColor(
+                    className={`${progressColor(
                       Math.round((agility / total) * 100)
                     )} progress-info`}
                     style={{ fontFamily: " Arial, Helvetica, sans-serif" }}

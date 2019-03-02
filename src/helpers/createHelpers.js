@@ -20,6 +20,11 @@ export function handleClass(input) {
     this.setState({ class: input });
   }
 }
+  // this is a function to post a new adventurer  to the database,
+  // it pulls the data off the payload and sets it into a object
+  //with a few basic checks but i actually have set the checks to handle on the back end so the checks here are
+  // really just second lines of defense
+
 
 export function addPlayer(e) {
   e.preventDefault();
@@ -195,3 +200,4 @@ export function addPlayer(e) {
       });
     });
 }
+

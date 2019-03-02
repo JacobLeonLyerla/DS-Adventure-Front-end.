@@ -1,20 +1,11 @@
-/*
-Break up this component as much as possible
-
-comment everything out
-
-add hooks if  they seem worth it,
-
-or even consider replacing this stuff with a context
-
-*/
-
 import React, { Component, Fragment } from "react";
 
-
 import { Redirect } from "react-router-dom";
-import {setButtonStyle,setClass,addPlayer} from "../helpers/createHelpers"
-import {handleInput} from "../helpers/commonHelpers"
+
+import { setButtonStyle, setClass, addPlayer } from "../helpers/createHelpers";
+
+import { handleInput } from "../helpers/commonHelpers";
+
 import CreateForm from "../helpers/createForm";
 
 class Create extends Component {
@@ -49,12 +40,6 @@ class Create extends Component {
 
     preview: ""
   };
-  // this is a function to post a new adventurer  to the database,
-  // it pulls the data off the payload and sets it into a object
-  //with a few basic checks but i actually have set the checks to handle on the back end so the checks here are
-  // really just second lines of defense
-
-
 
   // this is a redirect render if the user ever sets redirect on state to true
   renderRedirect = () => {
@@ -62,9 +47,6 @@ class Create extends Component {
       return <Redirect to="/" />;
     }
   };
-
- 
- 
 
   render() {
     return (
@@ -88,11 +70,11 @@ class Create extends Component {
           {this.renderRedirect()}
           <CreateForm
             {...this.state}
-            addPlayer={this.addPlayer}
+            addPlayer={addPlayer.bind(this)}
             handleInput={handleInput.bind(this)}
             setButtonStyle={setButtonStyle}
             setClass={setClass.bind(this)}
-            class ={this.state.class}
+            class={this.state.class}
           />
         </div>
       </Fragment>
