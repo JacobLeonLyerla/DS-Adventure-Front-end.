@@ -10,7 +10,7 @@ clean up the code in general and comment everything out
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Progress } from "reactstrap";
-import { setCurrentPlayer } from "../helpers/infoHelpers";
+import { setCurrentPlayer,updatePlayer } from "../helpers/infoHelpers";
 import { handleInput } from "../helpers/commonHelpers";
 import axios from "axios";
 
@@ -33,26 +33,6 @@ class Info extends Component {
     this.setCurrentPlayer(id);
   }
 
-  // this was going to allow people to edit player info, however it is not currently
-  // in the game because emplementing it was a bit wonky i'll try something a bit later
-  updatePlayer = id => {
-    const player = {};
-    if (this.state.name !== "") {
-      player.name = this.state.name;
-    }
-    if (this.state.bio !== "") {
-      player.bio = this.state.bio;
-    }
-    axios
-      .put(`https://dungeon-run.herokuapp.com/players/${id}`, player)
-      .then(() => {
-        this.setState({
-          name: "",
-          bio: ""
-        });
-        this.setCurrentPlayer(id);
-      });
-  };
 
   handleClass = input => {
     if (this.state.class === "") {
@@ -97,6 +77,7 @@ class Info extends Component {
   render() {
     this.setCurrentPlayer = setCurrentPlayer.bind(this);
     this.handleInput = handleInput.bind(this)
+    this.updatePlayer = updatePlayer.bind(this)
     let element = null;
     // when this.state.visable comes back as defined than it will render a gif above the form
     if (this.state.visible) {
