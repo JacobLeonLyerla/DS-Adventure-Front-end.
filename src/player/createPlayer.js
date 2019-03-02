@@ -1,11 +1,10 @@
-
 import React, { Component, Fragment } from "react";
 
 import { Redirect } from "react-router-dom";
 
-import {setButtonStyle,setClass,addPlayer} from "../helpers/createHelpers"
+import { setButtonStyle, setClass, addPlayer } from "../helpers/createHelpers";
 
-import {handleInput} from "../helpers/commonHelpers"
+import { handleInput } from "../helpers/commonHelpers";
 
 import CreateForm from "../helpers/createForm";
 
@@ -75,7 +74,7 @@ class Create extends Component {
             handleInput={handleInput.bind(this)}
             setButtonStyle={setButtonStyle}
             setClass={setClass.bind(this)}
-            class ={this.state.class}
+            class={this.state.class}
           />
         </div>
       </Fragment>
