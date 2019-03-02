@@ -10,7 +10,12 @@ clean up the code in general and comment everything out
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Progress } from "reactstrap";
-import { setCurrentPlayer,updatePlayer,handleClass } from "../helpers/infoHelpers";
+import {
+  setCurrentPlayer,
+  updatePlayer,
+  handleClass,
+  progressColor
+} from "../helpers/infoHelpers";
 import { handleInput } from "../helpers/commonHelpers";
 import axios from "axios";
 
@@ -33,25 +38,13 @@ class Info extends Component {
     this.setCurrentPlayer(id);
   }
 
-
-
   // this takes the value of the bar and gives it a style based on that
-  prgoressColor(value) {
-    if (value > 70) {
-      return "progress-high";
-    } else if (value > 50) {
-      return "progress-good";
-    } else if (value > 30) {
-      return "progress-mid";
-    } else {
-      return "progress-low";
-    }
-  }
+
   render() {
     this.setCurrentPlayer = setCurrentPlayer.bind(this);
-    this.handleInput = handleInput.bind(this)
-    this.updatePlayer = updatePlayer.bind(this)
-    this.handleClass = handleClass.bind(this)
+    this.handleInput = handleInput.bind(this);
+    this.updatePlayer = updatePlayer.bind(this);
+    this.handleClass = handleClass.bind(this);
 
     let element = null;
     // when this.state.visable comes back as defined than it will render a gif above the form
@@ -129,7 +122,7 @@ lastly we set the value based on the same logic */}
                 <Fragment>
                   <div className="text-left">Health</div>
                   <Progress
-                    className={`${this.prgoressColor(
+                    className={`${progressColor(
                       Math.round((health / total) * 100)
                     )} progress-info`}
                     style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
@@ -145,7 +138,7 @@ lastly we set the value based on the same logic */}
                 <Fragment>
                   <div className="text-left">Endurance</div>
                   <Progress
-                    className={`${this.prgoressColor(
+                    className={`${progressColor(
                       Math.round((endurance / total) * 100)
                     )} progress-info`}
                     style={{
@@ -163,7 +156,7 @@ lastly we set the value based on the same logic */}
                 <Fragment>
                   <div className="text-left">Intellect</div>
                   <Progress
-                    className={`${this.prgoressColor(
+                    className={`${progressColor(
                       Math.round((intellect / total) * 100)
                     )} progress-info`}
                     style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
@@ -179,7 +172,7 @@ lastly we set the value based on the same logic */}
                 <Fragment>
                   <div className="text-left">Strength</div>
                   <Progress
-                    className={`${this.prgoressColor(
+                    className={`${progressColor(
                       Math.round((strength / total) * 100)
                     )} progress-info`}
                     style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
@@ -195,7 +188,7 @@ lastly we set the value based on the same logic */}
                 <Fragment>
                   <div className="text-left">Agility</div>
                   <Progress
-                    className={`${this.prgoressColor(
+                    className={`${progressColor(
                       Math.round((agility / total) * 100)
                     )} progress-info`}
                     style={{ fontFamily: " Arial, Helvetica, sans-serif" }}
