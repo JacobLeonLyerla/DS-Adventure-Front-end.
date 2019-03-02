@@ -29,3 +29,8 @@ export function updatePlayer(id) {
       this.setCurrentPlayer(id);
     });
 }
+export function handleClass(input) {
+    if (this.state.class === "") {
+      this.setState({ class: input });
+    }
+  };
