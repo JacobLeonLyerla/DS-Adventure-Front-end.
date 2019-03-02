@@ -7,12 +7,11 @@ clean up the code in general and comment everything out
 
 */
 
-
-
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Progress } from "reactstrap";
-import {setCurrentPlayer} from "../helpers/infoHelpers"
+import { setCurrentPlayer } from "../helpers/infoHelpers";
+import { handleInput } from "../helpers/commonHelpers";
 import axios from "axios";
 
 class Info extends Component {
@@ -52,11 +51,9 @@ class Info extends Component {
           bio: ""
         });
         this.setCurrentPlayer(id);
-      })
+      });
   };
-  handleInput = input => {
-    this.setState({ [input.target.name]: input.target.value });
-  };
+
   handleClass = input => {
     if (this.state.class === "") {
       this.setState({ class: input });
@@ -99,7 +96,7 @@ class Info extends Component {
   }
   render() {
     this.setCurrentPlayer = setCurrentPlayer.bind(this);
-
+    this.handleInput = handleInput.bind(this)
     let element = null;
     // when this.state.visable comes back as defined than it will render a gif above the form
     if (this.state.visible) {
