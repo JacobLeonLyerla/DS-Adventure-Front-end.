@@ -10,8 +10,9 @@ clean up the code in general and comment everything out
 
 
 import React, { Component, Fragment } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Progress } from "reactstrap";
+import {setCurrentPlayer} from "../helpers/infoHelpers"
 import axios from "axios";
 
 class Info extends Component {
@@ -32,16 +33,7 @@ class Info extends Component {
     const { id } = this.props.match.params;
     this.setCurrentPlayer(id);
   }
-  // take id from the  component did mount use it do grab the player from the database than
-  // set that data on state
-  setCurrentPlayer = id => {
-    axios
-      .get(`https://dungeon-run.herokuapp.com/players/${id}`)
-      .then(response => {
-        this.setState({ player: response.data, preview: response.data.idle });
-      })
-      .catch(err => {});
-  };
+
   // this was going to allow people to edit player info, however it is not currently
   // in the game because emplementing it was a bit wonky i'll try something a bit later
   updatePlayer = id => {
@@ -106,6 +98,8 @@ class Info extends Component {
     }
   }
   render() {
+    this.setCurrentPlayer = setCurrentPlayer.bind(this);
+
     let element = null;
     // when this.state.visable comes back as defined than it will render a gif above the form
     if (this.state.visible) {
