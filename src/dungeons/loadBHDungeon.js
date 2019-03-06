@@ -3,7 +3,7 @@ import React, { Component, Fragment } from "react";
 import { Redirect } from "react-router-dom";
 
 import { Modal, Col, Row } from "reactstrap";
-import { setDungeon } from "../helpers/loadDHelper";
+import {currentRoom} from "../helpers/loadDHelper"
 import axios from "axios";
 
 import Map from "../dungeons/map.js";
@@ -16,8 +16,8 @@ class BlackHeart extends Component {
 
       area: {},
 
-      player: {
-        currentLocation: { _id: 0 }
+      player: { 
+        currentLocation: { _id: 0 }  
       },
 
       pPempId: "",
@@ -33,8 +33,10 @@ class BlackHeart extends Component {
       modal: false
     };
 
+
     this.toggle = this.toggle.bind(this);
   }
+
 
   toggle() {
     this.setState({
@@ -42,80 +44,45 @@ class BlackHeart extends Component {
     });
   }
 
+
   componentDidMount() {
     let { id } = this.props.match.params;
     this.currentPlayer(id);
   }
 
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //************************************************** AXIOS
+  setDungeon = reload => {
+    if (this.state.player.currentLocation === undefined) {
+      axios
+        .get("https://dungeon-run.herokuapp.com/blackheart")
+        .then(response => {
+          this.currentRoom(response.data[0]._id);
+          this.setState({ players: response.data });
 
-  currentRoom = id => {
-    axios
-      .get(`https://dungeon-run.herokuapp.com/blackheart/${id}`)
-      .then(response => {
-        this.setState({ area: response.data });
-        if (this.state.moved === true) {
-          this.setState({ moved: false });
-          let battle = {};
-          if (this.state.area.monsters) {
-            let randomInt = this.getRandomInt(700);
-            if (randomInt <= 250 && this.state.area.monsters.length >= 1) {
-              battle.currentBattle = this.state.area.monsters[0];
-            } else if (
-              randomInt >= 251 &&
-              randomInt <= 450 &&
-              this.state.area.monsters.length >= 2
-            ) {
-              battle.currentBattle = this.state.area.monsters[1];
-            } else if (
-              randomInt >= 451 &&
-              randomInt <= 600 &&
-              this.state.area.monsters.length >= 3
-            ) {
-              battle.currentBattle = this.state.area.monsters[2];
-            } else if (
-              randomInt >= 600 &&
-              randomInt <= 700 &&
-              this.state.area.monsters.length >= 4
-            ) {
-              battle.currentBattle = this.state.area.monsters[3];
-            } else if (
-              randomInt >= 0 &&
-              randomInt <= 1000 &&
-              this.state.area.monsters.length >= 5
-            ) {
-              battle.currentBattle = this.state.area.monsters[4];
-            } else {
-              battle.currentBattle = [];
-              this.setState({
-                redirect: false
-              });
-            }
-
-            axios
-              .put(
-                `https://dungeon-run.herokuapp.com/players/${
-                  this.state.player._id
-                }`,
-                battle
-              )
-
-              .then(response => {
-                if (response.data.currentBattle.length > 0) {
-                  this.setState({
-                    redirect: true
-                  });
-                }
-              });
+          if (reload === "reload") {
+            // window.location.reload();
           }
-        }
-      });
+        })
+
+        .catch(err => {});
+    } else {
+      this.currentRoom(this.state.player.currentLocation._id);
+      if (reload === "reload") {
+        // window.location.reload();
+      }
+
+    }
   };
+
+
+  
 
   getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
   }
+
 
   currentPlayer = id => {
     axios
@@ -126,6 +93,7 @@ class BlackHeart extends Component {
       })
       .catch(err => {});
   };
+
 
   setLocation(id) {
     let player = {};
@@ -149,6 +117,7 @@ class BlackHeart extends Component {
       .then(response => {})
       .catch(err => {});
   }
+
 
   move(direction) {
     let id = "";
@@ -209,6 +178,7 @@ class BlackHeart extends Component {
       .catch(err => {});
   }
 
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //************************************************** MOVMENT
   path(direction) {
@@ -250,6 +220,7 @@ class BlackHeart extends Component {
           for (let index = 0; index < this.state.area.west.length; index++) {
             pathId = this.state.area.west[0]._id;
           }
+
         } else {
           pathId = "No path";
         }
@@ -266,15 +237,19 @@ class BlackHeart extends Component {
     if (this.state.redirect) {
       return <Redirect to={`/battle/${id}`} />;
     }
+
   };
+
 
   movmentRender() {
     if (this.state.area.south !== undefined) {
       return (
+
         <Fragment>
           <br />
 
           <div className="BlackHeart">
+
             {`You are currently in  the ${this.state.area.name}`}
             <br />
 
@@ -284,6 +259,7 @@ class BlackHeart extends Component {
                   onClick={() => this.move("North")}
                   className="fas fa-chevron-circle-up movmenticons-styles"
                 />
+
               </Col>
               <Col md="12">
                 <Row style={{ justifyContent: "center" }}>
@@ -292,12 +268,14 @@ class BlackHeart extends Component {
                       onClick={() => this.move("West")}
                       className="fas fa-chevron-circle-left movmenticons-styles"
                     />
+
                   </Col>
                   <Col xs="3" sm="3" md="2">
                     <i
                       onClick={() => this.move("East")}
                       className="fas fa-chevron-circle-right movmenticons-styles"
                     />
+
                   </Col>
                 </Row>
               </Col>
@@ -306,6 +284,7 @@ class BlackHeart extends Component {
                   onClick={() => this.move("South")}
                   className="fas fa-chevron-circle-down movmenticons-styles"
                 />
+
               </Col>
             </Row>
 
@@ -318,11 +297,16 @@ class BlackHeart extends Component {
               toggle={this.toggle}
               className={this.props.className}
             >
+
               <Map name={this.state.area.name} />
             </Modal>
+
           </div>
         </Fragment>
+
       );
+
+
     } else {
       return (
         <div className="BlackHeart">
@@ -333,8 +317,10 @@ class BlackHeart extends Component {
           />
         </div>
       );
+
     }
   }
+
 
   winnings() {
     if (
@@ -342,6 +328,7 @@ class BlackHeart extends Component {
       this.state.player.itemWon !== undefined &&
       this.state.player.itemWon !== "lost"
     ) {
+
       return (
         <Fragment>
           <div className="winnings-styles">
@@ -355,6 +342,7 @@ class BlackHeart extends Component {
           </div>
         </Fragment>
       );
+
     } else if (
       this.state.player.itemWon === "lost" &&
       this.state.player.itemWon !== undefined
@@ -375,6 +363,7 @@ class BlackHeart extends Component {
     }
   }
 
+
   ding() {
     if (
       this.state.player.leveled === true &&
@@ -388,16 +377,18 @@ class BlackHeart extends Component {
     }
   }
 
-  render() {
-    this.setDungeon = setDungeon.bind(this);
 
+  render() {
+    this.currentRoom = currentRoom.bind(this)
     return (
+
       <Fragment>
         {this.renderRedirect(this.state.player._id)}
         {this.movmentRender()}
         {this.ding()}
         {this.winnings()}
       </Fragment>
+      
     );
   }
 }
