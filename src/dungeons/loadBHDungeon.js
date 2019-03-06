@@ -3,7 +3,12 @@ import React, { Component, Fragment } from "react";
 import { Redirect } from "react-router-dom";
 
 import { Modal, Col, Row } from "reactstrap";
-import { currentRoom, setLocation, move } from "../helpers/loadDHelper";
+import {
+  currentRoom,
+  setLocation,
+  move,
+  winnings
+} from "../helpers/loadDHelper";
 import axios from "axios";
 
 import Map from "../dungeons/map.js";
@@ -268,6 +273,7 @@ class BlackHeart extends Component {
     this.currentRoom = currentRoom.bind(this);
     this.setLocation = setLocation.bind(this);
     this.move = move.bind(this);
+    this.winnings = winnings.bind(this);
     return (
       <Fragment>
         {this.renderRedirect(this.state.player._id)}
