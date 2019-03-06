@@ -86,3 +86,64 @@ export function setLocation(id) {
       .then(response => {})
       .catch(err => {});
   }
+export function  
+
+move(direction) {
+  let id = "";
+  switch (direction) {
+    case "North":
+      id = this.path("North");
+
+      break;
+    case "South":
+      id = this.path("South");
+      break;
+    case "East":
+      id = this.path("East");
+      break;
+    case "West":
+      id = this.path("West");
+      break;
+    default:
+      break;
+  }
+
+  if (id === "No path") {
+    return alert(
+      `there is no path to the ${direction} of you, please try another path.`
+    );
+  }
+
+  if (this.state.player.tempPlayer !== "no temp") {
+    let id = this.state.player.tempPlayer;
+    axios
+      .delete(`https://dungeon-run.herokuapp.com/temps/${id}`)
+      .then(response => {
+        let id = this.state.player.tempMonster;
+        axios
+          .delete(`https://dungeon-run.herokuapp.com/temps/${id}`)
+          .then(response => {});
+      });
+  }
+
+  let player = {};
+  player.currentLocation = id;
+
+  player.tempMonster = "no temp";
+  player.tempPlayer = "no temp";
+  player.defeatedName = "none";
+  player.experienceGained = 0;
+  player.itemWon = "none";
+  player.leveled = false;
+  axios
+    .put(
+      `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`,
+      player
+    )
+    .then(response => {
+      this.setState({ moved: true });
+      this.currentRoom(id);
+    })
+    .catch(err => {});
+}
+
