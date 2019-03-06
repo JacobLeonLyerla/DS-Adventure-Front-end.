@@ -17,7 +17,6 @@ import {
   progressColor
 } from "../helpers/infoHelpers";
 import { handleInput } from "../helpers/commonHelpers";
-import axios from "axios";
 
 class Info extends Component {
   state = {
