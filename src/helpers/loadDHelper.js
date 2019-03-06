@@ -1,4 +1,5 @@
 import axios from "axios";
+import React, {  Fragment } from "react";
 
 
 
@@ -147,3 +148,42 @@ move(direction) {
     .catch(err => {});
 }
 
+export function 
+winnings() {
+  if (
+    this.state.player.itemWon !== "none" &&
+    this.state.player.itemWon !== undefined &&
+    this.state.player.itemWon !== "lost"
+  ) {
+    return (
+      <Fragment>
+        <div className="winnings-styles">
+          <div>{`${this.state.player.name} defeated the ${
+            this.state.player.defeatedName
+          }`}</div>
+          <div>{`earing ${
+            this.state.player.experienceGained
+          } experience`}</div>
+          <div>{`and looted ${this.state.player.itemWon}`}</div>
+        </div>
+      </Fragment>
+    );
+  } else if (
+    this.state.player.itemWon === "lost" &&
+    this.state.player.itemWon !== undefined
+  ) {
+    return (
+      <Fragment>
+        <div className="losing-styles">
+          <div>{`${this.state.player.name} was defeated by the ${
+            this.state.player.defeatedName
+          }`}</div>
+          <div>{`earning ${
+            this.state.player.experienceGained
+          } experience`}</div>
+          <div>{`You were returned to the ${this.state.area.name}`}</div>
+        </div>
+      </Fragment>
+    );
+  }
+}
