@@ -64,3 +64,25 @@ export function currentRoom(id) {
       }
     });
 }
+export function setLocation(id) {
+    let player = {};
+
+    if (
+      this.state.player.currentLocation._id !== 0 ||
+      this.state.player.currentLocation._id !== undefined
+    ) {
+      player.currentLocation = this.state.player.currentLocation._id(
+        "where is this going!"
+      );
+    } else {
+      player.currentLocation = this.state.area._id;
+    }
+
+    axios
+      .put(
+        `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`,
+        player
+      )
+      .then(response => {})
+      .catch(err => {});
+  }
