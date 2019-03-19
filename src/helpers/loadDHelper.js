@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, {  Fragment } from "react";
+import { Modal, Col, Row } from "reactstrap";
 
+import Map from "../dungeons/map";
 
 
 export function currentRoom(id) {
@@ -184,6 +186,100 @@ winnings() {
           <div>{`You were returned to the ${this.state.area.name}`}</div>
         </div>
       </Fragment>
+    );
+  }
+}
+
+export function setDungeon ( reload ) {
+  if (this.state.player.currentLocation === undefined) {
+    axios
+      .get("https://dungeon-run.herokuapp.com/blackheart")
+      .then(response => {
+        this.currentRoom(response.data[0]._id);
+        this.setState({ players: response.data });
+
+        if (reload === "reload") {
+          // window.location.reload();
+        }
+      })
+
+      .catch(err => {});
+  } else {
+    this.currentRoom(this.state.player.currentLocation._id);
+    if (reload === "reload") {
+      // window.location.reload();
+    }
+  }
+};
+
+export function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+export function movmentRender() {
+  if (this.state.area.south !== undefined) {
+    return (
+      <Fragment>
+        <br />
+
+        <div className="BlackHeart">
+          {`You are currently in  the ${this.state.area.name}`}
+          <br />
+
+          <Row>
+            <Col md="12">
+              <i
+                onClick={() => this.move("North")}
+                className="fas fa-chevron-circle-up movmenticons-styles"
+              />
+            </Col>
+            <Col md="12">
+              <Row style={{ justifyContent: "center" }}>
+                <Col xs="3" sm="3" md="2">
+                  <i
+                    onClick={() => this.move("West")}
+                    className="fas fa-chevron-circle-left movmenticons-styles"
+                  />
+                </Col>
+                <Col xs="3" sm="3" md="2">
+                  <i
+                    onClick={() => this.move("East")}
+                    className="fas fa-chevron-circle-right movmenticons-styles"
+                  />
+                </Col>
+              </Row>
+            </Col>
+            <Col md="12">
+              <i
+                onClick={() => this.move("South")}
+                className="fas fa-chevron-circle-down movmenticons-styles"
+              />
+            </Col>
+          </Row>
+
+          <button className="btn" color="danger" onClick={this.toggle}>
+            MAP
+          </button>
+
+          <Modal
+            isOpen={this.state.modal}
+            toggle={this.toggle}
+            className={this.props.className}
+          >
+            <Map name={this.state.area.name} />
+          </Modal>
+        </div>
+      </Fragment>
+    );
+  } else {
+    return (
+      <div className="BlackHeart">
+        <h3>You enter the room, looking around to find the next path.</h3>
+        <img
+          className="pathicon"
+          src="https://orig00.deviantart.net/2205/f/2010/307/e/e/moria_throne_room_by_moondoodles-d322n02.jpg"
+        />
+      </div>
     );
   }
 }
