@@ -9,7 +9,8 @@ import {
   move,
   winnings,
   setDungeon,
-  getRandomInt
+  getRandomInt,
+  movmentRender
 } from "../helpers/loadDHelper";
 import axios from "axios";
 
@@ -129,73 +130,7 @@ class BlackHeart extends Component {
     }
   };
 
-  movmentRender() {
-    if (this.state.area.south !== undefined) {
-      return (
-        <Fragment>
-          <br />
-
-          <div className="BlackHeart">
-            {`You are currently in  the ${this.state.area.name}`}
-            <br />
-
-            <Row>
-              <Col md="12">
-                <i
-                  onClick={() => this.move("North")}
-                  className="fas fa-chevron-circle-up movmenticons-styles"
-                />
-              </Col>
-              <Col md="12">
-                <Row style={{ justifyContent: "center" }}>
-                  <Col xs="3" sm="3" md="2">
-                    <i
-                      onClick={() => this.move("West")}
-                      className="fas fa-chevron-circle-left movmenticons-styles"
-                    />
-                  </Col>
-                  <Col xs="3" sm="3" md="2">
-                    <i
-                      onClick={() => this.move("East")}
-                      className="fas fa-chevron-circle-right movmenticons-styles"
-                    />
-                  </Col>
-                </Row>
-              </Col>
-              <Col md="12">
-                <i
-                  onClick={() => this.move("South")}
-                  className="fas fa-chevron-circle-down movmenticons-styles"
-                />
-              </Col>
-            </Row>
-
-            <button className="btn" color="danger" onClick={this.toggle}>
-              MAP
-            </button>
-
-            <Modal
-              isOpen={this.state.modal}
-              toggle={this.toggle}
-              className={this.props.className}
-            >
-              <Map name={this.state.area.name} />
-            </Modal>
-          </div>
-        </Fragment>
-      );
-    } else {
-      return (
-        <div className="BlackHeart">
-          <h3>You enter the room, looking around to find the next path.</h3>
-          <img
-            className="pathicon"
-            src="https://orig00.deviantart.net/2205/f/2010/307/e/e/moria_throne_room_by_moondoodles-d322n02.jpg"
-          />
-        </div>
-      );
-    }
-  }
+ 
 
   winnings() {
     if (
@@ -256,6 +191,7 @@ class BlackHeart extends Component {
     this.winnings = winnings.bind(this);
     this.setDungeon = setDungeon.bind(this);
     this.getRandomInt = getRandomInt
+    this.movmentRender = movmentRender.bind(this)
     return (
       <Fragment>
         {this.renderRedirect(this.state.player._id)}
