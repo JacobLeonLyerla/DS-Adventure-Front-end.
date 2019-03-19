@@ -8,7 +8,8 @@ import {
   setLocation,
   move,
   winnings,
-  setDungeon
+  setDungeon,
+  getRandomInt
 } from "../helpers/loadDHelper";
 import axios from "axios";
 
@@ -57,9 +58,7 @@ class BlackHeart extends Component {
   //************************************************** AXIOS
 
 
-  getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-  }
+
 
   currentPlayer = id => {
     axios
@@ -256,6 +255,7 @@ class BlackHeart extends Component {
     this.move = move.bind(this);
     this.winnings = winnings.bind(this);
     this.setDungeon = setDungeon.bind(this);
+    this.getRandomInt = getRandomInt
     return (
       <Fragment>
         {this.renderRedirect(this.state.player._id)}
