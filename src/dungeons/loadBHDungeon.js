@@ -7,7 +7,8 @@ import {
   currentRoom,
   setLocation,
   move,
-  winnings
+  winnings,
+  setDungeon
 } from "../helpers/loadDHelper";
 import axios from "axios";
 
@@ -54,27 +55,7 @@ class BlackHeart extends Component {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //************************************************** AXIOS
-  setDungeon = reload => {
-    if (this.state.player.currentLocation === undefined) {
-      axios
-        .get("https://dungeon-run.herokuapp.com/blackheart")
-        .then(response => {
-          this.currentRoom(response.data[0]._id);
-          this.setState({ players: response.data });
 
-          if (reload === "reload") {
-            // window.location.reload();
-          }
-        })
-
-        .catch(err => {});
-    } else {
-      this.currentRoom(this.state.player.currentLocation._id);
-      if (reload === "reload") {
-        // window.location.reload();
-      }
-    }
-  };
 
   getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
@@ -274,6 +255,7 @@ class BlackHeart extends Component {
     this.setLocation = setLocation.bind(this);
     this.move = move.bind(this);
     this.winnings = winnings.bind(this);
+    this.setDungeon = setDungeon.bind(this);
     return (
       <Fragment>
         {this.renderRedirect(this.state.player._id)}
