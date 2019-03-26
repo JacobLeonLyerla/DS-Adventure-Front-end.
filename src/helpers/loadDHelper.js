@@ -283,3 +283,15 @@ export function movmentRender() {
     );
   }
 }
+export function ding() {
+  if (
+    this.state.player.leveled === true &&
+    this.state.player.leveled !== undefined
+  ) {
+    return (
+      <div className="leveled-styles">
+        {`congratulations! you are now level ${this.state.player.level}`}
+      </div>
+    );
+  }
+}
