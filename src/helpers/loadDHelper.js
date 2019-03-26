@@ -298,3 +298,54 @@ export function currentPlayer(id) {
     })
     .catch(err => {});
 }
+
+export function path(direction) {
+  let pathId = "";
+
+  switch (direction) {
+    case "North":
+      if (this.state.area.north.length > 0) {
+        for (let index = 0; index < this.state.area.north.length; index++) {
+          pathId = this.state.area.north[0]._id;
+        }
+      } else {
+        pathId = "No path";
+      }
+
+      break;
+    case "South":
+      if (this.state.area.south.length > 0) {
+        for (let index = 0; index < this.state.area.south.length; index++) {
+          pathId = this.state.area.south[0]._id;
+        }
+      } else {
+        pathId = "No path";
+      }
+
+      break;
+    case "East":
+      if (this.state.area.east.length > 0) {
+        for (let index = 0; index < this.state.area.east.length; index++) {
+          pathId = this.state.area.east[0]._id;
+        }
+      } else {
+        pathId = "No path";
+      }
+
+      break;
+    case "West":
+      if (this.state.area.west.length > 0) {
+        for (let index = 0; index < this.state.area.west.length; index++) {
+          pathId = this.state.area.west[0]._id;
+        }
+      } else {
+        pathId = "No path";
+      }
+
+      break;
+    default:
+      break;
+  }
+
+  return pathId;
+}
