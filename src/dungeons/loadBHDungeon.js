@@ -11,7 +11,8 @@ import {
   setDungeon,
   getRandomInt,
   movmentRender,
-  ding
+  ding,
+  currentPlayer
 } from "../helpers/loadDHelper";
 import axios from "axios";
 
@@ -59,15 +60,7 @@ class BlackHeart extends Component {
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //************************************************** AXIOS
 
-  currentPlayer = id => {
-    axios
-      .get(`https://dungeon-run.herokuapp.com/players/${id}`)
-      .then(response => {
-        this.setState({ player: response.data, mTempid: response.data });
-        this.setDungeon();
-      })
-      .catch(err => {});
-  };
+
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //************************************************** MOVMENT
@@ -137,6 +130,7 @@ class BlackHeart extends Component {
     this.getRandomInt = getRandomInt;
     this.movmentRender = movmentRender.bind(this);
     this.ding = ding;
+    this.currentPlayer = currentPlayer.bind(this)
     return (
       <Fragment>
         {this.renderRedirect(this.state.player._id)}
