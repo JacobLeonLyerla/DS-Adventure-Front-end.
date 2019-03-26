@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { Fragment } from "react";
+import { Redirect } from "react-router-dom";
 import { Modal, Col, Row } from "reactstrap";
 
 import Map from "../dungeons/map";
@@ -349,3 +350,8 @@ export function path(direction) {
 
   return pathId;
 }
+export function renderRedirect ( id ) {
+  if (this.state.redirect) {
+    return <Redirect to={`/battle/${id}`} />;
+  }
+};
