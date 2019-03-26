@@ -1,9 +1,8 @@
 import axios from "axios";
-import React, {  Fragment } from "react";
+import React, { Fragment } from "react";
 import { Modal, Col, Row } from "reactstrap";
 
 import Map from "../dungeons/map";
-
 
 export function currentRoom(id) {
   axios
@@ -68,30 +67,28 @@ export function currentRoom(id) {
     });
 }
 export function setLocation(id) {
-    let player = {};
+  let player = {};
 
-    if (
-      this.state.player.currentLocation._id !== 0 ||
-      this.state.player.currentLocation._id !== undefined
-    ) {
-      player.currentLocation = this.state.player.currentLocation._id(
-        "where is this going!"
-      );
-    } else {
-      player.currentLocation = this.state.area._id;
-    }
-
-    axios
-      .put(
-        `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`,
-        player
-      )
-      .then(response => {})
-      .catch(err => {});
+  if (
+    this.state.player.currentLocation._id !== 0 ||
+    this.state.player.currentLocation._id !== undefined
+  ) {
+    player.currentLocation = this.state.player.currentLocation._id(
+      "where is this going!"
+    );
+  } else {
+    player.currentLocation = this.state.area._id;
   }
-export function  
 
-move(direction) {
+  axios
+    .put(
+      `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`,
+      player
+    )
+    .then(response => {})
+    .catch(err => {});
+}
+export function move(direction) {
   let id = "";
   switch (direction) {
     case "North":
@@ -150,8 +147,7 @@ move(direction) {
     .catch(err => {});
 }
 
-export function 
-winnings() {
+export function winnings() {
   if (
     this.state.player.itemWon !== "none" &&
     this.state.player.itemWon !== undefined &&
@@ -163,9 +159,7 @@ winnings() {
           <div>{`${this.state.player.name} defeated the ${
             this.state.player.defeatedName
           }`}</div>
-          <div>{`earing ${
-            this.state.player.experienceGained
-          } experience`}</div>
+          <div>{`earing ${this.state.player.experienceGained} experience`}</div>
           <div>{`and looted ${this.state.player.itemWon}`}</div>
         </div>
       </Fragment>
@@ -190,7 +184,7 @@ winnings() {
   }
 }
 
-export function setDungeon ( reload ) {
+export function setDungeon(reload) {
   if (this.state.player.currentLocation === undefined) {
     axios
       .get("https://dungeon-run.herokuapp.com/blackheart")
@@ -210,7 +204,7 @@ export function setDungeon ( reload ) {
       // window.location.reload();
     }
   }
-};
+}
 
 export function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
@@ -294,4 +288,13 @@ export function ding() {
       </div>
     );
   }
+}
+export function currentPlayer(id) {
+  axios
+    .get(`https://dungeon-run.herokuapp.com/players/${id}`)
+    .then(response => {
+      this.setState({ player: response.data, mTempid: response.data });
+      this.setDungeon();
+    })
+    .catch(err => {});
 }
