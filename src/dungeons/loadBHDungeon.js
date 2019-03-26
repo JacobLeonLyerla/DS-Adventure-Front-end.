@@ -9,7 +9,7 @@ import {
   winnings,
   setDungeon,
   getRandomInt,
-  movmentRender,
+  movementRender,
   ding,
   currentPlayer,
   path,
@@ -55,7 +55,7 @@ class BlackHeart extends Component {
     this.winnings = winnings.bind(this);
     this.setDungeon = setDungeon.bind(this);
     this.getRandomInt = getRandomInt;
-    this.movmentRender = movmentRender.bind(this);
+    this.movementRender = movementRender.bind(this);
     this.ding = ding;
     this.currentPlayer = currentPlayer.bind(this);
     this.path = path;
@@ -64,7 +64,7 @@ class BlackHeart extends Component {
     return (
       <Fragment>
         {this.renderRedirect(this.state.player._id)}
-        {this.movmentRender()}
+        {this.movementRender()}
         {this.ding()}
         {this.winnings()}
       </Fragment>

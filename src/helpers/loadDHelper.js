@@ -211,7 +211,7 @@ export function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-export function movmentRender() {
+export function movementRender() {
   if (this.state.area.south !== undefined) {
     return (
       <Fragment>
