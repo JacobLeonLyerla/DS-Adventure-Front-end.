@@ -10,7 +10,8 @@ import {
   winnings,
   setDungeon,
   getRandomInt,
-  movmentRender
+  movmentRender,
+  ding
 } from "../helpers/loadDHelper";
 import axios from "axios";
 
@@ -57,9 +58,6 @@ class BlackHeart extends Component {
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //************************************************** AXIOS
-
-
-
 
   currentPlayer = id => {
     axios
@@ -130,68 +128,15 @@ class BlackHeart extends Component {
     }
   };
 
- 
-
-  winnings() {
-    if (
-      this.state.player.itemWon !== "none" &&
-      this.state.player.itemWon !== undefined &&
-      this.state.player.itemWon !== "lost"
-    ) {
-      return (
-        <Fragment>
-          <div className="winnings-styles">
-            <div>{`${this.state.player.name} defeated the ${
-              this.state.player.defeatedName
-            }`}</div>
-            <div>{`earing ${
-              this.state.player.experienceGained
-            } experience`}</div>
-            <div>{`and looted ${this.state.player.itemWon}`}</div>
-          </div>
-        </Fragment>
-      );
-    } else if (
-      this.state.player.itemWon === "lost" &&
-      this.state.player.itemWon !== undefined
-    ) {
-      return (
-        <Fragment>
-          <div className="losing-styles">
-            <div>{`${this.state.player.name} was defeated by the ${
-              this.state.player.defeatedName
-            }`}</div>
-            <div>{`earning ${
-              this.state.player.experienceGained
-            } experience`}</div>
-            <div>{`You were returned to the ${this.state.area.name}`}</div>
-          </div>
-        </Fragment>
-      );
-    }
-  }
-
-  ding() {
-    if (
-      this.state.player.leveled === true &&
-      this.state.player.leveled !== undefined
-    ) {
-      return (
-        <div className="leveled-styles">
-          {`congratulations! you are now level ${this.state.player.level}`}
-        </div>
-      );
-    }
-  }
-
   render() {
     this.currentRoom = currentRoom.bind(this);
     this.setLocation = setLocation.bind(this);
     this.move = move.bind(this);
     this.winnings = winnings.bind(this);
     this.setDungeon = setDungeon.bind(this);
-    this.getRandomInt = getRandomInt
-    this.movmentRender = movmentRender.bind(this)
+    this.getRandomInt = getRandomInt;
+    this.movmentRender = movmentRender.bind(this);
+    this.ding = ding;
     return (
       <Fragment>
         {this.renderRedirect(this.state.player._id)}
