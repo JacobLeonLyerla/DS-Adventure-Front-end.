@@ -1,5 +1,17 @@
 
  import axios from "axios";
+ import paladin from "../assets/paladin.jpg";
+
+import rogue from "../assets/rogue.jpg";
+
+import mage from "../assets/mage.png";
+
+import warrior from "../assets/warrior.png";
+
+import ranger from "../assets/ranger.png";
+
+import necro from "../assets/necro.jpg";
+
  export function currentRoom ( id ) {
     axios
       .get(`https://dungeon-run.herokuapp.com/blackheart/${id}`)
@@ -249,4 +261,18 @@ export function currentPlayer ( id ) {
         });
     } else {
     }
+  }
+  
+export function classIcon(classname) {
+    if (classname === "Paladin") return paladin;
+
+    if (classname === "Ranger") return ranger;
+
+    if (classname === "Mage") return mage;
+
+    if (classname === "Necromancer") return necro;
+
+    if (classname === "Warrior") return warrior;
+
+    if (classname === "Rogue") return rogue;
   }
