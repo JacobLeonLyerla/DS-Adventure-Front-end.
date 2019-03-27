@@ -16,6 +16,8 @@ import necro from "../assets/necro.jpg";
 
 import { Progress } from "reactstrap";
 
+import {currentRoom} from "../helpers/itemsHelper";
+
 class Items extends Component {
   state = {
     player: {
@@ -32,37 +34,6 @@ class Items extends Component {
     this.currentPlayer(id);
   }
 
-  currentRoom = id => {
-    axios
-      .get(`https://dungeon-run.herokuapp.com/blackheart/${id}`)
-      .then(response => {
-        this.setState({ area: response.data });
-        let roomLoot = {};
-        let roomFilter = this.state.area.items.filter(item => {
-          let failed = false;
-          let secondfailed = false;
-          this.state.player.items.forEach(playerItem => {
-            if (playerItem._id !== item._id) {
-              return;
-            } else {
-              return (failed = true);
-            }
-          });
-          this.state.player.gear.forEach(InventoryItem => {
-            if (InventoryItem._id !== item._id) {
-              return;
-            } else {
-              return (secondfailed = true);
-            }
-          });
-
-          return failed === false && secondfailed === false;
-        });
-
-        roomLoot.items = roomFilter;
-        this.setState({ area: { items: roomLoot.items } });
-      });
-  };
 
   currentPlayer = id => {
     axios
@@ -671,6 +642,7 @@ class Items extends Component {
 
 
   render() {
+    this.currentRoom = currentRoom.bind(this)
     return (
       <Fragment>
         <div className="bigItemHeader-styles">Items in room</div>
