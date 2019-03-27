@@ -9,7 +9,8 @@ import {
   deleteItem,
   removeEquipment,
   classIcon,
-  checkDuplicate
+  checkDuplicate,
+  prgoressColor
 } from "../helpers/itemsHelper";
 
 class Items extends Component {
@@ -28,17 +29,6 @@ class Items extends Component {
     this.currentPlayer(id);
   }
 
-  prgoressColor(value) {
-    if (value > 70) {
-      return "progress-high";
-    } else if (value > 50) {
-      return "progress-good";
-    } else if (value > 30) {
-      return "progress-mid";
-    } else {
-      return "progress-low";
-    }
-  }
 
   renderEquipment() {
     if (this.state.player.name !== undefined && this.state.player.name !== "") {
@@ -329,6 +319,8 @@ class Items extends Component {
     this.removeEquipment = removeEquipment.bind(this);
     this.classIcon = classIcon
     this.checkDuplicate = checkDuplicate.bind(this)
+    this.prgoressColor = prgoressColor
+    
     return (
       <Fragment>
         <div className="bigItemHeader-styles">Items in room</div>
