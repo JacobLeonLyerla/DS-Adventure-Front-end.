@@ -211,7 +211,7 @@ export function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-export function movmentRender() {
+export function movementRender() {
   if (this.state.area.south !== undefined) {
     return (
       <Fragment>
@@ -350,8 +350,8 @@ export function path(direction) {
 
   return pathId;
 }
-export function renderRedirect ( id ) {
+export function renderRedirect(id) {
   if (this.state.redirect) {
     return <Redirect to={`/battle/${id}`} />;
   }
-};
+}

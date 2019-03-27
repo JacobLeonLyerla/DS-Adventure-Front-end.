@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 
-
-import { toggle, } from "../helpers/commonHelpers";
+import { toggle } from "../helpers/commonHelpers";
 import {
   currentRoom,
   setLocation,
@@ -9,7 +8,7 @@ import {
   winnings,
   setDungeon,
   getRandomInt,
-  movmentRender,
+  movementRender,
   ding,
   currentPlayer,
   path,
@@ -46,8 +45,6 @@ class BlackHeart extends Component {
     this.currentPlayer(id);
   }
 
-
-
   render() {
     this.currentRoom = currentRoom.bind(this);
     this.setLocation = setLocation.bind(this);
@@ -55,16 +52,16 @@ class BlackHeart extends Component {
     this.winnings = winnings.bind(this);
     this.setDungeon = setDungeon.bind(this);
     this.getRandomInt = getRandomInt;
-    this.movmentRender = movmentRender.bind(this);
+    this.movementRender = movementRender.bind(this);
     this.ding = ding;
     this.currentPlayer = currentPlayer.bind(this);
     this.path = path;
     this.toggle = toggle.bind(this);
-    this.renderRedirect = renderRedirect.bind(this)
+    this.renderRedirect = renderRedirect.bind(this);
     return (
       <Fragment>
         {this.renderRedirect(this.state.player._id)}
-        {this.movmentRender()}
+        {this.movementRender()}
         {this.ding()}
         {this.winnings()}
       </Fragment>
