@@ -16,7 +16,7 @@ import necro from "../assets/necro.jpg";
 
 import { Progress } from "reactstrap";
 
-import {currentRoom} from "../helpers/itemsHelper";
+import { currentRoom, currentPlayer } from "../helpers/itemsHelper";
 
 class Items extends Component {
   state = {
@@ -33,16 +33,6 @@ class Items extends Component {
     let { id } = this.props.match.params;
     this.currentPlayer(id);
   }
-
-
-  currentPlayer = id => {
-    axios
-      .get(`https://dungeon-run.herokuapp.com/players/${id}`)
-      .then(response => {
-        this.setState({ player: response.data });
-        this.currentRoom(this.state.player.currentLocation._id);
-      });
-  };
 
   deleteItem(type, loot) {
     console.log(loot, type);
@@ -640,9 +630,9 @@ class Items extends Component {
     }
   }
 
-
   render() {
-    this.currentRoom = currentRoom.bind(this)
+    this.currentRoom = currentRoom.bind(this);
+    this.currentPlayer = currentPlayer.bind(this);
     return (
       <Fragment>
         <div className="bigItemHeader-styles">Items in room</div>
@@ -673,7 +663,6 @@ class Items extends Component {
                     >
                       <i class="fas fa-level-down-alt" />
                     </div>
-
                   </div>
 
                   <div className="header-card">{item.name}</div>
@@ -706,9 +695,7 @@ class Items extends Component {
                           {item.health}
                         </Progress>
                       </Fragment>
-                    ) : (
-                     null
-                    )}
+                    ) : null}
 
                     {(item.endurance * 2) / 5 > 0 ? (
                       <Fragment>
@@ -725,9 +712,7 @@ class Items extends Component {
                           {item.endurance}
                         </Progress>
                       </Fragment>
-                    ) : (
-                     null
-                    )}
+                    ) : null}
 
                     {(item.intellect * 2) / 5 > 0 ? (
                       <Fragment>
@@ -744,9 +729,7 @@ class Items extends Component {
                           {item.intellect}
                         </Progress>
                       </Fragment>
-                    ) : (
-                     null
-                    )}
+                    ) : null}
 
                     {(item.strength * 2) / 5 > 0 ? (
                       <Fragment>
@@ -763,9 +746,7 @@ class Items extends Component {
                           {item.strength}
                         </Progress>
                       </Fragment>
-                    ) : (
-                      null
-                    )}
+                    ) : null}
 
                     {(item.agility * 2) / 5 > 0 ? (
                       <Fragment>
@@ -782,19 +763,14 @@ class Items extends Component {
                           {item.agility}
                         </Progress>
                       </Fragment>
-                    ) : (
-                     null
-                    )}
-
+                    ) : null}
                   </div>
                   <div className={`${item.rarity}Footer-styles footer`}>
                     {item.rarity}
                   </div>
-
                 </div>
 
                 <br />
-
               </Fragment>
             );
           })}
@@ -805,7 +781,6 @@ class Items extends Component {
             className={"classIcon-styles"}
             src={this.classIcon(this.state.player.class)}
           />
-
           <br />
           {this.state.player.name}
           <br />
@@ -831,9 +806,7 @@ class Items extends Component {
 
           {this.renderItems()}
         </div>
-
       </Fragment>
-      
     );
   }
 }
