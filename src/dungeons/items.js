@@ -1,16 +1,5 @@
 import React, { Component, Fragment } from "react";
 
-import paladin from "../assets/paladin.jpg";
-
-import rogue from "../assets/rogue.jpg";
-
-import mage from "../assets/mage.png";
-
-import warrior from "../assets/warrior.png";
-
-import ranger from "../assets/ranger.png";
-
-import necro from "../assets/necro.jpg";
 
 import { Progress } from "reactstrap";
 
@@ -18,7 +7,8 @@ import {
   currentRoom,
   currentPlayer,
   deleteItem,
-  removeEquipment
+  removeEquipment,
+  classIcon
 } from "../helpers/itemsHelper";
 
 class Items extends Component {
@@ -35,20 +25,6 @@ class Items extends Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     this.currentPlayer(id);
-  }
-
-  classIcon(classname) {
-    if (classname === "Paladin") return paladin;
-
-    if (classname === "Ranger") return ranger;
-
-    if (classname === "Mage") return mage;
-
-    if (classname === "Necromancer") return necro;
-
-    if (classname === "Warrior") return warrior;
-
-    if (classname === "Rogue") return rogue;
   }
 
   checkDuplicate(type, loot) {
@@ -428,6 +404,7 @@ class Items extends Component {
     this.currentPlayer = currentPlayer.bind(this);
     this.deleteItem = deleteItem.bind(this);
     this.removeEquipment = removeEquipment.bind(this);
+    this.classIcon = classIcon
     return (
       <Fragment>
         <div className="bigItemHeader-styles">Items in room</div>
