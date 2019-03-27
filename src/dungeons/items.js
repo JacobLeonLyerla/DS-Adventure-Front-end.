@@ -1,7 +1,5 @@
 import React, { Component, Fragment } from "react";
 
-import axios from "axios";
-
 import paladin from "../assets/paladin.jpg";
 
 import rogue from "../assets/rogue.jpg";
@@ -16,7 +14,12 @@ import necro from "../assets/necro.jpg";
 
 import { Progress } from "reactstrap";
 
-import { currentRoom, currentPlayer,deleteItem } from "../helpers/itemsHelper";
+import {
+  currentRoom,
+  currentPlayer,
+  deleteItem,
+  removeEquipment
+} from "../helpers/itemsHelper";
 
 class Items extends Component {
   state = {
@@ -34,115 +37,6 @@ class Items extends Component {
     this.currentPlayer(id);
   }
 
-  removeEquipment(item) {
-    let itemSlot = eval(`this.state.player.${item.slot}`);
-
-    if (itemSlot === "Equipped") {
-      let player = {};
-      let strength,
-        intellect,
-        health,
-        endurance,
-        agility = 0;
-      switch (item.slot) {
-        case "shield":
-          player.shield = "none";
-
-          break;
-        case "head":
-          player.head = "none";
-
-          break;
-        case "shoulders":
-          player.shoulders = "none";
-
-          break;
-        case "feet":
-          player.feet = "none";
-
-          break;
-        case "hands":
-          player.hands = "none";
-
-          break;
-        case "chest":
-          player.chest = "none";
-
-          break;
-        case "leggings":
-          player.leggings = "none";
-
-          break;
-        case "charm":
-          player.charm = "none";
-
-          break;
-        case "offHand":
-          player.offHand = "none";
-
-          break;
-        case "weaponTwoHand":
-          player.weaponTwoHand = "none";
-
-          break;
-        case "weaponOneHand":
-          player.weaponOneHand = "none";
-
-          break;
-        default:
-          break;
-      }
-
-      if (item.strength > 0) {
-        strength = item.strength;
-
-        player.strength = this.state.player.strength - strength;
-      }
-
-      if (item.intellect > 0) {
-        intellect = item.intellect;
-
-        player.intellect = this.state.player.intellect - intellect;
-      }
-
-      if (item.health > 0) {
-        health = item.health;
-
-        player.health = this.state.player.health - health;
-      }
-      if (item.agility > 0) {
-        agility = item.agility;
-
-        player.agility = this.state.player.agility - agility;
-      }
-      if (item.endurance > 0) {
-        endurance = item.endurance;
-
-        player.endurance = this.state.player.endurance - endurance;
-      }
-
-      axios
-        .put(
-          `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`,
-
-          player
-        )
-        .then(() => {
-          axios
-            .get(
-              `https://dungeon-run.herokuapp.com/players/${
-                this.state.player._id
-              }`
-            )
-
-            .then(response => {
-              this.setState({ player: response.data });
-              this.currentRoom(this.state.player.currentLocation._id);
-            });
-        });
-    } else {
-    }
-  }
   classIcon(classname) {
     if (classname === "Paladin") return paladin;
 
@@ -532,7 +426,8 @@ class Items extends Component {
   render() {
     this.currentRoom = currentRoom.bind(this);
     this.currentPlayer = currentPlayer.bind(this);
-    this.deleteItem = deleteItem.bind(this)
+    this.deleteItem = deleteItem.bind(this);
+    this.removeEquipment = removeEquipment.bind(this);
     return (
       <Fragment>
         <div className="bigItemHeader-styles">Items in room</div>
