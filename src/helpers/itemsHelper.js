@@ -276,3 +276,81 @@ export function classIcon(classname) {
 
     if (classname === "Rogue") return rogue;
   }
+
+  export function checkDuplicate(type, loot) {
+    let dup = false;
+
+    if (type === "Inventory") {
+      this.state.player.gear.forEach(curItem => {
+        if (curItem.slot === loot.slot) {
+          dup = true;
+        }
+        if (loot.slot === "shield") {
+          if (
+            curItem.slot === "offHand" ||
+            curItem.slot === "weaponTwoHand" ||
+            curItem.slot === "charm"
+          ) {
+            dup = true;
+          }
+        }
+
+        if (loot.slot === "offHand") {
+          if (
+            curItem.slot === "shield" ||
+            curItem.slot === "weaponTwoHand" ||
+            curItem.slot === "charm"
+          ) {
+            dup = true;
+          }
+        }
+
+        if (loot.slot === "weaponTwoHand") {
+          if (
+            curItem.slot === "offHand" ||
+            curItem.slot === "shield" ||
+            curItem.slot === "charm"
+          ) {
+            dup = true;
+          }
+        }
+
+        if (loot.slot === "charm") {
+          if (
+            curItem.slot === "offHand" ||
+            curItem.slot === "weaponTwoHand" ||
+            curItem.slot === "shield"
+          ) {
+            dup = true;
+          }
+        }
+
+        if (loot.slot === "weaponTwoHand" && curItem.slot === "weaponOneHand") {
+          dup = true;
+        }
+
+        if (
+          curItem.slot === "weaponOneHand" &&
+          curItem.slot === "weaponTwoHand"
+        ) {
+          dup = true;
+        }
+      });
+    }
+
+    if (dup === false) {
+      this.deleteItem(type, loot);
+    } else {
+      if (
+        loot.slot === "shield" ||
+        loot.slot === "offHand" ||
+        loot.slot === "charm"
+      ) {
+        return alert(
+          "offHand, Shields and Charms all count as secondary weapons. you can only have one, and only if you don't have a Two Handed Weapon"
+        );
+      } else {
+        return alert(`You cannot add another ${loot.slot} to your equipment`);
+      }
+    }
+  }
