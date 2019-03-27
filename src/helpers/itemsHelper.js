@@ -31,3 +31,11 @@
         this.setState({ area: { items: roomLoot.items } });
       });
   };
+export function currentPlayer ( id ) {
+    axios
+      .get(`https://dungeon-run.herokuapp.com/players/${id}`)
+      .then(response => {
+        this.setState({ player: response.data });
+        this.currentRoom(this.state.player.currentLocation._id);
+      });
+  };
