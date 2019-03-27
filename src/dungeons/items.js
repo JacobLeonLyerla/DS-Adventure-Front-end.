@@ -8,7 +8,8 @@ import {
   currentPlayer,
   deleteItem,
   removeEquipment,
-  classIcon
+  classIcon,
+  checkDuplicate
 } from "../helpers/itemsHelper";
 
 class Items extends Component {
@@ -25,84 +26,6 @@ class Items extends Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     this.currentPlayer(id);
-  }
-
-  checkDuplicate(type, loot) {
-    let dup = false;
-
-    if (type === "Inventory") {
-      this.state.player.gear.forEach(curItem => {
-        if (curItem.slot === loot.slot) {
-          dup = true;
-        }
-        if (loot.slot === "shield") {
-          if (
-            curItem.slot === "offHand" ||
-            curItem.slot === "weaponTwoHand" ||
-            curItem.slot === "charm"
-          ) {
-            dup = true;
-          }
-        }
-
-        if (loot.slot === "offHand") {
-          if (
-            curItem.slot === "shield" ||
-            curItem.slot === "weaponTwoHand" ||
-            curItem.slot === "charm"
-          ) {
-            dup = true;
-          }
-        }
-
-        if (loot.slot === "weaponTwoHand") {
-          if (
-            curItem.slot === "offHand" ||
-            curItem.slot === "shield" ||
-            curItem.slot === "charm"
-          ) {
-            dup = true;
-          }
-        }
-
-        if (loot.slot === "charm") {
-          if (
-            curItem.slot === "offHand" ||
-            curItem.slot === "weaponTwoHand" ||
-            curItem.slot === "shield"
-          ) {
-            dup = true;
-          }
-        }
-
-        if (loot.slot === "weaponTwoHand" && curItem.slot === "weaponOneHand") {
-          dup = true;
-        }
-
-        if (
-          curItem.slot === "weaponOneHand" &&
-          curItem.slot === "weaponTwoHand"
-        ) {
-          dup = true;
-        }
-      });
-    }
-
-    if (dup === false) {
-      this.deleteItem(type, loot);
-    } else {
-      if (
-        loot.slot === "shield" ||
-        loot.slot === "offHand" ||
-        loot.slot === "charm"
-      ) {
-        return alert(
-          "offHand, Shields and Charms all count as secondary weapons. you can only have one, and only if you don't have a Two Handed Weapon"
-        );
-      } else {
-        return alert(`You cannot add another ${loot.slot} to your equipment`);
-      }
-    }
   }
 
   prgoressColor(value) {
@@ -405,6 +328,7 @@ class Items extends Component {
     this.deleteItem = deleteItem.bind(this);
     this.removeEquipment = removeEquipment.bind(this);
     this.classIcon = classIcon
+    this.checkDuplicate = checkDuplicate.bind(this)
     return (
       <Fragment>
         <div className="bigItemHeader-styles">Items in room</div>
