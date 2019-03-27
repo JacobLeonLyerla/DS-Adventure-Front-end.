@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 
-
-import { toggle, } from "../helpers/commonHelpers";
+import { toggle } from "../helpers/commonHelpers";
 import {
   currentRoom,
   setLocation,
@@ -46,8 +45,6 @@ class BlackHeart extends Component {
     this.currentPlayer(id);
   }
 
-
-
   render() {
     this.currentRoom = currentRoom.bind(this);
     this.setLocation = setLocation.bind(this);
@@ -60,7 +57,7 @@ class BlackHeart extends Component {
     this.currentPlayer = currentPlayer.bind(this);
     this.path = path;
     this.toggle = toggle.bind(this);
-    this.renderRedirect = renderRedirect.bind(this)
+    this.renderRedirect = renderRedirect.bind(this);
     return (
       <Fragment>
         {this.renderRedirect(this.state.player._id)}

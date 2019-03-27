@@ -350,8 +350,8 @@ export function path(direction) {
 
   return pathId;
 }
-export function renderRedirect ( id ) {
+export function renderRedirect(id) {
   if (this.state.redirect) {
     return <Redirect to={`/battle/${id}`} />;
   }
-};
+}
