@@ -13,7 +13,8 @@ import {
   renderOpponent,
   renderAdventurer,
   renderStats,
-  adventurerAttacks
+  adventurerAttacks,
+  changeSpell
 } from "../helpers/battleHelpers";
 class Battle extends Component {
   state = {
@@ -42,31 +43,6 @@ class Battle extends Component {
     }
   };
 
-  changeSpell(direction) {
-    let spell = {};
-    if (direction === "Right") {
-      if (this.state.currentSpell + 1 < this.state.attacks.length) {
-        spell.currentSpell = this.state.currentSpell + 1;
-      } else {
-        spell.currentSpell = 0;
-      }
-    } else {
-      if (this.state.currentSpell - 1 !== -1) {
-        spell.currentSpell = this.state.currentSpell - 1;
-      } else {
-        spell.currentSpell = this.state.attacks.length - 1;
-      }
-    }
-    axios
-      .put(
-        `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`,
-        spell
-      )
-      .then(response => {
-        this.setState({ currentSpell: response.data.currentSpell });
-      })
-      .catch(err => {});
-  }
   opponentAttacks() {
     return this.state.monster.attacks.map(attack => (
       <Fragment>
@@ -143,6 +119,7 @@ class Battle extends Component {
     this.renderAdventurer = renderAdventurer.bind(this);
     this.renderStats = renderStats.bind(this);
     this.adventurerAttacks = adventurerAttacks.bind(this);
+    this.changeSpell = changeSpell.bind(this);
 
     return (
       <Fragment>
