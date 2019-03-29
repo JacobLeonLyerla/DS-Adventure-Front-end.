@@ -21,7 +21,7 @@ import BlackHeart from "./dungeons/loadBHDungeon";
 import Items from "./dungeons/items";
 
 import Battle from "./dungeons/battle";
-import {setPlayer} from "./helpers/appHelpers";
+import {setPlayer,findPlayer} from "./helpers/appHelpers";
 import {handleInput} from "./helpers/commonHelpers";
 class App extends Component {
   state = {
@@ -41,32 +41,6 @@ class App extends Component {
   componentDidMount() {
     this.setPlayer();
   }
-
-
-  // this takes the event in this case it's the onChange of the input field and setsi t on state
-
-  // this uses the players name to find him in the data base
-  findPlayer = (name, pass) => {
-    this.state.players.forEach(player => {
-      if (player.name.toLowerCase() === name.toLowerCase()) {
-        if (player.password.toLowerCase() === pass.toLowerCase()) {
-          this.setState({
-            player: player,
-
-            name: "",
-
-            password: "",
-
-            id: player._id,
-
-            redirect: true
-          });
-
-          return this.state.player;
-        }
-      }
-    });
-  };
 
   // loads the player frm the data base this route
   loadPlayer = (e, name, password) => {
@@ -128,6 +102,7 @@ class App extends Component {
   // the render has all the routes contained in side of it.
   render() {
     this.setPlayer = setPlayer.bind(this);
+    this.findPlayer = findPlayer.bind(this);
     this.handleInput = handleInput.bind(this);
     return (
       <div className="App">
