@@ -87,3 +87,16 @@ export function renderRedirect ( id ) {
       return <Redirect to={`/info/${id}`} />;
     }
   };
+
+    // this background is only loaded if it's not on either of those sites so if it's on another one than it will load,
+  // it also loads on local host, because i have not cared enough to add local host in
+ export function bhbackground() {
+    if (
+      window.location.href !== "https://dungeon-run.netlify.com/create" &&
+      window.location.href !== "https://dungeon-run.netlify.com/"
+    ) {
+      return "blackHeartBackground-styles";
+    }
+  }
+
+  //
