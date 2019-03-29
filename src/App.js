@@ -21,7 +21,7 @@ import BlackHeart from "./dungeons/loadBHDungeon";
 import Items from "./dungeons/items";
 
 import Battle from "./dungeons/battle";
-import {setPlayer,findPlayer} from "./helpers/appHelpers";
+import {setPlayer,findPlayer,loadPlayer} from "./helpers/appHelpers";
 import {handleInput} from "./helpers/commonHelpers";
 class App extends Component {
   state = {
@@ -42,44 +42,6 @@ class App extends Component {
     this.setPlayer();
   }
 
-  // loads the player frm the data base this route
-  loadPlayer = (e, name, password) => {
-    e.preventDefault();
-
-    const user = {
-      username: name,
-
-      password: password
-    };
-
-    axios
-      .post("https://dungeon-run.herokuapp.com/auth/login", user)
-
-      .then(response => {
-        localStorage.setItem("token", `Bearer ${response.data.token}`);
-
-        axios
-
-          .get(
-            `https://dungeon-run.herokuapp.com/players/${
-              response.data.user._id
-            }`
-          )
-          .then(response => {
-            this.setState({
-              player: response.data,
-
-              name: "",
-
-              password: "",
-
-              id: response.data._id,
-
-              redirect: true
-            });
-          });
-      });
-  };
 
   // this renders a redirect if redirect is ever true
   renderRedirect = id => {
@@ -103,6 +65,8 @@ class App extends Component {
   render() {
     this.setPlayer = setPlayer.bind(this);
     this.findPlayer = findPlayer.bind(this);
+    this.loadPlayer = loadPlayer.bind(this);
+
     this.handleInput = handleInput.bind(this);
     return (
       <div className="App">
