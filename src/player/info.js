@@ -1,11 +1,3 @@
-/*
-lets break this logic up keep as much of it in helpers as we can
-
-maybe replace our state with hooks, but thats not important
-
-clean up the code in general and comment everything out
-
-*/
 
 import React, { Component, Fragment } from "react";
 
@@ -13,7 +5,6 @@ import {
   setCurrentPlayer,
   updatePlayer,
   handleClass,
-  progressColor,
   infoLayout
 } from "../helpers/infoHelpers";
 import { handleInput } from "../helpers/commonHelpers";
