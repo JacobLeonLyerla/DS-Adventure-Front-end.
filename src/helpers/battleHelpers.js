@@ -359,3 +359,22 @@ export function death(died) {
       });
   }
 }
+
+export function renderOpponent() {
+    if (this.state.monster.idle !== undefined) {
+      return (
+        <Fragment>
+          <div className="oppenent-styles">
+            <img
+              className={`${this.state.monster.rarity} monster-img`}
+              src={
+                this.state.battle === false
+                  ? require(`../assets/${this.state.monster.idle}.gif`)
+                  : require(`../assets/${this.state.monster.battle}.gif`)
+              }
+            />
+          </div>
+        </Fragment>
+      );
+    }
+  }
