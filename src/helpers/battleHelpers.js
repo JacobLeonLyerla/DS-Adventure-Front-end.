@@ -361,213 +361,254 @@ export function death(died) {
 }
 
 export function renderOpponent() {
-    if (this.state.monster.idle !== undefined) {
-      return (
-        <Fragment>
-          <div className="oppenent-styles">
-            <img
-              className={`${this.state.monster.rarity} monster-img`}
-              src={
-                this.state.battle === false
-                  ? require(`../assets/${this.state.monster.idle}.gif`)
-                  : require(`../assets/${this.state.monster.battle}.gif`)
-              }
-            />
-          </div>
-        </Fragment>
-      );
-    }
-  }
-
-  export function renderAdventurer() {
-    if (this.state.player.idle !== undefined) {
-      return (
-        <Fragment>
-          <div className="adventurer-styles">
-            <img
-              className={`${this.state.player.class} class-img`}
-              src={
-                this.state.battle === false
-                  ? require(`../assets/${this.state.player.idle}.gif`)
-                  : require(`../assets/${this.state.player.battle}.gif`)
-              }
-            />
-          </div>
-        </Fragment>
-      );
-    }
-  }
-
-  
- export function renderStats() {
-    let currentpercent = Math.round(
-      (this.state.tempMonHP /
-        (this.state.monster.health +
-          Math.round(
-            (this.state.monster.health * this.state.player.level) / 30
-          ))) *
-        100
-    );
-    let currentPlayerhp = Math.round(
-      (this.state.tempPlayer.health / this.state.player.health) * 100
-    );
-    let monsterend = Math.round(
-      (this.state.tempMonster.endurance / this.state.monster.endurance) * 100
-    );
-    let playerend = Math.round(
-      (this.state.tempPlayer.endurance / this.state.player.endurance) * 100
-    );
+  if (this.state.monster.idle !== undefined) {
     return (
       <Fragment>
-        <div
-          className={
-            this.state.monster.rarity +
-            "Stats-styles mid-battle progress-container"
-          }
-        >
-          <div className="top-progress">
-            <p>{this.state.monster.name}</p>
-            <Progress color="success" value={currentpercent}>
-              {" "}
-              {`${this.state.tempMonHP}`}
-            </Progress>
+        <div className="oppenent-styles">
+          <img
+            className={`${this.state.monster.rarity} monster-img`}
+            src={
+              this.state.battle === false
+                ? require(`../assets/${this.state.monster.idle}.gif`)
+                : require(`../assets/${this.state.monster.battle}.gif`)
+            }
+          />
+        </div>
+      </Fragment>
+    );
+  }
+}
 
-            <Progress color="info" value={monsterend}>
-              {" "}
-              {`${this.state.tempMonster.endurance}`}
-            </Progress>
+export function renderAdventurer() {
+  if (this.state.player.idle !== undefined) {
+    return (
+      <Fragment>
+        <div className="adventurer-styles">
+          <img
+            className={`${this.state.player.class} class-img`}
+            src={
+              this.state.battle === false
+                ? require(`../assets/${this.state.player.idle}.gif`)
+                : require(`../assets/${this.state.player.battle}.gif`)
+            }
+          />
+        </div>
+      </Fragment>
+    );
+  }
+}
+
+export function renderStats() {
+  let currentpercent = Math.round(
+    (this.state.tempMonHP /
+      (this.state.monster.health +
+        Math.round(
+          (this.state.monster.health * this.state.player.level) / 30
+        ))) *
+      100
+  );
+  let currentPlayerhp = Math.round(
+    (this.state.tempPlayer.health / this.state.player.health) * 100
+  );
+  let monsterend = Math.round(
+    (this.state.tempMonster.endurance / this.state.monster.endurance) * 100
+  );
+  let playerend = Math.round(
+    (this.state.tempPlayer.endurance / this.state.player.endurance) * 100
+  );
+  return (
+    <Fragment>
+      <div
+        className={
+          this.state.monster.rarity +
+          "Stats-styles mid-battle progress-container"
+        }
+      >
+        <div className="top-progress">
+          <p>{this.state.monster.name}</p>
+          <Progress color="success" value={currentpercent}>
+            {" "}
+            {`${this.state.tempMonHP}`}
+          </Progress>
+
+          <Progress color="info" value={monsterend}>
+            {" "}
+            {`${this.state.tempMonster.endurance}`}
+          </Progress>
+        </div>
+
+        <div className="combatLog-styles">
+          {this.state.tempPlayer.combat === "hit" ? (
+            <div className="opponent-hit">{`${this.state.monster.name} ${
+              this.state.tempPlayer.combat
+            } with ${this.state.tempPlayer.spellUsed}`}</div>
+          ) : (
+            <div className="opponent-miss">{`${this.state.monster.name} ${
+              this.state.tempPlayer.combat
+            } with ${this.state.tempPlayer.spellUsed}`}</div>
+          )}
+
+          {this.state.tempMonster.combat === "hit" ? (
+            <div className={"player-hit"}>{`${this.state.player.name} ${
+              this.state.tempMonster.combat
+            } with ${this.state.tempMonster.spellUsed}`}</div>
+          ) : (
+            <div className={"player-miss"}>{`${this.state.player.name} ${
+              this.state.tempMonster.combat
+            } with ${this.state.tempMonster.spellUsed}`}</div>
+          )}
+        </div>
+        <div className="bottom-progress">
+          <Progress color="info" value={playerend}>
+            {" "}
+            {`${this.state.tempPlayer.endurance}`}
+          </Progress>
+
+          <Progress color="success" value={currentPlayerhp}>
+            {" "}
+            {`${this.state.tempPlayer.health}`}
+          </Progress>
+          <p>{this.state.player.name}</p>
+        </div>
+      </div>
+    </Fragment>
+  );
+}
+
+export function adventurerAttacks() {
+  let attack = { name: "" };
+  if (this.state.attacks !== []) {
+    attack = this.state.attacks[this.state.currentSpell];
+    if (attack !== undefined) {
+      return (
+        <Fragment>
+          <div
+            className={this.state.monster.rarity + "Stats-styles mid-battle"}
+          >
+            <div className={`spell ${this.state.player.class}-spell`}>
+              {attack.name}
+            </div>
+
+            <div>
+              <div className="damage">
+                Damage:{" "}
+                {Math.round(
+                  attack.damage +
+                    10 * this.state.player.level +
+                    this.state.player.strength / 1.5 +
+                    this.state.player.intellect / 2.5 +
+                    this.state.player.agility / 2
+                )}
+              </div>
+              <div className="cost">
+                Cost:{" "}
+                {Math.round(
+                  attack.cost * this.state.player.level -
+                    this.state.player.intellect / 3 -
+                    this.state.player.agility / 5 -
+                    this.state.player.strength / 7
+                )}
+              </div>
+            </div>
+            <br />
+            <br />
+            <div className="centerSpell-styles">
+              <i
+                onClick={() => this.changeSpell("Left")}
+                class="fas fa-long-arrow-alt-left"
+              />
+              <img
+                onClick={() =>
+                  this.startBattle(
+                    attack.damage,
+                    attack.cost,
+                    attack.hitChance,
+                    attack.name
+                  )
+                }
+                className="attack-styles"
+                src="https://d30y9cdsu7xlg0.cloudfront.net/png/12864-200.png"
+              />
+              <i
+                onClick={() => this.changeSpell("Right")}
+                class="fas fa-long-arrow-alt-right"
+              />
+            </div>
+            <div style={{ color: "lightcoral" }}>Attack</div>
+
+            <div>{attack.description}</div>
           </div>
+        </Fragment>
+      );
+    }
+  }
+}
 
-          <div className="combatLog-styles">
-            {this.state.tempPlayer.combat === "hit" ? (
-              <div className="opponent-hit">{`${this.state.monster.name} ${
-                this.state.tempPlayer.combat
-              } with ${this.state.tempPlayer.spellUsed}`}</div>
-            ) : (
-              <div className="opponent-miss">{`${this.state.monster.name} ${
-                this.state.tempPlayer.combat
-              } with ${this.state.tempPlayer.spellUsed}`}</div>
-            )}
+export function changeSpell(direction) {
+  let spell = {};
+  if (direction === "Right") {
+    if (this.state.currentSpell + 1 < this.state.attacks.length) {
+      spell.currentSpell = this.state.currentSpell + 1;
+    } else {
+      spell.currentSpell = 0;
+    }
+  } else {
+    if (this.state.currentSpell - 1 !== -1) {
+      spell.currentSpell = this.state.currentSpell - 1;
+    } else {
+      spell.currentSpell = this.state.attacks.length - 1;
+    }
+  }
+  axios
+    .put(
+      `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`,
+      spell
+    )
+    .then(response => {
+      this.setState({ currentSpell: response.data.currentSpell });
+    })
+    .catch(err => {});
+}
 
-            {this.state.tempMonster.combat === "hit" ? (
-              <div className={"player-hit"}>{`${this.state.player.name} ${
-                this.state.tempMonster.combat
-              } with ${this.state.tempMonster.spellUsed}`}</div>
-            ) : (
-              <div className={"player-miss"}>{`${this.state.player.name} ${
-                this.state.tempMonster.combat
-              } with ${this.state.tempMonster.spellUsed}`}</div>
-            )}
-          </div>
-          <div className="bottom-progress">
-            <Progress color="info" value={playerend}>
-              {" "}
-              {`${this.state.tempPlayer.endurance}`}
-            </Progress>
+export function opponentAttacks() {
+  return this.state.monster.attacks.map(attack => (
+    <Fragment>
+      <div className="opponentAttacks-styles">
+        <div className="attackName-styles">{attack.name}</div>
 
-            <Progress color="success" value={currentPlayerhp}>
-              {" "}
-              {`${this.state.tempPlayer.health}`}
-            </Progress>
-            <p>{this.state.player.name}</p>
+        <div className="opponent-damage">
+          Damage:{" "}
+          {Math.round(
+            attack.damage + (attack.damage * this.state.player.level) / 7
+          )}
+        </div>
+        <div className="opponent-cost">Cost : {attack.cost}</div>
+      </div>
+    </Fragment>
+  ));
+}
+
+export function renderOpponentStats() {
+  if (this.state.monster.attacks !== []) {
+    return (
+      <Fragment>
+        <div className={this.state.monster.rarity + "Stats-styles stats"}>
+          <div className="portraitStats-styles">
+            <div
+              style={{ width: "80%" }}
+              className={this.state.monster.rarity + "Rarity-styles"}
+            >
+              {this.state.monster.rarity}
+            </div>
+            <br />
+            <div className="battleheader-styles">{this.state.monster.name}</div>
+
+            <div>{`Health: ${this.state.tempMonHP} Endurance: ${
+              this.state.tempMonster.endurance
+            } `}</div>
           </div>
         </div>
       </Fragment>
     );
   }
-
-export function  adventurerAttacks() {
-    let attack = { name: "" };
-    if (this.state.attacks !== []) {
-      attack = this.state.attacks[this.state.currentSpell];
-      if (attack !== undefined) {
-        return (
-          <Fragment>
-            <div
-              className={this.state.monster.rarity + "Stats-styles mid-battle"}
-            >
-              <div className={`spell ${this.state.player.class}-spell`}>
-                {attack.name}
-              </div>
-
-              <div>
-                <div className="damage">
-                  Damage:{" "}
-                  {Math.round(
-                    attack.damage +
-                      10 * this.state.player.level +
-                      this.state.player.strength / 1.5 +
-                      this.state.player.intellect / 2.5 +
-                      this.state.player.agility / 2
-                  )}
-                </div>
-                <div className="cost">
-                  Cost:{" "}
-                  {Math.round(
-                    attack.cost * this.state.player.level -
-                      this.state.player.intellect / 3 -
-                      this.state.player.agility / 5 -
-                      this.state.player.strength / 7
-                  )}
-                </div>
-              </div>
-              <br />
-              <br />
-              <div className="centerSpell-styles">
-                <i
-                  onClick={() => this.changeSpell("Left")}
-                  class="fas fa-long-arrow-alt-left"
-                />
-                <img
-                  onClick={() =>
-                    this.startBattle(
-                      attack.damage,
-                      attack.cost,
-                      attack.hitChance,
-                      attack.name
-                    )
-                  }
-                  className="attack-styles"
-                  src="https://d30y9cdsu7xlg0.cloudfront.net/png/12864-200.png"
-                />
-                <i
-                  onClick={() => this.changeSpell("Right")}
-                  class="fas fa-long-arrow-alt-right"
-                />
-              </div>
-              <div style={{ color: "lightcoral" }}>Attack</div>
-
-              <div>{attack.description}</div>
-            </div>
-          </Fragment>
-        );
-      }
-    }
-  }
-
-  
- export function changeSpell(direction) {
-    let spell = {};
-    if (direction === "Right") {
-      if (this.state.currentSpell + 1 < this.state.attacks.length) {
-        spell.currentSpell = this.state.currentSpell + 1;
-      } else {
-        spell.currentSpell = 0;
-      }
-    } else {
-      if (this.state.currentSpell - 1 !== -1) {
-        spell.currentSpell = this.state.currentSpell - 1;
-      } else {
-        spell.currentSpell = this.state.attacks.length - 1;
-      }
-    }
-    axios
-      .put(
-        `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`,
-        spell
-      )
-      .then(response => {
-        this.setState({ currentSpell: response.data.currentSpell });
-      })
-      .catch(err => {});
-  }
+}
