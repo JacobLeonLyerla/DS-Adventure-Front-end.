@@ -10,7 +10,12 @@ import ranger from "../assets/rangerportrait.png";
 import necro from "../assets/necromancerportrait.jpg";
 
 import { Progress } from "reactstrap";
-import { currentPlayer,setTemps,fetchTemps } from "../helpers/battleHelpers";
+import {
+  currentPlayer,
+  setTemps,
+  fetchTemps,
+  startBattle
+} from "../helpers/battleHelpers";
 class Battle extends Component {
   state = {
     player: { attacks: [], tempPlayer: { _id: "" } },
@@ -32,110 +37,6 @@ class Battle extends Component {
     this.currentPlayer(id);
   }
 
-  startBattle(damage, cost, hitChance, name) {
-    let change = () => {
-      this.setState({ battle: false });
-    };
-
-    setTimeout(function() {
-      change();
-    }, 2270);
-    this.setState({ battle: true });
-
-    hitChance = Math.round(
-      hitChance +
-        this.state.player.agility * 1 +
-        this.state.player.intellect * 0.5 +
-        this.state.player.strength * 0.3 +
-        (this.state.player.level - this.state.monster.level) * 10
-    );
-    let hit = Math.floor(Math.random() * Math.floor(100));
-    let dmg = {};
-    let id = this.state.player.tempMonster;
-    if (this.state.player.tempMonster._id !== undefined) {
-      id = this.state.player.tempMonster._id;
-    }
-
-    if (
-      this.state.tempPlayer.endurance -
-        Math.round(
-          cost * this.state.player.level -
-            this.state.player.intellect / 3 -
-            this.state.player.agility / 5 -
-            (this.state.player.strength / 7) * this.state.player.level
-        ) >
-      0
-    ) {
-      if (hit <= hitChance) {
-        damage = Math.round(
-          damage +
-            10 * this.state.player.level +
-            this.state.player.strength / 1.5 +
-            this.state.player.intellect / 2.5 +
-            this.state.player.agility / 2
-        );
-
-        dmg.combat = "hit";
-        dmg.health = this.state.tempMonHP - damage;
-      }
-      if (hit > hitChance) {
-        dmg.combat = "missed";
-      }
-    } else {
-      dmg.combat = "out of endurance to cast";
-    }
-    dmg.attacked = true;
-    dmg.spellUsed = name;
-    axios
-      .put(`https://dungeon-run.herokuapp.com/temps/${id}`, dmg)
-      .then(response => {
-        this.setState({
-          tempMonster: response.data,
-          tempMonHP: response.data.health
-        });
-        if (response.data.health <= 0) {
-          this.death("Monster");
-        }
-
-        let id = this.state.player.tempPlayer;
-        if (this.state.player.tempPlayer._id !== undefined) {
-          id = this.state.player.tempPlayer._id;
-        }
-
-        let cast = {};
-        if (
-          this.state.tempPlayer.endurance -
-            Math.round(
-              cost * this.state.player.level -
-                this.state.player.intellect / 3 -
-                this.state.player.agility / 5 -
-                this.state.player.strength / 7
-            ) >
-          0
-        ) {
-          cast.endurance =
-            this.state.tempPlayer.endurance -
-            Math.round(
-              cost * this.state.player.level -
-                this.state.player.intellect / 3 -
-                this.state.player.agility / 5 -
-                this.state.player.strength / 7
-            );
-        } else {
-          cast.endurance = this.state.player.endurance;
-        }
-        axios
-          .put(`https://dungeon-run.herokuapp.com/temps/${id}`, cast)
-          .then(response => {
-            this.setState({ tempPlayer: response.data });
-            if (this.state.tempMonHP > 0) {
-              this.attacked();
-            }
-          })
-          .catch(err => {});
-      })
-      .catch(err => {});
-  }
   attacked() {
     if (this.state.tempMonster.attacked === true) {
       let id = this.state.player.tempMonster;
@@ -627,9 +528,10 @@ class Battle extends Component {
   }
 
   render() {
-  this.currentPlayer = currentPlayer.bind(this)
-  this.setTemps = setTemps.bind(this)
-  this.fetchTemps = fetchTemps.bind(this)
+    this.currentPlayer = currentPlayer.bind(this);
+    this.setTemps = setTemps.bind(this);
+    this.fetchTemps = fetchTemps.bind(this);
+    this.startBattle = startBattle.bind(this);
     return (
       <Fragment>
         {this.renderRedirect()}
