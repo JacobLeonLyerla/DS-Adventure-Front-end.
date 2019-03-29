@@ -17,7 +17,8 @@ import {
   startBattle,
   attacked,
   death,
-  renderOpponent
+  renderOpponent,
+  renderAdventurer
 } from "../helpers/battleHelpers";
 class Battle extends Component {
   state = {
@@ -47,24 +48,6 @@ class Battle extends Component {
   };
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ RENDERS
 
-  renderAdventurer() {
-    if (this.state.player.idle !== undefined) {
-      return (
-        <Fragment>
-          <div className="adventurer-styles">
-            <img
-              className={`${this.state.player.class} class-img`}
-              src={
-                this.state.battle === false
-                  ? require(`../assets/${this.state.player.idle}.gif`)
-                  : require(`../assets/${this.state.player.battle}.gif`)
-              }
-            />
-          </div>
-        </Fragment>
-      );
-    }
-  }
   pickPortrait(classname) {
     // if (classname === "Paladin") return paladin;
     if (classname === "Ranger") return ranger;
@@ -375,6 +358,7 @@ class Battle extends Component {
     this.attacked = attacked.bind(this);
     this.death = death.bind(this);
     this.renderOpponent = renderOpponent.bind(this);
+    this.renderAdventurer = renderAdventurer.bind(this);
 
     return (
       <Fragment>
