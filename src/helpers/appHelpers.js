@@ -14,3 +14,26 @@
       })
       .catch(() => {});
   };
+
+// this uses the players name to find him in the data base
+export function findPlayer (name, pass)  {
+    this.state.players.forEach(player => {
+      if (player.name.toLowerCase() === name.toLowerCase()) {
+        if (player.password.toLowerCase() === pass.toLowerCase()) {
+          this.setState({
+            player: player,
+
+            name: "",
+
+            password: "",
+
+            id: player._id,
+
+            redirect: true
+          });
+
+          return this.state.player;
+        }
+      }
+    });
+  };
