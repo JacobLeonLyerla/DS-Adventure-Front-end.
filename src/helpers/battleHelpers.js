@@ -378,3 +378,22 @@ export function renderOpponent() {
       );
     }
   }
+
+  export function renderAdventurer() {
+    if (this.state.player.idle !== undefined) {
+      return (
+        <Fragment>
+          <div className="adventurer-styles">
+            <img
+              className={`${this.state.player.class} class-img`}
+              src={
+                this.state.battle === false
+                  ? require(`../assets/${this.state.player.idle}.gif`)
+                  : require(`../assets/${this.state.player.battle}.gif`)
+              }
+            />
+          </div>
+        </Fragment>
+      );
+    }
+  }
