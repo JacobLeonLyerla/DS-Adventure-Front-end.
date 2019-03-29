@@ -544,3 +544,30 @@ export function  adventurerAttacks() {
       }
     }
   }
+
+  
+ export function changeSpell(direction) {
+    let spell = {};
+    if (direction === "Right") {
+      if (this.state.currentSpell + 1 < this.state.attacks.length) {
+        spell.currentSpell = this.state.currentSpell + 1;
+      } else {
+        spell.currentSpell = 0;
+      }
+    } else {
+      if (this.state.currentSpell - 1 !== -1) {
+        spell.currentSpell = this.state.currentSpell - 1;
+      } else {
+        spell.currentSpell = this.state.attacks.length - 1;
+      }
+    }
+    axios
+      .put(
+        `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`,
+        spell
+      )
+      .then(response => {
+        this.setState({ currentSpell: response.data.currentSpell });
+      })
+      .catch(err => {});
+  }
