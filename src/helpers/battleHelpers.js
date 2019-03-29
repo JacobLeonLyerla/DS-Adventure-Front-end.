@@ -475,3 +475,72 @@ export function renderOpponent() {
       </Fragment>
     );
   }
+
+export function  adventurerAttacks() {
+    let attack = { name: "" };
+    if (this.state.attacks !== []) {
+      attack = this.state.attacks[this.state.currentSpell];
+      if (attack !== undefined) {
+        return (
+          <Fragment>
+            <div
+              className={this.state.monster.rarity + "Stats-styles mid-battle"}
+            >
+              <div className={`spell ${this.state.player.class}-spell`}>
+                {attack.name}
+              </div>
+
+              <div>
+                <div className="damage">
+                  Damage:{" "}
+                  {Math.round(
+                    attack.damage +
+                      10 * this.state.player.level +
+                      this.state.player.strength / 1.5 +
+                      this.state.player.intellect / 2.5 +
+                      this.state.player.agility / 2
+                  )}
+                </div>
+                <div className="cost">
+                  Cost:{" "}
+                  {Math.round(
+                    attack.cost * this.state.player.level -
+                      this.state.player.intellect / 3 -
+                      this.state.player.agility / 5 -
+                      this.state.player.strength / 7
+                  )}
+                </div>
+              </div>
+              <br />
+              <br />
+              <div className="centerSpell-styles">
+                <i
+                  onClick={() => this.changeSpell("Left")}
+                  class="fas fa-long-arrow-alt-left"
+                />
+                <img
+                  onClick={() =>
+                    this.startBattle(
+                      attack.damage,
+                      attack.cost,
+                      attack.hitChance,
+                      attack.name
+                    )
+                  }
+                  className="attack-styles"
+                  src="https://d30y9cdsu7xlg0.cloudfront.net/png/12864-200.png"
+                />
+                <i
+                  onClick={() => this.changeSpell("Right")}
+                  class="fas fa-long-arrow-alt-right"
+                />
+              </div>
+              <div style={{ color: "lightcoral" }}>Attack</div>
+
+              <div>{attack.description}</div>
+            </div>
+          </Fragment>
+        );
+      }
+    }
+  }
