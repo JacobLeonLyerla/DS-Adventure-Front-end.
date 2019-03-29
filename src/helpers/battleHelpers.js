@@ -612,3 +612,26 @@ export function renderOpponentStats() {
     );
   }
 }
+
+
+export function renderAdventurerStats() {
+    if (this.state.monster.attacks !== []) {
+      return (
+        <Fragment>
+          <div
+            className={this.state.monster.rarity + "Stats-styles stats"}
+            style={{ borderRadius: "10vw 100vw 10vw 10vw" }}
+          >
+            <div>{`Strength: ${this.state.player.strength} Intellect: ${
+              this.state.player.intellect
+            } Agility: ${this.state.player.agility} `}</div>
+            <div>{`Health: ${this.state.tempPlayer.health} Endurance: ${
+              this.state.tempPlayer.endurance
+            } `}</div>
+
+            <div className="battleheader-styles">{this.state.player.name}</div>
+          </div>
+        </Fragment>
+      );
+    }
+  }
