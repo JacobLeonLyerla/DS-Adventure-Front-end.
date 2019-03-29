@@ -12,7 +12,8 @@ import {
   attacked,
   death,
   renderOpponent,
-  renderAdventurer
+  renderAdventurer,
+  renderStats
 } from "../helpers/battleHelpers";
 class Battle extends Component {
   state = {
@@ -43,83 +44,6 @@ class Battle extends Component {
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ RENDERS
 
 
-
-  renderStats() {
-    let currentpercent = Math.round(
-      (this.state.tempMonHP /
-        (this.state.monster.health +
-          Math.round(
-            (this.state.monster.health * this.state.player.level) / 30
-          ))) *
-        100
-    );
-    let currentPlayerhp = Math.round(
-      (this.state.tempPlayer.health / this.state.player.health) * 100
-    );
-    let monsterend = Math.round(
-      (this.state.tempMonster.endurance / this.state.monster.endurance) * 100
-    );
-    let playerend = Math.round(
-      (this.state.tempPlayer.endurance / this.state.player.endurance) * 100
-    );
-    return (
-      <Fragment>
-        <div
-          className={
-            this.state.monster.rarity +
-            "Stats-styles mid-battle progress-container"
-          }
-        >
-          <div className="top-progress">
-            <p>{this.state.monster.name}</p>
-            <Progress color="success" value={currentpercent}>
-              {" "}
-              {`${this.state.tempMonHP}`}
-            </Progress>
-
-            <Progress color="info" value={monsterend}>
-              {" "}
-              {`${this.state.tempMonster.endurance}`}
-            </Progress>
-          </div>
-
-          <div className="combatLog-styles">
-            {this.state.tempPlayer.combat === "hit" ? (
-              <div className="opponent-hit">{`${this.state.monster.name} ${
-                this.state.tempPlayer.combat
-              } with ${this.state.tempPlayer.spellUsed}`}</div>
-            ) : (
-              <div className="opponent-miss">{`${this.state.monster.name} ${
-                this.state.tempPlayer.combat
-              } with ${this.state.tempPlayer.spellUsed}`}</div>
-            )}
-
-            {this.state.tempMonster.combat === "hit" ? (
-              <div className={"player-hit"}>{`${this.state.player.name} ${
-                this.state.tempMonster.combat
-              } with ${this.state.tempMonster.spellUsed}`}</div>
-            ) : (
-              <div className={"player-miss"}>{`${this.state.player.name} ${
-                this.state.tempMonster.combat
-              } with ${this.state.tempMonster.spellUsed}`}</div>
-            )}
-          </div>
-          <div className="bottom-progress">
-            <Progress color="info" value={playerend}>
-              {" "}
-              {`${this.state.tempPlayer.endurance}`}
-            </Progress>
-
-            <Progress color="success" value={currentPlayerhp}>
-              {" "}
-              {`${this.state.tempPlayer.health}`}
-            </Progress>
-            <p>{this.state.player.name}</p>
-          </div>
-        </div>
-      </Fragment>
-    );
-  }
 
   // adventurerAttacks() {
   //   return this.state.attacks.map(attack => (
@@ -346,6 +270,7 @@ class Battle extends Component {
     this.death = death.bind(this);
     this.renderOpponent = renderOpponent.bind(this);
     this.renderAdventurer = renderAdventurer.bind(this);
+    this.renderStats = renderStats.bind(this);
 
     return (
       <Fragment>
