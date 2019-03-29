@@ -37,3 +37,42 @@ export function findPlayer (name, pass)  {
       }
     });
   };
+  
+  // loads the player frm the data base this route
+  export function loadPlayer  (e, name, password)  {
+    e.preventDefault();
+
+    const user = {
+      username: name,
+
+      password: password
+    };
+
+    axios
+      .post("https://dungeon-run.herokuapp.com/auth/login", user)
+
+      .then(response => {
+        localStorage.setItem("token", `Bearer ${response.data.token}`);
+
+        axios
+
+          .get(
+            `https://dungeon-run.herokuapp.com/players/${
+              response.data.user._id
+            }`
+          )
+          .then(response => {
+            this.setState({
+              player: response.data,
+
+              name: "",
+
+              password: "",
+
+              id: response.data._id,
+
+              redirect: true
+            });
+          });
+      });
+  };
