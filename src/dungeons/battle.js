@@ -17,6 +17,7 @@ import {
   changeSpell,
   opponentAttacks,
   renderOpponentStats,
+  renderAdventurerStats
 } from "../helpers/battleHelpers";
 class Battle extends Component {
   state = {
@@ -45,28 +46,6 @@ class Battle extends Component {
     }
   };
 
-  renderAdventurerStats() {
-    if (this.state.monster.attacks !== []) {
-      return (
-        <Fragment>
-          <div
-            className={this.state.monster.rarity + "Stats-styles stats"}
-            style={{ borderRadius: "10vw 100vw 10vw 10vw" }}
-          >
-            <div>{`Strength: ${this.state.player.strength} Intellect: ${
-              this.state.player.intellect
-            } Agility: ${this.state.player.agility} `}</div>
-            <div>{`Health: ${this.state.tempPlayer.health} Endurance: ${
-              this.state.tempPlayer.endurance
-            } `}</div>
-
-            <div className="battleheader-styles">{this.state.player.name}</div>
-          </div>
-        </Fragment>
-      );
-    }
-  }
-
   render() {
     this.currentPlayer = currentPlayer.bind(this);
     this.setTemps = setTemps.bind(this);
@@ -81,6 +60,7 @@ class Battle extends Component {
     this.changeSpell = changeSpell.bind(this);
     this.opponentAttacks = opponentAttacks.bind(this);
     this.renderOpponentStats = renderOpponentStats.bind(this);
+    this.renderAdventurerStats = renderAdventurerStats.bind(this);
 
     return (
       <Fragment>
