@@ -3,7 +3,6 @@ import axios from "axios";
 import { Row, Col } from "reactstrap";
 import { Redirect } from "react-router-dom";
 
-import { Progress } from "reactstrap";
 import {
   currentPlayer,
   setTemps,
@@ -13,7 +12,8 @@ import {
   death,
   renderOpponent,
   renderAdventurer,
-  renderStats
+  renderStats,
+  adventurerAttacks
 } from "../helpers/battleHelpers";
 class Battle extends Component {
   state = {
@@ -41,136 +41,7 @@ class Battle extends Component {
       return <Redirect to={`/blackheart/${this.state.player._id}`} />;
     }
   };
-  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ RENDERS
 
-
-
-  // adventurerAttacks() {
-  //   return this.state.attacks.map(attack => (
-  //     <Fragment>
-  //       <div className={this.state.monster.rarity + "Stats-styles"}>
-  //         {attack.name}
-
-  //         <div>{`cost: ${Math.round(
-  //           attack.cost -
-  //             this.state.player.intellect / 3 -
-  //             this.state.player.agility / 5 -
-  //             this.state.player.strength / 7
-  //         )}`}</div>
-  //         <br />
-  //         <div>
-  //           damage:{" "}
-  //           {Math.round(
-  //             attack.damage +
-  //               10 * this.state.player.level +
-  //               this.state.player.strength / 1.5 +
-  //               this.state.player.intellect / 2.5 +
-  //               this.state.player.agility / 2
-  //           )}
-  //         </div>
-  //         <br />
-  //         <div>{attack.description}</div>
-  //         <br />
-  //         attack<br />
-  //         <img
-  //           onClick={() => this.startBattle(attack.damage, attack.cost)}
-  //           className="attack-styles"
-  //           src="https://d30y9cdsu7xlg0.cloudfront.net/png/12864-200.png"
-  //         />
-  //       </div>
-  //     </Fragment>
-  //   ));
-  // }
-  adventurerAttacks() {
-    let attack = { name: "" };
-    if (this.state.attacks !== []) {
-      attack = this.state.attacks[this.state.currentSpell];
-      if (attack !== undefined) {
-        return (
-          <Fragment>
-            <div
-              className={this.state.monster.rarity + "Stats-styles mid-battle"}
-            >
-              <div className={`spell ${this.state.player.class}-spell`}>
-                {attack.name}
-              </div>
-
-              <div>
-                <div className="damage">
-                  Damage:{" "}
-                  {Math.round(
-                    attack.damage +
-                      10 * this.state.player.level +
-                      this.state.player.strength / 1.5 +
-                      this.state.player.intellect / 2.5 +
-                      this.state.player.agility / 2
-                  )}
-                </div>
-                <div className="cost">
-                  Cost:{" "}
-                  {Math.round(
-                    attack.cost * this.state.player.level -
-                      this.state.player.intellect / 3 -
-                      this.state.player.agility / 5 -
-                      this.state.player.strength / 7
-                  )}
-                </div>
-              </div>
-              <br />
-              <br />
-              <div className="centerSpell-styles">
-                <i
-                  onClick={() => this.changeSpell("Left")}
-                  class="fas fa-long-arrow-alt-left"
-                />
-                <img
-                  onClick={() =>
-                    this.startBattle(
-                      attack.damage,
-                      attack.cost,
-                      attack.hitChance,
-                      attack.name
-                    )
-                  }
-                  className="attack-styles"
-                  src="https://d30y9cdsu7xlg0.cloudfront.net/png/12864-200.png"
-                />
-                <i
-                  onClick={() => this.changeSpell("Right")}
-                  class="fas fa-long-arrow-alt-right"
-                />
-              </div>
-              <div style={{ color: "lightcoral" }}>Attack</div>
-
-              <div>{attack.description}</div>
-            </div>
-          </Fragment>
-        );
-      }
-    }
-  }
-  // changeSpell(direction) {
-  //   let spell = {};
-  //   if (direction === "Right") {
-  //     if (this.state.player.currentSpell + 1 < this.state.attacks.length) {
-  //       spell.currentSpell = this.state.player.currentSpell + 1;
-  //     } else {
-  //       spell.currentSpell = 0;
-  //     }
-  //   } else {
-  //     if (this.state.player.currentSpell - 1 !== -1) {
-  //       spell.currentSpell = this.state.player.currentSpell - 1;
-  //     } else {
-  //       spell.currentSpell = this.state.attacks.length - 1;
-  //     }
-  //   }
-  //   axios
-  //     .put(`http://localhost:5500/players/${this.state.player._id}`, spell)
-  //     .then(response => {
-  //       window.location.reload();
-  //     })
-  //     .catch(err => {});
-  // }
   changeSpell(direction) {
     let spell = {};
     if (direction === "Right") {
@@ -271,6 +142,7 @@ class Battle extends Component {
     this.renderOpponent = renderOpponent.bind(this);
     this.renderAdventurer = renderAdventurer.bind(this);
     this.renderStats = renderStats.bind(this);
+    this.adventurerAttacks = adventurerAttacks.bind(this);
 
     return (
       <Fragment>
