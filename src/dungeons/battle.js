@@ -14,7 +14,9 @@ import {
   renderAdventurer,
   renderStats,
   adventurerAttacks,
-  changeSpell
+  changeSpell,
+  opponentAttacks,
+  renderOpponentStats,
 } from "../helpers/battleHelpers";
 class Battle extends Component {
   state = {
@@ -43,49 +45,6 @@ class Battle extends Component {
     }
   };
 
-  opponentAttacks() {
-    return this.state.monster.attacks.map(attack => (
-      <Fragment>
-        <div className="opponentAttacks-styles">
-          <div className="attackName-styles">{attack.name}</div>
-
-          <div className="opponent-damage">
-            Damage:{" "}
-            {Math.round(
-              attack.damage + (attack.damage * this.state.player.level) / 7
-            )}
-          </div>
-          <div className="opponent-cost">Cost : {attack.cost}</div>
-        </div>
-      </Fragment>
-    ));
-  }
-  renderOpponentStats() {
-    if (this.state.monster.attacks !== []) {
-      return (
-        <Fragment>
-          <div className={this.state.monster.rarity + "Stats-styles stats"}>
-            <div className="portraitStats-styles">
-              <div
-                style={{ width: "80%" }}
-                className={this.state.monster.rarity + "Rarity-styles"}
-              >
-                {this.state.monster.rarity}
-              </div>
-              <br />
-              <div className="battleheader-styles">
-                {this.state.monster.name}
-              </div>
-
-              <div>{`Health: ${this.state.tempMonHP} Endurance: ${
-                this.state.tempMonster.endurance
-              } `}</div>
-            </div>
-          </div>
-        </Fragment>
-      );
-    }
-  }
   renderAdventurerStats() {
     if (this.state.monster.attacks !== []) {
       return (
@@ -120,6 +79,8 @@ class Battle extends Component {
     this.renderStats = renderStats.bind(this);
     this.adventurerAttacks = adventurerAttacks.bind(this);
     this.changeSpell = changeSpell.bind(this);
+    this.opponentAttacks = opponentAttacks.bind(this);
+    this.renderOpponentStats = renderOpponentStats.bind(this);
 
     return (
       <Fragment>
