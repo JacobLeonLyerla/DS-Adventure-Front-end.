@@ -1,5 +1,9 @@
   // pulls the player from the database ad sets it on the  state
   import axios from "axios";
+  import React from "react";
+
+  import { Redirect } from "react-router-dom";
+
 
   export function setPlayer ( reload ) {
     axios
@@ -75,4 +79,11 @@ export function findPlayer (name, pass)  {
             });
           });
       });
+  };
+
+  // this renders a redirect if redirect is ever true
+export function renderRedirect ( id ) {
+    if (this.state.redirect) {
+      return <Redirect to={`/info/${id}`} />;
+    }
   };
