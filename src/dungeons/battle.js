@@ -15,7 +15,8 @@ import {
   setTemps,
   fetchTemps,
   startBattle,
-  attacked
+  attacked,
+  death
 } from "../helpers/battleHelpers";
 class Battle extends Component {
   state = {
@@ -39,86 +40,6 @@ class Battle extends Component {
   }
 
   
-  death(died) {
-    if (died === "Player") {
-      let fail = {};
-      fail.defeatedName = this.state.monster.name;
-      fail.experienceGained = 0;
-      fail.itemWon = "lost";
-      fail.currentLocation = "5b60093b9a47813e2cdd30d1";
-      axios
-        .put(
-          `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`,
-          fail
-        )
-        .then(response => {
-          this.setState({
-            currentlocation: response.data.currentlocation,
-            redirect: true
-          });
-        });
-    } else {
-      //this selects a random index for an item in the monsters bag
-      let index = Math.floor(
-        Math.random() * Math.floor(this.state.monster.items.length)
-      );
-      // this basically takes the item at the random index we got above and sets that into a variable
-      let item = this.state.monster.items[index];
-      // sets a flag for adding the item into the index that i can use later
-      let add = true;
-      this.state.player.items.forEach(inventory => {
-        // this makes sure i don't alrady have the item, so if this is ever true than the add flag gets swapped and the item is not added,
-        // this stops bags from being full of duplicates a major issues in earlier builds
-        if (item._id === inventory) {
-          add = false;
-        }
-      });
-      // this is saying if the player is above this level no longer add items of that rarity to their bags,
-      // this helps from getting bags full of junk, i may remove this if i decide to add in a vendor into the game.
-      if (this.state.player.level > 5 && item.rarity === "common") {
-        add = false;
-      }
-      if (this.state.player.level > 10 && item.rarity === "uncommon") {
-        add = false;
-      }
-      // so if the add flag is still set to true after all of that  than add the item
-      if (add === true) {
-        this.state.player.items.push(this.state.monster.items[index]);
-      }
-      let playerlevel = this.state.player.level;
-      let victory = {};
-      if (
-        this.state.player.experience + this.state.monster.experience >=
-        playerlevel * 1000
-      ) {
-        victory.level = playerlevel + 1;
-        victory.leveled = true;
-        victory.health = this.state.player.health + playerlevel + 1 * 200;
-        victory.endurance = this.state.player.endurance + playerlevel + 1 * 200;
-      }
-
-      let myItems = this.state.player.items;
-
-      victory.defeatedName = this.state.monster.name;
-      victory.experienceGained = this.state.monster.experience;
-      victory.itemWon = item.name;
-      victory.items = myItems;
-      victory.experience =
-        this.state.player.experience + this.state.monster.experience;
-
-      axios
-        .put(
-          `https://dungeon-run.herokuapp.com/players/${this.state.player._id}`,
-          victory
-        )
-        .then(response => {
-          this.setState({
-            currentlocation: response.data.currentlocation,
-            redirect: true
-          });
-        });
-    }
-  }
   renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to={`/blackheart/${this.state.player._id}`} />;
@@ -470,7 +391,8 @@ class Battle extends Component {
     this.fetchTemps = fetchTemps.bind(this);
     this.startBattle = startBattle.bind(this);]
     this.attacked =  attacked.bind(this);
-    
+    this.death = death.bind(this);
+
     return (
       <Fragment>
         {this.renderRedirect()}
