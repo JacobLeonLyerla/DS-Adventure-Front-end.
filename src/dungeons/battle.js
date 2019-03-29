@@ -10,7 +10,7 @@ import ranger from "../assets/rangerportrait.png";
 import necro from "../assets/necromancerportrait.jpg";
 
 import { Progress } from "reactstrap";
-import { currentPlayer,setTemps } from "../helpers/battleHelpers";
+import { currentPlayer,setTemps,fetchTemps } from "../helpers/battleHelpers";
 class Battle extends Component {
   state = {
     player: { attacks: [], tempPlayer: { _id: "" } },
@@ -30,30 +30,6 @@ class Battle extends Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     this.currentPlayer(id);
-  }
-
-  fetchTemps() {
-    let id = this.state.player.tempPlayer;
-    axios
-      .get(`https://dungeon-run.herokuapp.com/temps/${id}`)
-      .then(response => {
-        this.setState({ tempPlayer: response.data });
-      })
-      .catch(err => {});
-    id = this.state.player.tempMonster;
-    if (this.state.player.tempMonster._id !== undefined) {
-      id = this.state.player.tempMonster._id;
-    }
-    axios
-      .get(`https://dungeon-run.herokuapp.com/temps/${id}`)
-      .then(response => {
-        let raisedhp = Math.round(
-          response.data.health +
-            (response.data.health * this.state.player.level) / 30
-        );
-        this.setState({ tempMonster: response.data, tempMonHP: raisedhp });
-      })
-      .catch(err => {});
   }
 
   startBattle(damage, cost, hitChance, name) {
@@ -653,6 +629,7 @@ class Battle extends Component {
   render() {
   this.currentPlayer = currentPlayer.bind(this)
   this.setTemps = setTemps.bind(this)
+  this.fetchTemps = fetchTemps.bind(this)
     return (
       <Fragment>
         {this.renderRedirect()}
