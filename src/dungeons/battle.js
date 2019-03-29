@@ -10,7 +10,7 @@ import ranger from "../assets/rangerportrait.png";
 import necro from "../assets/necromancerportrait.jpg";
 
 import { Progress } from "reactstrap";
-
+import { currentPlayer } from "../helpers/battleHelpers";
 class Battle extends Component {
   state = {
     player: { attacks: [], tempPlayer: { _id: "" } },
@@ -31,33 +31,6 @@ class Battle extends Component {
     let { id } = this.props.match.params;
     this.currentPlayer(id);
   }
-  currentPlayer = id => {
-    axios
-      .get(`https://dungeon-run.herokuapp.com/players/${id}`)
-      .then(response => {
-        this.setState({
-          player: response.data,
-          attacks: response.data.attacks,
-          currentLocation: response.data.currentLocation._id
-        });
-        id = this.state.player.currentBattle[0]._id;
-
-        axios
-          .get(`https://dungeon-run.herokuapp.com/monsters/${id}`)
-          .then(response => {
-            this.setState({
-              monster: response.data,
-              monsterAttacks: response.data.attacks
-            });
-            if (this.state.player.tempPlayer === "no temp") {
-              this.setTemps();
-            } else {
-              this.fetchTemps();
-            }
-          });
-      })
-      .catch(err => {});
-  };
 
   setTemps() {
     // we get the id from the player  on state
@@ -724,7 +697,7 @@ class Battle extends Component {
   }
 
   render() {
-    console.log(this.state);
+  this.currentPlayer = currentPlayer.bind(this)
     return (
       <Fragment>
         {this.renderRedirect()}
