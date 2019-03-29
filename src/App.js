@@ -21,7 +21,8 @@ import BlackHeart from "./dungeons/loadBHDungeon";
 import Items from "./dungeons/items";
 
 import Battle from "./dungeons/battle";
-
+import {setPlayer} from "./helpers/appHelpers";
+import {handleInput} from "./helpers/commonHelpers";
 class App extends Component {
   state = {
     players: undefined,
@@ -41,25 +42,8 @@ class App extends Component {
     this.setPlayer();
   }
 
-  // pulls the player from the database ad sets it on the  state
-  setPlayer = reload => {
-    axios
-      .get("https://dungeon-run.herokuapp.com/players")
-
-      .then(response => {
-        this.setState({ players: response.data });
-
-        if (reload === "reload") {
-          window.location.reload();
-        }
-      })
-      .catch(() => {});
-  };
 
   // this takes the event in this case it's the onChange of the input field and setsi t on state
-  handleInput = input => {
-    this.setState({ [input.target.name]: input.target.value });
-  };
 
   // this uses the players name to find him in the data base
   findPlayer = (name, pass) => {
@@ -143,6 +127,8 @@ class App extends Component {
 
   // the render has all the routes contained in side of it.
   render() {
+    this.setPlayer = setPlayer.bind(this);
+    this.handleInput = handleInput.bind(this);
     return (
       <div className="App">
         {this.renderRedirect(this.state.id)}
