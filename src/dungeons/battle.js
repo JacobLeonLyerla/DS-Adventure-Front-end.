@@ -10,7 +10,7 @@ import ranger from "../assets/rangerportrait.png";
 import necro from "../assets/necromancerportrait.jpg";
 
 import { Progress } from "reactstrap";
-import { currentPlayer } from "../helpers/battleHelpers";
+import { currentPlayer,setTemps } from "../helpers/battleHelpers";
 class Battle extends Component {
   state = {
     player: { attacks: [], tempPlayer: { _id: "" } },
@@ -30,52 +30,6 @@ class Battle extends Component {
   componentDidMount() {
     let { id } = this.props.match.params;
     this.currentPlayer(id);
-  }
-
-  setTemps() {
-    // we get the id from the player  on state
-    let id = this.state.player._id;
-    // setting up an object to post in
-    let temp = {};
-    // we post in the data we wwant to save inside of the temp collection
-    temp.health = this.state.player.health;
-    temp.endurance = this.state.player.endurance;
-    // if the tempPlayer that is set to state is not defined than allow this to run,
-    // we set it to undefined when we move rooms so if we are moving into a room and starting a battle
-    // this should always be un defined
-
-    axios
-      .post(`https://dungeon-run.herokuapp.com/temps`, temp)
-      .then(response => {
-        temp = {};
-        let id = response.data._id;
-        temp.health = this.state.monster.health;
-        temp.endurance = this.state.monster.endurance;
-        axios
-          .post(`https://dungeon-run.herokuapp.com/temps`, temp)
-          .then(response => {
-            temp = {};
-            temp.tempPlayer = id;
-            temp.tempMonster = response.data._id;
-            axios
-              .put(
-                `https://dungeon-run.herokuapp.com/players/${
-                  this.state.player._id
-                }`,
-                temp
-              )
-              .then(response => {
-                this.setState({
-                  player: response.data
-                });
-
-                this.fetchTemps();
-              })
-              .catch(err => {});
-          })
-          .catch(err => {});
-      })
-      .catch(err => {});
   }
 
   fetchTemps() {
@@ -698,6 +652,7 @@ class Battle extends Component {
 
   render() {
   this.currentPlayer = currentPlayer.bind(this)
+  this.setTemps = setTemps.bind(this)
     return (
       <Fragment>
         {this.renderRedirect()}
