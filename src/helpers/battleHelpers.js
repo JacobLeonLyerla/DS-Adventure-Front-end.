@@ -215,3 +215,68 @@ export function currentPlayer ( id ) {
       })
       .catch(err => {});
   }
+
+  export function attacked() {
+    if (this.state.tempMonster.attacked === true) {
+      let id = this.state.player.tempMonster;
+      if (this.state.player.tempMonster._id !== undefined) {
+        id = this.state.player.tempMonster._id;
+      }
+      let damage = this.state.monsterAttacks.filter(attack => {
+        let index = Math.floor(
+          Math.random() * Math.floor(this.state.monsterAttacks.length)
+        );
+
+        return attack === this.state.monsterAttacks[index];
+      });
+
+      let attack = {};
+
+      attack.attacked = false;
+      let remainingEnd = this.state.tempMonster.endurance - damage[0].cost;
+      if (this.state.tempMonster.endurance - damage[0].cost > 0) {
+        attack.endurance = this.state.tempMonster.endurance - damage[0].cost;
+      } else {
+        attack.endurance = this.state.monster.level * 75;
+      }
+      axios
+        .put(`https://dungeon-run.herokuapp.com/temps/${id}`, attack)
+        .then(response => {
+          this.setState({ tempMonster: response.data });
+          let id = this.state.player.tempPlayer;
+          if (this.state.player.tempPlayer._id !== undefined) {
+            id = this.state.player.tempPlayer._id;
+          }
+          let hit = Math.floor(Math.random() * Math.floor(100));
+
+          let dmg = {};
+          if (remainingEnd > 0) {
+            if (hit <= damage[0].hitChance * 2 + this.state.monster.level) {
+              dmg.health =
+                this.state.tempPlayer.health -
+                Math.round(
+                  damage[0].damage +
+                    (damage[0].damage * this.state.player.level) / 7
+                );
+              dmg.combat = "hit";
+            } else {
+              dmg.combat = "missed";
+            }
+          } else {
+            dmg.combat = "out of endurance to cast";
+          }
+          dmg.spellUsed = damage[0].name;
+          axios
+            .put(`https://dungeon-run.herokuapp.com/temps/${id}`, dmg)
+            .then(response => {
+              this.setState({ tempPlayer: response.data });
+              if (response.data.health <= 0) {
+                this.death("Player");
+              }
+              //window.location.reload();
+            })
+            .catch(err => {});
+        })
+        .catch(err => {});
+    }
+  }
