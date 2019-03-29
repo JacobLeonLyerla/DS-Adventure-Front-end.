@@ -2,15 +2,46 @@ import React, { Fragment } from "react";
 import axios from "axios";
 import { Row, Col } from "reactstrap";
 import { Redirect } from "react-router-dom";
-// import paladin from "./img/paladinportrait.png";
-import rogue from "../assets/rogueportrait.jpg";
-import mage from "../assets/mageportrait.png";
-import warrior from "../assets/warriorportrait.png";
-import ranger from "../assets/rangerportrait.png";
-import necro from "../assets/necromancerportrait.jpg";
 
 import { Progress } from "reactstrap";
 
+export function battleLayout(){
+    return(
+        <Fragment>
+        {this.renderRedirect()}
+        <Row className="fighters">
+          <Col md="5">
+            {this.renderAdventurer()}
+            <br />
+            {this.renderAdventurerStats()}
+          </Col>
+          <Col md="5">
+            {this.renderOpponent()}
+            <br />
+            {this.renderOpponentStats()}
+          </Col>
+        </Row>
+
+        <Row className="middleBattle-styles">
+          <Col md="3" className="mid-col">
+            {this.adventurerAttacks()}
+          </Col>
+
+          <Col md="3" className="mid-col">
+            {this.renderStats()}
+          </Col>
+          <Col md="3" className="mid-col">
+            <div
+              className={this.state.monster.rarity + "Stats-styles mid-battle"}
+            >
+              {this.opponentAttacks()}
+            </div>
+          </Col>
+        </Row>
+        <br />
+      </Fragment>
+    )
+}
 export function currentPlayer(id) {
   axios
     .get(`https://dungeon-run.herokuapp.com/players/${id}`)
@@ -635,3 +666,8 @@ export function renderAdventurerStats() {
       );
     }
   }
+  export function renderRedirect() {
+    if (this.state.redirect) {
+      return <Redirect to={`/blackheart/${this.state.player._id}`} />;
+    }
+  };
