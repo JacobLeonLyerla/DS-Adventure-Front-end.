@@ -16,7 +16,8 @@ import {
   fetchTemps,
   startBattle,
   attacked,
-  death
+  death,
+  renderOpponent
 } from "../helpers/battleHelpers";
 class Battle extends Component {
   state = {
@@ -39,31 +40,12 @@ class Battle extends Component {
     this.currentPlayer(id);
   }
 
-  
   renderRedirect = () => {
     if (this.state.redirect) {
       return <Redirect to={`/blackheart/${this.state.player._id}`} />;
     }
   };
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ RENDERS
-  renderOpponent() {
-    if (this.state.monster.idle !== undefined) {
-      return (
-        <Fragment>
-          <div className="oppenent-styles">
-            <img
-              className={`${this.state.monster.rarity} monster-img`}
-              src={
-                this.state.battle === false
-                  ? require(`../assets/${this.state.monster.idle}.gif`)
-                  : require(`../assets/${this.state.monster.battle}.gif`)
-              }
-            />
-          </div>
-        </Fragment>
-      );
-    }
-  }
 
   renderAdventurer() {
     if (this.state.player.idle !== undefined) {
@@ -389,9 +371,10 @@ class Battle extends Component {
     this.currentPlayer = currentPlayer.bind(this);
     this.setTemps = setTemps.bind(this);
     this.fetchTemps = fetchTemps.bind(this);
-    this.startBattle = startBattle.bind(this);]
-    this.attacked =  attacked.bind(this);
+    this.startBattle = startBattle.bind(this);
+    this.attacked = attacked.bind(this);
     this.death = death.bind(this);
+    this.renderOpponent = renderOpponent.bind(this);
 
     return (
       <Fragment>
